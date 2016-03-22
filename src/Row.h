@@ -10,13 +10,13 @@
 
 class Row {
 public:
-	Row(bool direction,	int speed,	int locY,	int width, int number);
+	Row(bool direction,	int speed,	int locY,	int height, int number);
 	virtual ~Row();
 	bool isDirection() const;
 	int getLocY() const;
 	int getNumber() const;
 	int getSpeed() const;
-	int getWidth() const;
+	int getHeight() const;
 	bool isLaneRow() const;
 	void setLaneRow(bool laneRow);
 
@@ -25,7 +25,7 @@ private:
 	bool laneRow;
 	int speed;
 	int locY;
-	int width;
+	int height;
 	int number;
 };
 

@@ -27,6 +27,9 @@ public:
 	virtual Obstacle* createObstacle(Row* row,int x,int y,int w,int h);
 	virtual Lane* createLane(Row* row,int x,int y,int w,int h);
 	virtual Item* createItem(Row* row,int x,int y,int w,int h);
+	virtual Obstacle* createObstacle(Row* row);
+	virtual Lane* createLane(Row* row);
+	virtual Item* createItem(Row* row);
 	virtual Window* createWindow();
 	virtual Events* createEvents();
 	SDLdata* sdldata;

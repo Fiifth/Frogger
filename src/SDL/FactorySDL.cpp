@@ -53,3 +53,18 @@ Item* FactorySDL::createItem(Row* row, int x, int y, int w,int h)
 {
 	return new ItemSDL(sdldata,row,x,y,w,h);
 }
+
+Obstacle* FactorySDL::createObstacle(Row* row)
+{
+	return new ObstacleSDL(sdldata,row);
+}
+
+Lane* FactorySDL::createLane(Row* row)
+{
+	return new LaneSDL(sdldata,row);
+}
+
+Item* FactorySDL::createItem(Row* row)
+{
+	return new ItemSDL(sdldata,row);
+}

@@ -20,6 +20,7 @@ public:
 	bool isRoom();
 	bool isVisible() const;
 	void setVisible(bool visible);
+	virtual void draw()=0;
 
 protected:
 	Row* row;

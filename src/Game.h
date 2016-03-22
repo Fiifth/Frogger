@@ -18,8 +18,8 @@ class Game {
 public:
 	Game(Factory* F);
 	virtual ~Game();
-	void rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory* F,vector<Row*>* rows,vector<list<Props*>>* propsOnRow,vector<list<Props*>>* itemsOnRow);
-	void propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>* rows,vector<list<Props*>>* propsOnRow,vector<list<Props*>>* itemsOnRow,int propW,int propH);
+	void rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory* F,vector<Row*>* rows,vector<list<Props*>>* propsOnRow);
+	void propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>* rows,vector<list<Props*>>* propsOnRow);
 	bool drawProps(vector<list<Props*>>* propsOnRow,int x, int w,int row);
 	list<Props*> fillEnemyList(Factory* F,Row* row,int difficulty,int screenWidth);
 

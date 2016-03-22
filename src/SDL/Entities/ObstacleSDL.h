@@ -19,6 +19,7 @@ class ObstacleSDL:public Obstacle {
 public:
 
 	ObstacleSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h);
+	ObstacleSDL(SDLdata* sdldata,Row* row);
 	virtual ~ObstacleSDL();
 	void draw();
 	void move(int deltaX,int deltaY);

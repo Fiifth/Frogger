@@ -8,7 +8,7 @@
 #include "Row.h"
 
 
-Row::Row(bool direction,int speed,int locY,int width, int number):direction(direction),laneRow(false),speed(speed),locY(locY), width(width),number(number)
+Row::Row(bool direction,int speed,int locY,int height, int number):direction(direction),laneRow(false),speed(speed),locY(locY), height(height),number(number)
 {
 
 }
@@ -32,8 +32,8 @@ int Row::getSpeed() const {
 	return speed;
 }
 
-int Row::getWidth() const {
-	return width;
+int Row::getHeight() const {
+	return height;
 }
 
 bool Row::isLaneRow() const {

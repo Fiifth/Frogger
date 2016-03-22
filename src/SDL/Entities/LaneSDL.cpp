@@ -27,6 +27,20 @@
 LaneSDL::~LaneSDL() {
 }
 
+LaneSDL::LaneSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata),textures(sdldata->getLaneTextures())
+{
+	setRow(row);
+		setSpeed(row->getSpeed());
+		setSize(0,row->getHeight());
+		setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
+		tex=textures.at(rand()%2);
+		int wn=0,hn=row->getHeight();
+		sdldata->getDependWAndH(tex,&wn, &hn);
+		setSize(wn,hn);
+		int xloc=row->isDirection()?screenWidth:-getW();
+		setLocation(xloc,row->getLocY());
+}
+
 void LaneSDL::draw()
 {
 	int angle=0;

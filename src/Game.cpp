@@ -22,15 +22,19 @@
 #include <algorithm>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+#include <ctime>
+#include <ratio>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 int numberOfRows;
 
 Game::Game(Factory* F)
 {
 	srand (time(NULL));
-	int propsStartW=100,propsStartH=50;
+	//int propsStartW=100,propsStartH=50;
 	int rowHeight=50;
 	int difficultyRows=1;
 	int windowHeight=500;
@@ -42,8 +46,6 @@ Game::Game(Factory* F)
 	vector<list<Props*>> propsOnRowR;
 	vector<Row*>* rows=&rowsR;
 	vector<list<Props*>>* propsOnRow=&propsOnRowR;
-	vector<list<Props*>> itemsOnRowR;
-	vector<list<Props*>>* itemsOnRow=&itemsOnRowR;
 
 
 	Window* win=F->createWindow();
@@ -52,11 +54,16 @@ Game::Game(Factory* F)
 	Player* player=F->createPlayer(plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
 	Events* event=F->createEvents();
 
-	rowGenerator(rowHeight,windowHeight,difficultyRows,F,rows,propsOnRow,itemsOnRow);
+
+
+	rowGenerator(rowHeight,windowHeight,difficultyRows,F,rows,propsOnRow);
+
+
+
 
 	for (int n=0; (n<windowWidth); n++)
 	{
-		propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow,itemsOnRow,propsStartW,propsStartH);
+		propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
 		int row=player->getY()/50;
 		drawProps(propsOnRow,player->getX(),player->getW(),row);
 	}
@@ -90,7 +97,8 @@ Game::Game(Factory* F)
 		}
 
 		win->setBackground();
-		propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow,itemsOnRow,propsStartW,propsStartH);
+
+		propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
 		int row=player->getY()/50;
 
 		bool col=drawProps(propsOnRow,player->getX(),player->getW(),row);
@@ -99,16 +107,19 @@ Game::Game(Factory* F)
 			player->setLocation(plStartX,plStartY);
 		else if(rows->at(row)->isLaneRow())
 			player->followRow(rows->at(row));
-		drawProps(itemsOnRow,player->getX(),player->getW(),row);
+
 		player->draw();
 
+		//auto start_time = chrono::high_resolution_clock::now();
+		//auto end_time = chrono::high_resolution_clock::now();
+		//cout << chrono::duration_cast<chrono::microseconds>(end_time - start_time).count() << endl;
 		win->updateScreen();
 	}
 }
 
 Game::~Game() {}
 
-void Game::rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory* F,vector<Row*>* rows,vector<list<Props*>>* propsOnRow,vector<list<Props*>>* itemsOnRow)
+void Game::rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory* F,vector<Row*>* rows,vector<list<Props*>>* propsOnRow)
 {
 	int maxSpeed=3;
 	numberOfRows=(screenHight)/rowHeight;
@@ -123,7 +134,6 @@ void Game::rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory
 			speed=(n==0||n==numberOfRows-1)?0:speed;
 			rows->push_back(F->createRow(((rand() %10)>5),speed,(n*rowHeight),rowHeight,n));
 			propsOnRow->push_back(enemies);
-			itemsOnRow->push_back(enemies);
 		}
 	}
 	else if (mode==2)
@@ -137,37 +147,24 @@ void Game::rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory
 			rows->push_back(F->createRow(((rand() %10)>5),speed,(n*rowHeight),rowHeight,n));
 			rows->back()->setLaneRow(true);
 			propsOnRow->push_back(enemies);
-			itemsOnRow->push_back(enemies);
+
 		}
 	}
 	else if (mode==3)
 		{
-			for (int n=0; n<(numberOfRows/2); n++)
+			for (int n=0; n<numberOfRows; n++)
 			{
 				list<Props*> enemies;
-						int speed=((rand()%(numberOfRows-n))+1)*difficultyRows;
-						speed=speed>maxSpeed?maxSpeed:speed;
-						speed=(n==0||n==numberOfRows-1)?0:speed;
-						rows->push_back(F->createRow(((rand() %10)>5),speed,(n*rowHeight),rowHeight,n));
-						rows->back()->setLaneRow(true);
-						propsOnRow->push_back(enemies);
-						itemsOnRow->push_back(enemies);
-			}
-			for (int n=numberOfRows/2; n<(numberOfRows); n++)
-			{
-				list<Props*> enemies;
-				int speed=((rand()%(numberOfRows-(n-numberOfRows/2)))+1)*difficultyRows;
-				speed=speed>maxSpeed?maxSpeed:speed;
+				int speed=2;
 				speed=(n==0||n==numberOfRows-1)?0:speed;
 				rows->push_back(F->createRow(((rand() %10)>5),speed,(n*rowHeight),rowHeight,n));
-
+				rows->back()->setLaneRow(n<(numberOfRows/2));
 				propsOnRow->push_back(enemies);
-				itemsOnRow->push_back(enemies);
 			}
 		}
 
 }
-void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>* rows,vector<list<Props*>>* propsOnRow,vector<list<Props*>>* itemsOnRow,int propW,int propH)
+void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>* rows,vector<list<Props*>>* propsOnRow)
 {
 	for(Row* row:*rows)
 	{
@@ -175,33 +172,32 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 		if((row->getNumber()!=0)&&(row->getNumber()!=(numberOfRows-1)))
 		{
 			list<Props*> PreProp=propsOnRow->at(row->getNumber());
-			if((PreProp.empty())||((PreProp.back())->isRoom()))
+			if((PreProp.empty())||((PreProp.front())->isRoom()))
 			{
 
 				Props* prop;
 				int number=rand()%100;
-				bool previousVisible=PreProp.empty()?false:PreProp.back()->isVisible();
+				bool previousVisible=PreProp.empty()?false:PreProp.front()->isVisible();
 				bool giveObsticle=row->isLaneRow()&&previousVisible;
 				if (giveObsticle||((number>difficulty)&&!previousVisible))
 				{
-					prop=F->createObstacle(row,0,row->getLocY(),propW,propH);
+					prop=F->createObstacle(row);
 					prop->setVisible(!row->isLaneRow());
 				}
 				else
 				{
-					prop=F->createLane(row,0,0,propW,propH);
+					prop=F->createLane(row);
 					prop->setVisible(row->isLaneRow());
 
 				}
-				propsOnRow->at(row->getNumber()).push_back(prop);
-
+				propsOnRow->at(row->getNumber()).push_front(prop);
 			}
-			Lane* temp=dynamic_cast<Lane*>(propsOnRow->at(row->getNumber()).back());
+			Lane* temp=dynamic_cast<Lane*>(propsOnRow->at(row->getNumber()).front());
 			if ((rand()%1000>995)&&temp!=nullptr)
 			{
-				Props* propBonus=F->createItem(row,0,0,propW,propH);
+				Props* propBonus=F->createItem(row);
 				if ((propBonus->getX()>temp->getX())&&((propBonus->getX()+propBonus->getW())<(temp->getX()+temp->getW())))
-				itemsOnRow->at(row->getNumber()).push_back(propBonus);
+					propsOnRow->at(row->getNumber()).push_back(propBonus);
 
 			}
 		}
@@ -219,40 +215,24 @@ bool Game::drawProps(vector<list<Props*>>* propsOnRow,int x, int w,int row)
 		{
 			if (!temp2->inframe())
 			{
+
 				propsOnRow->at(counter).remove(temp2);
+
+
 			}
 			else
 			{
-				if (dynamic_cast<Obstacle*>(temp2)!=nullptr)
-				{
-					Obstacle* temp3=dynamic_cast<Obstacle*>(temp2);
-					temp3->moveHor();
+				if (temp2->isVisible())
+				temp2->draw();
+				temp2->moveHor();
 
-					if (temp3->isVisible())
-					temp3->draw();
-					dete=temp3->coll(x,w,row)?true:dete;
-				}
-				else if (dynamic_cast<Lane*>(temp2)!=nullptr)
-				{
-					Lane* temp3=dynamic_cast<Lane*>(temp2);
-					if (temp3->isVisible())
-					temp3->draw();
-					temp3->moveHor();
-				}
-				else if (dynamic_cast<Item*>(temp2)!=nullptr)
+				Item* temp3=dynamic_cast<Item*>(temp2);
+				if (temp3!=nullptr)
 				{
 
-					Item* temp3=dynamic_cast<Item*>(temp2);
 					if(temp3->coll(x,w,row))
 					{
-
 						propsOnRow->at(counter).remove(temp2);
-						//TODO item effect
-					}
-					else
-					{
-						temp3->moveHor();
-					temp3->draw();
 					}
 				}
 			}

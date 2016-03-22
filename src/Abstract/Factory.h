@@ -26,6 +26,9 @@ public:
 	virtual Obstacle* createObstacle(Row* row,int x,int y,int w,int h)=0;
 	virtual Lane* createLane(Row* row,int x,int y,int w,int h)=0;
 	virtual Item* createItem(Row* row,int x,int y,int w,int h)=0;
+	virtual Obstacle* createObstacle(Row* row)=0;
+	virtual Lane* createLane(Row* row)=0;
+	virtual Item* createItem(Row* row)=0;
 	virtual Window* createWindow()=0;
 	virtual Events* createEvents()=0;
 	virtual Row* createRow(bool direction,int speed,int locY,int width, int number);

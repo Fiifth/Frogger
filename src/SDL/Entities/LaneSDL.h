@@ -15,6 +15,7 @@
 class LaneSDL: public Lane{
 public:
 	LaneSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h);
+	LaneSDL(SDLdata* sdldata,Row* row);
 	virtual ~LaneSDL();
 	void draw();
 private:

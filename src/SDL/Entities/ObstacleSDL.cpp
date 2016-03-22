@@ -39,3 +39,16 @@ void ObstacleSDL::draw()
 	sdldata->renderTexture(tex,sdldata->getRen(),x,y,&w,&h,angle);
 }
 
+ObstacleSDL::ObstacleSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata),textures(sdldata->getObstTextures())
+{
+	setRow(row);
+		setSpeed(row->getSpeed());
+		setSize(0,row->getHeight());
+		setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
+		tex=textures.at(rand()%3);
+		int wn=0,hn=row->getHeight();
+		sdldata->getDependWAndH(tex,&wn, &hn);
+		setSize(wn,hn);
+		int xloc=row->isDirection()?screenWidth:-getW();
+		setLocation(xloc,row->getLocY());
+}
