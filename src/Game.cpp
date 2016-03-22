@@ -34,14 +34,16 @@ int numberOfRows;
 Game::Game(Factory* F)
 {
 	srand (time(NULL));
-	//int propsStartW=100,propsStartH=50;
-	int rowHeight=50;
+	int rowHeight=100;
 	int difficultyRows=1;
-	int windowHeight=500;
-	int windowWidth=500;
+	int windowHeight=600;
+	int windowWidth=900;
 	int difficulty=70;
-	int plStartW=40,plStartH=40,plStartSpeed=50;
+	int plStartW=rowHeight,plStartH=rowHeight,plStartSpeed=rowHeight;
 	int plStartX=(windowWidth/2),plStartY=(windowHeight-plStartW);
+	//TODO setup window layout (scores/startposition/borders)
+	//TODO game start screen for options
+	//TODO make background depending on row
 	vector<Row*> rowsR;
 	vector<list<Props*>> propsOnRowR;
 	vector<Row*>* rows=&rowsR;
@@ -49,16 +51,12 @@ Game::Game(Factory* F)
 
 
 	Window* win=F->createWindow();
-	win->makeWindow(windowHeight,windowWidth,"frogger");
+	win->makeWindow(windowWidth,windowHeight,"frogger");
 
 	Player* player=F->createPlayer(plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
 	Events* event=F->createEvents();
 
-
-
 	rowGenerator(rowHeight,windowHeight,difficultyRows,F,rows,propsOnRow);
-
-
 
 
 	for (int n=0; (n<windowWidth); n++)
@@ -75,44 +73,29 @@ Game::Game(Factory* F)
 		if (temp!="")
 		{
 			if (temp=="Down")
-			{
 				player->moveDown();
-			}
 			else if (temp=="Up")
-			{
 				player->moveUp();
-			}
 			else if (temp=="Left")
-			{
 				player->moveLeft();
-			}
 			else if (temp=="Right")
-			{
 				player->moveRight();
-			}
 			else if (temp=="Escape")
-			{
 				return;
-			}
 		}
 
 		win->setBackground();
 
 		propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
-		int row=player->getY()/50;
+		int row=player->getY()/rowHeight;
 
-		bool col=drawProps(propsOnRow,player->getX(),player->getW(),row);
-
-		if (col)
+		if (drawProps(propsOnRow,player->getX(),player->getW(),row))
 			player->setLocation(plStartX,plStartY);
 		else if(rows->at(row)->isLaneRow())
 			player->followRow(rows->at(row));
 
 		player->draw();
 
-		//auto start_time = chrono::high_resolution_clock::now();
-		//auto end_time = chrono::high_resolution_clock::now();
-		//cout << chrono::duration_cast<chrono::microseconds>(end_time - start_time).count() << endl;
 		win->updateScreen();
 	}
 }
@@ -157,29 +140,24 @@ void Game::rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory
 				list<Props*> enemies;
 				int speed=2;
 				speed=(n==0||n==numberOfRows-1)?0:speed;
-				rows->push_back(F->createRow(((rand() %10)>5),speed,(n*rowHeight),rowHeight,n));
+				rows->push_back(F->createRow(((rand() %10)>=5),speed,(n*rowHeight),rowHeight,n));
 				rows->back()->setLaneRow(n<(numberOfRows/2));
 				propsOnRow->push_back(enemies);
 			}
 		}
-
 }
 void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>* rows,vector<list<Props*>>* propsOnRow)
 {
 	for(Row* row:*rows)
 	{
-
 		if((row->getNumber()!=0)&&(row->getNumber()!=(numberOfRows-1)))
 		{
-			list<Props*> PreProp=propsOnRow->at(row->getNumber());
-			if((PreProp.empty())||((PreProp.front())->isRoom()))
+			const list<Props*>* PreProp=&propsOnRow->at(row->getNumber());
+			if((PreProp->empty())||((PreProp->front())->isRoom()))
 			{
-
 				Props* prop;
 				int number=rand()%100;
-				bool previousVisible=PreProp.empty()?false:PreProp.front()->isVisible();
-				bool giveObsticle=row->isLaneRow()&&previousVisible;
-				if (giveObsticle||((number>difficulty)&&!previousVisible))
+				if ((row->isLaneRow()&&PreProp->front()->isVisible())||((number>difficulty)&&!PreProp->front()->isVisible()))
 				{
 					prop=F->createObstacle(row);
 					prop->setVisible(!row->isLaneRow());
@@ -192,13 +170,13 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 				}
 				propsOnRow->at(row->getNumber()).push_front(prop);
 			}
+			//TODO remove dynamic_cast
 			Lane* temp=dynamic_cast<Lane*>(propsOnRow->at(row->getNumber()).front());
-			if ((rand()%1000>995)&&temp!=nullptr)
+			if (temp!=nullptr&&(rand()%1000>995))
 			{
 				Props* propBonus=F->createItem(row);
 				if ((propBonus->getX()>temp->getX())&&((propBonus->getX()+propBonus->getW())<(temp->getX()+temp->getW())))
 					propsOnRow->at(row->getNumber()).push_back(propBonus);
-
 			}
 		}
 	}
@@ -215,10 +193,7 @@ bool Game::drawProps(vector<list<Props*>>* propsOnRow,int x, int w,int row)
 		{
 			if (!temp2->inframe())
 			{
-
 				propsOnRow->at(counter).remove(temp2);
-
-
 			}
 			else
 			{
@@ -227,13 +202,13 @@ bool Game::drawProps(vector<list<Props*>>* propsOnRow,int x, int w,int row)
 				temp2->moveHor();
 
 				Item* temp3=dynamic_cast<Item*>(temp2);
-				if (temp3!=nullptr)
+				if(temp3!=nullptr&&temp3->coll(x,w,row))
 				{
-
-					if(temp3->coll(x,w,row))
-					{
-						propsOnRow->at(counter).remove(temp2);
-					}
+					propsOnRow->at(counter).remove(temp2);
+				}
+				else
+				{
+					dete=temp2->coll(x,w,row)?true:dete;
 				}
 			}
 		}
@@ -247,3 +222,8 @@ list<Props*> Game::fillEnemyList(Factory* F,Row* row,int difficulty,int screenWi
 	list<Props*> temp;
 	return temp;
 }
+
+
+//auto start_time = chrono::high_resolution_clock::now();
+		//auto end_time = chrono::high_resolution_clock::now();
+		//cout << chrono::duration_cast<chrono::microseconds>(end_time - start_time).count() << endl;

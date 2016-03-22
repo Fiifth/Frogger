@@ -13,6 +13,7 @@ public:
 	Lane();
 	virtual ~Lane();
 	virtual void draw()=0;
+	bool coll(int xPos,int width,int row){return false;};
 };
 
 #endif /* ABSTRACT_ENTITIES_LANE_H_ */

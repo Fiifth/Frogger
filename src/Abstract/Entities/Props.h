@@ -21,6 +21,7 @@ public:
 	bool isVisible() const;
 	void setVisible(bool visible);
 	virtual void draw()=0;
+	virtual bool coll(int xPos,int width,int row)=0;
 
 protected:
 	Row* row;
