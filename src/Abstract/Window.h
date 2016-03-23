@@ -5,6 +5,8 @@
  *      Author: fifth
  */
 #include <string>
+#include <vector>
+#include "Row.h"
 #ifndef WINDOW_H_
 #define WINDOW_H_
 
@@ -18,6 +20,7 @@ public:
 	virtual void updateScreen()=0;
 	int getHeight() const;
 	int getWidth() const;
+	virtual void generateBackground(std::vector<Row*>* rows)=0;
 
 protected:
 	int WIDTH;

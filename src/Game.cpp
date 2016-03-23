@@ -34,13 +34,15 @@ int numberOfRows;
 Game::Game(Factory* F)
 {
 	srand (time(NULL));
-	int rowHeight=100;
+	int row;
+	int rowHeight=50;
 	int difficultyRows=1;
-	int windowHeight=600;
-	int windowWidth=900;
+	int windowHeight=500;
+	int windowWidth=500;
 	int difficulty=70;
 	int plStartW=rowHeight,plStartH=rowHeight,plStartSpeed=rowHeight;
 	int plStartX=(windowWidth/2),plStartY=(windowHeight-plStartW);
+	string keyStroke;
 	//TODO setup window layout (scores/startposition/borders)
 	//TODO game start screen for options
 	//TODO make background depending on row
@@ -62,32 +64,33 @@ Game::Game(Factory* F)
 	for (int n=0; (n<windowWidth); n++)
 	{
 		propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
-		int row=player->getY()/50;
+		int row=player->getY()/windowWidth;
 		drawProps(propsOnRow,player->getX(),player->getW(),row);
 	}
 
 
 	while(true)
 	{
-		string temp=event->getEvent();
-		if (temp!="")
+		keyStroke=event->getEvent();
+		if (keyStroke!="")
 		{
-			if (temp=="Down")
+			if (keyStroke=="Down")
 				player->moveDown();
-			else if (temp=="Up")
+			else if (keyStroke=="Up")
 				player->moveUp();
-			else if (temp=="Left")
+			else if (keyStroke=="Left")
 				player->moveLeft();
-			else if (temp=="Right")
+			else if (keyStroke=="Right")
 				player->moveRight();
-			else if (temp=="Escape")
+			else if (keyStroke=="Escape")
 				return;
 		}
 
 		win->setBackground();
+		win->generateBackground(rows);
 
 		propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
-		int row=player->getY()/rowHeight;
+		row=player->getY()/rowHeight;
 
 		if (drawProps(propsOnRow,player->getX(),player->getW(),row))
 			player->setLocation(plStartX,plStartY);
@@ -107,11 +110,11 @@ void Game::rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory
 	int maxSpeed=3;
 	numberOfRows=(screenHight)/rowHeight;
 	int mode=3;
+	list<Props*> enemies;
 	if (mode==1)
 	{
 		for (int n=0; n<numberOfRows; n++)
 		{
-			list<Props*> enemies;
 			int speed=((rand()%(numberOfRows-n))+1)*difficultyRows;
 			speed=speed>maxSpeed?maxSpeed:speed;
 			speed=(n==0||n==numberOfRows-1)?0:speed;
@@ -123,22 +126,19 @@ void Game::rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory
 	{
 		for (int n=0; n<numberOfRows; n++)
 		{
-			list<Props*> enemies;
 			int speed=((rand()%(numberOfRows-n))+1)*difficultyRows;
 			speed=speed>maxSpeed?maxSpeed:speed;
 			speed=(n==0||n==numberOfRows-1)?0:speed;
 			rows->push_back(F->createRow(((rand() %10)>5),speed,(n*rowHeight),rowHeight,n));
 			rows->back()->setLaneRow(true);
 			propsOnRow->push_back(enemies);
-
 		}
 	}
 	else if (mode==3)
 		{
 			for (int n=0; n<numberOfRows; n++)
 			{
-				list<Props*> enemies;
-				int speed=2;
+				int speed=1;
 				speed=(n==0||n==numberOfRows-1)?0:speed;
 				rows->push_back(F->createRow(((rand() %10)>=5),speed,(n*rowHeight),rowHeight,n));
 				rows->back()->setLaneRow(n<(numberOfRows/2));
@@ -177,6 +177,8 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 				Props* propBonus=F->createItem(row);
 				if ((propBonus->getX()>temp->getX())&&((propBonus->getX()+propBonus->getW())<(temp->getX()+temp->getW())))
 					propsOnRow->at(row->getNumber()).push_back(propBonus);
+				else
+					delete(propBonus);
 			}
 		}
 	}
@@ -194,6 +196,7 @@ bool Game::drawProps(vector<list<Props*>>* propsOnRow,int x, int w,int row)
 			if (!temp2->inframe())
 			{
 				propsOnRow->at(counter).remove(temp2);
+				delete(temp2);
 			}
 			else
 			{
@@ -205,11 +208,11 @@ bool Game::drawProps(vector<list<Props*>>* propsOnRow,int x, int w,int row)
 				if(temp3!=nullptr&&temp3->coll(x,w,row))
 				{
 					propsOnRow->at(counter).remove(temp2);
+					delete(temp3);
+					delete(temp2);
 				}
 				else
-				{
 					dete=temp2->coll(x,w,row)?true:dete;
-				}
 			}
 		}
 		counter++;

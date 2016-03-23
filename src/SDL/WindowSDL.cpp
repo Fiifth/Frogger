@@ -10,6 +10,7 @@
 #include "SDL.h"
 #include <string>
 #include "SDLdata.h"
+#include <vector>;
 
 using namespace std;
 
@@ -31,6 +32,27 @@ void WindowSDL::makeWindow(int ScreenWidth, int ScreenHeight,char const* title)
 	sdldata->createTextures();
 	setBackground();
 	updateScreen();
+}
+void WindowSDL::generateBackground(vector<Row*>* rows)
+{
+	std::vector<SDL_Texture*> backTextures=sdldata->getBackTextures();
+	for(Row* row:*rows)
+	{
+		int numberOfRows=(getHeight()/row->getHeight())-1;
+		int y=row->getLocY();
+		int height=row->getHeight();
+		int x=0,width=0;
+		int textureLocation=row->isLaneRow()?1:0;
+		textureLocation=(row->getNumber()==0)||(row->getNumber()==numberOfRows)?2:textureLocation;
+		sdldata->getDependWAndH(backTextures.at(textureLocation),&width,&height);
+
+		while(x<=getWidth())
+		{
+			sdldata->renderTexture(backTextures.at(textureLocation),ren,x,y,&width,&height,0);
+			x=x+width;
+		}
+	}
+
 }
 void WindowSDL::setBackground()
 {

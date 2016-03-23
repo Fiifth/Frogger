@@ -7,6 +7,8 @@
 #include "Window.h"
 #include "SDL.h"
 #include "SDLdata.h"
+#include "Row.h"
+#include <vector>
 
 #ifndef WINDOWSDL_H_
 #define WINDOWSDL_H_
@@ -18,6 +20,7 @@ public:
 	void makeWindow(int ScreenWidth, int ScreenHeight,char const* title);
 	 void setBackground();
 	 void updateScreen();
+	 void generateBackground(std::vector<Row*>* rows);
 private:
 	 SDLdata* sdldata;
 	 SDL_Renderer* ren;

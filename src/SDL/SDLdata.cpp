@@ -17,7 +17,6 @@ SDLdata::SDLdata()
 	screenHeight=480;
 	re=NULL;
 	backgroundTex=NULL;
-
 }
 
 SDLdata::~SDLdata() {}
@@ -99,6 +98,13 @@ void SDLdata::createTextures()
 	std::string imagePathItem ="C:/frogger/item.png";
 	itemTex.push_back(IMG_LoadTexture(re, imagePathItem.c_str()));
 
+	std::string imagePathBackground1 ="C:/frogger/back1.png";
+	backTex.push_back(IMG_LoadTexture(re, imagePathBackground1.c_str()));
+	std::string imagePathBackground2 ="C:/frogger/back2.png";
+	backTex.push_back(IMG_LoadTexture(re, imagePathBackground2.c_str()));
+	std::string imagePathBackground3 ="C:/frogger/back3.png";
+	backTex.push_back(IMG_LoadTexture(re, imagePathBackground3.c_str()));
+
 }
 
 SDL_Texture* SDLdata::getBackgroundTexture()
@@ -120,6 +126,10 @@ std::vector<SDL_Texture*> SDLdata::getItemTextures() {
 
 std::vector<SDL_Texture*> SDLdata::getLaneTextures() {
 	return laneTex;
+}
+
+std::vector<SDL_Texture*> SDLdata::getBackTextures() {
+	return backTex;
 }
 
 void SDLdata::setScreenDimension(int width,int height)

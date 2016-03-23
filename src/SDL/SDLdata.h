@@ -26,6 +26,7 @@ public:
 	std::vector<SDL_Texture*> getObstTextures();
 	std::vector<SDL_Texture*> getLaneTextures();
 	std::vector<SDL_Texture*> getItemTextures();
+	std::vector<SDL_Texture*> getBackTextures();
 	void setScreenDimension(int width,int height);
 
 	int getScreenHeight() const {
@@ -45,6 +46,7 @@ private:
 	std::vector<SDL_Texture*> ObstTex;
 	std::vector<SDL_Texture*> laneTex;
 	std::vector<SDL_Texture*> itemTex;
+	std::vector<SDL_Texture*> backTex;
 };
 
 #endif /* SDLSTUFF_H_ */
