@@ -35,17 +35,21 @@ Game::Game(Factory* F)
 {
 	srand (time(NULL));
 	int row;
+	int score=0,life=3,projectiles=0;
 	int rowHeight=50;
 	int difficultyRows=1;
-	int windowHeight=500;
-	int windowWidth=500;
+	int gameWindowHeight;
+	int gameWindowWidth;
+	int dataWindowHeight=20;
+	int WindowHeight=420;
+	int WindowWidth=500;
 	int difficulty=70;
+	dataWindowHeight=((WindowHeight-dataWindowHeight)%rowHeight)+dataWindowHeight;
+	gameWindowHeight=WindowHeight-dataWindowHeight;
+	gameWindowWidth=WindowWidth;
 	int plStartW=rowHeight,plStartH=rowHeight,plStartSpeed=rowHeight;
-	int plStartX=(windowWidth/2),plStartY=(windowHeight-plStartW);
+	int plStartX=(gameWindowWidth/2),plStartY=(gameWindowHeight-plStartW);
 	string keyStroke;
-	//TODO setup window layout (scores/startposition/borders)
-	//TODO game start screen for options
-	//TODO make background depending on row
 	vector<Row*> rowsR;
 	vector<list<Props*>> propsOnRowR;
 	vector<Row*>* rows=&rowsR;
@@ -53,53 +57,92 @@ Game::Game(Factory* F)
 
 
 	Window* win=F->createWindow();
-	win->makeWindow(windowWidth,windowHeight,"frogger");
+	win->makeWindow(WindowWidth,WindowHeight,dataWindowHeight,"frogger");
 
 	Player* player=F->createPlayer(plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
 	Events* event=F->createEvents();
 
-	rowGenerator(rowHeight,windowHeight,difficultyRows,F,rows,propsOnRow);
+	rowGenerator(rowHeight,gameWindowHeight,difficultyRows,F,rows,propsOnRow);
 
 
-	for (int n=0; (n<windowWidth); n++)
+	for (int n=0; (n<gameWindowWidth); n++)
 	{
 		propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
-		int row=player->getY()/windowWidth;
+		int row=player->getY()/gameWindowWidth;
 		drawProps(propsOnRow,player->getX(),player->getW(),row);
 	}
 
-
+	char state='B';
 	while(true)
 	{
 		keyStroke=event->getEvent();
-		if (keyStroke!="")
+		switch(state)
 		{
-			if (keyStroke=="Down")
-				player->moveDown();
-			else if (keyStroke=="Up")
-				player->moveUp();
-			else if (keyStroke=="Left")
-				player->moveLeft();
-			else if (keyStroke=="Right")
-				player->moveRight();
-			else if (keyStroke=="Escape")
-				return;
-		}
+			case 'A'  :
 
-		win->setBackground();
-		win->generateBackground(rows);
+				if (keyStroke!="")
+				{
+					if (keyStroke=="Down")
+					{
+						player->moveDown();
+						score=score-10;
+					}
+					else if (keyStroke=="Up")
+					{
+						player->moveUp();
+						score=score+10;
+					}
+					else if (keyStroke=="Left")
+						player->moveLeft();
+					else if (keyStroke=="Right")
+						player->moveRight();
+					else if (keyStroke=="Escape")
+						return;
+				}
 
-		propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
-		row=player->getY()/rowHeight;
+				win->setBackground();
+				win->generateBackground(rows);
+				win->dislayData(score,life,projectiles);
 
-		if (drawProps(propsOnRow,player->getX(),player->getW(),row))
-			player->setLocation(plStartX,plStartY);
-		else if(rows->at(row)->isLaneRow())
-			player->followRow(rows->at(row));
+				propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
+				row=player->getY()/rowHeight;
 
-		player->draw();
+				if (drawProps(propsOnRow,player->getX(),player->getW(),row))
+				{
+					player->setLocation(plStartX,plStartY);
+					life=life-1;
+					if (life==0)
+					{
+						state='B';
+						life=3;
+						score=0;
+					}
+				}
+				else if(rows->at(row)->isLaneRow())
+					player->followRow(rows->at(row));
+				player->draw();
+				win->updateScreen();
+				if(row==0)
+				{
+					score=score+100;
+					player->setLocation(plStartX,plStartY);
+				}
 
-		win->updateScreen();
+
+				break;
+			case 'B':
+			win->setBackground();
+			if (keyStroke!="")
+			{
+				if (keyStroke=="Space")
+					state='A';
+				else if (keyStroke=="Escape")
+					return;
+			}
+			win->updateScreen();
+			break;
+			}
+
 	}
 }
 
@@ -111,6 +154,7 @@ void Game::rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory
 	numberOfRows=(screenHight)/rowHeight;
 	int mode=3;
 	list<Props*> enemies;
+	bool dir=true;//(rand() %2)>0)
 	if (mode==1)
 	{
 		for (int n=0; n<numberOfRows; n++)
@@ -138,11 +182,12 @@ void Game::rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory
 		{
 			for (int n=0; n<numberOfRows; n++)
 			{
-				int speed=1;
+				int speed=2;
 				speed=(n==0||n==numberOfRows-1)?0:speed;
-				rows->push_back(F->createRow(((rand() %10)>=5),speed,(n*rowHeight),rowHeight,n));
+				rows->push_back(F->createRow(dir,speed,(n*rowHeight),rowHeight,n));
 				rows->back()->setLaneRow(n<(numberOfRows/2));
 				propsOnRow->push_back(enemies);
+				dir=not(dir);
 			}
 		}
 }
@@ -172,7 +217,7 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 			}
 			//TODO remove dynamic_cast
 			Lane* temp=dynamic_cast<Lane*>(propsOnRow->at(row->getNumber()).front());
-			if (temp!=nullptr&&(rand()%1000>995))
+			if (temp!=nullptr&&(rand()%1000>997))
 			{
 				Props* propBonus=F->createItem(row);
 				if ((propBonus->getX()>temp->getX())&&((propBonus->getX()+propBonus->getW())<(temp->getX()+temp->getW())))

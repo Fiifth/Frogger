@@ -40,7 +40,14 @@ void SDLdata::renderTexture(SDL_Texture* tex, SDL_Renderer* ren, int x, int y, i
 	dst.y = y;
 	dst.w = *w;
 	dst.h = *h;
-	SDL_RenderCopyEx(ren, tex, NULL, &dst,angle,NULL,SDL_FLIP_NONE);
+
+	SDL_RendererFlip temp=SDL_FLIP_NONE;
+	if (angle==1)
+	{
+	temp=SDL_FLIP_HORIZONTAL;
+	angle=0;
+	}
+	SDL_RenderCopyEx(ren, tex, NULL, &dst,angle,NULL,temp);
 	}
 void SDLdata::getDependWAndH(SDL_Texture* tex,int* w, int* h)
 {
@@ -132,8 +139,8 @@ std::vector<SDL_Texture*> SDLdata::getBackTextures() {
 	return backTex;
 }
 
-void SDLdata::setScreenDimension(int width,int height)
+void SDLdata::setScreenDimension(int width,int height,int dataWindowHeight)
 {
+	screenHeight=height-dataWindowHeight;
 	screenWidth=width;
-	screenHeight=height;
 }

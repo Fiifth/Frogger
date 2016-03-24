@@ -13,15 +13,17 @@ Window::Window()
 {
 	WIDTH  = 640;
 	HEIGHT = 480;
+	dataWindowHeight=20;
 	TITLE="frogger";
 }
 Window::~Window() {
 }
 
-void Window::setProp(int width,int height,char const* title)
+void Window::setProp(int width,int height,int dataWindowHeight,char const* title)
 {
 	WIDTH  = width;
 	HEIGHT = height;
+	this->dataWindowHeight=dataWindowHeight;
 	TITLE=title;
 }
 

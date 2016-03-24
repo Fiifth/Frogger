@@ -44,6 +44,6 @@ LaneSDL::LaneSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata),textures(sdldata-
 void LaneSDL::draw()
 {
 	int angle=0;
-			angle=row->isDirection()?180:0;
+			angle=row->isDirection()?1:0;
 		sdldata->renderTexture(tex,sdldata->getRen(),x,y,&w,&h,angle);
 }

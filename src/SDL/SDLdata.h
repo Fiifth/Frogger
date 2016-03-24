@@ -27,7 +27,7 @@ public:
 	std::vector<SDL_Texture*> getLaneTextures();
 	std::vector<SDL_Texture*> getItemTextures();
 	std::vector<SDL_Texture*> getBackTextures();
-	void setScreenDimension(int width,int height);
+	void setScreenDimension(int width,int height,int dataWindowHeight);
 
 	int getScreenHeight() const {
 		return screenHeight;

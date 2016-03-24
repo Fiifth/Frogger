@@ -17,7 +17,8 @@ class WindowSDL:public  Window{
 public:
 	WindowSDL(SDLdata* sdldata);
 	virtual ~WindowSDL();
-	void makeWindow(int ScreenWidth, int ScreenHeight,char const* title);
+	void makeWindow(int ScreenWidth, int ScreenHeight,int dataWindowHeight,char const* title);
+	void dislayData(int score,int life,int projectiles);
 	 void setBackground();
 	 void updateScreen();
 	 void generateBackground(std::vector<Row*>* rows);

@@ -14,17 +14,19 @@ class Window {
 public:
 	Window();
 	virtual ~Window();
-	virtual void makeWindow(int ScreenWidth, int ScreenHeight,char const* title)=0;
-	void setProp(int width,int height,char const* title);
+	virtual void makeWindow(int ScreenWidth, int ScreenHeight,int dataWindowHeight,char const* title)=0;
+	void setProp(int width,int height,int dataWindowHeight,char const* title);
 	virtual void setBackground()=0;
 	virtual void updateScreen()=0;
 	int getHeight() const;
 	int getWidth() const;
+	virtual void dislayData(int score,int life,int projectiles)=0;
 	virtual void generateBackground(std::vector<Row*>* rows)=0;
 
 protected:
 	int WIDTH;
 	int HEIGHT;
+	int dataWindowHeight;
 	char const * TITLE;
 };
 
