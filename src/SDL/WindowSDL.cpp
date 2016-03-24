@@ -61,19 +61,21 @@ void WindowSDL::dislayData(int score,int life,int projectiles)
 	string lifeS = to_string(life);
 	string projS = to_string(projectiles);
 	string text="Score: "+scoreS+" lives: "+lifeS+" Projectiles: "+projS;
-	char const* textC = text.c_str();
 
-	TTF_Font* Sans = TTF_OpenFont("c:\\sans.ttf", 24);
+	TTF_Font* Sans = TTF_OpenFont("c:\\sans.ttf", 40);
 	SDL_Color White = {255, 255, 255,255};
-	SDL_Surface* surfaceMessage =  TTF_RenderText_Blended(Sans, textC, White);
+	SDL_Surface* surfaceMessage =  TTF_RenderText_Blended(Sans, text.c_str(), White);
 	SDL_Texture* Message = SDL_CreateTextureFromSurface(ren, surfaceMessage);
+
 	SDL_Rect Message_rect; //create a rect
 	Message_rect.x = 0;//WIDTH/2;  //controls the rect's x coordinate
 	Message_rect.y = HEIGHT-dataWindowHeight; // controls the rect's y coordinte
 	Message_rect.w = WIDTH/2; // controls the width of the rect
 	Message_rect.h = dataWindowHeight; // controls the height of the rect
 	SDL_RenderCopyEx(ren, Message, NULL, &Message_rect,0,NULL,SDL_FLIP_NONE);
-
+	TTF_CloseFont(Sans);
+	SDL_FreeSurface(surfaceMessage);
+	SDL_DestroyTexture(Message);
 }
 void WindowSDL::setBackground()
 {

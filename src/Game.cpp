@@ -41,9 +41,9 @@ Game::Game(Factory* F)
 	int gameWindowHeight;
 	int gameWindowWidth;
 	int dataWindowHeight=20;
-	int WindowHeight=420;
-	int WindowWidth=500;
-	int difficulty=70;
+	int WindowHeight=520;
+	int WindowWidth=700;
+	int difficulty=50;
 	dataWindowHeight=((WindowHeight-dataWindowHeight)%rowHeight)+dataWindowHeight;
 	gameWindowHeight=WindowHeight-dataWindowHeight;
 	gameWindowWidth=WindowWidth;
@@ -131,17 +131,17 @@ Game::Game(Factory* F)
 
 				break;
 			case 'B':
-			win->setBackground();
-			if (keyStroke!="")
-			{
-				if (keyStroke=="Space")
-					state='A';
-				else if (keyStroke=="Escape")
-					return;
-			}
-			win->updateScreen();
-			break;
-			}
+				win->setBackground();
+				if (keyStroke!="")
+				{
+					if (keyStroke=="Space")
+						state='A';
+					else if (keyStroke=="Escape")
+						return;
+				}
+				win->updateScreen();
+				break;
+				}
 
 	}
 }
