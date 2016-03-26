@@ -43,7 +43,7 @@ Game::Game(Factory* F)
 	int dataWindowHeight=20;
 	int WindowHeight=520;
 	int WindowWidth=700;
-	int difficulty=50;
+	int difficulty=40;
 	dataWindowHeight=((WindowHeight-dataWindowHeight)%rowHeight)+dataWindowHeight;
 	gameWindowHeight=WindowHeight-dataWindowHeight;
 	gameWindowWidth=WindowWidth;
@@ -142,7 +142,6 @@ Game::Game(Factory* F)
 				win->updateScreen();
 				break;
 				}
-
 	}
 }
 
@@ -216,6 +215,11 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 				propsOnRow->at(row->getNumber()).push_front(prop);
 			}
 			//TODO remove dynamic_cast
+			//Possible solution-->
+			//roomForItem-->lane returns yes in case of x and y conditions/obsticle returns no
+			//problem --> I don't know the width
+			//offset with start position to make sure it works?
+			//or items are always squares-->width==rowhight
 			Lane* temp=dynamic_cast<Lane*>(propsOnRow->at(row->getNumber()).front());
 			if (temp!=nullptr&&(rand()%1000>997))
 			{
@@ -249,6 +253,8 @@ bool Game::drawProps(vector<list<Props*>>* propsOnRow,int x, int w,int row)
 				temp2->draw();
 				temp2->moveHor();
 
+				//TODO collide should return if there is a collision and if the object should be removed
+				//return pointer to object so the image can display a destroy animation?
 				Item* temp3=dynamic_cast<Item*>(temp2);
 				if(temp3!=nullptr&&temp3->coll(x,w,row))
 				{
@@ -269,6 +275,13 @@ list<Props*> Game::fillEnemyList(Factory* F,Row* row,int difficulty,int screenWi
 {
 	list<Props*> temp;
 	return temp;
+	//reuse object IDEA
+	//*****
+	//when object is out of screen --> put object in vector (vector type depends on type)
+	//when new object has to be created --> get an object from the vector
+	//problem
+	//The object that has to be removed is an obstical or a lane?
+	//
 }
 
 

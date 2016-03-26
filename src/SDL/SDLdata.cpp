@@ -101,7 +101,10 @@ void SDLdata::createTextures()
 	std::string imagePathLane ="C:/frogger/lane1.png";
 	laneTex.push_back(IMG_LoadTexture(re, imagePathLane.c_str()));
 	std::string magePathLane2 ="C:/frogger/lane2.png";
-		laneTex.push_back(IMG_LoadTexture(re, magePathLane2.c_str()));
+	laneTex.push_back(IMG_LoadTexture(re, magePathLane2.c_str()));
+	std::string magePathLane3 ="C:/frogger/lane3.png";
+	laneTex.push_back(IMG_LoadTexture(re, magePathLane3.c_str()));
+
 	std::string imagePathItem ="C:/frogger/item.png";
 	itemTex.push_back(IMG_LoadTexture(re, imagePathItem.c_str()));
 

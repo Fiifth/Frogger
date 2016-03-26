@@ -12,6 +12,8 @@
 #include "Row.h"
 #include "SDL.h"
 #include <vector>
+#include "Animator.h"
+
 class LaneSDL: public Lane{
 public:
 	LaneSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h);
@@ -23,6 +25,8 @@ private:
 	SDLdata* sdldata;
 	std::vector<SDL_Texture*> textures;
 	SDL_Texture* tex;
+	std::vector<int> ratio;
+	Animator* ani;
 };
 
 #endif /* SDL_ENTITIES_LANESDL_H_ */
