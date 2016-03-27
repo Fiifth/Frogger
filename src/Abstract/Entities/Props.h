@@ -22,6 +22,7 @@ public:
 	void setVisible(bool visible);
 	virtual void draw()=0;
 	virtual bool coll(int xPos,int width,int row)=0;
+	virtual bool roomForItem(int x,int w);
 
 protected:
 	Row* row;

@@ -14,6 +14,7 @@ public:
 	virtual ~Lane();
 	virtual void draw()=0;
 	bool coll(int xPos,int width,int row){return false;};
+	bool roomForItem(int x,int w);
 };
 
 #endif /* ABSTRACT_ENTITIES_LANE_H_ */

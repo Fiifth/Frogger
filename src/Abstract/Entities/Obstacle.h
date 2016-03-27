@@ -16,6 +16,7 @@ public:
 	virtual ~Obstacle();
 	virtual void draw()=0;
 	bool coll(int xPos,int width,int row);
+	bool roomForItem(int x,int w);
 
 };
 
