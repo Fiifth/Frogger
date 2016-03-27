@@ -2,7 +2,7 @@
  * Game.cpp
  *
  *  Created on: 22 Feb 2016
- *      Author: 
+ *      
  */
 
 #include <Obstacle.h>
