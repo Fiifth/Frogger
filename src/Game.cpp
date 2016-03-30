@@ -35,7 +35,6 @@ Game::Game(Factory* F)
 {
 	srand (time(NULL));
 	int row;
-	int score=0,life=3,projectiles=0;
 	int rowHeight=50;
 	int difficultyRows=1;
 	int gameWindowHeight;
@@ -85,12 +84,12 @@ Game::Game(Factory* F)
 					if (keyStroke=="Down")
 					{
 						player->moveDown();
-						score=score-10;
+						player->addScore(-10);
 					}
 					else if (keyStroke=="Up")
 					{
 						player->moveUp();
-						score=score+10;
+						player->addScore(10);
 					}
 					else if (keyStroke=="Left")
 						player->moveLeft();
@@ -102,29 +101,33 @@ Game::Game(Factory* F)
 
 				win->setBackground();
 				win->generateBackground(rows);
-				win->dislayData(score,life,projectiles);
+				win->dislayData(player->getScore(),player->getLife(),player->getProjectiles());
 
 				propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
 				row=player->getY()/rowHeight;
-
-				if (drawProps(propsOnRow,player->getX(),player->getW(),row))
+				int eff;
+				eff=drawProps(propsOnRow,player->getX(),player->getW(),row);
+				if (eff==1)
 				{
 					player->setLocation(plStartX,plStartY);
-					life=life-1;
-					if (life==0)
+					player->addLife(-1);
+					player->addScore(-10);
+					if (player->getLife()==0)
 					{
 						state='B';
-						life=3;
-						score=0;
+						player->setScore(0);
+						player->setLife(3);
 					}
 				}
 				else if(rows->at(row)->isLaneRow())
 					player->followRow(rows->at(row));
+				if(eff>1)
+					player->addScore(1);
 				player->draw();
 				win->updateScreen();
 				if(row==0)
 				{
-					score=score+100;
+					player->addScore(100);
 					player->setLocation(plStartX,plStartY);
 				}
 
@@ -226,10 +229,10 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 }
 
 
-bool Game::drawProps(vector<list<Props*>>* propsOnRow,int x, int w,int row)
+int Game::drawProps(vector<list<Props*>>* propsOnRow,int x, int w,int row)
 {
 	int counter=0;
-	bool dete=false;
+	int dete=false;
 	for (list<Props*> temp:*propsOnRow)
 	{
 		for(Props* temp2:temp)
@@ -242,20 +245,17 @@ bool Game::drawProps(vector<list<Props*>>* propsOnRow,int x, int w,int row)
 			else
 			{
 				if (temp2->isVisible())
-				temp2->draw();
+					temp2->draw();
 				temp2->moveHor();
-
-				//TODO collide should return if there is a collision and if the object should be removed
-				//return pointer to object so the image can display a destroy animation?
-				Item* temp3=dynamic_cast<Item*>(temp2);
-				if(temp3!=nullptr&&temp3->coll(x,w,row))
+				int effect=temp2->coll(x,w,row,true);
+				if(effect==1)
+					dete=effect;
+				else if ((effect>1)&&dete!=1)
 				{
 					propsOnRow->at(counter).remove(temp2);
-					delete(temp3);
 					delete(temp2);
+					dete=effect;
 				}
-				else
-					dete=temp2->coll(x,w,row)?true:dete;
 			}
 		}
 		counter++;

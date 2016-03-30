@@ -13,7 +13,7 @@ public:
 	Lane();
 	virtual ~Lane();
 	virtual void draw()=0;
-	bool coll(int xPos,int width,int row){return false;};
+	int coll(int xPos,int width,int row,bool type){return 0;};
 	bool roomForItem();
 	bool itemAbsent(){return true;};
 };

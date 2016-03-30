@@ -21,7 +21,8 @@ public:
 	bool isVisible() const;
 	void setVisible(bool visible);
 	virtual void draw()=0;
-	virtual bool coll(int xPos,int width,int row)=0;
+	virtual int coll(int xPos,int width,int row,bool type)=0;
+	//type true=player, false=bullet return type of effect 0=no effect, 1 player dies, 2-6 object dissapears and player gets effect
 	virtual bool roomForItem()=0;
 	virtual bool itemAbsent()=0;
 

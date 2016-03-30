@@ -14,9 +14,10 @@ public:
 	Item();
 	virtual ~Item();
 	virtual void draw()=0;
-	bool coll(int xPos,int width,int row);
+	int coll(int xPos,int width,int row,bool type);
 	bool roomForItem();
 	bool itemAbsent();
+	int effect=3;
 };
 
 #endif /* ABSTRACT_ENTITIES_ITEM_H_ */

@@ -15,7 +15,7 @@ public:
 	Obstacle();
 	virtual ~Obstacle();
 	virtual void draw()=0;
-	bool coll(int xPos,int width,int row);
+	int coll(int xPos,int width,int row,bool type);
 	bool roomForItem();
 	bool itemAbsent(){return true;};
 

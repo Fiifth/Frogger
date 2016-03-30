@@ -14,7 +14,7 @@ Obstacle::Obstacle()
 Obstacle::~Obstacle() {
 }
 
-bool Obstacle::coll(int xPos, int width,int row)
+int Obstacle::coll(int xPos, int width,int row,bool type)
 {
 	return (row==getRow()->getNumber()&&((xPos>=(x)&&xPos<=(x+w))||(xPos+width>=(x)&&xPos+width<=(x+w))));
 }

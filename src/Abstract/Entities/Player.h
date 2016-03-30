@@ -29,13 +29,23 @@ public:
 	int getDirection() const;
 	void setDirection(int direction);
 	int getCounter() const;
-	void setCounter(int counter = 0);
+	void setCounter(int counter);
+	int getLife() const;
+	void setLife(int life);
+	void addLife(int life);
+	int getProjectiles() const;
+	void setProjectiles(int projectiles);
+	void addProjectiles(int projectiles);
+	int getScore() const;
+	void setScore(int score);
+	void addScore(int score);
 
 private:
 	int vSpeed;
 	int hSpeed;
 	int direction;//1=up,2=right,3=down,4=left;
 	int counter=0;
+	int score=0,life=3,projectiles=0;
 };
 
 

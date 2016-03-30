@@ -85,3 +85,40 @@ int Player::getCounter() const {
 void Player::setCounter(int counter) {
 	this->counter = counter;
 }
+
+int Player::getLife() const {
+	return life;
+}
+
+void Player::setLife(int life) {
+	this->life = life;
+}
+
+int Player::getProjectiles() const {
+	return projectiles;
+}
+
+void Player::setProjectiles(int projectiles) {
+	this->projectiles = projectiles;
+}
+
+int Player::getScore() const {
+	return score;
+}
+
+void Player::setScore(int score) {
+	this->score = score;
+}
+
+void Player::addLife(int life) {
+	this->life=this->life+life;
+}
+
+void Player::addProjectiles(int projectiles) {
+	this->projectiles=this->projectiles+projectiles;
+}
+
+void Player::addScore(int score)
+{
+	this ->score=this->score+score;
+}

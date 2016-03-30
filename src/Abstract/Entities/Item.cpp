@@ -13,9 +13,9 @@ Item::Item() {
 Item::~Item() {
 }
 
-bool Item::coll(int xPos, int width,int row)
+int Item::coll(int xPos, int width,int row,bool type)
 {
-	return (row==getRow()->getNumber()&&((xPos>=(x)&&xPos<=(x+w))||(xPos+width>=(x)&&xPos+width<=(x+w))));
+	return row==getRow()->getNumber()&&((xPos>=(x)&&xPos<=(x+w))||(xPos+width>=(x)&&xPos+width<=(x+w)))?3:0;
 }
 
 bool Item::roomForItem()
