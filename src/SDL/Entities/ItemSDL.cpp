@@ -8,6 +8,7 @@
 #include <ItemSDL.h>
 #include "Row.h"
 #include <stdlib.h>
+#include <iostream>
 
 
 ItemSDL::ItemSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdldata(sdldata),textures(sdldata->getItemTextures())
@@ -20,7 +21,7 @@ ItemSDL::ItemSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdldata(sdl
 			int wn=0,hn=h;
 			sdldata->getDependWAndH(tex,&wn, &hn);
 			setSize(wn,hn);
-			int xloc=row->isDirection()?screenWidth+getW():-getW();
+			int xloc=row->isDirection()?screenWidth:-getW();
 			setLocation(xloc,row->getLocY());
 }
 
@@ -44,6 +45,6 @@ ItemSDL::ItemSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata),textures(sdldata-
 				int wn=0,hn=row->getHeight();
 				sdldata->getDependWAndH(tex,&wn, &hn);
 				setSize(wn,hn);
-				int xloc=row->isDirection()?screenWidth+getW():-getW();
+				int xloc=row->isDirection()?screenWidth:-getW();
 				setLocation(xloc,row->getLocY());
 }

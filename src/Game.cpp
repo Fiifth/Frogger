@@ -41,7 +41,7 @@ Game::Game(Factory* F)
 	int gameWindowHeight;
 	int gameWindowWidth;
 	int dataWindowHeight=20;
-	int WindowHeight=520;
+	int WindowHeight=220;
 	int WindowWidth=700;
 	int difficulty=40;
 	dataWindowHeight=((WindowHeight-dataWindowHeight)%rowHeight)+dataWindowHeight;
@@ -214,20 +214,12 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 				}
 				propsOnRow->at(row->getNumber()).push_front(prop);
 			}
-			//TODO remove dynamic_cast
-			//Possible solution-->
-			//roomForItem-->lane returns yes in case of x and y conditions/obsticle returns no
-			//problem --> I don't know the width
-			//offset with start position to make sure it works?
-			//or items are always squares-->width==rowhight
-			Lane* temp=dynamic_cast<Lane*>(propsOnRow->at(row->getNumber()).front());
-			if (temp!=nullptr&&(rand()%1000>997))
+			bool roomOnLane=propsOnRow->at(row->getNumber()).front()->roomForItem();
+			bool noItemYet=propsOnRow->at(row->getNumber()).back()->itemAbsent();
+			if (roomOnLane&&noItemYet&&(rand()%1000>500))
 			{
 				Props* propBonus=F->createItem(row);
-				if ((propBonus->getX()>temp->getX())&&((propBonus->getX()+propBonus->getW())<(temp->getX()+temp->getW())))
-					propsOnRow->at(row->getNumber()).push_back(propBonus);
-				else
-					delete(propBonus);
+				propsOnRow->at(row->getNumber()).push_back(propBonus);
 			}
 		}
 	}

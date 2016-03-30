@@ -19,7 +19,7 @@ bool Obstacle::coll(int xPos, int width,int row)
 	return (row==getRow()->getNumber()&&((xPos>=(x)&&xPos<=(x+w))||(xPos+width>=(x)&&xPos+width<=(x+w))));
 }
 
-bool roomForItem(int x,int w)
+bool Obstacle::roomForItem()
 {
 	return false;
 }

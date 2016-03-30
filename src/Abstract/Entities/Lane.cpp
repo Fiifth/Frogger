@@ -6,20 +6,20 @@
  */
 
 #include <Lane.h>
+#include "Entity.h"
+#include <iostream>
 
 Lane::Lane() {
-	//propBonus->getX()>temp->getX())&&((propBonus->getX()+propBonus->getW())<(temp->getX()+temp->getW())))
 
 }
 
 Lane::~Lane() {
 }
 
-bool roomForItem(int x, int w)
+bool Lane::roomForItem()
 {
-	if(x>getX()&&(x+w)<(getX()+getW()))
-		return true;
-	else
-		return false;
+	//height item = row->getHeight();
+	int itemX=row->isDirection()?screenWidth:-row->getHeight();
+	return (getX()<=itemX)&&(getX()+getW()>=row->getHeight()+itemX);
 }
 
