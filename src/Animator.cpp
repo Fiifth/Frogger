@@ -25,7 +25,7 @@ SDL_Texture* Animator::getTexture()
 	}
 	else
 	{
-		if(textures.size()>((unsigned)currentTexture+1))
+		if(textures.size()>((unsigned)currentTexture+1)&&ratio.at(currentTexture+1)>0)
 		{
 		currentTexture=currentTexture+1;
 		counter=ratio.at(currentTexture);
@@ -54,4 +54,11 @@ int Animator::getCurrentTexture() const {
 
 void Animator::setCurrentTexture(int currentTexture) {
 	this->currentTexture = currentTexture;
+}
+
+void Animator::triggerNext(int counter)
+{
+	currentTexture=currentTexture+1;
+	this->counter=counter;
+
 }

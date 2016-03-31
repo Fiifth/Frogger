@@ -20,6 +20,7 @@ public:
 	void setCounter(int counter);
 	int getCurrentTexture() const;
 	void setCurrentTexture(int currentTexture);
+	void triggerNext(int counter);
 
 	std::vector<SDL_Texture*> textures;
 	std::vector<int> ratio;

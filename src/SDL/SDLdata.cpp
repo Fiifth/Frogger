@@ -9,6 +9,7 @@
 #include <string>
 #include <SDL_image.h>
 #include <iostream>
+#include "Animator.h"
 SDL_Renderer* re;
 
 SDLdata::SDLdata()
@@ -19,6 +20,7 @@ SDLdata::SDLdata()
 	backgroundTex=NULL;
 }
 
+using namespace std;
 SDLdata::~SDLdata() {}
 
 
@@ -83,38 +85,72 @@ void SDLdata::updateScreen()
 }
 void SDLdata::createTextures()
 {
-	std::string imagePathBack ="C:/frogger/background.png";
+	std::vector<int> lane1Ratio={10,3,3};
+	std::vector<int> lane2Ratio={1};
+	std::vector<int> obs1Ratio={1};
+	std::vector<int> obs2Ratio={1};
+	std::vector<int> obs3Ratio={1};
+	std::vector<int> item1Ratio={1};
+	std::vector<int> player1Ratio={1,0};
+	vector<SDL_Texture*> lane1;
+	//vector<SDL_Texture*> lane2;
+	vector<SDL_Texture*> obst1;
+	vector<SDL_Texture*> obst2;
+	vector<SDL_Texture*> obst3;
+	vector<SDL_Texture*> item1;
+	vector<SDL_Texture*> player1;
+
+
+	string imagePathBack ="C:/frogger/background.png";
+	string playerPath1 ="C:/frogger/frog1.png";
+	string playerPath2 ="C:/frogger/frog2.png";
+	string imagePathEnemy1 ="C:/frogger/enemy1.png";
+	string imagePathEnemy2 ="C:/frogger/enemy2.png";
+	string imagePathEnemy3 ="C:/frogger/enemy3.png";
+	string imagePathLane1 ="C:/frogger/lane1.png";
+	string imagePathLane2 ="C:/frogger/lane2.png";
+	string imagePathLane3 ="C:/frogger/lane3.png";
+	string imagePathBackground1 ="C:/frogger/back1.png";
+	string imagePathBackground2 ="C:/frogger/back2.png";
+	string imagePathBackground3 ="C:/frogger/back3.png";
+	string imagePathItem ="C:/frogger/item.png";
+
 	backgroundTex=IMG_LoadTexture(re, imagePathBack.c_str());
-
-	std::string imagePath ="C:/frogger/frog1.png";
-	playerTex.push_back((IMG_LoadTexture(re, imagePath.c_str())));
-	std::string imagePath2 ="C:/frogger/frog2.png";
-	playerTex.push_back((IMG_LoadTexture(re, imagePath2.c_str())));
-
-	std::string imagePathEnemy ="C:/frogger/enemy1.png";
-	ObstTex.push_back(IMG_LoadTexture(re, imagePathEnemy.c_str()));
-	 imagePathEnemy ="C:/frogger/enemy2.png";
-	ObstTex.push_back(IMG_LoadTexture(re, imagePathEnemy.c_str()));
-	imagePathEnemy ="C:/frogger/enemy3.png";
-	ObstTex.push_back(IMG_LoadTexture(re, imagePathEnemy.c_str()));
-
-	std::string imagePathLane ="C:/frogger/lane1.png";
-	laneTex.push_back(IMG_LoadTexture(re, imagePathLane.c_str()));
-	std::string magePathLane2 ="C:/frogger/lane2.png";
-	laneTex.push_back(IMG_LoadTexture(re, magePathLane2.c_str()));
-	std::string magePathLane3 ="C:/frogger/lane3.png";
-	laneTex.push_back(IMG_LoadTexture(re, magePathLane3.c_str()));
-
-	std::string imagePathItem ="C:/frogger/item.png";
-	itemTex.push_back(IMG_LoadTexture(re, imagePathItem.c_str()));
-
-	std::string imagePathBackground1 ="C:/frogger/back1.png";
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground1.c_str()));
-	std::string imagePathBackground2 ="C:/frogger/back2.png";
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground2.c_str()));
-	std::string imagePathBackground3 ="C:/frogger/back3.png";
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground3.c_str()));
 
+	playerTex.push_back((IMG_LoadTexture(re, playerPath1.c_str())));
+	playerTex.push_back((IMG_LoadTexture(re, playerPath2.c_str())));
+	ObstTex.push_back(IMG_LoadTexture(re, imagePathEnemy1.c_str()));
+	ObstTex.push_back(IMG_LoadTexture(re, imagePathEnemy2.c_str()));
+	ObstTex.push_back(IMG_LoadTexture(re, imagePathEnemy3.c_str()));
+	laneTex.push_back(IMG_LoadTexture(re, imagePathLane1.c_str()));
+	laneTex.push_back(IMG_LoadTexture(re, imagePathLane2.c_str()));
+	laneTex.push_back(IMG_LoadTexture(re, imagePathLane3.c_str()));
+	itemTex.push_back(IMG_LoadTexture(re, imagePathItem.c_str()));
+
+	player1.push_back((IMG_LoadTexture(re, playerPath1.c_str())));
+	player1.push_back((IMG_LoadTexture(re, playerPath2.c_str())));
+	obst1.push_back(IMG_LoadTexture(re, imagePathEnemy1.c_str()));
+	obst2.push_back(IMG_LoadTexture(re, imagePathEnemy2.c_str()));
+	obst3.push_back(IMG_LoadTexture(re, imagePathEnemy3.c_str()));
+	lane1.push_back(IMG_LoadTexture(re, imagePathLane1.c_str()));
+	lane1.push_back(IMG_LoadTexture(re, imagePathLane2.c_str()));
+	lane1.push_back(IMG_LoadTexture(re, imagePathLane3.c_str()));
+	item1.push_back(IMG_LoadTexture(re, imagePathItem.c_str()));
+
+	Animator* obs1Ani=new Animator(obst1,obs1Ratio);
+	Animator* obs2Ani=new Animator(obst2,obs2Ratio);
+	Animator* obs3Ani=new Animator(obst3,obs3Ratio);
+	Animator* lane1Ani=new Animator(lane1,lane1Ratio);
+	Animator* item1Ani=new Animator(item1,item1Ratio);
+	Animator* player1Ani=new Animator(player1,player1Ratio);
+
+	obstiAni={obs1Ani,obs2Ani,obs3Ani};
+	laneAni={lane1Ani};
+	playerAni={player1Ani};
+	itemAni={item1Ani};
 }
 
 SDL_Texture* SDLdata::getBackgroundTexture()

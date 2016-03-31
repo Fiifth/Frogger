@@ -7,6 +7,7 @@
 
 #include "SDL.h"
 #include <vector>
+#include "Animator.h"
 #ifndef SDLSTUFF_H_
 #define SDLSTUFF_H_
 
@@ -47,6 +48,10 @@ private:
 	std::vector<SDL_Texture*> laneTex;
 	std::vector<SDL_Texture*> itemTex;
 	std::vector<SDL_Texture*> backTex;
+	std::vector<Animator*> obstiAni;
+	std::vector<Animator*> laneAni;
+	std::vector<Animator*> playerAni;
+	std::vector<Animator*> itemAni;
 };
 
 #endif /* SDLSTUFF_H_ */

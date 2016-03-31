@@ -40,7 +40,7 @@ Game::Game(Factory* F)
 	int gameWindowHeight;
 	int gameWindowWidth;
 	int dataWindowHeight=20;
-	int WindowHeight=220;
+	int WindowHeight=520;
 	int WindowWidth=700;
 	int difficulty=40;
 	dataWindowHeight=((WindowHeight-dataWindowHeight)%rowHeight)+dataWindowHeight;
@@ -219,7 +219,7 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 			}
 			bool roomOnLane=propsOnRow->at(row->getNumber()).front()->roomForItem();
 			bool noItemYet=propsOnRow->at(row->getNumber()).back()->itemAbsent();
-			if (roomOnLane&&noItemYet&&(rand()%1000>500))
+			if (roomOnLane&&noItemYet&&(rand()%1000>998))
 			{
 				Props* propBonus=F->createItem(row);
 				propsOnRow->at(row->getNumber()).push_back(propBonus);
