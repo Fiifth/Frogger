@@ -9,6 +9,7 @@
 #include "Window.h"
 #include "SDLdata.h"
 #include <vector>
+#include "Animator.h"
 #ifndef FROGSDL_H_
 #define FROGSDL_H_
 
@@ -23,6 +24,7 @@ private:
 	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w, int h);
 	SDLdata* sdldata;
 	std::vector<SDL_Texture*> textures;
+	Animator* ani;
 };
 
 

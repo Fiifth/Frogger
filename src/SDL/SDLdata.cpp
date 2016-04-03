@@ -85,12 +85,12 @@ void SDLdata::updateScreen()
 }
 void SDLdata::createTextures()
 {
-	std::vector<int> lane1Ratio={10,3,3};
+	std::vector<int> lane1Ratio={40,5,10};
 	std::vector<int> lane2Ratio={1};
 	std::vector<int> obs1Ratio={1};
 	std::vector<int> obs2Ratio={1};
 	std::vector<int> obs3Ratio={1};
-	std::vector<int> item1Ratio={1};
+	std::vector<int> item1Ratio={5};
 	std::vector<int> player1Ratio={1,0};
 	vector<SDL_Texture*> lane1;
 	//vector<SDL_Texture*> lane2;
@@ -140,17 +140,18 @@ void SDLdata::createTextures()
 	lane1.push_back(IMG_LoadTexture(re, imagePathLane3.c_str()));
 	item1.push_back(IMG_LoadTexture(re, imagePathItem.c_str()));
 
-	Animator* obs1Ani=new Animator(obst1,obs1Ratio);
-	Animator* obs2Ani=new Animator(obst2,obs2Ratio);
-	Animator* obs3Ani=new Animator(obst3,obs3Ratio);
-	Animator* lane1Ani=new Animator(lane1,lane1Ratio);
-	Animator* item1Ani=new Animator(item1,item1Ratio);
-	Animator* player1Ani=new Animator(player1,player1Ratio);
+	Animator obs1Ani(obst1,obs1Ratio);
+	Animator obs2Ani(obst2,obs2Ratio);
+	Animator obs3Ani(obst3,obs3Ratio);
+	Animator lane1Ani(lane1,lane1Ratio);
+	Animator item1Ani(item1,item1Ratio);
+	Animator player1Ani(player1,player1Ratio);
 
 	obstiAni={obs1Ani,obs2Ani,obs3Ani};
 	laneAni={lane1Ani};
 	playerAni={player1Ani};
 	itemAni={item1Ani};
+	std::cout<<"size: "<<itemAni.back().ratio.size()<<std::endl;
 }
 
 SDL_Texture* SDLdata::getBackgroundTexture()
@@ -182,4 +183,20 @@ void SDLdata::setScreenDimension(int width,int height,int dataWindowHeight)
 {
 	screenHeight=height-dataWindowHeight;
 	screenWidth=width;
+}
+
+Animator SDLdata::getItemAni() {
+	return itemAni.front();
+}
+
+Animator SDLdata::getLaneAni() {
+	return laneAni.front();
+}
+
+Animator SDLdata::getObstiAni() {
+	return obstiAni.front();
+}
+
+Animator SDLdata::getPlayerAni() {
+	return playerAni.front();
 }

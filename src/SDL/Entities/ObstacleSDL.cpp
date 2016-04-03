@@ -16,6 +16,8 @@ using namespace std;
 
 ObstacleSDL::ObstacleSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdldata(sdldata),textures(sdldata->getObstTextures())
 {
+	Animator bla=sdldata->getObstiAni();
+	ani=&bla;
 	setRow(row);
 	setSpeed(row->getSpeed());
 	setSize(0,h);
@@ -36,11 +38,12 @@ void ObstacleSDL::draw()
 {
 	int angle=0;
 	angle=row->isDirection()?1:0;
-	sdldata->renderTexture(tex,sdldata->getRen(),x,y,&w,&h,angle);
+	sdldata->renderTexture(ani->getTexture(),sdldata->getRen(),x,y,&w,&h,angle);
 }
 
 ObstacleSDL::ObstacleSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata),textures(sdldata->getObstTextures())
 {
+		ani=sdldata->getObstiAni().clone();
 	setRow(row);
 		setSpeed(row->getSpeed());
 		setSize(0,row->getHeight());

@@ -13,6 +13,7 @@
 #include "SDL.h"
 #include "Row.h"
 #include <vector>
+#include "Animator.h"
 
 class ItemSDL:public Item {
 public:
@@ -25,6 +26,7 @@ private:
 	SDLdata* sdldata;
 	std::vector<SDL_Texture*> textures;
 	SDL_Texture* tex;
+	Animator* ani;
 };
 
 #endif /* SDL_ENTITIES_ITEMSDL_H_ */

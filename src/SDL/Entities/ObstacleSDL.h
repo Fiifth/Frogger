@@ -10,6 +10,7 @@
 #include "SDLdata.h"
 #include "Row.h"
 #include <list>
+#include "Animator.h"
 
 
 #ifndef ENEMYSDL_H_
@@ -28,6 +29,7 @@ private:
 	SDLdata* sdldata;
 	std::vector<SDL_Texture*> textures;
 	SDL_Texture* tex;
+	Animator* ani;
 };
 
 #endif /* ENEMYSDL_H_ */

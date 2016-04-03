@@ -18,6 +18,9 @@ using namespace std;
 PlayerSDL::PlayerSDL(SDLdata* sdldata,int x,int y,int w,int h,int speedH,int speedV) :sdldata(sdldata),textures(sdldata->getPlayerTextures())
 
 {//TODO get animator object instead of textures
+	//Animator bla=sdldata->getPlayerAni();
+		//ani=&bla;
+		ani=sdldata->getPlayerAni().clone();
 	sethSpeed(speedH);
 	setvSpeed(speedV);
 	setSize(w,h);
@@ -31,8 +34,9 @@ void PlayerSDL::draw()
 {
 	int angle=getDirection();
 	int animationState=(getCounter()>0)?1:0;
-	//TODO set counter/current texture on animator object
+	ani->setCurrentTexture(animationState);
 	setCounter(getCounter()>0?(getCounter()-1):0);
-	sdldata->renderTexture(textures.at(animationState),sdldata->getRen(),x,y,&w,&h,angle);
+	ani->setCounter(getCounter());
+	sdldata->renderTexture(ani->getTexture(),sdldata->getRen(),x,y,&w,&h,angle);
 }
 

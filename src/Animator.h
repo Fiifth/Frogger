@@ -21,11 +21,13 @@ public:
 	int getCurrentTexture() const;
 	void setCurrentTexture(int currentTexture);
 	void triggerNext(int counter);
+	Animator* clone();
 
 	std::vector<SDL_Texture*> textures;
 	std::vector<int> ratio;
-	int counter;
-	int currentTexture;
+	int counter=0;
+	int currentTexture=0;
+	int size;
 };
 
 #endif /* ANIMATOR_H_ */

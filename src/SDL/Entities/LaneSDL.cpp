@@ -31,6 +31,7 @@ LaneSDL::~LaneSDL() {
 
 LaneSDL::LaneSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata),textures(sdldata->getLaneTextures())
 {
+	ani=sdldata->getLaneAni().clone();
 	setRow(row);
 	setSpeed(row->getSpeed());
 	setSize(0,row->getHeight());
@@ -42,11 +43,12 @@ LaneSDL::LaneSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata),textures(sdldata-
 	int xloc=row->isDirection()?screenWidth:-getW();
 	setLocation(xloc,row->getLocY());
 	//std::vector<SDL_Texture*> textures;
-	std::vector<SDL_Texture*>::const_iterator first = textures.begin();
-	std::vector<SDL_Texture*>::const_iterator last = textures.begin() + 3;
-	std::vector<SDL_Texture*> newVec(first, last);
-	ratio={10,3,3};
-	ani=new Animator(newVec,ratio);
+	//std::vector<SDL_Texture*>::const_iterator first = textures.begin();
+	//std::vector<SDL_Texture*>::const_iterator last = textures.begin() + 3;
+	//std::vector<SDL_Texture*> newVec(first, last);
+	//ratio={10,3,3};
+	//ani=new Animator(newVec,ratio);
+	//ani=sdldata->getLaneAni();
 	//TODO give animator instead of textures
 	//Set animator in vector and choose random from that vector when creating object lane
 }
