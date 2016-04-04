@@ -263,20 +263,6 @@ int Game::drawProps(vector<list<Props*>>* propsOnRow,int x, int w,int row)
 	return dete;
 }
 
-list<Props*> Game::fillEnemyList(Factory* F,Row* row,int difficulty,int screenWidth)
-{
-	list<Props*> temp;
-	return temp;
-	//reuse object IDEA
-	//*****
-	//when object is out of screen --> put object in vector (vector type depends on type)
-	//when new object has to be created --> get an object from the vector
-	//problem
-	//The object that has to be removed is an obstical or a lane?
-	//
-}
-
-
 //auto start_time = chrono::high_resolution_clock::now();
 		//auto end_time = chrono::high_resolution_clock::now();
 		//cout << chrono::duration_cast<chrono::microseconds>(end_time - start_time).count() << endl;

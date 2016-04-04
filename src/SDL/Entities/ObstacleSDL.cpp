@@ -44,7 +44,7 @@ void ObstacleSDL::draw()
 ObstacleSDL::ObstacleSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata),textures(sdldata->getObstTextures())
 {
 		ani=sdldata->getObstiAni().clone();
-	setRow(row);
+		setRow(row);
 		setSpeed(row->getSpeed());
 		setSize(0,row->getHeight());
 		setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());

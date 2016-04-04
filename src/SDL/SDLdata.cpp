@@ -90,7 +90,7 @@ void SDLdata::createTextures()
 	std::vector<int> obs1Ratio={1};
 	std::vector<int> obs2Ratio={1};
 	std::vector<int> obs3Ratio={1};
-	std::vector<int> item1Ratio={5};
+	std::vector<int> item1Ratio={1};
 	std::vector<int> player1Ratio={1,0};
 	vector<SDL_Texture*> lane1;
 	//vector<SDL_Texture*> lane2;
@@ -151,7 +151,6 @@ void SDLdata::createTextures()
 	laneAni={lane1Ani};
 	playerAni={player1Ani};
 	itemAni={item1Ani};
-	std::cout<<"size: "<<itemAni.back().ratio.size()<<std::endl;
 }
 
 SDL_Texture* SDLdata::getBackgroundTexture()

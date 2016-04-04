@@ -17,10 +17,8 @@ using namespace std;
 
 PlayerSDL::PlayerSDL(SDLdata* sdldata,int x,int y,int w,int h,int speedH,int speedV) :sdldata(sdldata),textures(sdldata->getPlayerTextures())
 
-{//TODO get animator object instead of textures
-	//Animator bla=sdldata->getPlayerAni();
-		//ani=&bla;
-		ani=sdldata->getPlayerAni().clone();
+{
+	ani=sdldata->getPlayerAni().clone();
 	sethSpeed(speedH);
 	setvSpeed(speedV);
 	setSize(w,h);
