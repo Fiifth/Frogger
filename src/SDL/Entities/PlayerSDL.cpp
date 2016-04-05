@@ -36,5 +36,6 @@ void PlayerSDL::draw()
 	setCounter(getCounter()>0?(getCounter()-1):0);
 	ani->setCounter(getCounter());
 	sdldata->renderTexture(ani->getTexture(),sdldata->getRen(),x,y,&w,&h,angle);
+	//TODO direction 0123 en daarna naar angle
 }
 

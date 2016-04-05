@@ -16,7 +16,7 @@ public:
 	virtual ~Props();
 	void setRow(Row* row);
 	Row* getRow();
-	void moveHor();
+	void moveForward();
 	bool isRoom();
 	bool isVisible() const;
 	void setVisible(bool visible);
@@ -25,6 +25,10 @@ public:
 	//type true=player, false=bullet return type of effect 0=no effect, 1 player dies, 2-6 object dissapears and player gets effect
 	virtual bool roomForItem()=0;
 	virtual bool itemAbsent()=0;
+	int getDirection() const;
+	void setDirection(int direction);
+
+	int direction=0;//1=up,2=right,3=down,4=left;
 
 protected:
 	Row* row;

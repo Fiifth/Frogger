@@ -46,7 +46,7 @@ void Player::moveLeft()
 }
 
 void Player::followRow(Row* row) {
-	if(!row->isDirection())
+	if(!row->isDirLeft())
 		//move(1+(((row->getSpeed())*2)/10),0,true);
 			move(row->getSpeed(),0,false);
 		else

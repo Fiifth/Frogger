@@ -14,7 +14,7 @@
 
 using namespace std;
 
-ObstacleSDL::ObstacleSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdldata(sdldata),textures(sdldata->getObstTextures())
+ObstacleSDL::ObstacleSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdldata(sdldata)
 {
 	Animator bla=sdldata->getObstiAni();
 	ani=&bla;
@@ -22,11 +22,10 @@ ObstacleSDL::ObstacleSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdl
 	setSpeed(row->getSpeed());
 	setSize(0,h);
 	setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
-	tex=textures.at(rand()%3);
 	int wn=0,hn=h;
-	sdldata->getDependWAndH(tex,&wn, &hn);
+	sdldata->getDependWAndH(ani->getTexture(),&wn, &hn);
 	setSize(wn,hn);
-	int xloc=row->isDirection()?screenWidth:-getW();
+	int xloc=row->isDirLeft()?screenWidth:-getW();
 	setLocation(xloc,row->getLocY());
 }
 
@@ -37,21 +36,22 @@ ObstacleSDL::~ObstacleSDL() {
 void ObstacleSDL::draw()
 {
 	int angle=0;
-	angle=row->isDirection()?1:0;
+	angle=row->isDirLeft()?1:0;
 	sdldata->renderTexture(ani->getTexture(),sdldata->getRen(),x,y,&w,&h,angle);
 }
 
-ObstacleSDL::ObstacleSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata),textures(sdldata->getObstTextures())
+ObstacleSDL::ObstacleSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata)
 {
 		ani=sdldata->getObstiAni().clone();
 		setRow(row);
+		//1=up,2=right,3=down,4=left;
+			setDirection(row->isDirLeft()?4:2);
 		setSpeed(row->getSpeed());
 		setSize(0,row->getHeight());
 		setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
-		tex=textures.at(rand()%3);
 		int wn=0,hn=row->getHeight();
-		sdldata->getDependWAndH(tex,&wn, &hn);
+		sdldata->getDependWAndH(ani->getTexture(),&wn, &hn);
 		setSize(wn,hn);
-		int xloc=row->isDirection()?screenWidth:-getW();
+		int xloc=row->isDirLeft()?screenWidth:-getW();
 		setLocation(xloc,row->getLocY());
 }

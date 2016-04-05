@@ -246,7 +246,7 @@ int Game::drawProps(vector<list<Props*>>* propsOnRow,int x, int w,int row)
 			{
 				if (temp2->isVisible())
 					temp2->draw();
-				temp2->moveHor();
+				temp2->moveForward();
 				int effect=temp2->coll(x,w,row,true);
 				if(effect==1)
 					dete=effect;

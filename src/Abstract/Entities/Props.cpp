@@ -22,18 +22,21 @@ void Props::setRow(Row* row) {
 Row* Props::getRow(){
 	return row;
 }
-void Props::moveHor()
+void Props::moveForward()
 {
-	if(!row->isDirection())
-	//move(1+(((row->getSpeed())*2)/10),0,true);
+	//1=up,2=right,3=down,4=left;
+	if(direction==2)
 		move(row->getSpeed(),0,true);
-	else
+	else if (direction==4)
 		move(-row->getSpeed(),0,true);
-	//move(-(1+(((row->getSpeed())*3)/10)),0,true);
+	else if ((direction==1))
+		move(0,-row->getSpeed(),true);
+	else if (direction==3)
+		move(0,row->getSpeed(),true);
 }
 bool Props::isRoom()
 {
-	bool temp=((x>0)&&(x<getWidth()-getW()));
+	//bool temp=((x>0)&&(x<getWidth()-getW()));
 
 	return ((x>0)&&(x<getWidth()-getW()));
 }
@@ -44,4 +47,12 @@ bool Props::isVisible() const {
 
 void Props::setVisible(bool visible) {
 	this->visible = visible;
+}
+
+int Props::getDirection() const {
+	return direction;
+}
+
+void Props::setDirection(int direction) {
+	this->direction = direction;
 }

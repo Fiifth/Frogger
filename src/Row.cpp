@@ -16,7 +16,7 @@ Row::Row(bool direction,int speed,int locY,int height, int number):direction(dir
 Row::~Row() {
 }
 
-bool Row::isDirection() const {
+bool Row::isDirLeft() const {
 	return direction;
 }
 

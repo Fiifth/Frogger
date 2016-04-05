@@ -27,8 +27,6 @@ public:
 private:
 	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w, int h);
 	SDLdata* sdldata;
-	std::vector<SDL_Texture*> textures;
-	SDL_Texture* tex;
 	Animator* ani;
 };
 

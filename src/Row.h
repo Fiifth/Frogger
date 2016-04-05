@@ -12,7 +12,7 @@ class Row {
 public:
 	Row(bool direction,	int speed,	int locY,	int height, int number);
 	virtual ~Row();
-	bool isDirection() const;
+	bool isDirLeft() const;
 	int getLocY() const;
 	int getNumber() const;
 	int getSpeed() const;

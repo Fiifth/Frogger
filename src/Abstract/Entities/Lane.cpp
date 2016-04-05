@@ -19,7 +19,7 @@ Lane::~Lane() {
 bool Lane::roomForItem()
 {
 	//height item = row->getHeight();
-	int itemX=row->isDirection()?screenWidth:-row->getHeight();
+	int itemX=row->isDirLeft()?screenWidth:-row->getHeight();
 	return (getX()<=itemX)&&(getX()+getW()>=row->getHeight()+itemX);
 }
 

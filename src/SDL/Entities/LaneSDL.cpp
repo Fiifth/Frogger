@@ -10,43 +10,42 @@
 #include <stdlib.h>
 #include <iostream>
 
- LaneSDL::LaneSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdldata(sdldata),textures(sdldata->getLaneTextures())
+ LaneSDL::LaneSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdldata(sdldata)
 {
+	 ani=sdldata->getLaneAni().clone();
 	setRow(row);
 	setSpeed(row->getSpeed());
 	setSize(0,h);
 	setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
-	tex=textures.at(rand()%2);
 	int wn=0,hn=h;
-	sdldata->getDependWAndH(tex,&wn, &hn);
+	sdldata->getDependWAndH(ani->getTexture(),&wn, &hn);
 	setSize(wn,hn);
-	int xloc=row->isDirection()?screenWidth:-getW();
+	int xloc=row->isDirLeft()?screenWidth:-getW();
 	setLocation(xloc,row->getLocY());
-	ratio={0};
-	ani=nullptr;
 }
 LaneSDL::~LaneSDL() {
 	delete(ani);
 }
 
-LaneSDL::LaneSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata),textures(sdldata->getLaneTextures())
+LaneSDL::LaneSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata)
 {
 	ani=sdldata->getLaneAni().clone();
 	setRow(row);
+	//1=up,2=right,3=down,4=left;
+		setDirection(row->isDirLeft()?4:2);
 	setSpeed(row->getSpeed());
 	setSize(0,row->getHeight());
 	setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
-	tex=textures.at(rand()%2);
 	int wn=0,hn=row->getHeight();
-	sdldata->getDependWAndH(tex,&wn, &hn);
+	sdldata->getDependWAndH(ani->getTexture(),&wn, &hn);
 	setSize(wn,hn);
-	int xloc=row->isDirection()?screenWidth:-getW();
+	int xloc=row->isDirLeft()?screenWidth:-getW();
 	setLocation(xloc,row->getLocY());
 }
 
 void LaneSDL::draw()
 {
 	int angle=0;
-	angle=row->isDirection()?1:0;
+	angle=row->isDirLeft()?1:0;
 	sdldata->renderTexture(ani->getTexture(),sdldata->getRen(),x,y,&w,&h,angle);
 }

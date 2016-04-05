@@ -19,9 +19,6 @@ Animator::~Animator()
 
 SDL_Texture* Animator::getTexture()
 {
-	std::cout<<"yey1"<<std::endl;
-	std::cout<<ratio.at(0)<<std::endl;
-	std::cout<<ratio.size()<<std::endl;
 	SDL_Texture* texture;
 	if(size>1)
 	{
@@ -47,7 +44,6 @@ SDL_Texture* Animator::getTexture()
 	}
 	else
 	{
-		std::cout<<"yey"<<std::endl;
 		return textures.back();
 	}
 }
