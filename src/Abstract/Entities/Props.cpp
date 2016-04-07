@@ -26,18 +26,16 @@ void Props::moveForward()
 {
 	//1=up,2=right,3=down,4=left;
 	if(direction==2)
-		move(row->getSpeed(),0,true);
+		move(speed,0,true);
 	else if (direction==4)
-		move(-row->getSpeed(),0,true);
+		move(-speed,0,true);
 	else if ((direction==1))
-		move(0,-row->getSpeed(),true);
+		move(0,-speed,true);
 	else if (direction==3)
-		move(0,row->getSpeed(),true);
+		move(0,speed,true);
 }
 bool Props::isRoom()
 {
-	//bool temp=((x>0)&&(x<getWidth()-getW()));
-
 	return ((x>0)&&(x<getWidth()-getW()));
 }
 
@@ -55,4 +53,12 @@ int Props::getDirection() const {
 
 void Props::setDirection(int direction) {
 	this->direction = direction;
+}
+
+bool Props::isTurned() const {
+	return turned;
+}
+
+void Props::setTurned(bool turned) {
+	this->turned = turned;
 }

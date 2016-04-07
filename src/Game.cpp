@@ -25,6 +25,7 @@
 #include <ctime>
 #include <ratio>
 #include <chrono>
+#include "Projectile.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -51,6 +52,8 @@ Game::Game(Factory* F)
 	string keyStroke;
 	vector<Row*> rowsR;
 	vector<list<Props*>> propsOnRowR;
+	list<Projectile*>projectilesR;
+	list<Projectile*>*projectiles=&projectilesR;
 	vector<Row*>* rows=&rowsR;
 	vector<list<Props*>>* propsOnRow=&propsOnRowR;
 
@@ -67,8 +70,7 @@ Game::Game(Factory* F)
 	for (int n=0; (n<gameWindowWidth); n++)
 	{
 		propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
-		int row=player->getY()/gameWindowWidth;
-		drawProps(propsOnRow,player->getX(),player->getY(),player->getH(),player->getW(),row);
+		drawProps(propsOnRow,projectiles,player->getX(),player->getY(),player->getH(),player->getW());
 	}
 
 	char state='B';
@@ -97,6 +99,11 @@ Game::Game(Factory* F)
 						player->moveRight();
 					else if (keyStroke=="Escape")
 						return;
+					else if (keyStroke=="Space")
+					{
+						Projectile* temp=F->createProjectile(player->getDirection(),player->getX(),player->getY(),player->getH(),5);
+						projectiles->push_back(temp);
+					}
 				}
 
 				win->setBackground();
@@ -106,7 +113,7 @@ Game::Game(Factory* F)
 				propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
 				row=player->getY()/rowHeight;
 				int eff;
-				eff=drawProps(propsOnRow,player->getX(),player->getY(),player->getH(),player->getW(),row);
+				eff=drawProps(propsOnRow,projectiles,player->getX(),player->getY(),player->getH(),player->getW());
 				if (eff==1)
 				{
 					player->setLocation(plStartX,plStartY);
@@ -121,16 +128,18 @@ Game::Game(Factory* F)
 				}
 				else if(rows->at(row)->isLaneRow())
 					player->followRow(rows->at(row));
+
 				if(eff>1)
 					player->addScore(1);
 				player->draw();
-				win->updateScreen();
+
 				if(row==0)
 				{
 					player->addScore(100);
 					player->setLocation(plStartX,plStartY);
 				}
 
+				win->updateScreen();
 
 				break;
 			case 'B':
@@ -229,7 +238,7 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 }
 
 
-int Game::drawProps(vector<list<Props*>>* propsOnRow,int x,int y,int h, int w,int row)
+int Game::drawProps(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectiles,int x,int y,int h, int w)
 {
 	int counter=0;
 	int dete=false;
@@ -237,6 +246,17 @@ int Game::drawProps(vector<list<Props*>>* propsOnRow,int x,int y,int h, int w,in
 	{
 		for(Props* temp2:temp)
 		{
+			for (Projectile* proj:*projectiles)
+			{
+				if(temp2->isVisible()&&temp2->coll(proj->getX(),proj->getY(),proj->getH(),proj->getW(),true))
+				{
+					temp2->setVisible(false);
+					temp2->setTurned(true);
+					delete (proj);
+					projectiles->remove(proj);
+
+				}
+			}
 			if (!temp2->inframe())
 			{
 				propsOnRow->at(counter).remove(temp2);
@@ -247,7 +267,6 @@ int Game::drawProps(vector<list<Props*>>* propsOnRow,int x,int y,int h, int w,in
 				if (temp2->isVisible())
 					temp2->draw();
 				temp2->moveForward();
-				//int effect=temp2->coll(x,w,row,true);
 				int effect=temp2->coll(x,y,h,w,true);
 				if(effect==1)
 					dete=effect;
@@ -260,6 +279,19 @@ int Game::drawProps(vector<list<Props*>>* propsOnRow,int x,int y,int h, int w,in
 			}
 		}
 		counter++;
+	}
+	for (Projectile* temp:*projectiles)
+	{
+		if (temp->inframe())
+		{
+		temp->draw();
+		temp->moveForward();
+		}
+		else
+		{
+			delete (temp);
+		projectiles->remove(temp);
+		}
 	}
 	return dete;
 }

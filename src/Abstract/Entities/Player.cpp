@@ -16,42 +16,40 @@ Player::Player():vSpeed(0),hSpeed(0),direction(1)
 
 Player::~Player() {
 }
-
+//int direction=0;//1=up,2=right,3=down,4=left;
 void Player::moveUp()
 {
 	move(0,(-vSpeed),false);
-	direction=0;
+	direction=1;
 	counter=10;
 }
 
 void Player::moveDown()
 {
 	move(0,vSpeed,false);
-	direction=180;
+	direction=3;
 	counter=10;
 }
 
 void Player::moveRight()
 {
 	move(hSpeed/2,0,false);
-	direction=90;
+	direction=2;
 	counter=10;
 }
 
 void Player::moveLeft()
 {
 	move(-(hSpeed/2),0,false);
-	direction=270;
+	direction=4;
 	counter=10;
 }
 
 void Player::followRow(Row* row) {
 	if(!row->isDirLeft())
-		//move(1+(((row->getSpeed())*2)/10),0,true);
 			move(row->getSpeed(),0,false);
 		else
 			move(-row->getSpeed(),0,false);
-		//move(-(1+(((row->getSpeed())*3)/10)),0,true);
 }
 
 int Player::gethSpeed() const {

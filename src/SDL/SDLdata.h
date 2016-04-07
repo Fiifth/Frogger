@@ -8,6 +8,7 @@
 #include "SDL.h"
 #include <vector>
 #include "Animator.h"
+#include <string>
 #ifndef SDLSTUFF_H_
 #define SDLSTUFF_H_
 
@@ -29,6 +30,7 @@ public:
 	std::vector<SDL_Texture*> getItemTextures();
 	std::vector<SDL_Texture*> getBackTextures();
 	void setScreenDimension(int width,int height,int dataWindowHeight);
+	Animator getAnimator(std::vector<std::string> paths,std::vector<int> ratio);
 
 	int getScreenHeight() const {
 		return screenHeight;

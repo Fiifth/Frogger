@@ -6,6 +6,7 @@
  */
 
 #include "Entity.h"
+#include <iostream>
 Entity::Entity()
 {
 	x=30;
@@ -53,8 +54,9 @@ void Entity::setScreenSize(int width,int height)
 	screenHeight = height;
 }
 bool Entity::inframe()
-{//||y>(HEIGHT+h)||y<(0-h)
-	return (x<(screenWidth+(2*w))&&x>(0-(2*w)));
+{
+	//std::cout<<h<<std::endl;
+	return ((x<(screenWidth+(2*w))&&x>(0-(2*w))) &&((y<=screenHeight+h)&&(y>=(0-h))));
 }
 
 
