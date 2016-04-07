@@ -68,7 +68,7 @@ Game::Game(Factory* F)
 	{
 		propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
 		int row=player->getY()/gameWindowWidth;
-		drawProps(propsOnRow,player->getX(),player->getW(),row);
+		drawProps(propsOnRow,player->getX(),player->getY(),player->getH(),player->getW(),row);
 	}
 
 	char state='B';
@@ -106,7 +106,7 @@ Game::Game(Factory* F)
 				propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
 				row=player->getY()/rowHeight;
 				int eff;
-				eff=drawProps(propsOnRow,player->getX(),player->getW(),row);
+				eff=drawProps(propsOnRow,player->getX(),player->getY(),player->getH(),player->getW(),row);
 				if (eff==1)
 				{
 					player->setLocation(plStartX,plStartY);
@@ -229,7 +229,7 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 }
 
 
-int Game::drawProps(vector<list<Props*>>* propsOnRow,int x, int w,int row)
+int Game::drawProps(vector<list<Props*>>* propsOnRow,int x,int y,int h, int w,int row)
 {
 	int counter=0;
 	int dete=false;
@@ -247,7 +247,8 @@ int Game::drawProps(vector<list<Props*>>* propsOnRow,int x, int w,int row)
 				if (temp2->isVisible())
 					temp2->draw();
 				temp2->moveForward();
-				int effect=temp2->coll(x,w,row,true);
+				//int effect=temp2->coll(x,w,row,true);
+				int effect=temp2->coll(x,y,h,w,true);
 				if(effect==1)
 					dete=effect;
 				else if ((effect>1)&&dete!=1)

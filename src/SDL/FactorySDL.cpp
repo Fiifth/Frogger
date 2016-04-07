@@ -14,6 +14,7 @@
 #include "EventsSDL.h"
 #include "LaneSDL.h"
 #include "ItemSDL.h"
+#include "ProjectileSDL.h"
 
 #include "Window.h"
 #include "WindowSDL.h"
@@ -67,4 +68,9 @@ Lane* FactorySDL::createLane(Row* row)
 Item* FactorySDL::createItem(Row* row)
 {
 	return new ItemSDL(sdldata,row);
+}
+
+Projectile* FactorySDL::createProjectile(int direction,int Xstart,int Ystart,int size,int speed)
+{
+	return new ProjectileSDL(sdldata,direction,Xstart,Ystart,size,speed);
 }

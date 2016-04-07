@@ -15,6 +15,7 @@ public:
 	virtual ~Projectile();
 	bool roomForItem(){return false;};
 	bool itemAbsent(){return true;};
+	int coll(int xPos,int YPos, int height,int width,bool type);
 private:
 
 };

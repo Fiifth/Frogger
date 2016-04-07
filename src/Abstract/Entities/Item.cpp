@@ -13,14 +13,13 @@ Item::Item() {
 Item::~Item() {
 }
 
-int Item::coll(int xPos, int width,int row,bool type)
-{
-	return row==getRow()->getNumber()&&((xPos>=(x)&&xPos<=(x+w))||(xPos+width>=(x)&&xPos+width<=(x+w)))?3:0;
-}
-
 bool Item::roomForItem()
 {
 	return false;
+}
+
+int Item::coll(int xPos, int YPos, int height, int width, bool type) {
+	return (((YPos>=(y)&&YPos<(y+h))||(YPos+height>(y)&&YPos+height<=(y+h)))&&((xPos>=(x)&&xPos<=(x+w))||(xPos+width>=(x)&&xPos+width<=(x+w))))?3:0;
 }
 
 bool Item::itemAbsent()

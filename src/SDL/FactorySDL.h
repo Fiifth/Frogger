@@ -13,6 +13,8 @@
 #include "Row.h"
 #include "Lane.h"
 #include "Item.h"
+#include "Projectile.h"
+#include "ProjectileSDL.h"
 
 #ifndef FACTORYSDL_H_
 #define FACTORYSDL_H_
@@ -27,6 +29,7 @@ public:
 	virtual Obstacle* createObstacle(Row* row,int x,int y,int w,int h);
 	virtual Lane* createLane(Row* row,int x,int y,int w,int h);
 	virtual Item* createItem(Row* row,int x,int y,int w,int h);
+	virtual Projectile* createProjectile(int direction,int Xstart,int Ystart,int size,int speed);
 	virtual Obstacle* createObstacle(Row* row);
 	virtual Lane* createLane(Row* row);
 	virtual Item* createItem(Row* row);

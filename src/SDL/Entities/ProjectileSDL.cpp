@@ -11,7 +11,7 @@ ProjectileSDL::ProjectileSDL(SDLdata* sdldata,int direction,int Xstart,int Ystar
 	//1=up,2=right,3=down,4=left;
 	ani=sdldata->getItemAni().clone();
 		setDirection(direction);
-		setSpeed(row->getSpeed());
+		setSpeed(speed);
 		setSize(0,size);
 		setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
 		int wn=0,hn=size;
