@@ -12,7 +12,7 @@
 
  LaneSDL::LaneSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdldata(sdldata)
 {
-	 ani=sdldata->getLaneAni().clone();
+	ani=sdldata->getLaneAni().clone();
 	setRow(row);
 	setSpeed(row->getSpeed());
 	setSize(0,h);
@@ -20,8 +20,7 @@
 	int wn=0,hn=h;
 	sdldata->getDependWAndH(ani->getTexture(),&wn, &hn);
 	setSize(wn,hn);
-	int xloc=row->isDirLeft()?screenWidth:-getW();
-	setLocation(xloc,row->getLocY());
+	setLocation(x,row->getLocY());
 }
 LaneSDL::~LaneSDL() {
 	delete(ani);

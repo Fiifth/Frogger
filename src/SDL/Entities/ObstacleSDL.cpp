@@ -25,8 +25,7 @@ ObstacleSDL::ObstacleSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdl
 	int wn=0,hn=h;
 	sdldata->getDependWAndH(ani->getTexture(),&wn, &hn);
 	setSize(wn,hn);
-	int xloc=row->isDirLeft()?screenWidth:-getW();
-	setLocation(xloc,row->getLocY());
+	setLocation(x,row->getLocY());
 }
 
 ObstacleSDL::~ObstacleSDL() {

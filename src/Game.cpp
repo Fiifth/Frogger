@@ -296,6 +296,15 @@ int Game::drawProps(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectil
 	return dete;
 }
 
+list<Props*> Game::fillEnemyList(Factory* F, Row* row, int difficulty,int screenWidth)
+{
+	list<Props*> listOfProps;
+	int x;
+F->createObstacle(row,x,5,0,row->getHeight());
+
+
+	return listOfProps;
+}
 //auto start_time = chrono::high_resolution_clock::now();
 		//auto end_time = chrono::high_resolution_clock::now();
 		//cout << chrono::duration_cast<chrono::microseconds>(end_time - start_time).count() << endl;
