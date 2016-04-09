@@ -14,6 +14,7 @@
 {
 	ani=sdldata->getLaneAni().clone();
 	setRow(row);
+	setDirection(row->isDirLeft()?4:2);
 	setSpeed(row->getSpeed());
 	setSize(0,h);
 	setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());

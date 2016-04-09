@@ -66,12 +66,7 @@ Game::Game(Factory* F)
 
 	rowGenerator(rowHeight,gameWindowHeight,difficultyRows,F,rows,propsOnRow);
 
-
-	for (int n=0; (n<gameWindowWidth); n++)
-	{
-		propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
-		drawProps(propsOnRow,projectiles,player->getX(),player->getY(),player->getH(),player->getW());
-	}
+	fillEnemyList(F,rows,propsOnRow, difficulty,WindowWidth);
 
 	char state='B';
 	while(true)
@@ -111,6 +106,7 @@ Game::Game(Factory* F)
 				win->dislayData(player->getScore(),player->getLife(),player->getProjectiles());
 
 				propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
+
 				row=player->getY()/rowHeight;
 				int eff;
 				eff=drawProps(propsOnRow,projectiles,player->getX(),player->getY(),player->getH(),player->getW());
@@ -193,6 +189,7 @@ void Game::rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory
 		{
 			for (int n=0; n<numberOfRows; n++)
 			{
+				list<Props*> enemiies;
 				int speed=2;
 				speed=(n==0||n==numberOfRows-1)?0:speed;
 				rows->push_back(F->createRow(dir,speed,(n*rowHeight),rowHeight,n));
@@ -240,7 +237,6 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 
 int Game::drawProps(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectiles,int x,int y,int h, int w)
 {
-	int counter=0;
 	int dete=false;
 	for (list<Props*> temp:*propsOnRow)
 	{
@@ -248,6 +244,7 @@ int Game::drawProps(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectil
 		{
 			for (Projectile* proj:*projectiles)
 			{
+
 				if(temp2->isVisible()&&temp2->coll(proj->getX(),proj->getY(),proj->getH(),proj->getW(),true))
 				{
 					temp2->setVisible(false);
@@ -259,7 +256,7 @@ int Game::drawProps(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectil
 			}
 			if (!temp2->inframe())
 			{
-				propsOnRow->at(counter).remove(temp2);
+				propsOnRow->at(temp2->getRow()->getNumber()).remove(temp2);
 				delete(temp2);
 			}
 			else
@@ -267,18 +264,18 @@ int Game::drawProps(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectil
 				if (temp2->isVisible())
 					temp2->draw();
 				temp2->moveForward();
+
 				int effect=temp2->coll(x,y,h,w,true);
 				if(effect==1)
 					dete=effect;
 				else if ((effect>1)&&dete!=1)
 				{
-					propsOnRow->at(counter).remove(temp2);
+					propsOnRow->at(temp2->getRow()->getNumber()).remove(temp2);
 					delete(temp2);
 					dete=effect;
 				}
 			}
 		}
-		counter++;
 	}
 	for (Projectile* temp:*projectiles)
 	{
@@ -296,14 +293,42 @@ int Game::drawProps(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectil
 	return dete;
 }
 
-list<Props*> Game::fillEnemyList(Factory* F, Row* row, int difficulty,int screenWidth)
+void Game::fillEnemyList(Factory* F,vector<Row*>* rows, vector<list<Props*>>* propsOnRow, int difficulty,int screenWidth)
 {
 	list<Props*> listOfProps;
-	int x;
-F->createObstacle(row,x,5,0,row->getHeight());
+	for(Row* row:*rows)
+	{
+		int x=0;
+		while(x<screenWidth)
+		{
+			if((row->getNumber()!=0)&&(row->getNumber()!=(numberOfRows-1)))
+			{
+				const list<Props*>* PreProp=&propsOnRow->at(row->getNumber());
+				Props* prop;
+				int number=rand()%100;
+				if ((row->isLaneRow()&&PreProp->front()->isVisible())||((number>difficulty)&&!PreProp->front()->isVisible()))
+				{
+					prop=F->createObstacle(row,x,5,0,row->getHeight());
+					prop->setVisible(!row->isLaneRow());
+				}
+				else
+				{
+					prop=F->createLane(row,x,5,0,row->getHeight());
+					prop->setVisible(row->isLaneRow());
 
+				}
+				if(row->isDirLeft())
+					propsOnRow->at(row->getNumber()).push_front(prop);
+				else
+					propsOnRow->at(row->getNumber()).push_back(prop);
 
-	return listOfProps;
+				x=prop->getW()+x;
+			}
+			else
+				x=screenWidth;
+
+		}
+	}
 }
 //auto start_time = chrono::high_resolution_clock::now();
 		//auto end_time = chrono::high_resolution_clock::now();

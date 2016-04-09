@@ -22,7 +22,7 @@ public:
 	void rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory* F,vector<Row*>* rows,vector<list<Props*>>* propsOnRow);
 	void propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>* rows,vector<list<Props*>>* propsOnRow);
 	int drawProps(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectiles,int x,int y,int h, int w);
-	list<Props*> fillEnemyList(Factory* F,Row* row,int difficulty,int screenWidth);
+	void fillEnemyList(Factory* F,std::vector<Row*>* rows,std::vector<std::list<Props*>>* propsOnRow,int difficulty,int screenWidth);
 
 
 };

@@ -16,9 +16,9 @@ using namespace std;
 
 ObstacleSDL::ObstacleSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdldata(sdldata)
 {
-	Animator bla=sdldata->getObstiAni();
-	ani=&bla;
+	ani=sdldata->getObstiAni().clone();
 	setRow(row);
+	setDirection(row->isDirLeft()?4:2);
 	setSpeed(row->getSpeed());
 	setSize(0,h);
 	setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
