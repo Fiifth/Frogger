@@ -16,9 +16,9 @@ Lane::Lane() {
 Lane::~Lane() {
 }
 
-int Lane::coll(int xPos, int YPos, int height, int width, bool type) {
+int Lane::coll(Entity* entity, bool type) {
 	if (isTurned())
-		return (((YPos>=(y)&&YPos<(y+h))||(YPos+height>(y)&&YPos+height<=(y+h)))&&((xPos>=(x)&&xPos<=(x+w))||(xPos+width>=(x)&&xPos+width<=(x+w))));
+		return (((entity->getY()>=(y)&&entity->getY()<(y+h))||(entity->getY()+entity->getH()>(y)&&entity->getY()+entity->getH()<=(y+h)))&&((entity->getX()>=(x)&&entity->getX()<=(x+w))||(entity->getX()+entity->getW()>=(x)&&entity->getX()+entity->getW()<=(x+w))));
 	else
 		return 0;
 }

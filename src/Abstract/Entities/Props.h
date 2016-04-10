@@ -21,17 +21,16 @@ public:
 	bool isVisible() const;
 	void setVisible(bool visible);
 	virtual void draw()=0;
-	virtual int coll(int xPos,int YPos, int height,int width,bool type)=0;
+	virtual int coll(Entity* entity,bool type)=0;
 	//type true=player, false=bullet return type of effect 0=no effect, 1 player dies, 2-6 object disappears and player gets effect
 	virtual bool roomForItem()=0;
 	virtual bool itemAbsent()=0;
-	int getDirection() const;
-	void setDirection(int direction);
+
 
 	bool isTurned() const;
 	void setTurned(bool turned);
 
-	int direction=0;//1=up,2=right,3=down,4=left;
+
 
 protected:
 	Row* row;

@@ -25,9 +25,13 @@ public:
 	int getWidth() const;
 	int getSpeed() const;
 	void setSpeed(int speed);
+	int getDirection() const;
+		void setDirection(int direction);
+
 protected:
 	int x,y,w,h,speed;
 	int screenWidth,screenHeight;
+	int direction=1;//1=up,2=right,3=down,4=left;
 
 
 };

@@ -8,12 +8,13 @@
 #ifndef ABSTRACT_ENTITIES_LANE_H_
 #define ABSTRACT_ENTITIES_LANE_H_
 #include "Props.h"
+#include "Entity.h"
 class Lane :public Props{
 public:
 	Lane();
 	virtual ~Lane();
 	virtual void draw()=0;
-	int coll(int xPos,int YPos, int height,int width,bool type);
+	int coll(Entity* entity,bool type);
 	bool roomForItem();
 	bool itemAbsent(){return true;};
 };

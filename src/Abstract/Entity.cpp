@@ -91,3 +91,10 @@ int Entity::getSpeed() const {
 void Entity::setSpeed(int speed) {
 	this->speed = speed;
 }
+int Entity::getDirection() const {
+	return direction;
+}
+
+void Entity::setDirection(int direction) {
+	this->direction = direction;
+}

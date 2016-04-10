@@ -23,6 +23,7 @@ PlayerSDL::PlayerSDL(SDLdata* sdldata,int x,int y,int w,int h,int speedH,int spe
 	setvSpeed(speedV);
 	setSize(w,h);
 	setLocation(x,y);
+	setStartPosition(x,y);
 	setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
 }
 

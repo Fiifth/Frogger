@@ -29,7 +29,7 @@ public:
 	virtual Obstacle* createObstacle(Row* row,int x,int y,int w,int h);
 	virtual Lane* createLane(Row* row,int x,int y,int w,int h);
 	virtual Item* createItem(Row* row,int x,int y,int w,int h);
-	virtual Projectile* createProjectile(int direction,int Xstart,int Ystart,int size,int speed);
+	virtual Projectile* createProjectile(Entity* entity,int speed);
 	virtual Obstacle* createObstacle(Row* row);
 	virtual Lane* createLane(Row* row);
 	virtual Item* createItem(Row* row);

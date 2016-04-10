@@ -35,7 +35,6 @@ int numberOfRows;
 Game::Game(Factory* F)
 {
 	srand (time(NULL));
-	int row;
 	int rowHeight=50;
 	int difficultyRows=1;
 	int gameWindowHeight;
@@ -56,12 +55,15 @@ Game::Game(Factory* F)
 	list<Projectile*>*projectiles=&projectilesR;
 	vector<Row*>* rows=&rowsR;
 	vector<list<Props*>>* propsOnRow=&propsOnRowR;
+	list<Player*> playersR;
+	list<Player*>* players=&playersR;
 
 
 	Window* win=F->createWindow();
 	win->makeWindow(WindowWidth,WindowHeight,dataWindowHeight,"frogger");
 
 	Player* player=F->createPlayer(plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
+	players->push_back(player);
 	Events* event=F->createEvents();
 
 	rowGenerator(rowHeight,gameWindowHeight,difficultyRows,F,rows,propsOnRow);
@@ -74,70 +76,36 @@ Game::Game(Factory* F)
 		keyStroke=event->getEvent();
 		switch(state)
 		{
+
+		//----------------------------------------------------------------------------------------------------
 			case 'A'  :
 
 				if (keyStroke!="")
 				{
-					if (keyStroke=="Down")
-					{
-						player->moveDown();
-						player->addScore(-10);
-					}
-					else if (keyStroke=="Up")
-					{
-						player->moveUp();
-						player->addScore(10);
-					}
-					else if (keyStroke=="Left")
-						player->moveLeft();
-					else if (keyStroke=="Right")
-						player->moveRight();
-					else if (keyStroke=="Escape")
+					player->takeAction(keyStroke);
+					if (keyStroke=="Escape")
 						return;
 					else if (keyStroke=="Space")
 					{
-						Projectile* temp=F->createProjectile(player->getDirection(),player->getX(),player->getY(),player->getH(),5);
-						projectiles->push_back(temp);
+						projectiles->push_back(F->createProjectile(player,5));
 					}
 				}
 
 				win->setBackground();
 				win->generateBackground(rows);
-				win->dislayData(player->getScore(),player->getLife(),player->getProjectiles());
-
 				propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
-
-				row=player->getY()/rowHeight;
-				int eff;
-				eff=drawProps(propsOnRow,projectiles,player->getX(),player->getY(),player->getH(),player->getW());
-				if (eff==1)
-				{
-					player->setLocation(plStartX,plStartY);
-					player->addLife(-1);
-					player->addScore(-10);
-					if (player->getLife()==0)
-					{
+				if (collisionDetection(propsOnRow,projectiles,players)==1)
 						state='B';
-						player->setScore(0);
-						player->setLife(3);
-					}
-				}
-				else if(rows->at(row)->isLaneRow())
-					player->followRow(rows->at(row));
-
-				if(eff>1)
-					player->addScore(1);
-				player->draw();
-
-				if(row==0)
+				else
 				{
-					player->addScore(100);
-					player->setLocation(plStartX,plStartY);
+					drawGameElements(propsOnRow,projectiles, players,rows);
 				}
-
+				win->dislayData(player->getScore(),player->getLife(),player->getProjectiles());
 				win->updateScreen();
 
 				break;
+
+				//----------------------------------------------------------------------------------------------------
 			case 'B':
 				win->setBackground();
 				if (keyStroke!="")
@@ -149,7 +117,7 @@ Game::Game(Factory* F)
 				}
 				win->updateScreen();
 				break;
-				}
+			}
 	}
 }
 
@@ -205,12 +173,12 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 	{
 		if((row->getNumber()!=0)&&(row->getNumber()!=(numberOfRows-1)))
 		{
-			const list<Props*>* PreProp=&propsOnRow->at(row->getNumber());
+			list<Props*>* PreProp=&propsOnRow->at(row->getNumber());
 			if((PreProp->empty())||((PreProp->front())->isRoom()))
 			{
 				Props* prop;
-				int number=rand()%100;
-				if ((row->isLaneRow()&&PreProp->front()->isVisible())||((number>difficulty)&&!PreProp->front()->isVisible()))
+				//if ((row->isLaneRow()&&PreProp->front()->isVisible())||((number>difficulty)&&!PreProp->front()->isVisible()))
+				if(obsOrLane(PreProp,true,row->isLaneRow(),difficulty))
 				{
 					prop=F->createObstacle(row);
 					prop->setVisible(!row->isLaneRow());
@@ -223,19 +191,25 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 				}
 				propsOnRow->at(row->getNumber()).push_front(prop);
 			}
-			bool roomOnLane=propsOnRow->at(row->getNumber()).front()->roomForItem();
-			bool noItemYet=propsOnRow->at(row->getNumber()).back()->itemAbsent();
+			bool roomOnLane=PreProp->front()->roomForItem();
+			bool noItemYet=PreProp->back()->itemAbsent();
 			if (roomOnLane&&noItemYet&&(rand()%1000>998))
 			{
 				Props* propBonus=F->createItem(row);
 				propsOnRow->at(row->getNumber()).push_back(propBonus);
+			}
+			if(rand()%1000>998)
+			{
+				Props* randomObstable=PreProp->front();
+				Props* projec=F->createProjectile(randomObstable,5);
+				propsOnRow->at(row->getNumber()).push_back(projec);
 			}
 		}
 	}
 }
 
 
-int Game::drawProps(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectiles,int x,int y,int h, int w)
+int Game::collisionDetection(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectiles,list<Player*>* players)
 {
 	int dete=false;
 	for (list<Props*> temp:*propsOnRow)
@@ -244,50 +218,26 @@ int Game::drawProps(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectil
 		{
 			for (Projectile* proj:*projectiles)
 			{
-
-				if(temp2->isVisible()&&temp2->coll(proj->getX(),proj->getY(),proj->getH(),proj->getW(),true))
+				if(temp2->isVisible()&&temp2->coll(proj,true))
 				{
 					temp2->setVisible(false);
 					temp2->setTurned(true);
 					delete (proj);
 					projectiles->remove(proj);
-
 				}
 			}
-			if (!temp2->inframe())
+			int effect=temp2->coll(players->back(),true);
+			if(effect>1)
 			{
 				propsOnRow->at(temp2->getRow()->getNumber()).remove(temp2);
 				delete(temp2);
+				dete=effect;
+				players->back()->addScore(1);
 			}
-			else
+			else if (effect==1)
 			{
-				if (temp2->isVisible())
-					temp2->draw();
-				temp2->moveForward();
-
-				int effect=temp2->coll(x,y,h,w,true);
-				if(effect==1)
-					dete=effect;
-				else if ((effect>1)&&dete!=1)
-				{
-					propsOnRow->at(temp2->getRow()->getNumber()).remove(temp2);
-					delete(temp2);
-					dete=effect;
-				}
+				return players->back()->hit();
 			}
-		}
-	}
-	for (Projectile* temp:*projectiles)
-	{
-		if (temp->inframe())
-		{
-		temp->draw();
-		temp->moveForward();
-		}
-		else
-		{
-			delete (temp);
-		projectiles->remove(temp);
 		}
 	}
 	return dete;
@@ -303,10 +253,9 @@ void Game::fillEnemyList(Factory* F,vector<Row*>* rows, vector<list<Props*>>* pr
 		{
 			if((row->getNumber()!=0)&&(row->getNumber()!=(numberOfRows-1)))
 			{
-				const list<Props*>* PreProp=&propsOnRow->at(row->getNumber());
+				list<Props*>* PreProp=&propsOnRow->at(row->getNumber());
 				Props* prop;
-				int number=rand()%100;
-				if ((row->isLaneRow()&&PreProp->front()->isVisible())||((number>difficulty)&&!PreProp->front()->isVisible()))
+				if(obsOrLane(PreProp,row->isDirLeft(),row->isLaneRow(),difficulty))
 				{
 					prop=F->createObstacle(row,x,5,0,row->getHeight());
 					prop->setVisible(!row->isLaneRow());
@@ -326,9 +275,55 @@ void Game::fillEnemyList(Factory* F,vector<Row*>* rows, vector<list<Props*>>* pr
 			}
 			else
 				x=screenWidth;
-
 		}
 	}
+}
+
+void Game::drawGameElements(std::vector<std::list<Props*>>* propsOnRow,
+		list<Projectile*>* projectiles, list<Player*>* players,vector<Row*>* rows) {
+int i=0;
+
+	for (list<Props*> temp:*propsOnRow)
+	{
+		propsOnRow->at(i).remove_if(Pred());
+		i++;
+		temp.remove_if(Pred());
+		for(Props* temp2:temp)
+		{
+				if (temp2->isVisible())
+					temp2->draw();
+				temp2->moveForward();
+		}
+
+	}
+
+	projectiles->remove_if(Pred());
+	for (Projectile* temp:*projectiles)
+	{
+		temp->draw();
+		temp->moveForward();
+	}
+	for(Player* player:*players)
+	{
+		int row=player->getY()/player->getH(); //TODO instread of getH search for row height
+		player->draw();
+		if(rows->at(row)->isLaneRow())
+			player->followRow(rows->at(row));
+		if(row==0)
+		{
+			player->addScore(100);
+			player->resetPosition();
+		}
+	}
+}
+
+bool Game::obsOrLane(list<Props*>* PreProp,bool frontOrBack,bool laneRow, int difficulty)
+{
+	int number=rand()%100;
+	if (frontOrBack)
+	return ((laneRow&&PreProp->front()->isVisible())||((number>difficulty)&&!PreProp->front()->isVisible()));
+	else
+		return ((laneRow&&PreProp->back()->isVisible())||((number>difficulty)&&!PreProp->back()->isVisible()));
 }
 //auto start_time = chrono::high_resolution_clock::now();
 		//auto end_time = chrono::high_resolution_clock::now();

@@ -17,6 +17,7 @@ public:
 	ProjectileSDL(SDLdata* sdldata,int direction, int Xstart,int Ystart,int size,int speed);
 	virtual ~ProjectileSDL();
 	void draw();
+
 private:
 	SDLdata* sdldata;
 	Animator* ani;

@@ -47,13 +47,7 @@ void Props::setVisible(bool visible) {
 	this->visible = visible;
 }
 
-int Props::getDirection() const {
-	return direction;
-}
 
-void Props::setDirection(int direction) {
-	this->direction = direction;
-}
 
 bool Props::isTurned() const {
 	return turned;

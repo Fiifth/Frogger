@@ -30,7 +30,7 @@ public:
 	virtual Obstacle* createObstacle(Row* row)=0;
 	virtual Lane* createLane(Row* row)=0;
 	virtual Item* createItem(Row* row)=0;
-	virtual Projectile* createProjectile(int direction,int Xstart,int Ystart,int size,int speed)=0;
+	virtual Projectile* createProjectile(Entity* entity,int speed)=0;
 	virtual Window* createWindow()=0;
 	virtual Events* createEvents()=0;
 	virtual Row* createRow(bool direction,int speed,int locY,int width, int number);

@@ -8,6 +8,7 @@
 #ifndef ABSTRACT_ENTITIES_PROJECTILE_H_
 #define ABSTRACT_ENTITIES_PROJECTILE_H_
 #include "Props.h"
+#include "Entity.h"
 
 class Projectile :public Props{
 public:
@@ -15,7 +16,7 @@ public:
 	virtual ~Projectile();
 	bool roomForItem(){return false;};
 	bool itemAbsent(){return true;};
-	int coll(int xPos,int YPos, int height,int width,bool type);
+	int coll(Entity* entity,bool type);
 private:
 
 };

@@ -11,7 +11,7 @@
 using namespace std;
 
 
-Player::Player():vSpeed(0),hSpeed(0),direction(1)
+Player::Player():vSpeed(0),hSpeed(0),startX(0),startY(0)
 {}
 
 Player::~Player() {
@@ -68,13 +68,6 @@ void Player::setvSpeed(int speed) {
 	vSpeed = speed;
 }
 
-int Player::getDirection() const {
-	return direction;
-}
-
-void Player::setDirection(int direction) {
-	this->direction = direction;
-}
 
 int Player::getCounter() const {
 	return counter;
@@ -119,4 +112,48 @@ void Player::addProjectiles(int projectiles) {
 void Player::addScore(int score)
 {
 	this ->score=this->score+score;
+}
+
+bool Player::hit()
+{
+	resetPosition();
+	if (life==0)
+	{
+		setScore(0);
+		setLife(3);
+		return true;
+	}
+	else
+	{
+		addLife(-1);
+		addScore(-10);
+		return false;
+	}
+}
+
+void Player::resetPosition() {
+	x=startX;
+	y=startY;
+}
+
+void Player::setStartPosition(int startX, int startY) {
+	this->startX=startX;
+	this->startY=startY;
+}
+
+void Player::takeAction(std::string key) {
+	if (key=="Down")
+	{
+		moveDown();
+		addScore(-10);
+	}
+	else if (key=="Up")
+	{
+		moveUp();
+		addScore(10);
+	}
+	else if (key=="Left")
+		moveLeft();
+	else if (key=="Right")
+		moveRight();
 }

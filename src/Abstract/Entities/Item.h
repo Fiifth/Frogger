@@ -8,13 +8,14 @@
 #ifndef ABSTRACT_ENTITIES_ITEM_H_
 #define ABSTRACT_ENTITIES_ITEM_H_
 #include "Props.h"
+#include "Entity.h"
 
 class Item :public Props{
 public:
 	Item();
 	virtual ~Item();
 	virtual void draw()=0;
-	int coll(int xPos,int YPos, int height,int width,bool type);
+	int coll(Entity* entity,bool type);
 	bool roomForItem();
 	bool itemAbsent();
 	int effect=3;

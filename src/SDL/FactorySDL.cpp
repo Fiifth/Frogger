@@ -70,7 +70,7 @@ Item* FactorySDL::createItem(Row* row)
 	return new ItemSDL(sdldata,row);
 }
 
-Projectile* FactorySDL::createProjectile(int direction,int Xstart,int Ystart,int size,int speed)
+Projectile* FactorySDL::createProjectile(Entity* entity,int speed)
 {
-	return new ProjectileSDL(sdldata,direction,Xstart,Ystart,size,speed);
+	return new ProjectileSDL(sdldata,entity->getDirection(),entity->getX(),entity->getY(),entity->getH(),speed);
 }

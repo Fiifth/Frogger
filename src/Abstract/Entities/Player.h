@@ -7,6 +7,7 @@
 #include "Window.h"
 #include "Entity.h"
 #include "Row.h"
+#include <string>
 #ifndef FROG_H_
 #define FROG_H_
 
@@ -26,8 +27,6 @@ public:
 	void sethSpeed(int speed);
 	int getvSpeed() const;
 	void setvSpeed(int speed);
-	int getDirection() const;
-	void setDirection(int direction);
 	int getCounter() const;
 	void setCounter(int counter);
 	int getLife() const;
@@ -39,13 +38,17 @@ public:
 	int getScore() const;
 	void setScore(int score);
 	void addScore(int score);
+	bool hit();
+	void resetPosition();
+	void setStartPosition(int startX,int startY);
+	void takeAction(std::string key);
 
 private:
 	int vSpeed;
 	int hSpeed;
-	int direction;//1=up,2=right,3=down,4=left;
 	int counter=0;
 	int score=0,life=3,projectiles=0;
+	int startX,startY;
 };
 
 

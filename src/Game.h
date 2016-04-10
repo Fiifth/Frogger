@@ -11,6 +11,7 @@
 #include "Row.h"
 #include "Props.h"
 #include "Projectile.h"
+#include "Player.h"
 #ifndef GAME_H_
 #define GAME_H_
 
@@ -21,9 +22,17 @@ public:
 	virtual ~Game();
 	void rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory* F,vector<Row*>* rows,vector<list<Props*>>* propsOnRow);
 	void propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>* rows,vector<list<Props*>>* propsOnRow);
-	int drawProps(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectiles,int x,int y,int h, int w);
+	int collisionDetection(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectiles,list<Player*>* players);
 	void fillEnemyList(Factory* F,std::vector<Row*>* rows,std::vector<std::list<Props*>>* propsOnRow,int difficulty,int screenWidth);
-
+	void drawGameElements(std::vector<std::list<Props*>>* propsOnRow,list<Projectile*>*projectiles,list<Player*>* players,vector<Row*>* rows);
+	bool obsOrLane(list<Props*>* PreProp,bool frontOrBack,bool laneRow, int difficulty);
+	struct Pred
+		{
+		   bool operator()(Props* item) const
+		   {
+		      return !item->inframe();
+		   }
+		};
 
 };
 

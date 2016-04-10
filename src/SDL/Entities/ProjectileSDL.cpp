@@ -6,6 +6,7 @@
  */
 
 #include <ProjectileSDL.h>
+#include <iostream>
 
 ProjectileSDL::ProjectileSDL(SDLdata* sdldata,int direction,int Xstart,int Ystart,int size,int speed):sdldata(sdldata) {
 	//1=up,2=right,3=down,4=left;
@@ -18,10 +19,12 @@ ProjectileSDL::ProjectileSDL(SDLdata* sdldata,int direction,int Xstart,int Ystar
 		sdldata->getDependWAndH(ani->getTexture(),&wn, &hn);
 		setSize(wn,hn);
 		setLocation(Xstart,Ystart);
+		this->setVisible(true);
 }
 
 ProjectileSDL::~ProjectileSDL() {
-	// TODO Auto-generated destructor stub
+	delete(ani);
+	//std::cout<<"hello"<<std::endl;
 }
 
 void ProjectileSDL::draw()
