@@ -7,6 +7,8 @@
 #include "Window.h"
 #include "Entity.h"
 #include "Row.h"
+#include <ratio>
+#include <chrono>
 #include <string>
 #ifndef FROG_H_
 #define FROG_H_
@@ -42,13 +44,22 @@ public:
 	void resetPosition();
 	void setStartPosition(int startX,int startY);
 	void takeAction(std::string key);
+	int getRemainingTime();
+	void setRemainingTime(int remainingTime);
+	void resetRemainingTime();
+	void decreaseTime();
 
 private:
 	int vSpeed;
 	int hSpeed;
 	int counter=0;
-	int score=0,life=3,projectiles=0;
+	int score=0,life=3,projectiles=3;
 	int startX,startY;
+	int totalTime;
+	int remainingTime;
+	std::chrono::high_resolution_clock::time_point previousTime=std::chrono::high_resolution_clock::now();
+	std::chrono::high_resolution_clock::time_point currentTime=std::chrono::high_resolution_clock::now();
+	float correctTime=float(totalTime);
 };
 
 

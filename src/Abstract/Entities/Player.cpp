@@ -11,7 +11,7 @@
 using namespace std;
 
 
-Player::Player():vSpeed(0),hSpeed(0),startX(0),startY(0)
+Player::Player():vSpeed(0),hSpeed(0),startX(0),startY(0),totalTime(50),remainingTime(totalTime)
 {}
 
 Player::~Player() {
@@ -121,6 +121,7 @@ bool Player::hit()
 	{
 		setScore(0);
 		setLife(3);
+		projectiles=3;
 		return true;
 	}
 	else
@@ -134,6 +135,7 @@ bool Player::hit()
 void Player::resetPosition() {
 	x=startX;
 	y=startY;
+	resetRemainingTime();
 }
 
 void Player::setStartPosition(int startX, int startY) {
@@ -156,4 +158,24 @@ void Player::takeAction(std::string key) {
 		moveLeft();
 	else if (key=="Right")
 		moveRight();
+}
+
+int Player::getRemainingTime()
+{
+	decreaseTime();
+	return remainingTime;
+}
+
+void Player::setRemainingTime(int remainingTime) {
+	this->remainingTime = remainingTime;
+}
+
+void Player::resetRemainingTime() {
+
+	previousTime=std::chrono::high_resolution_clock::now();
+}
+
+void Player::decreaseTime() {
+		currentTime=std::chrono::high_resolution_clock::now();
+		remainingTime=totalTime-(std::chrono::duration_cast<std::chrono::seconds>(currentTime-previousTime).count());
 }

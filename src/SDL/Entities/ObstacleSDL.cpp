@@ -30,7 +30,6 @@ ObstacleSDL::ObstacleSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdl
 
 ObstacleSDL::~ObstacleSDL() {
 	delete(ani);
-	//cout<<"get wrecked"<<endl;
 }
 
 

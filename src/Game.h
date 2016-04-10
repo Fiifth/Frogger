@@ -26,11 +26,24 @@ public:
 	void fillEnemyList(Factory* F,std::vector<Row*>* rows,std::vector<std::list<Props*>>* propsOnRow,int difficulty,int screenWidth);
 	void drawGameElements(std::vector<std::list<Props*>>* propsOnRow,list<Projectile*>*projectiles,list<Player*>* players,vector<Row*>* rows);
 	bool obsOrLane(list<Props*>* PreProp,bool frontOrBack,bool laneRow, int difficulty);
-	struct Pred
+	Props* getRandomObst(list<Props*>* PreProp);
+	struct drawMoveRemove
 		{
-		   bool operator()(Props* item) const
+		   bool operator()(Props* prop) const
 		   {
-		      return !item->inframe();
+			   bool temp=false;
+			   if(!prop->inframe())
+			   {
+				   temp=true;
+				   delete(prop);
+			   }
+			   else
+			   {
+				   if (prop->isVisible())
+					   prop->draw();
+				   prop->moveForward();
+			   }
+		      return temp;
 		   }
 		};
 

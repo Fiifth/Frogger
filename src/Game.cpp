@@ -35,6 +35,10 @@ int numberOfRows;
 Game::Game(Factory* F)
 {
 	srand (time(NULL));
+	auto start_time=chrono::high_resolution_clock::now();
+	auto end_time=chrono::high_resolution_clock::now();
+	int remTime=0;
+	int totalTime=50;
 	int rowHeight=50;
 	int difficultyRows=1;
 	int gameWindowHeight;
@@ -87,9 +91,14 @@ Game::Game(Factory* F)
 						return;
 					else if (keyStroke=="Space")
 					{
+						if (player->getProjectiles()>0)
+						{
 						projectiles->push_back(F->createProjectile(player,5));
+						player->addProjectiles(-1);
+						}
 					}
 				}
+				end_time=chrono::high_resolution_clock::now();
 
 				win->setBackground();
 				win->generateBackground(rows);
@@ -100,7 +109,8 @@ Game::Game(Factory* F)
 				{
 					drawGameElements(propsOnRow,projectiles, players,rows);
 				}
-				win->dislayData(player->getScore(),player->getLife(),player->getProjectiles());
+
+				win->dislayData(player->getScore(),player->getLife(),player->getProjectiles(),player->getRemainingTime());
 				win->updateScreen();
 
 				break;
@@ -111,7 +121,10 @@ Game::Game(Factory* F)
 				if (keyStroke!="")
 				{
 					if (keyStroke=="Space")
+					{
+						player->resetRemainingTime();
 						state='A';
+					}
 					else if (keyStroke=="Escape")
 						return;
 				}
@@ -177,7 +190,6 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 			if((PreProp->empty())||((PreProp->front())->isRoom()))
 			{
 				Props* prop;
-				//if ((row->isLaneRow()&&PreProp->front()->isVisible())||((number>difficulty)&&!PreProp->front()->isVisible()))
 				if(obsOrLane(PreProp,true,row->isLaneRow(),difficulty))
 				{
 					prop=F->createObstacle(row);
@@ -193,16 +205,19 @@ void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>
 			}
 			bool roomOnLane=PreProp->front()->roomForItem();
 			bool noItemYet=PreProp->back()->itemAbsent();
-			if (roomOnLane&&noItemYet&&(rand()%1000>998))
+			if (roomOnLane&&noItemYet&&(rand()%1000>995))
 			{
 				Props* propBonus=F->createItem(row);
 				propsOnRow->at(row->getNumber()).push_back(propBonus);
 			}
 			if(rand()%1000>998)
 			{
-				Props* randomObstable=PreProp->front();
-				Props* projec=F->createProjectile(randomObstable,5);
-				propsOnRow->at(row->getNumber()).push_back(projec);
+				Props* randomObstable=getRandomObst(PreProp);
+				if (randomObstable!=nullptr)
+				{
+					Props* projec=F->createProjectile(randomObstable,5);
+					propsOnRow->at(row->getNumber()).push_back(projec);
+				}
 			}
 		}
 	}
@@ -218,6 +233,7 @@ int Game::collisionDetection(vector<list<Props*>>* propsOnRow,list<Projectile*>*
 		{
 			for (Projectile* proj:*projectiles)
 			{
+				//TODO use remove if
 				if(temp2->isVisible()&&temp2->coll(proj,true))
 				{
 					temp2->setVisible(false);
@@ -226,6 +242,7 @@ int Game::collisionDetection(vector<list<Props*>>* propsOnRow,list<Projectile*>*
 					projectiles->remove(proj);
 				}
 			}
+
 			int effect=temp2->coll(players->back(),true);
 			if(effect>1)
 			{
@@ -233,8 +250,9 @@ int Game::collisionDetection(vector<list<Props*>>* propsOnRow,list<Projectile*>*
 				delete(temp2);
 				dete=effect;
 				players->back()->addScore(1);
+				players->back()->addProjectiles(1);
 			}
-			else if (effect==1)
+			else if (effect==1||players->back()->getRemainingTime()==0)
 			{
 				return players->back()->hit();
 			}
@@ -285,28 +303,15 @@ int i=0;
 
 	for (list<Props*> temp:*propsOnRow)
 	{
-		propsOnRow->at(i).remove_if(Pred());
+		propsOnRow->at(i).remove_if(drawMoveRemove());
 		i++;
-		temp.remove_if(Pred());
-		for(Props* temp2:temp)
-		{
-				if (temp2->isVisible())
-					temp2->draw();
-				temp2->moveForward();
-		}
-
 	}
 
-	projectiles->remove_if(Pred());
-	for (Projectile* temp:*projectiles)
-	{
-		temp->draw();
-		temp->moveForward();
-	}
+	projectiles->remove_if(drawMoveRemove());
+
 	for(Player* player:*players)
 	{
 		int row=player->getY()/player->getH(); //TODO instread of getH search for row height
-		player->draw();
 		if(rows->at(row)->isLaneRow())
 			player->followRow(rows->at(row));
 		if(row==0)
@@ -314,6 +319,7 @@ int i=0;
 			player->addScore(100);
 			player->resetPosition();
 		}
+		player->draw();
 	}
 }
 
@@ -321,9 +327,32 @@ bool Game::obsOrLane(list<Props*>* PreProp,bool frontOrBack,bool laneRow, int di
 {
 	int number=rand()%100;
 	if (frontOrBack)
-	return ((laneRow&&PreProp->front()->isVisible())||((number>difficulty)&&!PreProp->front()->isVisible()));
+		return ((laneRow&&PreProp->front()->isVisible())||((number>difficulty)&&!PreProp->front()->isVisible()));
 	else
 		return ((laneRow&&PreProp->back()->isVisible())||((number>difficulty)&&!PreProp->back()->isVisible()));
+}
+
+Props* Game::getRandomObst(list<Props*>* PreProp)
+{
+	Props* prop;
+	vector<Props*> temp;
+	for(Props* pro:*PreProp)
+	{
+		Row* row=pro->getRow();
+		if(row!=nullptr&&pro->isVisible()&&!row->isLaneRow())
+		{
+			temp.push_back(pro);
+		}
+
+	}
+	if (temp.size()>0)
+	{
+	prop=temp.at(rand()%temp.size());
+	}
+	else
+		prop=nullptr;
+	return prop;
+
 }
 //auto start_time = chrono::high_resolution_clock::now();
 		//auto end_time = chrono::high_resolution_clock::now();

@@ -55,12 +55,13 @@ void WindowSDL::generateBackground(vector<Row*>* rows)
 		}
 	}
 }
-void WindowSDL::dislayData(int score,int life,int projectiles)
+void WindowSDL::dislayData(int score,int life,int projectiles,int time)
 {
 	string scoreS = to_string(score);
 	string lifeS = to_string(life);
 	string projS = to_string(projectiles);
-	string text="Score: "+scoreS+" lives: "+lifeS+" Projectiles: "+projS;
+	string timeS=to_string(time);
+	string text="Score: "+scoreS+" lives: "+lifeS+" Projectiles: "+projS+" time: "+timeS;
 
 	TTF_Font* Sans = TTF_OpenFont("c:\\sans.ttf", 40);
 	SDL_Color White = {255, 255, 255,255};

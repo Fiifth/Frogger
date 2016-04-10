@@ -20,7 +20,7 @@ public:
 	virtual void updateScreen()=0;
 	int getHeight() const;
 	int getWidth() const;
-	virtual void dislayData(int score,int life,int projectiles)=0;
+	virtual void dislayData(int score,int life,int projectiles,int time)=0;
 	virtual void generateBackground(std::vector<Row*>* rows)=0;
 
 protected:

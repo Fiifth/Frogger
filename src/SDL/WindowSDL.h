@@ -18,7 +18,7 @@ public:
 	WindowSDL(SDLdata* sdldata);
 	virtual ~WindowSDL();
 	void makeWindow(int ScreenWidth, int ScreenHeight,int dataWindowHeight,char const* title);
-	void dislayData(int score,int life,int projectiles);
+	void dislayData(int score,int life,int projectiles,int time);
 	 void setBackground();
 	 void updateScreen();
 	 void generateBackground(std::vector<Row*>* rows);
