@@ -21,6 +21,7 @@ public:
 	int getHeight() const;
 	int getWidth() const;
 	virtual void dislayData(int score,int life,int projectiles,int time)=0;
+	virtual void displayHighScore(int score1,int score2,int score3,int score4)=0;
 	virtual void generateBackground(std::vector<Row*>* rows)=0;
 
 protected:

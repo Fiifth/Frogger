@@ -7,6 +7,8 @@
 
 #include "Player.h"
 #include <iostream>
+#include <algorithm>    // std::sort
+#include <vector>       // std::vector
 
 using namespace std;
 
@@ -119,6 +121,7 @@ bool Player::hit()
 	resetPosition();
 	if (life==0)
 	{
+		addHighScore(score);
 		setScore(0);
 		setLife(3);
 		projectiles=3;
@@ -178,4 +181,18 @@ void Player::resetRemainingTime() {
 void Player::decreaseTime() {
 		currentTime=std::chrono::high_resolution_clock::now();
 		remainingTime=totalTime-(std::chrono::duration_cast<std::chrono::seconds>(currentTime-previousTime).count());
+}
+
+void Player::addHighScore(int score)
+{
+	highScore.pop_back();
+	highScore.push_back(score);
+	std::sort(highScore.begin(),highScore.end());
+	std::reverse(highScore.begin(),highScore.end());
+	highScore.pop_back();
+	highScore.push_back(score);
+}
+
+const vector<int>& Player::getHighScore() const {
+	return highScore;
 }

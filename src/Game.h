@@ -12,6 +12,8 @@
 #include "Props.h"
 #include "Projectile.h"
 #include "Player.h"
+#include <chrono>
+#include <iostream>
 #ifndef GAME_H_
 #define GAME_H_
 
@@ -46,6 +48,14 @@ public:
 		      return temp;
 		   }
 		};
+	template <class Clock>
+	void
+	display_precision()
+	{
+	    typedef std::chrono::duration<double, std::nano> NS;
+	    NS ns = typename Clock::duration(1);
+	    std::cout << ns.count() << " ns\n";
+	}
 
 };
 

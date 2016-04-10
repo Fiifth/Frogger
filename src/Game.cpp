@@ -35,10 +35,9 @@ int numberOfRows;
 Game::Game(Factory* F)
 {
 	srand (time(NULL));
-	auto start_time=chrono::high_resolution_clock::now();
-	auto end_time=chrono::high_resolution_clock::now();
-	int remTime=0;
-	int totalTime=50;
+	auto start_time=chrono::steady_clock::now();
+	auto end_time=chrono::steady_clock::now();
+
 	int rowHeight=50;
 	int difficultyRows=1;
 	int gameWindowHeight;
@@ -80,7 +79,6 @@ Game::Game(Factory* F)
 		keyStroke=event->getEvent();
 		switch(state)
 		{
-
 		//----------------------------------------------------------------------------------------------------
 			case 'A'  :
 
@@ -98,11 +96,10 @@ Game::Game(Factory* F)
 						}
 					}
 				}
-				end_time=chrono::high_resolution_clock::now();
-
 				win->setBackground();
 				win->generateBackground(rows);
 				propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
+
 				if (collisionDetection(propsOnRow,projectiles,players)==1)
 						state='B';
 				else
@@ -112,12 +109,16 @@ Game::Game(Factory* F)
 
 				win->dislayData(player->getScore(),player->getLife(),player->getProjectiles(),player->getRemainingTime());
 				win->updateScreen();
-
 				break;
 
 				//----------------------------------------------------------------------------------------------------
 			case 'B':
 				win->setBackground();
+				win->displayHighScore(player->getHighScore().at(0),
+						player->getHighScore().at(1),
+						player->getHighScore().at(2),
+						player->getHighScore().at(3));
+
 				if (keyStroke!="")
 				{
 					if (keyStroke=="Space")
@@ -357,3 +358,5 @@ Props* Game::getRandomObst(list<Props*>* PreProp)
 //auto start_time = chrono::high_resolution_clock::now();
 		//auto end_time = chrono::high_resolution_clock::now();
 		//cout << chrono::duration_cast<chrono::microseconds>(end_time - start_time).count() << endl;
+//start_time=chrono::steady_clock::now();
+	//			end_time=chrono::steady_clock::now();
