@@ -48,4 +48,16 @@ void LaneSDL::draw()
 	int angle=0;
 	angle=row->isDirLeft()?1:0;
 	sdldata->renderTexture(ani->getTexture(),sdldata->getRen(),x,y,&w,&h,angle);
+
+	if(ani->isTurned()&&!turned)
+	{
+		isTurenedByAni=true;
+		turned=true;
+	}
+	else if (isTurenedByAni&&turned)
+	{
+		turned=false;
+	}
+
+	//turned=ani->isTurned();
 }

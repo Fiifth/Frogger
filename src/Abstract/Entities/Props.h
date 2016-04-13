@@ -36,6 +36,7 @@ protected:
 	Row* row;
 	bool visible;
 	bool turned=false;
+	bool isTurenedByAni=false;
 };
 
 #endif /* ABSTRACT_PROPS_H_ */

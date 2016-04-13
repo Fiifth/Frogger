@@ -34,5 +34,14 @@ void ProjectileSDL::draw()
 	angle=(getDirection()==3)?180:angle;
 	angle=(getDirection()==4)?270:angle;
 	sdldata->renderTexture(ani->getTexture(),sdldata->getRen(),x,y,&w,&h,angle);
+	if(ani->isTurned()&&!turned)
+		{
+			isTurenedByAni=true;
+			turned=true;
+		}
+		else if (isTurenedByAni&&turned)
+		{
+			turned=false;
+		}
 }
 

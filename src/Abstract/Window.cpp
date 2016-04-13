@@ -34,3 +34,15 @@ int Window::getHeight() const {
 int Window::getWidth() const {
 	return WIDTH;
 }
+
+void Window::setOldParameters(int score,int life,int projectiles, int time) {
+	oldScore=score;
+	oldLife=life;
+	oldProjectiles=projectiles;
+	oldTime=time;
+}
+
+bool Window::valueChanged(int score, int life, int projectiles, int time)
+{
+	return !(oldScore==score&&oldLife==life&&oldProjectiles==projectiles&&oldTime==time);
+}

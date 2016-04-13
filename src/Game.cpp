@@ -5,8 +5,7 @@
  *      
  */
 
-#include <Obstacle.h>
-#include <Player.h>
+
 #include "Game.h"
 
 #include "SDLdata.h"
@@ -26,29 +25,25 @@
 #include <ratio>
 #include <chrono>
 #include "Projectile.h"
+#include <Obstacle.h>
+#include <Player.h>
 
 using namespace std;
 using namespace std::chrono;
 
-int numberOfRows;
 
 Game::Game(Factory* F)
 {
 	srand (time(NULL));
-	auto start_time=chrono::steady_clock::now();
-	auto end_time=chrono::steady_clock::now();
-
 	int rowHeight=50;
 	int difficultyRows=1;
-	int gameWindowHeight;
-	int gameWindowWidth;
-	int dataWindowHeight=20;
 	int WindowHeight=520;
 	int WindowWidth=700;
-	int difficulty=40;
-	dataWindowHeight=((WindowHeight-dataWindowHeight)%rowHeight)+dataWindowHeight;
-	gameWindowHeight=WindowHeight-dataWindowHeight;
-	gameWindowWidth=WindowWidth;
+	int difficulty=90;
+	int dataWindowHeightDesired=20;
+	int dataWindowHeight=((WindowHeight-dataWindowHeightDesired)%rowHeight)+dataWindowHeightDesired;
+	int gameWindowHeight=WindowHeight-dataWindowHeight;
+	int gameWindowWidth=WindowWidth;
 	int plStartW=rowHeight,plStartH=rowHeight,plStartSpeed=rowHeight;
 	int plStartX=(gameWindowWidth/2),plStartY=(gameWindowHeight-plStartW);
 	string keyStroke;
@@ -81,7 +76,6 @@ Game::Game(Factory* F)
 		{
 		//----------------------------------------------------------------------------------------------------
 			case 'A'  :
-
 				if (keyStroke!="")
 				{
 					player->takeAction(keyStroke);
@@ -96,9 +90,10 @@ Game::Game(Factory* F)
 						}
 					}
 				}
-				win->setBackground();
+
 				win->generateBackground(rows);
-				propsGenerator(F,difficulty,win->getWidth(),rows,propsOnRow);
+
+				propsGenerator(F,difficulty,rows,propsOnRow);
 
 				if (collisionDetection(propsOnRow,projectiles,players)==1)
 						state='B';
@@ -125,6 +120,7 @@ Game::Game(Factory* F)
 					{
 						player->resetRemainingTime();
 						state='A';
+						win->setBackground();
 					}
 					else if (keyStroke=="Escape")
 						return;
@@ -140,7 +136,7 @@ Game::~Game() {}
 void Game::rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory* F,vector<Row*>* rows,vector<list<Props*>>* propsOnRow)
 {
 	int maxSpeed=3;
-	numberOfRows=(screenHight)/rowHeight;
+	int numberOfRows=(screenHight)/rowHeight;
 	int mode=3;
 	list<Props*> enemies;
 	bool dir=true;//(rand() %2)>0)
@@ -181,11 +177,11 @@ void Game::rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory
 			}
 		}
 }
-void Game::propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>* rows,vector<list<Props*>>* propsOnRow)
+void Game::propsGenerator(Factory* F,int difficulty,vector<Row*>* rows,vector<list<Props*>>* propsOnRow)
 {
 	for(Row* row:*rows)
 	{
-		if((row->getNumber()!=0)&&(row->getNumber()!=(numberOfRows-1)))
+		if((row->getNumber()!=0)&&(row->getNumber()!=((rows->size())-1)))
 		{
 			list<Props*>* PreProp=&propsOnRow->at(row->getNumber());
 			if((PreProp->empty())||((PreProp->front())->isRoom()))
@@ -270,7 +266,7 @@ void Game::fillEnemyList(Factory* F,vector<Row*>* rows, vector<list<Props*>>* pr
 		int x=0;
 		while(x<screenWidth)
 		{
-			if((row->getNumber()!=0)&&(row->getNumber()!=(numberOfRows-1)))
+			if((row->getNumber()!=0)&&(row->getNumber()!=(rows->size()-1)))
 			{
 				list<Props*>* PreProp=&propsOnRow->at(row->getNumber());
 				Props* prop;

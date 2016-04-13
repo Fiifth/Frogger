@@ -8,6 +8,8 @@
 #include "SDL.h"
 #include "SDLdata.h"
 #include "Row.h"
+#include "SDL_ttf.h"
+#include "SDL.h"
 #include <vector>
 
 #ifndef WINDOWSDL_H_
@@ -23,9 +25,19 @@ public:
 	 void setBackground();
 	 void updateScreen();
 	 void generateBackground(std::vector<Row*>* rows);
+	 void saveCurrentWindowImage();
 private:
 	 SDLdata* sdldata;
 	 SDL_Renderer* ren;
+	 TTF_Font* Sans;
+	 SDL_Color White;
+	 SDL_Color Black;
+	 SDL_Surface* surfaceMessage=nullptr;
+	 SDL_Texture* Message=nullptr;
+	 SDL_Window* win;
+	 bool temp=false;
+	 SDL_Surface* rowsBackgroundGenerated=nullptr;
+	 SDL_Texture* backgourndTexture=nullptr;
 };
 
 #endif /* WINDOWSDL_H_ */

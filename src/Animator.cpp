@@ -9,7 +9,7 @@
 #include <iostream>
 
 Animator::Animator(std::vector<SDL_Texture*> textures,std::vector<int> ratio):textures(textures),ratio(ratio),
-																				counter(ratio.at(0)),currentTexture(0)
+																				counter(abs(ratio.at(0))),currentTexture(0)
 {
 	size=textures.size();
 }
@@ -28,15 +28,17 @@ SDL_Texture* Animator::getTexture()
 		}
 		else
 		{
-			if(size>(currentTexture+1)&&ratio.at(currentTexture+1)>0)
+			if(size>(currentTexture+1)&&abs(ratio.at(currentTexture+1))>0)
 			{
 			currentTexture=currentTexture+1;
-			counter=ratio.at(currentTexture);
+			counter=abs(ratio.at(currentTexture));
+			turned=(ratio.at(currentTexture)<0);
 			}
 			else
 			{
 				currentTexture=0;
-				counter=ratio.at(0);
+				counter=abs(ratio.at(currentTexture));
+				turned=(ratio.at(currentTexture)<0);
 			}
 		}
 		texture=textures.at(currentTexture);
@@ -76,4 +78,12 @@ void Animator::triggerNext(int counter)
 
 Animator* Animator::clone() {
 	return new Animator(*this);
+}
+
+bool Animator::isTurned() const {
+	return turned;
+}
+
+void Animator::setTurned(bool turned) {
+	this->turned = turned;
 }

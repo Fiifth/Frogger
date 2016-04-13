@@ -98,7 +98,7 @@ void SDLdata::createTextures()
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground3.c_str()));
 
 	obstiAni={getAnimator({"C:/frogger/enemy1.png"},{1}),getAnimator({"C:/frogger/enemy2.png"},{1}),getAnimator({"C:/frogger/enemy3.png"},{1})};
-	laneAni={getAnimator({"C:/frogger/lane1.png","C:/frogger/lane2.png","C:/frogger/lane3.png"},{40,5,10})};
+	laneAni={getAnimator({"C:/frogger/lane1.png","C:/frogger/lane2.png","C:/frogger/lane3.png"},{40,5,-10})};
 	itemAni={getAnimator({"C:/frogger/item.png"},{1})};
 	playerAni={getAnimator({"C:/frogger/frog1.png","C:/frogger/frog2.png"},{1,0})};
 

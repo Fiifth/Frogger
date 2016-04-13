@@ -23,7 +23,7 @@ public:
 	Game(Factory* F);
 	virtual ~Game();
 	void rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory* F,vector<Row*>* rows,vector<list<Props*>>* propsOnRow);
-	void propsGenerator(Factory* F,int difficulty,int screenWidth,vector<Row*>* rows,vector<list<Props*>>* propsOnRow);
+	void propsGenerator(Factory* F,int difficulty,vector<Row*>* rows,vector<list<Props*>>* propsOnRow);
 	int collisionDetection(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectiles,list<Player*>* players);
 	void fillEnemyList(Factory* F,std::vector<Row*>* rows,std::vector<std::list<Props*>>* propsOnRow,int difficulty,int screenWidth);
 	void drawGameElements(std::vector<std::list<Props*>>* propsOnRow,list<Projectile*>*projectiles,list<Player*>* players,vector<Row*>* rows);
@@ -41,21 +41,13 @@ public:
 			   }
 			   else
 			   {
-				   if (prop->isVisible())
+				  if (prop->isVisible())
 					   prop->draw();
 				   prop->moveForward();
 			   }
 		      return temp;
 		   }
 		};
-	template <class Clock>
-	void
-	display_precision()
-	{
-	    typedef std::chrono::duration<double, std::nano> NS;
-	    NS ns = typename Clock::duration(1);
-	    std::cout << ns.count() << " ns\n";
-	}
 
 };
 

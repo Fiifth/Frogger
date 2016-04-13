@@ -22,12 +22,15 @@ public:
 	void setCurrentTexture(int currentTexture);
 	void triggerNext(int counter);
 	Animator* clone();
+	bool isTurned() const;
+	void setTurned(bool turned);
 
 	std::vector<SDL_Texture*> textures;
 	std::vector<int> ratio;
 	int counter=0;
 	int currentTexture=0;
 	int size;
+	bool turned=false;
 };
 
 #endif /* ANIMATOR_H_ */
