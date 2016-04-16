@@ -31,19 +31,22 @@ public:
 	std::vector<SDL_Texture*> getBackTextures();
 	void setScreenDimension(int width,int height,int dataWindowHeight);
 	Animator getAnimator(std::vector<std::string> paths,std::vector<int> ratio);
-
-	int getScreenHeight() const {
-		return screenHeight;
-	}
-
-	int getScreenWidth() const {
-		return screenWidth;
-	}
-
-	Animator getItemAni();
+	Animator getItemAni(int ind);
 	Animator getLaneAni();
 	Animator getObstiAni();
 	Animator getPlayerAni();
+	Animator getProjAni(int ind);
+	int getScreenHeight() const;
+	void setScreenHeight(int screenHeight);
+	int getScreenWidth() const;
+	void setScreenWidth(int screenWidth);
+	void setPlayerRange(int start,int end);
+	void resetPlayerRange();
+
+	void setLaneRange(int start,int end);
+	void resetLaneRange();
+	void setObstacleRange(int start,int end);
+	void resetObstacleRange();
 
 private:
 	int screenWidth;
@@ -59,6 +62,13 @@ private:
 	std::vector<Animator> laneAni;
 	std::vector<Animator> playerAni;
 	std::vector<Animator> itemAni;
+	std::vector<Animator> projAni;
+	int playerRangeStart;
+	int playerRangeEnd;
+	int laneRangeStart;
+	int laneRangeEnd;
+	int obstacleRangeStart;
+	int obstacleRangeEnd;
 };
 
 #endif /* SDLSTUFF_H_ */

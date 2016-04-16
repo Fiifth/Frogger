@@ -17,8 +17,8 @@
 
 class ItemSDL:public Item {
 public:
-	ItemSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h);
-	ItemSDL(SDLdata* sdldata,Row* row);
+	ItemSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h,int ind);
+	ItemSDL(SDLdata* sdldata,Row* row,int ind);
 	virtual ~ItemSDL();
 	void draw();
 private:

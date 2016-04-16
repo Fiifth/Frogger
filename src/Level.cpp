@@ -20,7 +20,7 @@ char Level::levelExecution(string keyStroke)
 	for (Player* player:*players)
 	{
 		if (player->takeAction(keyStroke))
-			projectiles->push_back(F->createProjectile(players->back(),5));
+			projectiles->push_back(F->createProjectile(players->back(),5,0));
 	}
 
 	win->generateBackground(rows);
@@ -108,7 +108,7 @@ void Level::propsGenerator(Factory* F,int difficulty,vector<Row*>* rows,vector<l
 			bool noItemYet=PreProp->back()->itemAbsent();
 			if (roomOnLane&&noItemYet&&(rand()%1000>995))
 			{
-				Props* propBonus=F->createItem(row);
+				Props* propBonus=F->createItem(row,0);
 				propsOnRow->at(row->getNumber()).push_back(propBonus);
 			}
 			if(rand()%1000>998)
@@ -116,7 +116,7 @@ void Level::propsGenerator(Factory* F,int difficulty,vector<Row*>* rows,vector<l
 				Props* randomObstable=getRandomObst(PreProp);
 				if (randomObstable!=nullptr)
 				{
-					Props* projec=F->createProjectile(randomObstable,5);
+					Props* projec=F->createProjectile(randomObstable,5,0);
 					propsOnRow->at(row->getNumber()).push_back(projec);
 				}
 			}

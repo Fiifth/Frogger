@@ -11,10 +11,9 @@
 #include <iostream>
 
 
-ItemSDL::ItemSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdldata(sdldata)
+ItemSDL::ItemSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h,int ind) :sdldata(sdldata)
 {
-	Animator bla=sdldata->getItemAni();
-	ani=&bla;
+	ani=sdldata->getItemAni(ind).clone();
 	setRow(row);
 	setSpeed(row->getSpeed());
 	divider=row->getDivider();
@@ -47,9 +46,9 @@ void ItemSDL::draw()
 		}
 }
 
-ItemSDL::ItemSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata)
+ItemSDL::ItemSDL(SDLdata* sdldata, Row* row,int ind) :sdldata(sdldata)
 {
-	ani=sdldata->getItemAni().clone();
+	ani=sdldata->getItemAni(ind).clone();
 	setRow(row);
 	//1=up,2=right,3=down,4=left;
 	setDirection(row->isDirLeft()?4:2);

@@ -29,10 +29,12 @@ FactorySDL::~FactorySDL() {}
 
 Player* FactorySDL::createPlayer(int x,int y,int w,int h,int speedH,int speedV)
 {
+	sdldata->resetPlayerRange();
 	return new PlayerSDL(sdldata,x,y,w,h,speedH,speedV);
 }
 Obstacle* FactorySDL::createObstacle(Row* row,int x,int y,int w,int h)
 {
+	sdldata->resetObstacleRange();
 	return new ObstacleSDL(sdldata,row,x,y,w,h);
 }
 Window* FactorySDL::createWindow()
@@ -47,30 +49,33 @@ Events* FactorySDL::createEvents()
 
 Lane* FactorySDL::createLane(Row* row, int x, int y, int w,int h)
 {
+	sdldata->resetLaneRange();
 	return new LaneSDL(sdldata,row,x,y,w,h);
 }
 
-Item* FactorySDL::createItem(Row* row, int x, int y, int w,int h)
+Item* FactorySDL::createItem(Row* row, int x, int y, int w,int h,int type)
 {
-	return new ItemSDL(sdldata,row,x,y,w,h);
+	return new ItemSDL(sdldata,row,x,y,w,h,type);
 }
 
 Obstacle* FactorySDL::createObstacle(Row* row)
 {
+	sdldata->resetObstacleRange();
 	return new ObstacleSDL(sdldata,row);
 }
 
 Lane* FactorySDL::createLane(Row* row)
 {
+	sdldata->resetLaneRange();
 	return new LaneSDL(sdldata,row);
 }
 
-Item* FactorySDL::createItem(Row* row)
+Item* FactorySDL::createItem(Row* row,int type)
 {
-	return new ItemSDL(sdldata,row);
+	return new ItemSDL(sdldata,row,type);
 }
 
-Projectile* FactorySDL::createProjectile(Entity* entity,int speed)
+Projectile* FactorySDL::createProjectile(Entity* entity,int speed,int type)
 {
-	return new ProjectileSDL(sdldata,entity->getDirection(),entity->getX(),entity->getY(),entity->getH(),speed);
+	return new ProjectileSDL(sdldata,entity->getDirection(),entity->getX(),entity->getY(),entity->getH(),speed,type);
 }

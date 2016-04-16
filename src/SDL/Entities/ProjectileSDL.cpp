@@ -8,13 +8,13 @@
 #include <ProjectileSDL.h>
 #include <iostream>
 
-ProjectileSDL::ProjectileSDL(SDLdata* sdldata,int direction,int Xstart,int Ystart,int size,int speed):sdldata(sdldata)
+ProjectileSDL::ProjectileSDL(SDLdata* sdldata,int direction,int Xstart,int Ystart,int size,int speed,int ind):sdldata(sdldata)
 {
 	//1=up,2=right,3=down,4=left;
-	ani=sdldata->getItemAni().clone();
+	ani=sdldata->getProjAni(ind).clone();
 	setDirection(direction);
 	setSpeed(speed);
-	divider=1;
+	divider=0;
 	setSize(0,size);
 	setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
 	int wn=0,hn=size;

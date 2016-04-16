@@ -28,11 +28,11 @@ public:
 	virtual Player* createPlayer(int x,int y,int w,int h,int speedH,int speedV);
 	virtual Obstacle* createObstacle(Row* row,int x,int y,int w,int h);
 	virtual Lane* createLane(Row* row,int x,int y,int w,int h);
-	virtual Item* createItem(Row* row,int x,int y,int w,int h);
-	virtual Projectile* createProjectile(Entity* entity,int speed);
+	virtual Item* createItem(Row* row,int x,int y,int w,int h,int type);
+	virtual Projectile* createProjectile(Entity* entity,int speed,int type);
 	virtual Obstacle* createObstacle(Row* row);
 	virtual Lane* createLane(Row* row);
-	virtual Item* createItem(Row* row);
+	virtual Item* createItem(Row* row,int type);
 	virtual Window* createWindow();
 	virtual Events* createEvents();
 	SDLdata* sdldata;

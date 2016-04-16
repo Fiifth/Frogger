@@ -9,7 +9,7 @@
 #include "Row.h"
 #include <iostream>
 
-Props::Props(): row(nullptr),visible(true),divider(1){
+Props::Props(): row(nullptr),visible(true),divider(0){
 }
 
 Props::~Props() {

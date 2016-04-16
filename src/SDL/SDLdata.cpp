@@ -101,6 +101,7 @@ void SDLdata::createTextures()
 	laneAni={getAnimator({"C:/frogger/lane1.png","C:/frogger/lane2.png","C:/frogger/lane3.png"},{40,5,10})};
 	itemAni={getAnimator({"C:/frogger/item.png"},{1})};
 	playerAni={getAnimator({"C:/frogger/frog1.png","C:/frogger/frog2.png"},{1,0})};
+	projAni={getAnimator({"C:/frogger/item.png"},{1})};
 
 }
 
@@ -135,20 +136,20 @@ void SDLdata::setScreenDimension(int width,int height,int dataWindowHeight)
 	screenWidth=width;
 }
 
-Animator SDLdata::getItemAni() {
-	return itemAni.front();
+Animator SDLdata::getItemAni(int ind) {
+	return itemAni.at(ind);
 }
 
 Animator SDLdata::getLaneAni() {
-	return laneAni.at(rand()%laneAni.size());
+	return laneAni.at((rand()%(laneRangeEnd-laneRangeStart))+laneRangeStart);
 }
 
 Animator SDLdata::getObstiAni() {
-	return obstiAni.at(rand()%obstiAni.size());
+	return obstiAni.at((rand()%(obstacleRangeEnd-obstacleRangeStart))+obstacleRangeStart);
 }
 
 Animator SDLdata::getPlayerAni() {
-	return playerAni.front();
+	return playerAni.at((rand()%(playerRangeEnd-playerRangeStart))+playerRangeStart);
 }
 
 Animator SDLdata::getAnimator(std::vector<std::string> paths,std::vector<int> ratio)
@@ -160,4 +161,62 @@ Animator SDLdata::getAnimator(std::vector<std::string> paths,std::vector<int> ra
 	}
 	Animator temp(textures,ratio);
 	return temp;
+}
+
+int SDLdata::getScreenHeight() const {
+	return screenHeight;
+}
+
+void SDLdata::setScreenHeight(int screenHeight) {
+	this->screenHeight = screenHeight;
+}
+
+int SDLdata::getScreenWidth() const {
+	return screenWidth;
+}
+
+void SDLdata::setScreenWidth(int screenWidth) {
+	this->screenWidth = screenWidth;
+}
+
+void SDLdata::setPlayerRange(int start, int end)
+{//TODO controle toevoegen
+	playerRangeStart=start;
+	playerRangeEnd=end;
+}
+
+void SDLdata::resetPlayerRange()
+{
+	playerRangeStart=0;
+	playerRangeEnd=playerAni.size();
+}
+
+
+void SDLdata::setLaneRange(int start, int end)
+{//TODO controle toevoegen
+	laneRangeStart=start;
+	laneRangeEnd=end;
+}
+
+void SDLdata::resetLaneRange()
+{
+	laneRangeStart=0;
+	laneRangeEnd=laneAni.size();
+}
+
+void SDLdata::setObstacleRange(int start, int end)
+{
+	obstacleRangeStart=(obstiAni.size()>=start)&&(start>=0)?start:obstiAni.size();
+	obstacleRangeEnd=obstiAni.size()>=end?end:obstiAni.size();
+}
+
+void SDLdata::resetObstacleRange()
+{
+	obstacleRangeStart=0;
+	obstacleRangeEnd=obstiAni.size();
+}
+
+Animator SDLdata::getProjAni(int ind)
+{
+	return projAni.at(ind);
 }

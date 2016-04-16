@@ -14,7 +14,7 @@
 
 class ProjectileSDL:public Projectile {
 public:
-	ProjectileSDL(SDLdata* sdldata,int direction, int Xstart,int Ystart,int size,int speed);
+	ProjectileSDL(SDLdata* sdldata,int direction, int Xstart,int Ystart,int size,int speed,int ind);
 	virtual ~ProjectileSDL();
 	void draw();
 
