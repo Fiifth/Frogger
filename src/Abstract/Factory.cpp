@@ -13,8 +13,8 @@ Factory::Factory() {}
 
 Factory::~Factory() {}
 
-Row* Factory::createRow(bool direction,int speed,int locY,int width, int number)
+Row* Factory::createRow(bool direction,int speed,int divider,int locY,int width, int number)
 {
-	return new Row(direction,speed,locY,width,number);
+	return new Row(direction,speed,divider,locY,width,number);
 }
 

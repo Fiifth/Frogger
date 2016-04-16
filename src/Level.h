@@ -35,8 +35,9 @@
 
 class Level {
 public:
-	Level();
+	Level(Factory* F,Window* win,list<Player*>* players,int rowHeight,int difficulty);
 	virtual ~Level();
+	char levelExecution(string keyStroke);
 	void rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory* F,vector<Row*>* rows,vector<list<Props*>>* propsOnRow);
 	void propsGenerator(Factory* F,int difficulty,vector<Row*>* rows,vector<list<Props*>>* propsOnRow);
 	int collisionDetection(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectiles,list<Player*>* players);
@@ -44,6 +45,7 @@ public:
 	void drawGameElements(std::vector<std::list<Props*>>* propsOnRow,list<Projectile*>*projectiles,list<Player*>* players,vector<Row*>* rows);
 	bool obsOrLane(list<Props*>* PreProp,bool frontOrBack,bool laneRow, int difficulty);
 	Props* getRandomObst(list<Props*>* PreProp);
+	bool playersAlive(list<Player*>* players,char mode);
 	struct drawMoveRemove
 	{
 	   bool operator()(Props* prop) const
@@ -64,17 +66,16 @@ public:
 	   }
 	};
 private:
-		int rowHeight=50;
+
 		int difficultyRows=1;
-		int WindowHeight=520;
-		int WindowWidth=700;
-		int difficulty=90;
-		int dataWindowHeightDesired=20;
-		int dataWindowHeight=((WindowHeight-dataWindowHeightDesired)%rowHeight)+dataWindowHeightDesired;
-		int gameWindowHeight=WindowHeight-dataWindowHeight;
-		int gameWindowWidth=WindowWidth;
-		int plStartW=rowHeight,plStartH=rowHeight,plStartSpeed=rowHeight;
-		int plStartX=(gameWindowWidth/2),plStartY=(gameWindowHeight-plStartW);
+
+		Factory* F;
+		Window* win;
+		list<Player*>* players;
+		int difficulty;
+
+		//**
+		//**
 		string keyStroke;
 		vector<Row*> rowsR;
 		vector<list<Props*>> propsOnRowR;
@@ -82,8 +83,7 @@ private:
 		list<Projectile*>*projectiles=&projectilesR;
 		vector<Row*>* rows=&rowsR;
 		vector<list<Props*>>* propsOnRow=&propsOnRowR;
-		list<Player*> playersR;
-		list<Player*>* players=&playersR;
+
 };
 
 #endif /* LEVEL_H_ */

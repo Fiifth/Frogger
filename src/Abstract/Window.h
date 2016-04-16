@@ -25,11 +25,13 @@ public:
 	virtual void generateBackground(std::vector<Row*>* rows)=0;
 	void setOldParameters(int score,int life,int projectiles, int time);
 	bool valueChanged(int score,int life,int projectiles,int time);
+	int getGameWindowHeight() const;
 
 protected:
 	int WIDTH;
 	int HEIGHT;
 	int dataWindowHeight;
+	int gameWindowHeight;
 	char const * TITLE;
 	int oldScore=0,oldLife=0,oldProjectiles=0,oldTime=0;
 };

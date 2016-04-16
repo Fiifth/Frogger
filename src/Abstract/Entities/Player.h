@@ -40,10 +40,10 @@ public:
 	int getScore() const;
 	void setScore(int score);
 	void addScore(int score);
-	bool hit();
+	void hit();
 	void resetPosition();
 	void setStartPosition(int startX,int startY);
-	void takeAction(std::string key);
+	bool takeAction(std::string key);
 	int getRemainingTime();
 	void setRemainingTime(int remainingTime);
 	void resetRemainingTime();
@@ -51,6 +51,10 @@ public:
 	void addHighScore(int score);
 	const vector<int>& getHighScore() const;
 	bool myfunction (int i,int j) { return (i>j); }
+
+	bool isDead() const;
+	void setDead(bool dead);
+	bool timeToMove();
 
 private:
 	int vSpeed;
@@ -60,6 +64,9 @@ private:
 	int startX,startY;
 	int totalTime;
 	int remainingTime;
+	bool dead=false;
+	int divider=0;
+	int dividerCounter=0;
 	std::chrono::high_resolution_clock::time_point previousTime=std::chrono::high_resolution_clock::now();
 	std::chrono::high_resolution_clock::time_point currentTime=std::chrono::high_resolution_clock::now();
 	float correctTime=float(totalTime);

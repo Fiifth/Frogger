@@ -33,7 +33,7 @@ public:
 	virtual Projectile* createProjectile(Entity* entity,int speed)=0;
 	virtual Window* createWindow()=0;
 	virtual Events* createEvents()=0;
-	virtual Row* createRow(bool direction,int speed,int locY,int width, int number);
+	virtual Row* createRow(bool direction,int speed,int divider,int locY,int width, int number);
 };
 
 

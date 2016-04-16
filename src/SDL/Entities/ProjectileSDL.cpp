@@ -8,18 +8,20 @@
 #include <ProjectileSDL.h>
 #include <iostream>
 
-ProjectileSDL::ProjectileSDL(SDLdata* sdldata,int direction,int Xstart,int Ystart,int size,int speed):sdldata(sdldata) {
+ProjectileSDL::ProjectileSDL(SDLdata* sdldata,int direction,int Xstart,int Ystart,int size,int speed):sdldata(sdldata)
+{
 	//1=up,2=right,3=down,4=left;
 	ani=sdldata->getItemAni().clone();
-		setDirection(direction);
-		setSpeed(speed);
-		setSize(0,size);
-		setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
-		int wn=0,hn=size;
-		sdldata->getDependWAndH(ani->getTexture(),&wn, &hn);
-		setSize(wn,hn);
-		setLocation(Xstart,Ystart);
-		this->setVisible(true);
+	setDirection(direction);
+	setSpeed(speed);
+	divider=1;
+	setSize(0,size);
+	setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
+	int wn=0,hn=size;
+	sdldata->getDependWAndH(ani->getTexture(),&wn, &hn);
+	setSize(wn,hn);
+	setLocation(Xstart,Ystart);
+	this->setVisible(true);
 }
 
 ProjectileSDL::~ProjectileSDL() {

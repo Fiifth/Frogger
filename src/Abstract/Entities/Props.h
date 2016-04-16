@@ -25,10 +25,9 @@ public:
 	//type true=player, false=bullet return type of effect 0=no effect, 1 player dies, 2-6 object disappears and player gets effect
 	virtual bool roomForItem()=0;
 	virtual bool itemAbsent()=0;
-
-
 	bool isTurned() const;
 	void setTurned(bool turned);
+	bool timeToMove();
 
 
 
@@ -37,6 +36,8 @@ protected:
 	bool visible;
 	bool turned=false;
 	bool isTurenedByAni=false;
+	int divider;
+	int dividercounter=0;
 };
 
 #endif /* ABSTRACT_PROPS_H_ */

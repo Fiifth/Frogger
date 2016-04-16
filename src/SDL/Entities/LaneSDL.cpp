@@ -16,6 +16,7 @@
 	setRow(row);
 	setDirection(row->isDirLeft()?4:2);
 	setSpeed(row->getSpeed());
+	divider=row->getDivider();
 	setSize(0,h);
 	setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
 	int wn=0,hn=h;
@@ -34,6 +35,7 @@ LaneSDL::LaneSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata)
 	//1=up,2=right,3=down,4=left;
 		setDirection(row->isDirLeft()?4:2);
 	setSpeed(row->getSpeed());
+	divider=row->getDivider();
 	setSize(0,row->getHeight());
 	setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
 	int wn=0,hn=row->getHeight();

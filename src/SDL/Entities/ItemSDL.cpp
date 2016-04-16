@@ -14,16 +14,17 @@
 ItemSDL::ItemSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdldata(sdldata)
 {
 	Animator bla=sdldata->getItemAni();
-				ani=&bla;
+	ani=&bla;
 	setRow(row);
-			setSpeed(row->getSpeed());
-			setSize(0,h);
-			setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
-			int wn=0,hn=h;
-			sdldata->getDependWAndH(ani->getTexture(),&wn, &hn);
-			setSize(wn,hn);
-			int xloc=row->isDirLeft()?screenWidth:-getW();
-			setLocation(xloc,row->getLocY());
+	setSpeed(row->getSpeed());
+	divider=row->getDivider();
+	setSize(0,h);
+	setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
+	int wn=0,hn=h;
+	sdldata->getDependWAndH(ani->getTexture(),&wn, &hn);
+	setSize(wn,hn);
+	int xloc=row->isDirLeft()?screenWidth:-getW();
+	setLocation(xloc,row->getLocY());
 }
 
 ItemSDL::~ItemSDL() {
@@ -53,6 +54,7 @@ ItemSDL::ItemSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata)
 	//1=up,2=right,3=down,4=left;
 	setDirection(row->isDirLeft()?4:2);
 	setSpeed(row->getSpeed());
+	divider=row->getDivider();
 	setSize(0,row->getHeight());
 	setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
 	int wn=0,hn=row->getHeight();

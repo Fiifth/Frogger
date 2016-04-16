@@ -10,7 +10,7 @@
 
 class Row {
 public:
-	Row(bool direction,	int speed,	int locY,	int height, int number);
+	Row(bool direction,	int speed,int divider,	int locY,	int height, int number);
 	virtual ~Row();
 	bool isDirLeft() const;
 	int getLocY() const;
@@ -19,11 +19,14 @@ public:
 	int getHeight() const;
 	bool isLaneRow() const;
 	void setLaneRow(bool laneRow);
+	int getDivider() const;
+	void setDivider(int divider);
 
 private:
 	bool direction;
 	bool laneRow;
 	int speed;
+	int divider;
 	int locY;
 	int height;
 	int number;

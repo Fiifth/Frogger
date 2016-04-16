@@ -8,7 +8,7 @@
 #include "Row.h"
 
 
-Row::Row(bool direction,int speed,int locY,int height, int number):direction(direction),laneRow(false),speed(speed),locY(locY), height(height),number(number)
+Row::Row(bool direction,int speed,int divider,int locY,int height, int number):direction(direction),laneRow(false),speed(speed),divider(divider),locY(locY), height(height),number(number)
 {
 
 }
@@ -42,4 +42,12 @@ bool Row::isLaneRow() const {
 
 void Row::setLaneRow(bool laneRow) {
 	this->laneRow = laneRow;
+}
+
+int Row::getDivider() const {
+	return divider;
+}
+
+void Row::setDivider(int divider) {
+	this->divider = divider;
 }

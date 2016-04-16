@@ -14,6 +14,7 @@ Window::Window()
 	WIDTH  = 640;
 	HEIGHT = 480;
 	dataWindowHeight=20;
+	gameWindowHeight=HEIGHT-dataWindowHeight;
 	TITLE="frogger";
 }
 Window::~Window() {
@@ -24,6 +25,7 @@ void Window::setProp(int width,int height,int dataWindowHeight,char const* title
 	WIDTH  = width;
 	HEIGHT = height;
 	this->dataWindowHeight=dataWindowHeight;
+	gameWindowHeight=height-dataWindowHeight;
 	TITLE=title;
 }
 
@@ -45,4 +47,8 @@ void Window::setOldParameters(int score,int life,int projectiles, int time) {
 bool Window::valueChanged(int score, int life, int projectiles, int time)
 {
 	return !(oldScore==score&&oldLife==life&&oldProjectiles==projectiles&&oldTime==time);
+}
+
+int Window::getGameWindowHeight() const {
+	return gameWindowHeight;
 }

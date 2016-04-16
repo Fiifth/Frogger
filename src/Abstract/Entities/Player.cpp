@@ -9,9 +9,8 @@
 #include <iostream>
 #include <algorithm>    // std::sort
 #include <vector>       // std::vector
-
+#include <thread>
 using namespace std;
-
 
 Player::Player():vSpeed(0),hSpeed(0),startX(0),startY(0),totalTime(50),remainingTime(totalTime)
 {}
@@ -47,11 +46,22 @@ void Player::moveLeft()
 	counter=10;
 }
 
-void Player::followRow(Row* row) {
-	if(!row->isDirLeft())
+void Player::followRow(Row* row)
+{
+	if(divider!=row->getDivider())
+	{
+		divider=row->getDivider();
+		dividerCounter=0;
+	}
+
+	if(timeToMove())
+	{
+		if(!row->isDirLeft())
 			move(row->getSpeed(),0,false);
 		else
 			move(-row->getSpeed(),0,false);
+	}
+
 }
 
 int Player::gethSpeed() const {
@@ -116,28 +126,26 @@ void Player::addScore(int score)
 	this ->score=this->score+score;
 }
 
-bool Player::hit()
+void Player::hit()
 {
 	resetPosition();
 	if (life==0)
 	{
 		addHighScore(score);
-		setScore(0);
-		setLife(3);
-		projectiles=3;
-		return true;
+		setDead(true);
 	}
 	else
 	{
 		addLife(-1);
 		addScore(-10);
-		return false;
+
 	}
 }
 
 void Player::resetPosition() {
 	x=startX;
 	y=startY;
+	direction=1;
 	resetRemainingTime();
 }
 
@@ -146,7 +154,11 @@ void Player::setStartPosition(int startX, int startY) {
 	this->startY=startY;
 }
 
-void Player::takeAction(std::string key) {
+bool Player::takeAction(std::string key) {
+	if (key=="")
+	{
+		return false;
+	}
 	if (key=="Down")
 	{
 		moveDown();
@@ -161,6 +173,12 @@ void Player::takeAction(std::string key) {
 		moveLeft();
 	else if (key=="Right")
 		moveRight();
+	else if (key=="Space"&&getProjectiles()>0)
+	{
+		addProjectiles(-1);
+		return true;
+	}
+return false;
 }
 
 int Player::getRemainingTime()
@@ -195,4 +213,33 @@ void Player::addHighScore(int score)
 
 const vector<int>& Player::getHighScore() const {
 	return highScore;
+}
+
+bool Player::isDead() const {
+	return dead;
+}
+
+void Player::setDead(bool dead)
+{
+	if (!dead)
+	{
+		setScore(0);
+		setLife(3);
+		projectiles=3;
+	}
+	this->dead = dead;
+}
+bool Player::timeToMove()
+{
+	if(dividerCounter==0)
+	{
+
+		dividerCounter=divider;
+		return true;
+	}
+	else
+	{
+		dividerCounter=dividerCounter-1;
+		return false;
+	}
 }

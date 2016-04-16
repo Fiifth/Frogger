@@ -29,7 +29,7 @@ public:
 private:
 	 SDLdata* sdldata;
 	 SDL_Renderer* ren;
-	 TTF_Font* Sans;
+	 TTF_Font* Sans=nullptr;
 	 SDL_Color White;
 	 SDL_Color Black;
 	 SDL_Surface* surfaceMessage=nullptr;
