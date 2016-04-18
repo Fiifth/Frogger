@@ -16,7 +16,7 @@
 
 class PlayerSDL :public Player {
 public:
-	PlayerSDL(SDLdata* sdldata,int x,int y,int w,int h,int speedH,int speedV);
+	PlayerSDL(SDLdata* sdldata,int x,int y,int w,int h,int speedH,int speedV,int number);
 	virtual ~PlayerSDL();
 	void draw();
 	void move(int deltaX,int deltaY);

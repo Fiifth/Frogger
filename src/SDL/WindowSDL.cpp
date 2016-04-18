@@ -7,14 +7,22 @@
 
 #include "WindowSDL.h"
 #include <iostream>
+#include <math.h>
 
 #include <string>
 #include "SDLdata.h"
 #include <vector>
 
+#include <algorithm>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+#include <ctime>
+#include <ratio>
 #include <chrono>
+#include <Windows.h>
 
 using namespace std;
+using namespace std::chrono;
 
 
 WindowSDL::WindowSDL(SDLdata* sdldata):sdldata(sdldata), ren(NULL),win(NULL)
@@ -35,10 +43,18 @@ void WindowSDL::makeWindow(int ScreenWidth, int ScreenHeight,int dataWindowHeigh
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init() ;
 	win = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
-	ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED| SDL_RENDERER_PRESENTVSYNC );
+	//
 	sdldata->setRen(ren);
 	sdldata->createTextures();
 	updateScreen();
+	//startP = chrono::high_resolution_clock::now();
+	//SDL_RenderPresent(ren);
+	//SDL_RenderPresent(ren);
+	//endP = chrono::high_resolution_clock::now();
+	//int difference=std::chrono::duration_cast<std::chrono::milliseconds>(endP- startP).count();
+	//cout<<difference<<endl;
+
 }
 void WindowSDL::generateBackground(vector<Row*>* rows)
 {
@@ -115,7 +131,23 @@ void WindowSDL::setBackground()
 }
 void WindowSDL::updateScreen()
 {
+	//int correction=0;
+	//endP = chrono::high_resolution_clock::now();
+	//int difference=std::chrono::duration_cast<std::chrono::milliseconds>(endP- startP).count();
+	//while(difference<15)
+	//{
+		//correction++;
+		//int delay=((15-difference))>=0?((15-difference)):0;
+		//int delay=((19-difference))>=0?(ceil((19-(float)difference)/2)):0;
+		//SDL_Delay(delay);
+		//endP = chrono::high_resolution_clock::now();
+		//difference=std::chrono::duration_cast<std::chrono::milliseconds>(endP- startP).count();
+	//}
+	//cout<<difference-15<<":"<<correction<<endl;
+	//startP = chrono::high_resolution_clock::now();
 	SDL_RenderPresent(ren);
+
+
 }
 
 void WindowSDL::displayHighScore(int score1, int score2, int score3,

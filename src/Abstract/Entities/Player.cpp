@@ -154,26 +154,27 @@ void Player::setStartPosition(int startX, int startY) {
 	this->startY=startY;
 }
 
-bool Player::takeAction(std::string key) {
+bool Player::takeAction(std::string key)
+{
 	if (key=="")
 	{
 		return false;
 	}
-	if (key=="Down")
+	if (key==keyDown)
 	{
 		moveDown();
 		addScore(-10);
 	}
-	else if (key=="Up")
+	else if (key==keyUp)
 	{
 		moveUp();
 		addScore(10);
 	}
-	else if (key=="Left")
+	else if (key==keyLeft)
 		moveLeft();
-	else if (key=="Right")
+	else if (key==keyRight)
 		moveRight();
-	else if (key=="Space"&&getProjectiles()>0)
+	else if (key==fire&&getProjectiles()>0)
 	{
 		addProjectiles(-1);
 		return true;
@@ -226,6 +227,7 @@ void Player::setDead(bool dead)
 		setScore(0);
 		setLife(3);
 		projectiles=3;
+		resetPosition();
 	}
 	this->dead = dead;
 }
@@ -242,4 +244,13 @@ bool Player::timeToMove()
 		dividerCounter=dividerCounter-1;
 		return false;
 	}
+}
+
+void Player::setDifferentControls()
+{
+	keyUp="Z";
+	keyDown="S";
+	keyLeft="Q";
+	keyRight="D";
+	fire="Space";
 }

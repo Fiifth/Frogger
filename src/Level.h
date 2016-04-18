@@ -46,6 +46,7 @@ public:
 	bool obsOrLane(list<Props*>* PreProp,bool frontOrBack,bool laneRow, int difficulty);
 	Props* getRandomObst(list<Props*>* PreProp);
 	bool playersAlive(list<Player*>* players,char mode);
+
 	struct drawMoveRemove
 	{
 	   bool operator()(Props* prop) const

@@ -15,10 +15,10 @@
 using namespace std;
 
 
-PlayerSDL::PlayerSDL(SDLdata* sdldata,int x,int y,int w,int h,int speedH,int speedV) :sdldata(sdldata),textures(sdldata->getPlayerTextures())
+PlayerSDL::PlayerSDL(SDLdata* sdldata,int x,int y,int w,int h,int speedH,int speedV,int number) :sdldata(sdldata),textures(sdldata->getPlayerTextures())
 
 {
-	ani=sdldata->getPlayerAni().clone();
+	ani=sdldata->getPlayerAni(number).clone();
 	sethSpeed(speedH);
 	setvSpeed(speedV);
 	setSize(w,h);
@@ -31,6 +31,8 @@ PlayerSDL::~PlayerSDL() {}
 
 void PlayerSDL::draw()
 {
+	if(!isDead())
+	{
 	//int direction=0;//1=up,2=right,3=down,4=left;
 	int angle=0;
 	angle=(getDirection()==2)?90:angle;
@@ -42,5 +44,6 @@ void PlayerSDL::draw()
 	setCounter(getCounter()>0?(getCounter()-1):0);
 	ani->setCounter(getCounter());
 	sdldata->renderTexture(ani->getTexture(),sdldata->getRen(),x,y,&w,&h,angle);
+	}
 }
 

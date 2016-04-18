@@ -11,6 +11,12 @@
 #include "SDL_ttf.h"
 #include "SDL.h"
 #include <vector>
+#include <algorithm>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+#include <ctime>
+#include <ratio>
+#include <chrono>
 
 #ifndef WINDOWSDL_H_
 #define WINDOWSDL_H_
@@ -38,6 +44,8 @@ private:
 	 bool temp=false;
 	 SDL_Surface* rowsBackgroundGenerated=nullptr;
 	 SDL_Texture* backgourndTexture=nullptr;
+	 std::chrono::high_resolution_clock::time_point startP=std::chrono::high_resolution_clock::now();
+	 std::chrono::high_resolution_clock::time_point endP=std::chrono::high_resolution_clock::now();
 };
 
 #endif /* WINDOWSDL_H_ */

@@ -20,7 +20,7 @@ char Level::levelExecution(string keyStroke)
 	for (Player* player:*players)
 	{
 		if (player->takeAction(keyStroke))
-			projectiles->push_back(F->createProjectile(players->back(),5,0));
+			projectiles->push_back(F->createProjectile(player,5,0));
 	}
 
 	win->generateBackground(rows);
@@ -142,6 +142,18 @@ int Level::collisionDetection(vector<list<Props*>>* propsOnRow,list<Projectile*>
 					delete (proj);
 					projectiles->remove(proj);
 				}
+				else
+				{
+					for(Player* player:*players)
+					{
+						if(proj->coll(player,true))
+						{
+							player->hit();
+							projectiles->remove(proj);
+						}
+					}
+				}
+
 			}
 			for(Player* player:*players)
 			{
@@ -149,8 +161,7 @@ int Level::collisionDetection(vector<list<Props*>>* propsOnRow,list<Projectile*>
 				if(effect>1)
 				{
 					propsOnRow->at(temp2->getRow()->getNumber()).remove(temp2);
-					delete(temp2);
-					dete=effect;
+					//delete(temp2); //TODO fix
 					player->addScore(1);
 					player->addProjectiles(1);
 				}

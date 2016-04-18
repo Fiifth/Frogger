@@ -26,7 +26,6 @@ ProjectileSDL::ProjectileSDL(SDLdata* sdldata,int direction,int Xstart,int Ystar
 
 ProjectileSDL::~ProjectileSDL() {
 	delete(ani);
-	//std::cout<<"hello"<<std::endl;
 }
 
 void ProjectileSDL::draw()

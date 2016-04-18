@@ -25,7 +25,7 @@ class FactorySDL : public Factory {
 public:
 	FactorySDL();
 	virtual ~FactorySDL();
-	virtual Player* createPlayer(int x,int y,int w,int h,int speedH,int speedV);
+	virtual Player* createPlayer(int x,int y,int w,int h,int speedH,int speedV,int number);
 	virtual Obstacle* createObstacle(Row* row,int x,int y,int w,int h);
 	virtual Lane* createLane(Row* row,int x,int y,int w,int h);
 	virtual Item* createItem(Row* row,int x,int y,int w,int h,int type);

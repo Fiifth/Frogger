@@ -34,7 +34,7 @@ public:
 	Animator getItemAni(int ind);
 	Animator getLaneAni();
 	Animator getObstiAni();
-	Animator getPlayerAni();
+	Animator getPlayerAni(int ind);
 	Animator getProjAni(int ind);
 	int getScreenHeight() const;
 	void setScreenHeight(int screenHeight);

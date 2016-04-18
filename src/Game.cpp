@@ -51,8 +51,11 @@ Game::Game(Factory* F)
 	Events* event=F->createEvents();
 	Window* win=F->createWindow();
 	win->makeWindow(WindowWidth,WindowHeight,dataWindowHeight,"frogger");
-	Player* player=F->createPlayer(plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
+	Player* player=F->createPlayer(plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight,0);
+	Player* player2=F->createPlayer(plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight,1);
+	player2->setDifferentControls();
 	players->push_back(player);
+	players->push_back(player2);
 	Level* level=new Level(F,win,players,rowHeight,90);
 	char state='B';
 	while(true)
@@ -62,6 +65,7 @@ Game::Game(Factory* F)
 		{
 		//----------------------------------------------------------------------------------------------------
 			case 'A'  :
+
 				if (keyStroke=="Escape")
 					return;
 				state=level->levelExecution(keyStroke);
@@ -74,8 +78,11 @@ Game::Game(Factory* F)
 				win->setBackground();
 				if (keyStroke=="Space")
 				{
-					player->resetRemainingTime();
-					player->setDead(false);
+					for (Player* play:*players)
+					{
+						play->resetRemainingTime();
+						play->setDead(false);
+					}
 					state='A';
 					win->setBackground();
 				}
@@ -89,8 +96,6 @@ Game::Game(Factory* F)
 
 Game::~Game() {}
 
-//auto start_time = chrono::high_resolution_clock::now();
-		//auto end_time = chrono::high_resolution_clock::now();
-		//cout << chrono::duration_cast<chrono::microseconds>(end_time - start_time).count() << endl;
+
 //start_time=chrono::steady_clock::now();
 	//			end_time=chrono::steady_clock::now();

@@ -55,6 +55,7 @@ public:
 	bool isDead() const;
 	void setDead(bool dead);
 	bool timeToMove();
+	void setDifferentControls();
 
 private:
 	int vSpeed;
@@ -71,6 +72,7 @@ private:
 	std::chrono::high_resolution_clock::time_point currentTime=std::chrono::high_resolution_clock::now();
 	float correctTime=float(totalTime);
 	vector <int>highScore={0,0,0,0};
+	string keyUp="Up",keyDown="Down",keyLeft="Left",keyRight="Right",fire="Right Ctrl";
 };
 
 

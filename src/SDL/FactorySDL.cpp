@@ -27,10 +27,10 @@ FactorySDL::FactorySDL() {sdldata=new SDLdata();}
 
 FactorySDL::~FactorySDL() {}
 
-Player* FactorySDL::createPlayer(int x,int y,int w,int h,int speedH,int speedV)
+Player* FactorySDL::createPlayer(int x,int y,int w,int h,int speedH,int speedV,int number)
 {
 	sdldata->resetPlayerRange();
-	return new PlayerSDL(sdldata,x,y,w,h,speedH,speedV);
+	return new PlayerSDL(sdldata,x,y,w,h,speedH,speedV,number);
 }
 Obstacle* FactorySDL::createObstacle(Row* row,int x,int y,int w,int h)
 {
@@ -77,5 +77,28 @@ Item* FactorySDL::createItem(Row* row,int type)
 
 Projectile* FactorySDL::createProjectile(Entity* entity,int speed,int type)
 {
-	return new ProjectileSDL(sdldata,entity->getDirection(),entity->getX(),entity->getY(),entity->getH(),speed,type);
+	int x,y;
+	int dir=entity->getDirection();
+	//int direction=0;//1=up,2=right,3=down,4=left;
+	if(dir==1)
+	{
+	x=entity->getX();
+	y=entity->getY()-entity->getH();
+	}
+	else if (dir==2)
+	{
+		x=entity->getX()+(entity->getW()+2);
+			y=entity->getY();
+	}
+	else if (dir==3)
+	{
+		x=entity->getX();
+			y=entity->getY()+entity->getH();
+	}
+	else if (dir==4)
+	{
+		x=entity->getX()-(entity->getW()+2);
+			y=entity->getY();
+	}
+	return new ProjectileSDL(sdldata,entity->getDirection(),x,y,entity->getH(),speed,type);
 }

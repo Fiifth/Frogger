@@ -23,7 +23,7 @@ class Factory {
 public:
 	Factory();
 	virtual ~Factory();
-	virtual Player* createPlayer(int x,int y,int w,int h,int speedH,int speedV)=0;
+	virtual Player* createPlayer(int x,int y,int w,int h,int speedH,int speedV,int number)=0;
 	virtual Obstacle* createObstacle(Row* row,int x,int y,int w,int h)=0;
 	virtual Lane* createLane(Row* row,int x,int y,int w,int h)=0;
 	virtual Item* createItem(Row* row,int x,int y,int w,int h,int type)=0;
