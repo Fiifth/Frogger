@@ -4,11 +4,12 @@
  *  Created on: Feb 29, 2016
  *      Author: fifth
  */
+
+#ifndef WINDOW_H_
+#define WINDOW_H_
 #include <string>
 #include <vector>
 #include "Row.h"
-#ifndef WINDOW_H_
-#define WINDOW_H_
 
 class Window {
 public:

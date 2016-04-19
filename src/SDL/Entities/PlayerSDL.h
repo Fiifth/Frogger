@@ -4,19 +4,22 @@
  *  Created on: 22 Feb 2016
  *      Author: msn-w
  */
+
+#ifndef FROGSDL_H_
+#define FROGSDL_H_
 #include "Entity.h"
 #include "Player.h"
 #include "Window.h"
 #include "SDLdata.h"
 #include <vector>
 #include "Animator.h"
-#ifndef FROGSDL_H_
-#define FROGSDL_H_
+#include "Factory.h"
+#include "Props.h"
 
 
 class PlayerSDL :public Player {
 public:
-	PlayerSDL(SDLdata* sdldata,int x,int y,int w,int h,int speedH,int speedV,int number);
+	PlayerSDL(SDLdata* sdldata,Factory* F,int x,int y,int w,int h,int speedH,int speedV,int number);
 	virtual ~PlayerSDL();
 	void draw();
 	void move(int deltaX,int deltaY);
@@ -25,6 +28,7 @@ private:
 	SDLdata* sdldata;
 	std::vector<SDL_Texture*> textures;
 	Animator* ani;
+
 };
 
 

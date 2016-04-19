@@ -9,6 +9,9 @@
 #define ABSTRACT_ENTITIES_PROJECTILE_H_
 #include "Props.h"
 #include "Entity.h"
+#include "Player.h"
+
+
 
 class Projectile :public Props{
 public:
@@ -16,7 +19,9 @@ public:
 	virtual ~Projectile();
 	bool roomForItem(){return false;};
 	bool itemAbsent(){return true;};
-	int coll(Entity* entity,bool type);
+	int coll(Player* player,bool type);
+	bool spawnItem(){return false;};
+		bool fire(){return false;};
 private:
 
 };

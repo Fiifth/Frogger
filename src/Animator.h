@@ -5,11 +5,12 @@
  *      Author: msn-w
  */
 
-#include "SDL.h"
-#include <vector>
+
 
 #ifndef ANIMATOR_H_
 #define ANIMATOR_H_
+#include "SDL.h"
+#include <vector>
 
 class Animator {
 public:

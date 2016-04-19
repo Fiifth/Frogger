@@ -19,8 +19,9 @@ char Level::levelExecution(string keyStroke)
 {
 	for (Player* player:*players)
 	{
-		if (player->takeAction(keyStroke))
-			projectiles->push_back(F->createProjectile(player,5,0));
+		player->takeAction(keyStroke);
+		//if (player->takeAction(keyStroke))
+		//	projectiles->push_back(F->createProjectile(player,5,0));
 	}
 
 	win->generateBackground(rows);
@@ -100,24 +101,19 @@ void Level::propsGenerator(Factory* F,int difficulty,vector<Row*>* rows,vector<l
 				{
 					prop=F->createLane(row);
 					prop->setVisible(row->isLaneRow());
+					//if random
+					prop->spawnItem();
 
 				}
 				propsOnRow->at(row->getNumber()).push_front(prop);
 			}
-			bool roomOnLane=PreProp->front()->roomForItem();
-			bool noItemYet=PreProp->back()->itemAbsent();
-			if (roomOnLane&&noItemYet&&(rand()%1000>995))
-			{
-				Props* propBonus=F->createItem(row,0);
-				propsOnRow->at(row->getNumber()).push_back(propBonus);
-			}
+
 			if(rand()%1000>998)
 			{
 				Props* randomObstable=getRandomObst(PreProp);
 				if (randomObstable!=nullptr)
 				{
-					Props* projec=F->createProjectile(randomObstable,5,0);
-					propsOnRow->at(row->getNumber()).push_back(projec);
+					randomObstable->fire();
 				}
 			}
 		}
@@ -132,29 +128,6 @@ int Level::collisionDetection(vector<list<Props*>>* propsOnRow,list<Projectile*>
 	{
 		for(Props* temp2:temp)
 		{
-			for (Projectile* proj:*projectiles)
-			{
-				//TODO use remove if
-				if(temp2->isVisible()&&temp2->coll(proj,true))
-				{
-					temp2->setVisible(false);
-					temp2->setTurned(true);
-					delete (proj);
-					projectiles->remove(proj);
-				}
-				else
-				{
-					for(Player* player:*players)
-					{
-						if(proj->coll(player,true))
-						{
-							player->hit();
-							projectiles->remove(proj);
-						}
-					}
-				}
-
-			}
 			for(Player* player:*players)
 			{
 				int effect=temp2->coll(player,true);

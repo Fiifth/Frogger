@@ -6,8 +6,9 @@
  */
 
 #include "Entity.h"
-#include <iostream>
-Entity::Entity()
+#include "Props.h"
+
+Entity::Entity():F(nullptr)
 {
 	x=30;
 	y=30;
@@ -55,7 +56,6 @@ void Entity::setScreenSize(int width,int height)
 }
 bool Entity::inframe()
 {
-	//std::cout<<h<<std::endl;
 	return ((x<(screenWidth+(2*w))&&x>(0-(2*w))) &&((y<=screenHeight+h)&&(y>=(0-h))));
 }
 
@@ -97,4 +97,26 @@ int Entity::getDirection() const {
 
 void Entity::setDirection(int direction) {
 	this->direction = direction;
+}
+
+void Entity::setF(Factory* f) {
+	F = f;
+}
+
+
+bool Entity::drawMoveRemove::operator ()(Props* prop) {
+	 bool temp=false;
+	   if(!prop->inframe())
+	   {
+		   temp=true;
+		   delete(prop);
+	   }
+	   else
+	   {
+		   prop->moveForward();
+		  if (prop->isVisible())
+			   prop->draw();
+
+	   }
+	   return temp;
 }

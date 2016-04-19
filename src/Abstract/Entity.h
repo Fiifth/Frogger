@@ -5,10 +5,14 @@
  *      Author: msn-w
  */
 
-#ifndef ABSTRACT_ENTITY_H_
-#define ABSTRACT_ENTITY_H_
-
+#ifndef ENTITY_H_
+#define ENTITY_H_
+#include <list>
+class Projectile;
+class Factory;
+class Props;
 class Entity {
+
 public:
 	Entity();
 	virtual ~Entity();
@@ -27,12 +31,18 @@ public:
 	void setSpeed(int speed);
 	int getDirection() const;
 		void setDirection(int direction);
+	void setF(Factory* f);
+	struct drawMoveRemove
+	{
+	   bool operator()(Props* prop);
+	};
+
 
 protected:
 	int x,y,w,h,speed;
 	int screenWidth,screenHeight;
 	int direction=1;//1=up,2=right,3=down,4=left;
-
+	Factory* F;
 
 };
 

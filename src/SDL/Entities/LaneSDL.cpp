@@ -10,8 +10,9 @@
 #include <stdlib.h>
 #include <iostream>
 
- LaneSDL::LaneSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdldata(sdldata)
+ LaneSDL::LaneSDL(SDLdata* sdldata,Row* row,Factory* F,int x,int y,int w,int h) :sdldata(sdldata)
 {
+	 setF(F);
 	ani=sdldata->getLaneAni().clone();
 	setRow(row);
 	setDirection(row->isDirLeft()?4:2);
@@ -28,8 +29,9 @@ LaneSDL::~LaneSDL() {
 	delete(ani);
 }
 
-LaneSDL::LaneSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata)
+LaneSDL::LaneSDL(SDLdata* sdldata, Row* row,Factory* F) :sdldata(sdldata)
 {
+	 setF(F);
 	ani=sdldata->getLaneAni().clone();
 	setRow(row);
 	//1=up,2=right,3=down,4=left;
@@ -60,6 +62,5 @@ void LaneSDL::draw()
 	{
 		turned=false;
 	}
-
-	//turned=ani->isTurned();
+	itemList.remove_if(drawMoveRemove());
 }

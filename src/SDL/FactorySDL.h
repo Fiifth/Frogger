@@ -4,6 +4,10 @@
  *  Created on: 22 Feb 2016
  *      Author: msn-w
  */
+
+
+#ifndef FACTORYSDL_H_
+#define FACTORYSDL_H_
 #include "Obstacle.h"
 #include "Player.h"
 #include "Factory.h"
@@ -15,9 +19,6 @@
 #include "Item.h"
 #include "Projectile.h"
 #include "ProjectileSDL.h"
-
-#ifndef FACTORYSDL_H_
-#define FACTORYSDL_H_
 
 using namespace std;
 

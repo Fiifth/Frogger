@@ -9,16 +9,20 @@
 #define ABSTRACT_ENTITIES_ITEM_H_
 #include "Props.h"
 #include "Entity.h"
+#include "Player.h"
 
 class Item :public Props{
 public:
 	Item();
 	virtual ~Item();
 	virtual void draw()=0;
-	int coll(Entity* entity,bool type);
+	int coll(Player* player,bool type);
 	bool roomForItem();
 	bool itemAbsent();
 	int effect=3;
+	bool spawnItem(){return false;};
+	bool fire(){return false;};
+
 };
 
 #endif /* ABSTRACT_ENTITIES_ITEM_H_ */

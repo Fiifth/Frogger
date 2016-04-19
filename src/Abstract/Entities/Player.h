@@ -4,14 +4,21 @@
  *  Created on: 22 Feb 2016
  *      Author: msn-w
  */
+
+#ifndef FROG_H_
+#define FROG_H_
 #include "Window.h"
 #include "Entity.h"
 #include "Row.h"
 #include <ratio>
 #include <chrono>
 #include <string>
-#ifndef FROG_H_
-#define FROG_H_
+#include <iostream>
+#include <algorithm>    // std::sort
+#include <vector>       // std::vector
+#include "Projectile.h"
+#include <list>
+
 
 using namespace std;
 
@@ -73,6 +80,8 @@ private:
 	float correctTime=float(totalTime);
 	vector <int>highScore={0,0,0,0};
 	string keyUp="Up",keyDown="Down",keyLeft="Left",keyRight="Right",fire="Right Ctrl";
+protected:
+	std::list<Projectile*>projectileList;
 };
 
 

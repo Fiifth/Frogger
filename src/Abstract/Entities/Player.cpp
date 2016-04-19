@@ -6,11 +6,9 @@
  */
 
 #include "Player.h"
-#include <iostream>
-#include <algorithm>    // std::sort
-#include <vector>       // std::vector
-#include <thread>
+#include "Factory.h"
 using namespace std;
+
 
 Player::Player():vSpeed(0),hSpeed(0),startX(0),startY(0),totalTime(50),remainingTime(totalTime)
 {}
@@ -177,7 +175,9 @@ bool Player::takeAction(std::string key)
 	else if (key==fire&&getProjectiles()>0)
 	{
 		addProjectiles(-1);
-		return true;
+		projectileList.push_back(F->createProjectile(this,5,0));
+
+		//return true;
 	}
 return false;
 }

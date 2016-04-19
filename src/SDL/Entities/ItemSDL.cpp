@@ -16,17 +16,18 @@ ItemSDL::ItemSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h,int ind) :sdl
 	ani=sdldata->getItemAni(ind).clone();
 	setRow(row);
 	setSpeed(row->getSpeed());
+	setDirection(row->isDirLeft()?4:2);
 	divider=row->getDivider();
 	setSize(0,h);
 	setScreenSize(sdldata->getScreenWidth(),sdldata->getScreenHeight());
 	int wn=0,hn=h;
 	sdldata->getDependWAndH(ani->getTexture(),&wn, &hn);
 	setSize(wn,hn);
-	int xloc=row->isDirLeft()?screenWidth:-getW();
-	setLocation(xloc,row->getLocY());
+	setLocation(x,y);
 }
 
 ItemSDL::~ItemSDL() {
+	std::cout<<"hellooooooo"<<std::endl;
 	delete(ani);
 }
 

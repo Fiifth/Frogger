@@ -8,15 +8,22 @@
 #ifndef ABSTRACT_ENTITIES_LANE_H_
 #define ABSTRACT_ENTITIES_LANE_H_
 #include "Props.h"
-#include "Entity.h"
+#include <iostream>
+#include "Player.h"
+#include <list>
+#include "Item.h"
 class Lane :public Props{
 public:
 	Lane();
 	virtual ~Lane();
 	virtual void draw()=0;
-	int coll(Entity* entity,bool type);
+	int coll(Player* player,bool type);
 	bool roomForItem();
 	bool itemAbsent(){return true;};
+	bool spawnItem();
+	bool fire(){return false;};
+protected:
+	std::list<Item*>itemList;
 };
 
 #endif /* ABSTRACT_ENTITIES_LANE_H_ */

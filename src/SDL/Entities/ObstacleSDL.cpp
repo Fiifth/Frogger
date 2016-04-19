@@ -14,8 +14,9 @@
 
 using namespace std;
 
-ObstacleSDL::ObstacleSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h) :sdldata(sdldata)
+ObstacleSDL::ObstacleSDL(SDLdata* sdldata,Row* row,Factory* F,int x,int y,int w,int h) :sdldata(sdldata)
 {
+	 setF(F);
 	ani=sdldata->getObstiAni().clone();
 	setRow(row);
 	setDirection(row->isDirLeft()?4:2);
@@ -48,10 +49,12 @@ void ObstacleSDL::draw()
 		{
 			turned=false;
 		}
+	projectileList.remove_if(drawMoveRemove());
 }
 
-ObstacleSDL::ObstacleSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata)
+ObstacleSDL::ObstacleSDL(SDLdata* sdldata, Row* row,Factory* F) :sdldata(sdldata)
 {
+	 setF(F);
 		ani=sdldata->getObstiAni().clone();
 		setRow(row);
 		//1=up,2=right,3=down,4=left;
@@ -65,4 +68,5 @@ ObstacleSDL::ObstacleSDL(SDLdata* sdldata, Row* row) :sdldata(sdldata)
 		setSize(wn,hn);
 		int xloc=row->isDirLeft()?screenWidth:-getW();
 		setLocation(xloc,row->getLocY());
+
 }

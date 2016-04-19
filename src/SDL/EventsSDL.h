@@ -4,11 +4,12 @@
  *  Created on: 6-mrt.-2016
  *      Author: msn-w
  */
-#include "Events.h"
-#include <string>
+
 #ifndef EVENTSSDL_H_
 #define EVENTSSDL_H_
 
+#include "Events.h"
+#include <string>
 class EventsSDL :public Events{
 public:
 	EventsSDL();

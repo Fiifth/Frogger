@@ -5,12 +5,13 @@
  *      Author: msn-w
  */
 
+
+#ifndef SDLSTUFF_H_
+#define SDLSTUFF_H_
 #include "SDL.h"
 #include <vector>
 #include "Animator.h"
 #include <string>
-#ifndef SDLSTUFF_H_
-#define SDLSTUFF_H_
 
 class SDLdata {
 public:

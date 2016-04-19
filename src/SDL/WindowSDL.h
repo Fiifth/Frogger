@@ -4,6 +4,11 @@
  *  Created on: Feb 29, 2016
  *      Author: fifth
  */
+
+
+
+#ifndef WINDOWSDL_H_
+#define WINDOWSDL_H_
 #include "Window.h"
 #include "SDL.h"
 #include "SDLdata.h"
@@ -17,9 +22,6 @@
 #include <ctime>
 #include <ratio>
 #include <chrono>
-
-#ifndef WINDOWSDL_H_
-#define WINDOWSDL_H_
 
 class WindowSDL:public  Window{
 public:

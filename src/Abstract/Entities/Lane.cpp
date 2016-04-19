@@ -6,9 +6,7 @@
  */
 
 #include <Lane.h>
-#include "Entity.h"
-#include <iostream>
-
+#include "Factory.h"
 Lane::Lane() {
 
 }
@@ -16,9 +14,9 @@ Lane::Lane() {
 Lane::~Lane() {
 }
 
-int Lane::coll(Entity* entity, bool type) {
+int Lane::coll(Player* player, bool type) {
 	if (isTurned())
-		return (((entity->getY()>=(y)&&entity->getY()<(y+h))||(entity->getY()+entity->getH()>(y)&&entity->getY()+entity->getH()<=(y+h)))&&((entity->getX()>=(x)&&entity->getX()<=(x+w))||(entity->getX()+entity->getW()>=(x)&&entity->getX()+entity->getW()<=(x+w))));
+		return (((player->getY()>=(y)&&player->getY()<(y+h))||(player->getY()+player->getH()>(y)&&player->getY()+player->getH()<=(y+h)))&&((player->getX()>=(x)&&player->getX()<=(x+w))||(player->getX()+player->getW()>=(x)&&player->getX()+player->getW()<=(x+w))));
 	else
 		return 0;
 }
@@ -30,3 +28,10 @@ bool Lane::roomForItem()
 	return (getX()<=itemX)&&(getX()+getW()>=row->getHeight()+itemX);
 }
 
+bool Lane::spawnItem()
+{
+	//itemList.push_back(F->createItem(row,x,y,w,h,0));
+	itemList.push_back(F->createItem(row,0));
+	//std::cout<<"new"<<itemList.size()<<endl;
+	return true;
+}

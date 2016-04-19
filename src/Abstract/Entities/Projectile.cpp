@@ -6,6 +6,7 @@
  */
 
 #include <Projectile.h>
+#include "Player.h"
 
 Projectile::Projectile() {
 	// TODO Auto-generated constructor stub
@@ -16,10 +17,10 @@ Projectile::~Projectile() {
 	// TODO Auto-generated destructor stub
 }
 
-int Projectile::coll(Entity* entity, bool type)
+int Projectile::coll(Player* player, bool type)
 {
 	if (!isTurned())
-		return (((entity->getY()>=(y)&&entity->getY()<(y+h))||(entity->getY()+entity->getH()>(y)&&entity->getY()+entity->getH()<=(y+h)))&&((entity->getX()>=(x)&&entity->getX()<=(x+w))||(entity->getX()+entity->getW()>=(x)&&entity->getX()+entity->getW()<=(x+w))));
+		return (((player->getY()>=(y)&&player->getY()<(y+h))||(player->getY()+player->getH()>(y)&&player->getY()+player->getH()<=(y+h)))&&((player->getX()>=(x)&&player->getX()<=(x+w))||(player->getX()+player->getW()>=(x)&&player->getX()+player->getW()<=(x+w))));
 		else
 			return 0;
 }

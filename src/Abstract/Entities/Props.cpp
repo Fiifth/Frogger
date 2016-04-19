@@ -6,8 +6,8 @@
  */
 
 #include <Props.h>
-#include "Row.h"
-#include <iostream>
+#include "Factory.h"
+
 
 Props::Props(): row(nullptr),visible(true),divider(0){
 }

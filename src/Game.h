@@ -4,6 +4,9 @@
  *  Created on: 22 Feb 2016
  *      Author: msn-w
  */
+
+#ifndef GAME_H_
+#define GAME_H_
 #include <Obstacle.h>
 #include "Factory.h"
 #include <vector>
@@ -14,9 +17,6 @@
 #include "Player.h"
 #include <chrono>
 #include <iostream>
-#ifndef GAME_H_
-#define GAME_H_
-
 
 class Game {
 public:

@@ -4,8 +4,12 @@
  *  Created on: 22 Feb 2016
  *      Author: msn-w
  */
-#include <Obstacle.h>
-#include <Player.h>
+
+#ifndef FACTORY_H_
+#define FACTORY_H_
+
+#include "Obstacle.h"
+#include "Player.h"
 #include "Window.h"
 #include "WindowSDL.h"
 #include "Events.h"
@@ -14,8 +18,6 @@
 #include "Lane.h"
 #include "Projectile.h"
 #include "Item.h"
-#ifndef FACTORY_H_
-#define FACTORY_H_
 
 using namespace std;
 

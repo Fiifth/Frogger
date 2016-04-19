@@ -13,11 +13,12 @@
 #include "SDL.h"
 #include <vector>
 #include "Animator.h"
+#include "Factory.h"
 
 class LaneSDL: public Lane{
 public:
-	LaneSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h);
-	LaneSDL(SDLdata* sdldata,Row* row);
+	LaneSDL(SDLdata* sdldata,Row* row,Factory* F,int x,int y,int w,int h);
+	LaneSDL(SDLdata* sdldata,Row* row,Factory* F);
 	virtual ~LaneSDL();
 	void draw();
 private:
