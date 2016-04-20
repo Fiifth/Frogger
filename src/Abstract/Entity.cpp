@@ -59,7 +59,6 @@ bool Entity::inframe()
 	return ((x<(screenWidth+(2*w))&&x>(0-(2*w))) &&((y<=screenHeight+h)&&(y>=(0-h))));
 }
 
-
 int Entity::getH() const {
 	return h;
 }
@@ -119,4 +118,8 @@ bool Entity::drawMoveRemove::operator ()(Props* prop) {
 
 	   }
 	   return temp;
+}
+
+bool Entity::colli(Entity* entity) {
+	return (((entity->getY()>=(y)&&entity->getY()<(y+h))||(entity->getY()+entity->getH()>(y)&&entity->getY()+entity->getH()<=(y+h)))&&((entity->getX()>=(x)&&entity->getX()<=(x+w))||(entity->getX()+entity->getW()>=(x)&&entity->getX()+entity->getW()<=(x+w))));
 }

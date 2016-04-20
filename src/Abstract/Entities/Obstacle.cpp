@@ -16,11 +16,12 @@ Obstacle::Obstacle()
 Obstacle::~Obstacle() {
 }
 
-int Obstacle::coll(Player* player, bool type) {
-	if (!isTurned())
-	return (((player->getY()>=(y)&&player->getY()<(y+h))||(player->getY()+player->getH()>(y)&&player->getY()+player->getH()<=(y+h)))&&((player->getX()>=(x)&&player->getX()<=(x+w))||(player->getX()+player->getW()>=(x)&&player->getX()+player->getW()<=(x+w))));
+void Obstacle::collision(Player* player) {
+	if (colli(player)&&(!isTurned()))
+		player->hit();
 	else
-		return 0;
+		projectileList.remove_if(collisionS(player));
+	player->getProjectileList().remove_if(playerProjectiles(this));
 }
 
 bool Obstacle::roomForItem()

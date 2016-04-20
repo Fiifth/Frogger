@@ -254,3 +254,12 @@ void Player::setDifferentControls()
 	keyRight="D";
 	fire="Space";
 }
+
+std::list<Projectile*>& Player::getProjectileList()
+{
+	return projectileList;
+}
+
+void Player::collision(Player* player) {
+	//return (((player->getY()>=(y)&&player->getY()<(y+h))||(player->getY()+player->getH()>(y)&&player->getY()+player->getH()<=(y+h)))&&((player->getX()>=(x)&&player->getX()<=(x+w))||(player->getX()+player->getW()>=(x)&&player->getX()+player->getW()<=(x+w))))?3:0;
+}

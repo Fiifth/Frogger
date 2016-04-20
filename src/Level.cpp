@@ -18,11 +18,7 @@ Level::~Level() {
 char Level::levelExecution(string keyStroke)
 {
 	for (Player* player:*players)
-	{
 		player->takeAction(keyStroke);
-		//if (player->takeAction(keyStroke))
-		//	projectiles->push_back(F->createProjectile(player,5,0));
-	}
 
 	win->generateBackground(rows);
 	propsGenerator(F,difficulty,rows,propsOnRow);
@@ -123,29 +119,17 @@ void Level::propsGenerator(Factory* F,int difficulty,vector<Row*>* rows,vector<l
 
 int Level::collisionDetection(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectiles,list<Player*>* players)
 {
-	int dete=false;
 	for (list<Props*> temp:*propsOnRow)
 	{
 		for(Props* temp2:temp)
 		{
 			for(Player* player:*players)
 			{
-				int effect=temp2->coll(player,true);
-				if(effect>1)
-				{
-					propsOnRow->at(temp2->getRow()->getNumber()).remove(temp2);
-					//delete(temp2); //TODO fix
-					player->addScore(1);
-					player->addProjectiles(1);
-				}
-				else if (effect==1||player->getRemainingTime()==0)
-				{
-					player->hit();
-				}
+				temp2->collision(player);
 			}
 		}
 	}
-	return dete;
+	return false;
 }
 
 void Level::fillEnemyList(Factory* F,vector<Row*>* rows, vector<list<Props*>>* propsOnRow, int difficulty,int screenWidth)
@@ -194,13 +178,10 @@ int i=0;
 		i++;
 	}
 
-	projectiles->remove_if(drawMoveRemove());
 
 	for(Player* player:*players)
 	{
 		int row=player->getY()/player->getH(); //TODO instread of getH search for row height
-		if(rows->at(row)->isLaneRow())
-			player->followRow(rows->at(row));
 		if(row==0)
 		{
 			player->addScore(100);
@@ -220,7 +201,6 @@ bool Level::obsOrLane(list<Props*>* PreProp,bool frontOrBack,bool laneRow, int d
 }
 
 
-
 Props* Level::getRandomObst(list<Props*>* PreProp)
 {
 	Props* prop;
@@ -232,7 +212,6 @@ Props* Level::getRandomObst(list<Props*>* PreProp)
 		{
 			temp.push_back(pro);
 		}
-
 	}
 	if (temp.size()>0)
 	{

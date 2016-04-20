@@ -11,6 +11,7 @@
 class Projectile;
 class Factory;
 class Props;
+class Player;
 class Entity {
 
 public:
@@ -32,6 +33,8 @@ public:
 	int getDirection() const;
 		void setDirection(int direction);
 	void setF(Factory* f);
+	virtual void collision(Player* player)=0;
+	bool colli(Entity* entity);
 	struct drawMoveRemove
 	{
 	   bool operator()(Props* prop);

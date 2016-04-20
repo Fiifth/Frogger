@@ -17,13 +17,31 @@ public:
 	Lane();
 	virtual ~Lane();
 	virtual void draw()=0;
-	int coll(Player* player,bool type);
+	void collision(Player* player);
 	bool roomForItem();
 	bool itemAbsent(){return true;};
 	bool spawnItem();
 	bool fire(){return false;};
 protected:
 	std::list<Item*>itemList;
+	struct collisionS
+	{
+	collisionS(Player* player):player(player){}
+	Player* player;
+	   bool operator()(Item* item) const
+	   {
+		  if(item->colli(player))
+		  {
+			  player->addHighScore(1);
+			  player->addProjectiles(1);
+			  delete(item);
+			  //TODO fix effects
+			  return true;
+		  }
+		  else
+			  return false;
+	   }
+	};
 };
 
 #endif /* ABSTRACT_ENTITIES_LANE_H_ */

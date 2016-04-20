@@ -10,7 +10,7 @@
 #include "Entity.h"
 #include "Row.h"
 #include <iostream>
-class Player;
+
 
 class Props :public Entity {
 public:
@@ -23,7 +23,7 @@ public:
 	bool isVisible() const;
 	void setVisible(bool visible);
 	virtual void draw()=0;
-	virtual int coll(Player* player,bool type)=0;
+
 	//type true=player, false=bullet return type of effect 0=no effect, 1 player dies, 2-6 object disappears and player gets effect
 	virtual bool roomForItem()=0;
 	virtual bool itemAbsent()=0;

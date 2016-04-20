@@ -27,7 +27,6 @@ ItemSDL::ItemSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h,int ind) :sdl
 }
 
 ItemSDL::~ItemSDL() {
-	std::cout<<"hellooooooo"<<std::endl;
 	delete(ani);
 }
 

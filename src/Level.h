@@ -59,22 +59,13 @@ public:
 		   }
 		   else
 		   {
-			  if (prop->isVisible())
-				   prop->draw();
+			   prop->draw();
 			   prop->moveForward();
 		   }
 		   return temp;
 	   }
 	};
-	struct collision
-		{
-		collision(Player* player):player(player){}
-		Player* player;
-		   bool operator()(Props* prop) const
-		   {
-			  return  prop->coll(player,true);
-		   }
-		};
+
 private:
 
 		int difficultyRows=1;

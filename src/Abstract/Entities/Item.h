@@ -16,7 +16,7 @@ public:
 	Item();
 	virtual ~Item();
 	virtual void draw()=0;
-	int coll(Player* player,bool type);
+	void collision(Player* player);
 	bool roomForItem();
 	bool itemAbsent();
 	int effect=3;

@@ -14,11 +14,17 @@ Lane::Lane() {
 Lane::~Lane() {
 }
 
-int Lane::coll(Player* player, bool type) {
-	if (isTurned())
-		return (((player->getY()>=(y)&&player->getY()<(y+h))||(player->getY()+player->getH()>(y)&&player->getY()+player->getH()<=(y+h)))&&((player->getX()>=(x)&&player->getX()<=(x+w))||(player->getX()+player->getW()>=(x)&&player->getX()+player->getW()<=(x+w))));
-	else
-		return 0;
+void Lane::collision(Player* player)
+{
+	if (colli(player))
+	{
+		if((isTurned()))
+			player->hit();
+		else if (isVisible())
+			player->followRow(row);
+	}
+
+	itemList.remove_if(collisionS(player));
 }
 
 bool Lane::roomForItem()

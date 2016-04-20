@@ -37,6 +37,8 @@ ObstacleSDL::~ObstacleSDL() {
 
 void ObstacleSDL::draw()
 {
+	if (isVisible())
+	{
 	int angle=0;
 	angle=row->isDirLeft()?1:0;
 	sdldata->renderTexture(ani->getTexture(),sdldata->getRen(),x,y,&w,&h,angle);
@@ -49,6 +51,7 @@ void ObstacleSDL::draw()
 		{
 			turned=false;
 		}
+	}
 	projectileList.remove_if(drawMoveRemove());
 }
 

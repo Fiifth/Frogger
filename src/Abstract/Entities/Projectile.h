@@ -19,7 +19,7 @@ public:
 	virtual ~Projectile();
 	bool roomForItem(){return false;};
 	bool itemAbsent(){return true;};
-	int coll(Player* player,bool type);
+	void collision(Player* player);
 	bool spawnItem(){return false;};
 		bool fire(){return false;};
 private:

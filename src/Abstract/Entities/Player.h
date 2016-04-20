@@ -63,6 +63,7 @@ public:
 	void setDead(bool dead);
 	bool timeToMove();
 	void setDifferentControls();
+	std::list<Projectile*>& getProjectileList();
 
 private:
 	int vSpeed;
@@ -80,6 +81,7 @@ private:
 	float correctTime=float(totalTime);
 	vector <int>highScore={0,0,0,0};
 	string keyUp="Up",keyDown="Down",keyLeft="Left",keyRight="Right",fire="Right Ctrl";
+	void collision(Player* player);
 protected:
 	std::list<Projectile*>projectileList;
 };
