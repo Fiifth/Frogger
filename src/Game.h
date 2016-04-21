@@ -22,6 +22,7 @@ class Game {
 public:
 	Game(Factory* F);
 	virtual ~Game();
+	bool playersAlive(list<Player*>* players,char mode);
 
 
 };

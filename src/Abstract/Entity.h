@@ -39,6 +39,37 @@ public:
 	{
 	   bool operator()(Props* prop);
 	};
+	struct ProjCol
+		{
+			std::list<Projectile*>* projectList;
+			ProjCol(std::list<Projectile*>* projectList):projectList(projectList){}
+			bool operator()(Entity* projectile) const
+			{
+				int prevSize=projectList->size();
+				projectList->remove_if(ProjCol2(projectile));
+				int newSize=projectList->size();
+				bool shrink=(newSize<prevSize)?true:false;
+				if (shrink)
+					delete(projectile);
+				return shrink;
+			}
+		};
+		struct ProjCol2
+		{
+			Entity* project;
+			ProjCol2(Entity* project):project(project){}
+			bool operator()(Entity* projectile) const
+			{
+				if(projectile->colli(project))
+				{
+					delete(projectile);
+					return true;
+				}
+				else
+					return false;
+			}
+		};
+
 
 
 protected:

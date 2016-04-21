@@ -7,6 +7,7 @@
 
 #include "Entity.h"
 #include "Props.h"
+#include "Projectile.h"
 
 Entity::Entity():F(nullptr)
 {
@@ -56,7 +57,7 @@ void Entity::setScreenSize(int width,int height)
 }
 bool Entity::inframe()
 {
-	return ((x<(screenWidth+(2*w))&&x>(0-(2*w))) &&((y<=screenHeight+h)&&(y>=(0-h))));
+	return ((x<(screenWidth+(3*w))&&x>(0-(3*w))) &&((y<=screenHeight+h)&&(y>=(0-h))));
 }
 
 int Entity::getH() const {
@@ -104,20 +105,20 @@ void Entity::setF(Factory* f) {
 
 
 bool Entity::drawMoveRemove::operator ()(Props* prop) {
-	 bool temp=false;
-	   if(!prop->inframe())
-	   {
-		   temp=true;
-		   delete(prop);
-	   }
-	   else
-	   {
-		   prop->moveForward();
-		  if (prop->isVisible())
-			   prop->draw();
+	bool temp=false;
+	if(!prop->inframe())
+	{
+		temp=true;
+		delete(prop);
+	}
+	else
+	{
+		prop->moveForward();
+		if (prop->isVisible())
+			prop->draw();
 
-	   }
-	   return temp;
+	}
+	return temp;
 }
 
 bool Entity::colli(Entity* entity) {

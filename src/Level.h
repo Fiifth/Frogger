@@ -44,8 +44,6 @@ public:
 	void fillEnemyList(Factory* F,std::vector<Row*>* rows,std::vector<std::list<Props*>>* propsOnRow,int difficulty,int screenWidth);
 	void drawGameElements(std::vector<std::list<Props*>>* propsOnRow,list<Projectile*>*projectiles,list<Player*>* players,vector<Row*>* rows);
 	bool obsOrLane(list<Props*>* PreProp,bool frontOrBack,bool laneRow, int difficulty);
-	Props* getRandomObst(list<Props*>* PreProp);
-	bool playersAlive(list<Player*>* players,char mode);
 
 	struct drawMoveRemove
 	{

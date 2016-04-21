@@ -16,12 +16,21 @@ Obstacle::Obstacle()
 Obstacle::~Obstacle() {
 }
 
-void Obstacle::collision(Player* player) {
+void Obstacle::collision(Player* player)
+{
+	considerFire();
 	if (colli(player)&&(!isTurned()))
 		player->hit();
 	else
-		projectileList.remove_if(collisionS(player));
-	player->getProjectileList().remove_if(playerProjectiles(this));
+	{
+		int temp=projectileList.size();
+		projectileList.remove_if(ProjCol2(player));
+		int temp2=projectileList.size();
+		if (temp2<temp)
+					player->hit();
+	}
+	player->getProjectileList()->remove_if(playerProjectiles(this));
+	projectileList.remove_if(ProjCol(player->getProjectileList()));
 }
 
 bool Obstacle::roomForItem()
@@ -32,7 +41,19 @@ bool Obstacle::roomForItem()
 bool Obstacle::fire()
 {
 	projectileList.push_back(F->createProjectile(this,5,0));
-
-
 	return true;
+}
+
+void Obstacle::considerFire()
+{
+	if (isVisible()&&(((abs(x-previousX)))>w))
+	{
+		if(rand()%100>50)
+			fire();
+		previousX=x;
+	}
+}
+std::list<Projectile*>* Obstacle::getProjectileList()
+{
+	return &projectileList;
 }

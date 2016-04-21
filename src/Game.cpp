@@ -68,7 +68,8 @@ Game::Game(Factory* F)
 
 				if (keyStroke=="Escape")
 					return;
-				state=level->levelExecution(keyStroke);
+				level->levelExecution(keyStroke);
+				state=playersAlive(players,'A')?'A':'B';
 				win->dislayData(player->getScore(),player->getLife(),player->getProjectiles(),player->getRemainingTime());
 				win->updateScreen();
 				break;
@@ -94,8 +95,17 @@ Game::Game(Factory* F)
 	}
 }
 
-Game::~Game() {}
+Game::~Game() {
+}
 
-
+bool Game::playersAlive(list<Player*>* players, char mode)
+{
+	bool temp=false;
+		for (Player* player:*players)
+		{
+			temp=temp||!player->isDead();
+		}
+		return temp;
+}
 //start_time=chrono::steady_clock::now();
 	//			end_time=chrono::steady_clock::now();

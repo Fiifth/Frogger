@@ -83,21 +83,21 @@ Projectile* FactorySDL::createProjectile(Entity* entity,int speed,int type)
 	if(dir==1)
 	{
 		x=entity->getX();
-		y=entity->getY()-entity->getH();
+		y=entity->getY();
 	}
 	else if (dir==2)
 	{
-		x=entity->getX()+(entity->getW()+2);
+		x=entity->getX();
 			y=entity->getY();
 	}
 	else if (dir==3)
 	{
 		x=entity->getX();
-			y=entity->getY()+entity->getH();
+			y=entity->getY();
 	}
 	else if (dir==4)
 	{
-		x=entity->getX()-(entity->getH()+2);
+		x=entity->getX();
 			y=entity->getY();
 	}
 	return new ProjectileSDL(sdldata,entity->getDirection(),x,y,entity->getH(),speed,type);

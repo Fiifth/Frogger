@@ -154,30 +154,32 @@ void Player::setStartPosition(int startX, int startY) {
 
 bool Player::takeAction(std::string key)
 {
-	if (key=="")
+	if(!isDead())
 	{
-		return false;
-	}
-	if (key==keyDown)
-	{
-		moveDown();
-		addScore(-10);
-	}
-	else if (key==keyUp)
-	{
-		moveUp();
-		addScore(10);
-	}
-	else if (key==keyLeft)
-		moveLeft();
-	else if (key==keyRight)
-		moveRight();
-	else if (key==fire&&getProjectiles()>0)
-	{
-		addProjectiles(-1);
-		projectileList.push_back(F->createProjectile(this,5,0));
-
-		//return true;
+		if (key=="")
+		{
+			return false;
+		}
+		if (key==keyDown)
+		{
+			moveDown();
+			if(y>startY)
+			addScore(-10);
+		}
+		else if (key==keyUp)
+		{
+			moveUp();
+			addScore(10);
+		}
+		else if (key==keyLeft)
+			moveLeft();
+		else if (key==keyRight)
+			moveRight();
+		else if (key==fire&&getProjectiles()>0)
+		{
+			addProjectiles(-1);
+			projectileList.push_back(F->createProjectile(this,5,0));
+		}
 	}
 return false;
 }
@@ -255,11 +257,21 @@ void Player::setDifferentControls()
 	fire="Space";
 }
 
-std::list<Projectile*>& Player::getProjectileList()
+std::list<Projectile*>* Player::getProjectileList()
 {
-	return projectileList;
+	return &projectileList;
 }
 
-void Player::collision(Player* player) {
+void Player::collision(Player* player)
+{
+	if (player!=this)
+	{
+		projectileList.remove_if(ProjCol(player->getProjectileList()));
+		int temp=projectileList.size();
+		projectileList.remove_if(ProjCol2(player));
+		int temp2=projectileList.size();
+		if (temp2<temp)
+			player->hit();
+	}
 	//return (((player->getY()>=(y)&&player->getY()<(y+h))||(player->getY()+player->getH()>(y)&&player->getY()+player->getH()<=(y+h)))&&((player->getX()>=(x)&&player->getX()<=(x+w))||(player->getX()+player->getW()>=(x)&&player->getX()+player->getW()<=(x+w))))?3:0;
 }

@@ -24,6 +24,10 @@
 	sdldata->getDependWAndH(ani->getTexture(),&wn, &hn);
 	setSize(wn,hn);
 	setLocation(x,row->getLocY());
+	if ((rand()%100)>50)
+	{
+		spawnItem();
+	}
 }
 LaneSDL::~LaneSDL() {
 	delete(ani);
@@ -45,6 +49,10 @@ LaneSDL::LaneSDL(SDLdata* sdldata, Row* row,Factory* F) :sdldata(sdldata)
 	setSize(wn,hn);
 	int xloc=row->isDirLeft()?screenWidth:-getW();
 	setLocation(xloc,row->getLocY());
+	if ((rand()%100)>50)
+		{
+			spawnItem();
+		}
 }
 
 void LaneSDL::draw()

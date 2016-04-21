@@ -28,6 +28,7 @@ ObstacleSDL::ObstacleSDL(SDLdata* sdldata,Row* row,Factory* F,int x,int y,int w,
 	sdldata->getDependWAndH(ani->getTexture(),&wn, &hn);
 	setSize(wn,hn);
 	setLocation(x,row->getLocY());
+	previousX=x;
 }
 
 ObstacleSDL::~ObstacleSDL() {
@@ -39,6 +40,7 @@ void ObstacleSDL::draw()
 {
 	if (isVisible())
 	{
+
 	int angle=0;
 	angle=row->isDirLeft()?1:0;
 	sdldata->renderTexture(ani->getTexture(),sdldata->getRen(),x,y,&w,&h,angle);
@@ -71,5 +73,6 @@ ObstacleSDL::ObstacleSDL(SDLdata* sdldata, Row* row,Factory* F) :sdldata(sdldata
 		setSize(wn,hn);
 		int xloc=row->isDirLeft()?screenWidth:-getW();
 		setLocation(xloc,row->getLocY());
+		previousX=x;
 
 }
