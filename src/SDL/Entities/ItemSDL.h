@@ -15,14 +15,16 @@
 #include <vector>
 #include "Animator.h"
 
-class ItemSDL:public Item {
+class ItemSDL: public Item
+{
 public:
-	ItemSDL(SDLdata* sdldata,Row* row,int x,int y,int w,int h,int ind);
-	ItemSDL(SDLdata* sdldata,Row* row,int ind);
+	ItemSDL(SDLdata* sdldata, Row* row, int x, int y, int w, int h, int ind);
+	ItemSDL(SDLdata* sdldata, Row* row, int ind);
 	virtual ~ItemSDL();
 	void draw();
 private:
-	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w, int h);
+	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w,
+			int h);
 	SDLdata* sdldata;
 	Animator* ani;
 };

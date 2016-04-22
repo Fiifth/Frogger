@@ -11,20 +11,34 @@
 #include "Entity.h"
 #include "Player.h"
 
-
-
-class Projectile :public Props{
+class Projectile: public Props
+{
 public:
 	Projectile();
 	virtual ~Projectile();
-	bool roomForItem(){return false;};
-	bool itemAbsent(){return true;};
+	bool roomForItem()
+	{
+		return false;
+	}
+	;
+	bool itemAbsent()
+	{
+		return true;
+	}
+	;
 	void collision(Player* player);
-	bool spawnItem(){return false;};
-	bool fire(){return false;};
+	bool spawnItem()
+	{
+		return false;
+	}
+	;
+	bool fire()
+	{
+		return false;
+	}
+	;
 private:
 
 };
-
 
 #endif /* ABSTRACT_ENTITIES_PROJECTILE_H_ */

@@ -7,171 +7,147 @@
 
 #include <Level.h>
 
-Level::Level(Factory* F,Window* win,list<Player*>* players,int rowHeight,int difficulty) :F(F),win(win),players(players),difficulty(difficulty)
+Level::Level(Factory* F, Window* win, list<Player*>* players, int rowHeight,
+		int difficulty) :
+		F(F), win(win), players(players), difficulty(difficulty)
 {
-	rowGenerator(rowHeight,win->getGameWindowHeight(),difficultyRows,F,rows,propsOnRow);
-	fillEnemyList(F,rows,propsOnRow, difficulty,win->getWidth());
-
+	rowGenerator(rowHeight, win->getGameWindowHeight(), difficultyRows, F, rows,
+			propsOnRow);
+	fillEnemyList(F, rows, propsOnRow, win->getWidth());
 }
 
-Level::~Level() {
+Level::~Level()
+{
 }
 char Level::levelExecution(string keyStroke)
 {
-	for (Player* player:*players)
+	for (Player* player : *players)
 		player->takeAction(keyStroke);
+	if (keyStroke=="P")
+		increaseSpeed(rows);
 
 	win->generateBackground(rows);
-	propsGenerator(F,difficulty,rows,propsOnRow);
-	collisionDetection(propsOnRow,projectiles,players);
-	drawGameElements(propsOnRow,projectiles, players,rows);
-	for (Player* playerx:*players)
-		for (Player* playery:*players)
-			playerx->collision(playery);
-
+	propsGenerator(F, rows, propsOnRow);
+	collisionDetection(propsOnRow, projectiles, players);
+	drawGameElements(propsOnRow, projectiles, players, rows);
 
 	return 'H';
 }
 
-void Level::rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory* F,vector<Row*>* rows,vector<list<Props*>>* propsOnRow)
+void Level::rowGenerator(int rowHeight, int screenHight, int difficultyRows,
+		Factory* F, vector<Row*>* rows, vector<list<Props*>>* propsOnRow)
 {
-	int maxSpeed=3;
-	int divider=0;
-	int numberOfRows=(screenHight)/rowHeight;
-	int mode=3;
+	int maxSpeed = 3;
+	int divider = 0;
+	int numberOfRows = (screenHight) / rowHeight;
+	int mode = 3;
 	list<Props*> enemies;
-	bool dir=true;//(rand() %2)>0)
-	if (mode==1)
+	bool dir = true; //(rand() %2)>0)
+
+	if (mode == 3)
 	{
-		for (int n=0; n<numberOfRows; n++)
+		for (int n = 0; n < numberOfRows; n++)
 		{
-			int speed=((rand()%(numberOfRows-n))+1)*difficultyRows;
-			speed=speed>maxSpeed?maxSpeed:speed;
-			speed=(n==0||n==numberOfRows-1)?0:speed;
-			rows->push_back(F->createRow(((rand() %10)>5),speed,divider,(n*rowHeight),rowHeight,n));
+			/*
+			 * A: start row
+			 * B: obst row
+			 * C: lane row
+			 * D: forest row
+			 * E: end row
+			 */
+			int speed = 1;
+			char type='B';
+
+			type=n < (numberOfRows / 2)?'C':type;
+			type=n ==(numberOfRows / 2)?'D':type;
+			type=(n == 0)?'A':type;
+			type=(n == numberOfRows - 1)?'E':type;
+			speed = (type == 'A' || type=='E'||type=='D') ? 0 : speed;
+			rows->push_back(F->createRow(dir, speed, divider, (n * rowHeight),rowHeight, n,type,50,50,50));
 			propsOnRow->push_back(enemies);
-		}
-	}
-	else if (mode==2)
-	{
-		for (int n=0; n<numberOfRows; n++)
-		{
-			int speed=((rand()%(numberOfRows-n))+1)*difficultyRows;
-			speed=speed>maxSpeed?maxSpeed:speed;
-			speed=(n==0||n==numberOfRows-1)?0:speed;
-			rows->push_back(F->createRow(((rand() %10)>5),speed,divider,(n*rowHeight),rowHeight,n));
-			rows->back()->setLaneRow(true);
-			propsOnRow->push_back(enemies);
-		}
-	}
-	else if (mode==3)
-	{
-		for (int n=0; n<numberOfRows; n++)
-		{
-			list<Props*> enemiies;
-			int speed=1;
-			speed=(n==0||n==numberOfRows-1)?0:speed;
-			rows->push_back(F->createRow(dir,speed,divider,(n*rowHeight),rowHeight,n));
-			rows->back()->setLaneRow(n<(numberOfRows/2));
-			propsOnRow->push_back(enemies);
-			dir=not(dir);
+			dir = not (dir);
 		}
 	}
 }
 
-void Level::propsGenerator(Factory* F,int difficulty,vector<Row*>* rows,vector<list<Props*>>* propsOnRow)
+void Level::propsGenerator(Factory* F, vector<Row*>* rows,
+		vector<list<Props*>>* propsOnRow)
 {
-	for(Row* row:*rows)
+	for (Row* row : *rows)
 	{
-		if((row->getNumber()!=0)&&((unsigned)row->getNumber()!=((rows->size())-1)))
+		if ((row->getType()=='B') || (row->getType()=='C'))
 		{
-			list<Props*>* PreProp=&propsOnRow->at(row->getNumber());
-			if((PreProp->empty())||((PreProp->front())->isRoom()))
+			list<Props*>* PreProp = &propsOnRow->at(row->getNumber());
+			if ((PreProp->empty()) || ((PreProp->front())->isRoom()))
 			{
-				Props* prop;
-				if(obsOrLane(PreProp,true,row->isLaneRow(),difficulty))
-				{
-					prop=F->createObstacle(row);
-					prop->setVisible(!row->isLaneRow());
-				}
-				else
-				{
-					prop=F->createLane(row);
-					prop->setVisible(row->isLaneRow());
-				}
+				Props* prop=obsOrLane(PreProp,row, true,-99);
 				propsOnRow->at(row->getNumber()).push_front(prop);
 			}
 		}
 	}
 }
 
-
-int Level::collisionDetection(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectiles,list<Player*>* players)
+int Level::collisionDetection(vector<list<Props*>>* propsOnRow,
+		list<Projectile*>*projectiles, list<Player*>* players)
 {
-	for (list<Props*> temp:*propsOnRow)
+	for (list<Props*> temp : *propsOnRow)
 	{
-		for(Props* temp2:temp)
+		for (Props* temp2 : temp)
 		{
-			for(Player* player:*players)
+			for (Player* player : *players)
 			{
 				temp2->collision(player);
 			}
 		}
 	}
+	for (Player* playerx : *players)
+		for (Player* playery : *players)
+			playerx->collision(playery);
 	return false;
 }
 
-void Level::fillEnemyList(Factory* F,vector<Row*>* rows, vector<list<Props*>>* propsOnRow, int difficulty,int screenWidth)
+void Level::fillEnemyList(Factory* F, vector<Row*>* rows,
+		vector<list<Props*>>* propsOnRow, int screenWidth)
 {
 	list<Props*> listOfProps;
-	for(Row* row:*rows)
+	for (Row* row : *rows)
 	{
-		int x=0;
-		while(x<screenWidth)
+		int x = 0;
+		while (x < screenWidth)
 		{
-			if((row->getNumber()!=0)&&((unsigned)row->getNumber()!=(rows->size()-1)))
+			if ((row->getType()=='B') || (row->getType()=='C')||row->getType()=='D')
 			{
-				list<Props*>* PreProp=&propsOnRow->at(row->getNumber());
-				Props* prop;
-				if(obsOrLane(PreProp,row->isDirLeft(),row->isLaneRow(),difficulty))
-				{
-					prop=F->createObstacle(row,x,5,0,row->getHeight());
-					prop->setVisible(!row->isLaneRow());
-				}
-				else
-				{
-					prop=F->createLane(row,x,5,0,row->getHeight());
-					prop->setVisible(row->isLaneRow());
-
-				}
-				if(row->isDirLeft())
+				list<Props*>* PreProp = &propsOnRow->at(row->getNumber());
+				Props* prop=obsOrLane(PreProp,row, row->isDirLeft(),x);
+				if (row->isDirLeft())
 					propsOnRow->at(row->getNumber()).push_front(prop);
 				else
 					propsOnRow->at(row->getNumber()).push_back(prop);
 
-				x=prop->getW()+x;
+				x = prop->getW() + x;
 			}
 			else
-				x=screenWidth;
+				x = screenWidth;
 		}
 	}
 }
 
 void Level::drawGameElements(std::vector<std::list<Props*>>* propsOnRow,
-		list<Projectile*>* projectiles, list<Player*>* players,vector<Row*>* rows) {
-	int i=0;
+		list<Projectile*>* projectiles, list<Player*>* players,
+		vector<Row*>* rows)
+{
+	int i = 0;
 
-	for (list<Props*> temp:*propsOnRow)
+	for (list<Props*> temp : *propsOnRow)
 	{
 		propsOnRow->at(i).remove_if(drawMoveRemove());
 		i++;
 	}
 
-
-	for(Player* player:*players)
+	for (Player* player : *players)
 	{
-		int row=player->getY()/player->getH();
-		if(row==0)
+		int row = player->getY() / player->getH();
+		if (row == 0)
 		{
 			player->addScore(100);
 			player->resetPosition();
@@ -180,12 +156,40 @@ void Level::drawGameElements(std::vector<std::list<Props*>>* propsOnRow,
 	}
 }
 
-bool Level::obsOrLane(list<Props*>* PreProp,bool frontOrBack,bool laneRow, int difficulty)
+Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,int x)
 {
-	int number=rand()%100;
+	Props* prop;
+	int number = rand() % 100;
+	int laneRow=row->getType()=='C';
 	if (frontOrBack)
-		return ((laneRow&&PreProp->front()->isVisible())||((number>difficulty)&&!PreProp->front()->isVisible()));
+	{
+		if ((laneRow && PreProp->front()->isVisible())|| ((number > row->getObsticleSpawnChance()) && !PreProp->front()->isVisible()))
+		{
+			if (x==-99)
+				prop = F->createObstacle(row,row->getType()=='B');
+			else
+				prop = F->createObstacle(row,row->getType()=='B'||row->getType()=='D', x, 5, 0, row->getHeight());
+		}
+		else
+		{
+			if (x==-99)
+				prop = F->createLane(row,row->getType()=='C');
+			else
+				prop = F->createLane(row,row->getType()=='C', x, 5, 0, row->getHeight());
+		}
+	}
 	else
-		return ((laneRow&&PreProp->back()->isVisible())||((number>difficulty)&&!PreProp->back()->isVisible()));
+	{
+		if((laneRow && PreProp->back()->isVisible())|| ((number > row->getObsticleSpawnChance()) && !PreProp->back()->isVisible()))
+			prop = F->createObstacle(row,row->getType()=='B'||row->getType()=='D', x, 5, 0, row->getHeight());
+		else
+			prop = F->createLane(row,row->getType()=='C', x, 5, 0, row->getHeight());
+	}
+	return prop;
 }
 
+bool Level::increaseSpeed(vector<Row*>* rows)
+{
+
+	return true;
+}

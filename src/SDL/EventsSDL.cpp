@@ -9,26 +9,27 @@
 #include "SDL.h"
 #include <iostream>
 
-
 using namespace std;
 //string event;
 
-EventsSDL::EventsSDL() {
+EventsSDL::EventsSDL()
+{
 
 }
 
-EventsSDL::~EventsSDL() {
+EventsSDL::~EventsSDL()
+{
 }
 
 string EventsSDL::getEvent()
 {
 	SDL_Event e;
 	SDL_PollEvent(&e);
-	if(e.type==SDL_KEYDOWN)
+	if (e.type == SDL_KEYDOWN)
 	{
-	const char* s= SDL_GetKeyName( e.key.keysym.sym);
-	return s;
+		const char* s = SDL_GetKeyName(e.key.keysym.sym);
+		return s;
 	}
 	else
-	return "";
+		return "";
 }

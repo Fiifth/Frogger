@@ -20,22 +20,27 @@
 #include "WindowSDL.h"
 #include "Row.h"
 
-
 using namespace std;
 
-FactorySDL::FactorySDL() {sdldata=new SDLdata();}
+FactorySDL::FactorySDL()
+{
+	sdldata = new SDLdata();
+}
 
-FactorySDL::~FactorySDL() {}
+FactorySDL::~FactorySDL()
+{
+}
 
-Player* FactorySDL::createPlayer(int x,int y,int w,int h,int speedH,int speedV,int number)
+Player* FactorySDL::createPlayer(int x, int y, int w, int h, int speedH,
+		int speedV, int number)
 {
 	sdldata->resetPlayerRange();
-	return new PlayerSDL(sdldata,this,x,y,w,h,speedH,speedV,number);
+	return new PlayerSDL(sdldata, this, x, y, w, h, speedH, speedV, number);
 }
-Obstacle* FactorySDL::createObstacle(Row* row,int x,int y,int w,int h)
+Obstacle* FactorySDL::createObstacle(Row* row,bool visible, int x, int y, int w, int h)
 {
 	sdldata->resetObstacleRange();
-	return new ObstacleSDL(sdldata,row,this,x,y,w,h);
+	return new ObstacleSDL(sdldata, row, this,visible, x, y, w, h);
 }
 Window* FactorySDL::createWindow()
 {
@@ -47,58 +52,59 @@ Events* FactorySDL::createEvents()
 	return new EventsSDL();
 }
 
-Lane* FactorySDL::createLane(Row* row, int x, int y, int w,int h)
+Lane* FactorySDL::createLane(Row* row,bool visible, int x, int y, int w, int h)
 {
 	sdldata->resetLaneRange();
-	return new LaneSDL(sdldata,row,this,x,y,w,h);
+	return new LaneSDL(sdldata, row, this,visible, x, y, w, h);
 }
 
-Item* FactorySDL::createItem(Row* row, int x, int y, int w,int h,int type)
+Item* FactorySDL::createItem(Row* row, int x, int y, int w, int h, int type)
 {
-	return new ItemSDL(sdldata,row,x,y,w,h,type);
+	return new ItemSDL(sdldata, row, x, y, w, h, type);
 }
 
-Obstacle* FactorySDL::createObstacle(Row* row)
+Obstacle* FactorySDL::createObstacle(Row* row,bool visible)
 {
 	sdldata->resetObstacleRange();
-	return new ObstacleSDL(sdldata,row,this);
+	return new ObstacleSDL(sdldata, row, this,visible);
 }
 
-Lane* FactorySDL::createLane(Row* row)
+Lane* FactorySDL::createLane(Row* row,bool visible)
 {
 	sdldata->resetLaneRange();
-	return new LaneSDL(sdldata,row,this);
+	return new LaneSDL(sdldata, row, this,visible);
 }
 
-Item* FactorySDL::createItem(Row* row,int type)
+Item* FactorySDL::createItem(Row* row, int type)
 {
-	return new ItemSDL(sdldata,row,type);
+	return new ItemSDL(sdldata, row, type);
 }
 
-Projectile* FactorySDL::createProjectile(Entity* entity,int speed,int type)
+Projectile* FactorySDL::createProjectile(Entity* entity, int speed, int type)
 {
-	int x,y;
-	int dir=entity->getDirection();
+	int x, y;
+	int dir = entity->getDirection();
 	//int direction=0;//1=up,2=right,3=down,4=left;
-	if(dir==1)
+	if (dir == 1)
 	{
-		x=entity->getX();
-		y=entity->getY();
+		x = entity->getX();
+		y = entity->getY();
 	}
-	else if (dir==2)
+	else if (dir == 2)
 	{
-		x=entity->getX();
-			y=entity->getY();
+		x = entity->getX();
+		y = entity->getY();
 	}
-	else if (dir==3)
+	else if (dir == 3)
 	{
-		x=entity->getX();
-			y=entity->getY();
+		x = entity->getX();
+		y = entity->getY();
 	}
-	else if (dir==4)
+	else if (dir == 4)
 	{
-		x=entity->getX();
-			y=entity->getY();
+		x = entity->getX();
+		y = entity->getY();
 	}
-	return new ProjectileSDL(sdldata,entity->getDirection(),x,y,entity->getH(),speed,type);
+	return new ProjectileSDL(sdldata, entity->getDirection(), x, y,
+			entity->getH(), speed, type);
 }

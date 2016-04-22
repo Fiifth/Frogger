@@ -8,40 +8,42 @@
 #include <Animator.h>
 #include <iostream>
 
-Animator::Animator(std::vector<SDL_Texture*> textures,std::vector<int> ratio):textures(textures),ratio(ratio),
-																				counter(abs(ratio.at(0))),currentTexture(0)
+Animator::Animator(std::vector<SDL_Texture*> textures, std::vector<int> ratio) :
+		textures(textures), ratio(ratio), counter(abs(ratio.at(0))), currentTexture(0)
 {
-	size=textures.size();
+	size = textures.size();
 }
 
 Animator::~Animator()
-{}
+{
+}
 
 SDL_Texture* Animator::getTexture()
 {
 	SDL_Texture* texture;
-	if(size>1)
+	if (size > 1)
 	{
-		if (counter>0)
+		if (counter > 0)
 		{
 			counter--;
 		}
 		else
 		{
-			if(size>(currentTexture+1)&&abs(ratio.at(currentTexture+1))>0)
+			if (size > (currentTexture + 1)
+					&& abs(ratio.at(currentTexture + 1)) > 0)
 			{
-			currentTexture=currentTexture+1;
-			counter=abs(ratio.at(currentTexture));
-			turned=(ratio.at(currentTexture)<0);
+				currentTexture = currentTexture + 1;
+				counter = abs(ratio.at(currentTexture));
+				turned = (ratio.at(currentTexture) < 0);
 			}
 			else
 			{
-				currentTexture=0;
-				counter=abs(ratio.at(currentTexture));
-				turned=(ratio.at(currentTexture)<0);
+				currentTexture = 0;
+				counter = abs(ratio.at(currentTexture));
+				turned = (ratio.at(currentTexture) < 0);
 			}
 		}
-		texture=textures.at(currentTexture);
+		texture = textures.at(currentTexture);
 		return texture;
 	}
 	else
@@ -50,40 +52,52 @@ SDL_Texture* Animator::getTexture()
 	}
 }
 
-int Animator::getCounter() const {
+int Animator::getCounter() const
+{
 	return counter;
 }
 
-void Animator::setCounter(int counter) {
+void Animator::setCounter(int counter)
+{
 	this->counter = counter;
 }
 
-int Animator::getCurrentTexture() const {
+int Animator::getCurrentTexture() const
+{
 	return currentTexture;
 }
 
-void Animator::setCurrentTexture(int currentTexture) {
+void Animator::setCurrentTexture(int currentTexture)
+{
 	this->currentTexture = currentTexture;
 }
 
 void Animator::triggerNext(int counter)
 {
-	if (ratio.size()<currentTexture+1)
+	if (ratio.size() < (unsigned)currentTexture + 1)
 	{
-	currentTexture=currentTexture+1;
-	this->counter=counter;
+		currentTexture = currentTexture + 1;
+		this->counter = counter;
 	}
-
 }
 
-Animator* Animator::clone() {
+Animator* Animator::clone()
+{
 	return new Animator(*this);
 }
 
-bool Animator::isTurned() const {
+bool Animator::isTurned() const
+{
 	return turned;
 }
 
-void Animator::setTurned(bool turned) {
+void Animator::setTurned(bool turned)
+{
 	this->turned = turned;
+}
+
+void Animator::setCurrentTextureFor(int texture, int counter)
+{
+	currentTexture = texture;
+	this->counter = counter;
 }

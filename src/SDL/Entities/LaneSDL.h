@@ -15,14 +15,16 @@
 #include "Animator.h"
 #include "Factory.h"
 
-class LaneSDL: public Lane{
+class LaneSDL: public Lane
+{
 public:
-	LaneSDL(SDLdata* sdldata,Row* row,Factory* F,int x,int y,int w,int h);
-	LaneSDL(SDLdata* sdldata,Row* row,Factory* F);
+	LaneSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible, int x, int y, int w, int h);
+	LaneSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible);
 	virtual ~LaneSDL();
 	void draw();
 private:
-	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w, int h);
+	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w,
+			int h);
 	SDLdata* sdldata;
 	Animator* ani;
 };

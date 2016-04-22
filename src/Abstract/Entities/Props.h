@@ -11,8 +11,8 @@
 #include "Row.h"
 #include <iostream>
 
-
-class Props :public Entity {
+class Props: public Entity
+{
 public:
 	Props();
 	virtual ~Props();
@@ -33,15 +33,13 @@ public:
 	virtual bool fire()=0;
 	virtual bool spawnItem()=0;
 
-
-
 protected:
 	Row* row;
 	bool visible;
-	bool turned=false;
-	bool isTurenedByAni=false;
+	bool turned = false;
+	bool isTurenedByAni = false;
 	int divider;
-	int dividercounter=0;
+	int dividercounter = 0;
 };
 
 #endif /* ABSTRACT_PROPS_H_ */

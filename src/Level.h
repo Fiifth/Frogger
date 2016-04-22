@@ -33,55 +33,65 @@
 #include <Obstacle.h>
 #include <Player.h>
 
-class Level {
+class Level
+{
 public:
-	Level(Factory* F,Window* win,list<Player*>* players,int rowHeight,int difficulty);
+	Level(Factory* F, Window* win, list<Player*>* players, int rowHeight,
+			int difficulty);
 	virtual ~Level();
 	char levelExecution(string keyStroke);
-	void rowGenerator(int rowHeight,int screenHight,int difficultyRows,Factory* F,vector<Row*>* rows,vector<list<Props*>>* propsOnRow);
-	void propsGenerator(Factory* F,int difficulty,vector<Row*>* rows,vector<list<Props*>>* propsOnRow);
-	int collisionDetection(vector<list<Props*>>* propsOnRow,list<Projectile*>*projectiles,list<Player*>* players);
-	void fillEnemyList(Factory* F,std::vector<Row*>* rows,std::vector<std::list<Props*>>* propsOnRow,int difficulty,int screenWidth);
-	void drawGameElements(std::vector<std::list<Props*>>* propsOnRow,list<Projectile*>*projectiles,list<Player*>* players,vector<Row*>* rows);
-	bool obsOrLane(list<Props*>* PreProp,bool frontOrBack,bool laneRow, int difficulty);
+	void rowGenerator(int rowHeight, int screenHight, int difficultyRows,
+			Factory* F, vector<Row*>* rows, vector<list<Props*>>* propsOnRow);
+	void propsGenerator(Factory* F, vector<Row*>* rows,
+			vector<list<Props*>>* propsOnRow);
+	int collisionDetection(vector<list<Props*>>* propsOnRow,
+			list<Projectile*>*projectiles, list<Player*>* players);
+	void fillEnemyList(Factory* F, std::vector<Row*>* rows,
+			std::vector<std::list<Props*>>* propsOnRow,
+			int screenWidth);
+	void drawGameElements(std::vector<std::list<Props*>>* propsOnRow,
+			list<Projectile*>*projectiles, list<Player*>* players,
+			vector<Row*>* rows);
+	Props* obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,int x);
+	bool increaseSpeed(vector<Row*>* rows);
 
 	struct drawMoveRemove
 	{
-	   bool operator()(Props* prop) const
-	   {
-		   bool temp=false;
-		   if(!prop->inframe())
-		   {
-			   temp=true;
-			   delete(prop);
-		   }
-		   else
-		   {
-			   prop->draw();
-			   prop->moveForward();
-		   }
-		   return temp;
-	   }
+		bool operator()(Props* prop) const
+		{
+			bool temp = false;
+			if (!prop->inframe())
+			{
+				temp = true;
+				delete (prop);
+			}
+			else
+			{
+				prop->draw();
+				prop->moveForward();
+			}
+			return temp;
+		}
 	};
 
 private:
 
-		int difficultyRows=1;
+	int difficultyRows = 1;
 
-		Factory* F;
-		Window* win;
-		list<Player*>* players;
-		int difficulty;
+	Factory* F;
+	Window* win;
+	list<Player*>* players;
+	int difficulty;
 
-		//**
-		//**
-		string keyStroke;
-		vector<Row*> rowsR;
-		vector<list<Props*>> propsOnRowR;
-		list<Projectile*>projectilesR;
-		list<Projectile*>*projectiles=&projectilesR;
-		vector<Row*>* rows=&rowsR;
-		vector<list<Props*>>* propsOnRow=&propsOnRowR;
+	//**
+	//**
+	string keyStroke;
+	vector<Row*> rowsR;
+	vector<list<Props*>> propsOnRowR;
+	list<Projectile*> projectilesR;
+	list<Projectile*>*projectiles = &projectilesR;
+	vector<Row*>* rows = &rowsR;
+	vector<list<Props*>>* propsOnRow = &propsOnRowR;
 
 };
 

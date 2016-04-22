@@ -8,12 +8,14 @@
 #include <Projectile.h>
 #include "Player.h"
 
-Projectile::Projectile() {
+Projectile::Projectile()
+{
 	// TODO Auto-generated constructor stub
 
 }
 
-Projectile::~Projectile() {
+Projectile::~Projectile()
+{
 	// TODO Auto-generated destructor stub
 }
 

@@ -5,16 +5,15 @@
  *      Author: msn-w
  */
 
-
-
 #ifndef ANIMATOR_H_
 #define ANIMATOR_H_
 #include "SDL.h"
 #include <vector>
 
-class Animator {
+class Animator
+{
 public:
-	Animator(std::vector<SDL_Texture*> textures,std::vector<int> ratio);
+	Animator(std::vector<SDL_Texture*> textures, std::vector<int> ratio);
 	virtual ~Animator();
 	SDL_Texture* getTexture();
 	int getCounter() const;
@@ -25,13 +24,14 @@ public:
 	Animator* clone();
 	bool isTurned() const;
 	void setTurned(bool turned);
+	void setCurrentTextureFor(int texture,int counter);
 
 	std::vector<SDL_Texture*> textures;
 	std::vector<int> ratio;
-	int counter=0;
-	int currentTexture=0;
+	int counter = 0;
+	int currentTexture = 0;
 	int size;
-	bool turned=false;
+	bool turned = false;
 };
 
 #endif /* ANIMATOR_H_ */

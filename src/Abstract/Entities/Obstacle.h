@@ -15,40 +15,51 @@
 #include "Projectile.h"
 #include <list>
 
-
-class Obstacle :public Props{
+class Obstacle: public Props
+{
 public:
 	Obstacle();
 	virtual ~Obstacle();
 	virtual void draw()=0;
 	void collision(Player* player);
 	bool roomForItem();
-	bool itemAbsent(){return true;};
+	bool itemAbsent()
+	{
+		return true;
+	}
+	;
 	bool fire();
 	void considerFire();
-	bool spawnItem(){return false;};
+	bool spawnItem()
+	{
+		return false;
+	}
+	;
 	std::list<Projectile*>* getProjectileList();
 protected:
-	int previousX=0;
-	std::list<Projectile*>projectileList;
+	int previousX = 0;
+	std::list<Projectile*> projectileList;
 
 	struct playerProjectiles
+	{
+		playerProjectiles(Obstacle* obstacle) :
+				obstacle(obstacle)
 		{
-		playerProjectiles(Obstacle* obstacle):obstacle(obstacle){}
+		}
 		Obstacle* obstacle;
-		   bool operator()(Projectile* projectile) const
-		   {
-			  if(obstacle->isVisible()&&obstacle->colli(projectile))
-			  {
-				  delete(projectile);
-				  obstacle->setVisible(false);
-				  obstacle->setTurned(true);
-				  return true;
-			  }
-			  else
-				  return false;
-		   }
-		};
+		bool operator()(Projectile* projectile) const
+		{
+			if (obstacle->isVisible() && obstacle->colli(projectile))
+			{
+				delete (projectile);
+				obstacle->setVisible(false);
+				obstacle->setTurned(true);
+				return true;
+			}
+			else
+				return false;
+		}
+	};
 };
 
 #endif /* ENEMY_H_ */

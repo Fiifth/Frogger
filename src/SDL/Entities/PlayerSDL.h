@@ -16,20 +16,21 @@
 #include "Factory.h"
 #include "Props.h"
 
-
-class PlayerSDL :public Player {
+class PlayerSDL: public Player
+{
 public:
-	PlayerSDL(SDLdata* sdldata,Factory* F,int x,int y,int w,int h,int speedH,int speedV,int number);
+	PlayerSDL(SDLdata* sdldata, Factory* F, int x, int y, int w, int h,
+			int speedH, int speedV, int number);
 	virtual ~PlayerSDL();
 	void draw();
-	void move(int deltaX,int deltaY);
+	void move(int deltaX, int deltaY);
 private:
-	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w, int h);
+	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w,
+			int h);
 	SDLdata* sdldata;
 	std::vector<SDL_Texture*> textures;
 	Animator* ani;
 
 };
-
 
 #endif /* FROGSDL_H_ */

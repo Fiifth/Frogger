@@ -10,7 +10,8 @@
 
 #include "Events.h"
 #include <string>
-class EventsSDL :public Events{
+class EventsSDL: public Events
+{
 public:
 	EventsSDL();
 	virtual ~EventsSDL();

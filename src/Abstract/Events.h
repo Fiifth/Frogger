@@ -5,12 +5,12 @@
  *      Author: msn-w
  */
 
-
 #ifndef EVENTS_H_
 #define EVENTS_H_
 #include <string>
 
-class Events {
+class Events
+{
 public:
 	Events();
 	virtual ~Events();

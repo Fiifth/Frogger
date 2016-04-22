@@ -18,14 +18,13 @@
 #include <chrono>
 #include <iostream>
 
-class Game {
+class Game
+{
 public:
 	Game(Factory* F);
 	virtual ~Game();
-	bool playersAlive(list<Player*>* players,char mode);
-
+	bool playersAlive(list<Player*>* players, char mode);
 
 };
-
 
 #endif /* GAME_H_ */

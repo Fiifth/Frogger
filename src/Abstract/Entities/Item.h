@@ -11,7 +11,8 @@
 #include "Entity.h"
 #include "Player.h"
 
-class Item :public Props{
+class Item: public Props
+{
 public:
 	Item();
 	virtual ~Item();
@@ -19,9 +20,17 @@ public:
 	void collision(Player* player);
 	bool roomForItem();
 	bool itemAbsent();
-	int effect=3;
-	bool spawnItem(){return false;};
-	bool fire(){return false;};
+	int effect = 3;
+	bool spawnItem()
+	{
+		return false;
+	}
+	;
+	bool fire()
+	{
+		return false;
+	}
+	;
 
 };
 

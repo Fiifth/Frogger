@@ -19,10 +19,10 @@
 #include "Projectile.h"
 #include <list>
 
-
 using namespace std;
 
-class Player :public Entity{
+class Player: public Entity
+{
 public:
 	Player();
 	virtual ~Player();
@@ -49,7 +49,7 @@ public:
 	void addScore(int score);
 	void hit();
 	void resetPosition();
-	void setStartPosition(int startX,int startY);
+	void setStartPosition(int startX, int startY);
 	bool takeAction(std::string key);
 	int getRemainingTime();
 	void setRemainingTime(int remainingTime);
@@ -57,7 +57,10 @@ public:
 	void decreaseTime();
 	void addHighScore(int score);
 	const vector<int>& getHighScore() const;
-	bool myfunction (int i,int j) { return (i>j); }
+	bool myfunction(int i, int j)
+	{
+		return (i > j);
+	}
 
 	bool isDead() const;
 	void setDead(bool dead);
@@ -66,28 +69,31 @@ public:
 	std::list<Projectile*>* getProjectileList();
 	void collision(Player* player);
 
-
-
 private:
 	int vSpeed;
 	int hSpeed;
-	int counter=0;
-	int score=0,life=3,projectiles=3;
-	int startX,startY;
+	int counter = 0;
+	int score = 0, life = 3, projectiles = 3;
+	int startX, startY;
 	int totalTime;
 	int remainingTime;
-	bool dead=false;
-	int divider=0;
-	int dividerCounter=0;
-	std::chrono::high_resolution_clock::time_point previousTime=std::chrono::high_resolution_clock::now();
-	std::chrono::high_resolution_clock::time_point currentTime=std::chrono::high_resolution_clock::now();
-	float correctTime=float(totalTime);
-	vector <int>highScore={0,0,0,0};
-	string keyUp="Up",keyDown="Down",keyLeft="Left",keyRight="Right",fire="Right Ctrl";
+	bool dead = false;
+
+	int divider = 0;
+	int dividerCounter = 0;
+	std::chrono::high_resolution_clock::time_point previousTime =
+			std::chrono::high_resolution_clock::now();
+	std::chrono::high_resolution_clock::time_point currentTime =
+			std::chrono::high_resolution_clock::now();
+	float correctTime = float(totalTime);
+	vector<int> highScore =
+	{ 0, 0, 0, 0 };
+	string keyUp = "Up", keyDown = "Down", keyLeft = "Left", keyRight = "Right",
+			fire = "Right Ctrl";
 
 protected:
-	std::list<Projectile*>projectileList;
+	std::list<Projectile*> projectileList;
+	bool moved=false;
 };
-
 
 #endif /* FROG_H_ */

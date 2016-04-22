@@ -12,16 +12,17 @@
 #include "SDLdata.h"
 #include "Animator.h"
 
-class ProjectileSDL:public Projectile {
+class ProjectileSDL: public Projectile
+{
 public:
-	ProjectileSDL(SDLdata* sdldata,int direction, int Xstart,int Ystart,int size,int speed,int ind);
+	ProjectileSDL(SDLdata* sdldata, int direction, int Xstart, int Ystart,
+			int size, int speed, int ind);
 	virtual ~ProjectileSDL();
 	void draw();
 
 private:
 	SDLdata* sdldata;
 	Animator* ani;
-
 
 };
 

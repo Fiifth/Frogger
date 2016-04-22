@@ -1,4 +1,3 @@
-
 /*
  * start.cpp
  *
@@ -6,7 +5,6 @@
  *      Author: msn-w
  */
 #define SDL_MAIN_HANDLED
-
 
 #include "Game.h"
 #include "Player.h"
@@ -19,8 +17,8 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-Factory* f=new FactorySDL();
-new Game(f);
-return 0;
+	Factory* f = new FactorySDL();
+	new Game(f);
+	return 0;
 }
 

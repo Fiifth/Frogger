@@ -9,12 +9,17 @@
 
 using namespace std;
 
-Factory::Factory() {}
-
-Factory::~Factory() {}
-
-Row* Factory::createRow(bool direction,int speed,int divider,int locY,int width, int number)
+Factory::Factory()
 {
-	return new Row(direction,speed,divider,locY,width,number);
+}
+
+Factory::~Factory()
+{
+}
+
+Row* Factory::createRow(bool direction, int speed, int divider, int locY,
+		int width, int number,char type, int ObsticleSpawnChance,	int itemSpawnChance,int shootChance)
+{
+	return new Row(direction, speed, divider, locY, width, number,type,ObsticleSpawnChance,itemSpawnChance,shootChance);
 }
 

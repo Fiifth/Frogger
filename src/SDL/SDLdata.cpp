@@ -15,28 +15,31 @@ SDL_Renderer* re;
 
 SDLdata::SDLdata()
 {
-	screenWidth=640;
-	screenHeight=480;
-	re=NULL;
-	backgroundTex=NULL;
+	screenWidth = 640;
+	screenHeight = 480;
+	re = NULL;
+	backgroundTex = NULL;
 }
 
 using namespace std;
-SDLdata::~SDLdata() {}
+SDLdata::~SDLdata()
+{
+}
 
-
-void SDLdata::renderTexture(SDL_Texture* tex, SDL_Renderer* ren, int x, int y, int* w, int* h,int angle){
-	int aQ,wQ,hQ;
+void SDLdata::renderTexture(SDL_Texture* tex, SDL_Renderer* ren, int x, int y,
+		int* w, int* h, int angle)
+{
+	int aQ, wQ, hQ;
 	Uint32 fQ;
-	SDL_QueryTexture(tex, &fQ,&aQ,&wQ,&hQ);
+	SDL_QueryTexture(tex, &fQ, &aQ, &wQ, &hQ);
 
-	if(*w==0)
+	if (*w == 0)
 	{
-		*w=(float)(((float)*h)/(float)hQ)*wQ;
+		*w = (float) (((float) *h) / (float) hQ) * wQ;
 	}
-	else if (*h==0)
+	else if (*h == 0)
 	{
-		*h=(float)(((float)*w)/(float)wQ)*hQ;
+		*h = (float) (((float) *w) / (float) wQ) * hQ;
 	}
 	SDL_Rect dst;
 	dst.x = x;
@@ -44,27 +47,27 @@ void SDLdata::renderTexture(SDL_Texture* tex, SDL_Renderer* ren, int x, int y, i
 	dst.w = *w;
 	dst.h = *h;
 
-	SDL_RendererFlip temp=SDL_FLIP_NONE;
-	if (angle==1)
+	SDL_RendererFlip temp = SDL_FLIP_NONE;
+	if (angle == 1)
 	{
-	temp=SDL_FLIP_HORIZONTAL;
-	angle=0;
+		temp = SDL_FLIP_HORIZONTAL;
+		angle = 0;
 	}
-	SDL_RenderCopyEx(ren, tex, NULL, &dst,angle,NULL,temp);
-	}
-void SDLdata::getDependWAndH(SDL_Texture* tex,int* w, int* h)
+	SDL_RenderCopyEx(ren, tex, NULL, &dst, angle, NULL, temp);
+}
+void SDLdata::getDependWAndH(SDL_Texture* tex, int* w, int* h)
 {
-	int aQ,wQ,hQ;
+	int aQ, wQ, hQ;
 	Uint32 fQ;
-	SDL_QueryTexture(tex, &fQ,&aQ,&wQ,&hQ);
+	SDL_QueryTexture(tex, &fQ, &aQ, &wQ, &hQ);
 
-	if(*w==0)
+	if (*w == 0)
 	{
-		*w=(float)(((float)*h)/(float)hQ)*wQ;
+		*w = (float) (((float) *h) / (float) hQ) * wQ;
 	}
-	else if (*h==0)
+	else if (*h == 0)
 	{
-		*h=(float)(((float)*w)/(float)wQ)*hQ;
+		*h = (float) (((float) *w) / (float) wQ) * hQ;
 	}
 }
 SDL_Renderer* SDLdata::getRen()
@@ -73,7 +76,7 @@ SDL_Renderer* SDLdata::getRen()
 }
 void SDLdata::setRen(SDL_Renderer* rende)
 {
-	re=rende;
+	re = rende;
 }
 void SDLdata::setBackground(SDL_Texture* texB)
 {
@@ -87,21 +90,42 @@ void SDLdata::updateScreen()
 void SDLdata::createTextures()
 {
 
-	string imagePathBack ="C:/frogger/background.png";
-	string imagePathBackground1 ="C:/frogger/back1.png";
-	string imagePathBackground2 ="C:/frogger/back2.png";
-	string imagePathBackground3 ="C:/frogger/back3.png";
+	string imagePathBack = "C:/frogger/background.png";
+	string imagePathBackground1 = "C:/frogger/back1.png";
+	string imagePathBackground2 = "C:/frogger/back2.png";
+	string imagePathBackground3 = "C:/frogger/back3.png";
 
-	backgroundTex=IMG_LoadTexture(re, imagePathBack.c_str());
+	backgroundTex = IMG_LoadTexture(re, imagePathBack.c_str());
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground1.c_str()));
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground2.c_str()));
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground3.c_str()));
 
-	obstiAni={getAnimator({"C:/frogger/enemy1.png"},{1}),getAnimator({"C:/frogger/enemy2.png"},{1}),getAnimator({"C:/frogger/enemy3.png"},{1})};
-	laneAni={getAnimator({"C:/frogger/lane1.png","C:/frogger/lane2.png","C:/frogger/lane3.png"},{40,5,10})};
-	itemAni={getAnimator({"C:/frogger/item.png"},{1})};
-	playerAni={getAnimator({"C:/frogger/frog1.png","C:/frogger/frog2.png"},{1,0}),getAnimator({"C:/frogger/frog3.png","C:/frogger/frog4.png"},{1,0})};
-	projAni={getAnimator({"C:/frogger/item.png"},{1})};
+	obstiAni=
+	{	getAnimator(
+				{	"C:/frogger/enemy1.png"},
+				{	1}),getAnimator(
+				{	"C:/frogger/enemy2.png"},
+				{	1}),getAnimator(
+				{	"C:/frogger/enemy3.png"},
+				{	1})};
+	laneAni=
+	{	getAnimator(
+				{	"C:/frogger/lane1.png","C:/frogger/lane2.png","C:/frogger/lane3.png"},
+				{	40,5,10})};
+	itemAni=
+	{	getAnimator(
+				{	"C:/frogger/item.png"},
+				{	1})};
+	playerAni=
+	{	getAnimator(
+				{	"C:/frogger/frog1.png","C:/frogger/frog2.png"},
+				{	1,0}),getAnimator(
+				{	"C:/frogger/frog3.png","C:/frogger/frog4.png"},
+				{	1,0})};
+	projAni=
+	{	getAnimator(
+				{	"C:/frogger/item.png"},
+				{	1})};
 
 }
 
@@ -110,111 +134,129 @@ SDL_Texture* SDLdata::getBackgroundTexture()
 	return backgroundTex;
 }
 
-std::vector<SDL_Texture*> SDLdata::getPlayerTextures() {
+std::vector<SDL_Texture*> SDLdata::getPlayerTextures()
+{
 	return playerTex;
 }
 
-std::vector<SDL_Texture*> SDLdata::getObstTextures() {
+std::vector<SDL_Texture*> SDLdata::getObstTextures()
+{
 	return ObstTex;
 }
 
-std::vector<SDL_Texture*> SDLdata::getItemTextures() {
+std::vector<SDL_Texture*> SDLdata::getItemTextures()
+{
 	return itemTex;
 }
 
-std::vector<SDL_Texture*> SDLdata::getLaneTextures() {
+std::vector<SDL_Texture*> SDLdata::getLaneTextures()
+{
 	return laneTex;
 }
 
-std::vector<SDL_Texture*> SDLdata::getBackTextures() {
+std::vector<SDL_Texture*> SDLdata::getBackTextures()
+{
 	return backTex;
 }
 
-void SDLdata::setScreenDimension(int width,int height,int dataWindowHeight)
+void SDLdata::setScreenDimension(int width, int height, int dataWindowHeight)
 {
-	screenHeight=height-dataWindowHeight;
-	screenWidth=width;
+	screenHeight = height - dataWindowHeight;
+	screenWidth = width;
 }
 
-Animator SDLdata::getItemAni(int ind) {
+Animator SDLdata::getItemAni(int ind)
+{
 	return itemAni.at(ind);
 }
 
-Animator SDLdata::getLaneAni() {
-	return laneAni.at((rand()%(laneRangeEnd-laneRangeStart))+laneRangeStart);
+Animator SDLdata::getLaneAni()
+{
+	return laneAni.at(
+			(rand() % (laneRangeEnd - laneRangeStart)) + laneRangeStart);
 }
 
-Animator SDLdata::getObstiAni() {
-	return obstiAni.at((rand()%(obstacleRangeEnd-obstacleRangeStart))+obstacleRangeStart);
+Animator SDLdata::getObstiAni()
+{
+	return obstiAni.at(
+			(rand() % (obstacleRangeEnd - obstacleRangeStart))
+					+ obstacleRangeStart);
 }
 
-Animator SDLdata::getPlayerAni(int ind) {
+Animator SDLdata::getPlayerAni(int ind)
+{
 	//return playerAni.at((rand()%(playerRangeEnd-playerRangeStart))+playerRangeStart);
 	return playerAni.at(ind);
 }
 
-Animator SDLdata::getAnimator(std::vector<std::string> paths,std::vector<int> ratio)
+Animator SDLdata::getAnimator(std::vector<std::string> paths,
+		std::vector<int> ratio)
 {
 	vector<SDL_Texture*> textures;
-	for(string temp:paths)
+	for (string temp : paths)
 	{
 		textures.push_back(IMG_LoadTexture(re, temp.c_str()));
 	}
-	Animator temp(textures,ratio);
+	Animator temp(textures, ratio);
 	return temp;
 }
 
-int SDLdata::getScreenHeight() const {
+int SDLdata::getScreenHeight() const
+{
 	return screenHeight;
 }
 
-void SDLdata::setScreenHeight(int screenHeight) {
+void SDLdata::setScreenHeight(int screenHeight)
+{
 	this->screenHeight = screenHeight;
 }
 
-int SDLdata::getScreenWidth() const {
+int SDLdata::getScreenWidth() const
+{
 	return screenWidth;
 }
 
-void SDLdata::setScreenWidth(int screenWidth) {
+void SDLdata::setScreenWidth(int screenWidth)
+{
 	this->screenWidth = screenWidth;
 }
 
 void SDLdata::setPlayerRange(int start, int end)
-{//TODO controle toevoegen
-	playerRangeStart=start;
-	playerRangeEnd=end;
+{ //TODO controle toevoegen
+	playerRangeStart = start;
+	playerRangeEnd = end;
 }
 
 void SDLdata::resetPlayerRange()
 {
-	playerRangeStart=0;
-	playerRangeEnd=playerAni.size();
+	playerRangeStart = 0;
+	playerRangeEnd = playerAni.size();
 }
 
-
 void SDLdata::setLaneRange(int start, int end)
-{//TODO controle toevoegen
-	laneRangeStart=start;
-	laneRangeEnd=end;
+{ //TODO controle toevoegen
+	laneRangeStart = start;
+	laneRangeEnd = end;
 }
 
 void SDLdata::resetLaneRange()
 {
-	laneRangeStart=0;
-	laneRangeEnd=laneAni.size();
+	laneRangeStart = 0;
+	laneRangeEnd = laneAni.size();
 }
 
 void SDLdata::setObstacleRange(int start, int end)
 {
-	obstacleRangeStart=(obstiAni.size()>=start)&&(start>=0)?start:obstiAni.size();
-	obstacleRangeEnd=obstiAni.size()>=end?end:obstiAni.size();
+	obstacleRangeStart =
+			(obstiAni.size() >= start) && (start >= 0) ?
+					start : obstiAni.size();
+	obstacleRangeEnd = obstiAni.size() >= end ? end : obstiAni.size();
 }
 
 void SDLdata::resetObstacleRange()
 {
-	obstacleRangeStart=0;
-	obstacleRangeEnd=obstiAni.size();
+	obstacleRangeStart = 0;
+	obstacleRangeEnd = obstiAni.size();
 }
 
 Animator SDLdata::getProjAni(int ind)

@@ -5,8 +5,6 @@
  *      Author: msn-w
  */
 
-
-
 #ifndef ENEMYSDL_H_
 #define ENEMYSDL_H_
 #include "Obstacle.h"
@@ -18,16 +16,19 @@
 #include "Animator.h"
 #include "Factory.h"
 
-class ObstacleSDL:public Obstacle {
+class ObstacleSDL: public Obstacle
+{
 public:
 
-	ObstacleSDL(SDLdata* sdldata,Row* row,Factory* F,int x,int y,int w,int h);
-	ObstacleSDL(SDLdata* sdldata,Row* row,Factory* F);
+	ObstacleSDL(SDLdata* sdldata, Row* row, Factory* F,bool visiblen, int x, int y, int w,
+			int h);
+	ObstacleSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible);
 	virtual ~ObstacleSDL();
 	void draw();
-	void move(int deltaX,int deltaY);
+	void move(int deltaX, int deltaY);
 private:
-	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w, int h);
+	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w,
+			int h);
 	SDLdata* sdldata;
 	Animator* ani;
 };
