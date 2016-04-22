@@ -36,6 +36,7 @@ public:
 	void setF(Factory* f);
 	virtual void collision(Player* player)=0;
 	bool colli(Entity* entity);
+	bool colli2(Entity* entity1,Entity* entity2);
 	struct drawMoveRemove
 	{
 		bool operator()(Props* prop);

@@ -64,11 +64,31 @@ void WindowSDL::makeWindow(int ScreenWidth, int ScreenHeight,
 }
 void WindowSDL::generateBackground(vector<Row*>* rows)
 {
-	if (rowsBackgroundGenerated == nullptr)
+	bool changed=false;
+	unsigned int i=0;
+	if(rowsBackgroundGenerated != nullptr)
 	{
+		if(rows->size()==rowsOld.size())
+		{
+			for (i =0;i<rows->size();i++)
+			{
+				bool temp=rows->at(i)->getLocY()==rowsOld.at(i)->getLocY();
+				changed=temp?changed:true;
+				temp=rows->at(i)->getType()==rowsOld.at(i)->getType();
+				changed=temp?changed:true;
+			}
+		}
+		else
+			changed=true;
+
+	}
+	if (rowsBackgroundGenerated == nullptr||changed)
+	{
+		rowsOld.clear();
 		std::vector<SDL_Texture*> backTextures = sdldata->getBackTextures();
 		for (Row* row : *rows)
 		{
+			rowsOld.push_back(row->clone());
 			int y = row->getLocY();
 			int height = row->getHeight();
 			int x = 0, width = 0;
@@ -84,6 +104,7 @@ void WindowSDL::generateBackground(vector<Row*>* rows)
 				x = x + width;
 			}
 		}
+
 		saveCurrentWindowImage();
 	}
 	else

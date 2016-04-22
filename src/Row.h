@@ -32,6 +32,7 @@ public:
 	char getType() const;
 	void setSpeed(int speed);
 	void setLocY(int locY);
+	Row* clone();
 
 private:
 	bool direction;

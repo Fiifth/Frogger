@@ -50,6 +50,8 @@ private:
 			std::chrono::high_resolution_clock::now();
 	std::chrono::high_resolution_clock::time_point endP =
 			std::chrono::high_resolution_clock::now();
+	std::vector<Row*> rowsOld;
+	std::vector<Row*>* rowsOldP;
 };
 
 #endif /* WINDOWSDL_H_ */

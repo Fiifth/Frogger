@@ -190,6 +190,10 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,int x)
 
 bool Level::increaseSpeed(vector<Row*>* rows)
 {
+	for (Row* row : *rows)
+	{
+		row->setLocY(row->getLocY()+1);
+	}
 
 	return true;
 }

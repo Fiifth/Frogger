@@ -137,10 +137,25 @@ bool Entity::drawMoveRemove::operator ()(Props* prop)
 
 bool Entity::colli(Entity* entity)
 {
-	return (((entity->getY() >= (y) && entity->getY() < (y + h))
-			|| (entity->getY() + entity->getH() > (y)
-					&& entity->getY() + entity->getH() <= (y + h)))
-			&& ((entity->getX() >= (x) && entity->getX() <= (x + w))
-					|| (entity->getX() + entity->getW() >= (x)
-							&& entity->getX() + entity->getW() <= (x + w))));
+	return (colli2(this,entity)||colli2(entity,this));
+//	return (((entity->getY() >= (y) && entity->getY() < (y + h))
+//			|| (entity->getY() + entity->getH() > (y)
+//					&& entity->getY() + entity->getH() <= (y + h)))
+//			&& ((entity->getX() >= (x) && entity->getX() <= (x + w))
+//					|| (entity->getX() + entity->getW() >= (x)
+//							&& entity->getX() + entity->getW() <= (x + w))));
+}
+bool Entity::colli2(Entity* entity1,Entity* entity2)
+{
+	int ay1=entity1->getY();
+	int ay2=entity1->getY()+entity1->getH();
+	int by1=entity2->getY();
+	int by2=entity2->getY()+entity2->getH();
+	int ax1=entity1->getX();
+	int ax2=entity1->getX()+entity1->getW();
+	int bx1=entity2->getX();
+	int bx2=entity2->getX()+entity2->getW();
+
+	return (((ay1 >= by1 && ay1 < by2) || (ay2 > by1 && ay2 <= by2))
+		&& ((ax1 >= bx1 && ax1 <= bx2) || (ax2 >= bx1&& ax2 <= bx2)));
 }

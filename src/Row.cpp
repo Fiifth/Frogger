@@ -110,3 +110,7 @@ void Row::setLocY(int locY)
 {
 	this->locY = locY;
 }
+Row* Row::clone()
+{
+	return new Row(*this);
+}
