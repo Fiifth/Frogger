@@ -54,6 +54,8 @@ public:
 			vector<Row*>* rows);
 	Props* obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,int x);
 	bool increaseSpeed(vector<Row*>* rows);
+	bool objectiveCompleteCheck(std::vector<std::list<Props*>>* propsOnRow);
+	bool isObjectiveDone() const;
 
 	struct drawMoveRemove
 	{
@@ -92,6 +94,7 @@ private:
 	list<Projectile*>*projectiles = &projectilesR;
 	vector<Row*>* rows = &rowsR;
 	vector<list<Props*>>* propsOnRow = &propsOnRowR;
+	bool objectiveDone=false;
 
 };
 

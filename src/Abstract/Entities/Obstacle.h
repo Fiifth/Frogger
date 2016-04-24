@@ -25,7 +25,7 @@ public:
 	bool roomForItem();
 	bool itemListEmpty()
 	{
-		return false;
+		return true;
 	};
 	bool itemAbsent()
 	{

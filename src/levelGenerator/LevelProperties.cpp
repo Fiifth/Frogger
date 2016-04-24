@@ -10,8 +10,8 @@
 LevelProperties::LevelProperties()
 {
 	firstRow=new RowProp(0,0,'A',0,0,0,0,0,true,false,1,1,0,0);
-	lastRow=new RowProp(0,0,'E',0,0,100,100,0,true,false,1,1,0,0);
-	middleRow=new RowProp(0,0,'D',0,0,50,50,0,true,false,1,1,0,0);
+	lastRow=new RowProp(0,0,'E',0,0,100,100,0,true,false,9,12,1,1);
+	middleRow=new RowProp(0,0,'D',0,0,50,50,0,true,false,9,12,0,0);
 	level1();
 //speed,divider,type,textureRangeS,textureRangeE,ObsticleSpawnChance,itemSpawnChance,shootChance);
 }
@@ -24,10 +24,10 @@ LevelProperties::~LevelProperties()
 
 void LevelProperties::level1()
 {
-	seg1=new RowProp(1,0,'B',0,0,40,30,70,true,false,0,0,0,0);
-	seg2=new RowProp(2,0,'B',0,0,50,10,20,true,false,0,0,0,0);
-	seg3=new RowProp(1,0,'C',0,0,40,10,0,false,true,0,0,0,0);
-	seg4=new RowProp(2,0,'C',0,0,50,10,0,false,true,0,0,0,0);
+	seg1=new RowProp(1,0,'B',0,0,40,30,70,true,false,0,8,0,0);
+	seg2=new RowProp(2,0,'B',0,0,50,10,20,true,false,0,8,0,0);
+	seg3=new RowProp(1,0,'C',0,0,40,30,70,false,true,0,8,0,0);
+	seg4=new RowProp(2,0,'C',0,0,50,10,70,false,true,0,8,0,0);
 }
 
 const RowProp* LevelProperties::getFirstRow() const

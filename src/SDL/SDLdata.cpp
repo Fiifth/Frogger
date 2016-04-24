@@ -101,31 +101,39 @@ void SDLdata::createTextures()
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground3.c_str()));
 
 	obstiAni=
-	{	getAnimator(
-				{	"C:/frogger/enemy1.png"},
-				{	1}),getAnimator(
-				{	"C:/frogger/enemy2.png"},
-				{	1}),getAnimator(
-				{	"C:/frogger/enemy3.png"},
-				{	1})};
+	{
+		getAnimator({"o1.png"},{1}),
+		getAnimator({"o2.png"},{1}),
+		getAnimator({"o3.png"},{1}),
+		getAnimator({"o4.png"},{1}),
+		getAnimator({"o5.png"},{1}),
+		getAnimator({"o6.png"},{1}),
+		getAnimator({"o7.png"},{1}),
+		getAnimator({"o8.png"},{1}),
+		getAnimator({"o9.png"},{1}),
+		getAnimator({"o10.png"},{1}),
+		getAnimator({"o11.png"},{1}),
+		getAnimator({"o12.png"},{1}),
+		getAnimator({"o13.png"},{1})
+	};
 	laneAni=
-	{	getAnimator(
-				{	"C:/frogger/lane1.png","C:/frogger/lane2.png","C:/frogger/lane3.png"},
-				{	40,5,10})};
+	{
+			getAnimator({"lane1.png","lane2.png","lane3.png"},{40,5,10}),
+			getAnimator({"o13.png"},{1})
+	};
 	itemAni=
-	{	getAnimator(
-				{	"C:/frogger/item.png"},
-				{	1})};
+	{
+			getAnimator({"item.png"},{1})
+	};
 	playerAni=
-	{	getAnimator(
-				{	"C:/frogger/frog1.png","C:/frogger/frog2.png"},
-				{	1,0}),getAnimator(
-				{	"C:/frogger/frog3.png","C:/frogger/frog4.png"},
-				{	1,0})};
+	{
+			getAnimator({"frog1.png","frog2.png"},{1,0}),
+			getAnimator({"frog3.png","frog4.png"},{1,0})
+	};
 	projAni=
-	{	getAnimator(
-				{	"C:/frogger/item.png"},
-				{	1})};
+	{
+			getAnimator({"item.png"},{1})
+	};
 
 }
 
@@ -190,9 +198,10 @@ Animator SDLdata::getAnimator(std::vector<std::string> paths,
 		std::vector<int> ratio)
 {
 	vector<SDL_Texture*> textures;
+	string dir="C:/frogger/";
 	for (string temp : paths)
 	{
-		textures.push_back(IMG_LoadTexture(re, temp.c_str()));
+		textures.push_back(IMG_LoadTexture(re, (dir+temp).c_str()));
 	}
 	Animator temp(textures, ratio);
 	return temp;

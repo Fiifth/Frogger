@@ -208,6 +208,7 @@ bool Player::takeAction(std::string key)
 
 int Player::getRemainingTime()
 {
+	if (!dead)
 	decreaseTime();
 	return remainingTime;
 }

@@ -72,7 +72,10 @@ Game::Game(Factory* F)
 			if (keyStroke == "Escape")
 				return;
 			level->levelExecution(keyStroke);
+
 			state = playersAlive(players, 'A') ? 'A' : 'B';
+			state=level->isObjectiveDone()?'B':state;
+
 			win->dislayData(players);
 			win->updateScreen();
 			break;

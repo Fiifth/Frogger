@@ -7,6 +7,7 @@
 
 #ifndef LVLPROP_H_
 #define LVLPROP_H_
+#include <vector>
 
 class RowProp
 {
@@ -60,6 +61,9 @@ public:
 	int aROE=0;
 	int aRLS=0; //animator range Lane start
 	int aRLE=0;
+	std::vector<int> obstIndexes;
+	std::vector<int> laneIndexes;
+	std::vector<int> itemTypeChance;
 };
 
 #endif /* LVLPROP_H_ */

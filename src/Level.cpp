@@ -37,6 +37,7 @@ char Level::levelExecution(string keyStroke)
 	propsGenerator(F, rows, propsOnRow);
 	collisionDetection(propsOnRow, projectiles, players);
 	drawGameElements(propsOnRow, projectiles, players, rows);
+	objectiveDone=objectiveCompleteCheck(propsOnRow);
 
 	return 'H';
 }
@@ -232,4 +233,19 @@ bool Level::increaseSpeed(vector<Row*>* rows)
 	}
 
 	return true;
+}
+
+bool Level::isObjectiveDone() const
+{
+	return objectiveDone;
+}
+
+bool Level::objectiveCompleteCheck(std::vector<std::list<Props*> >* propsOnRow)
+{
+	bool ready=true;
+	for(Props* prop:propsOnRow->at(0))
+	{
+		ready=prop->itemListEmpty()&&ready?true:false;
+	}
+	return ready;
 }

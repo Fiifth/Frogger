@@ -7,6 +7,7 @@
 
 #ifndef ROW_H_
 #define ROW_H_
+#include "levelGenerator/RowProp.h"
 
 class Row
 {
@@ -14,6 +15,7 @@ public:
 	Row(bool direction, int speed, int divider, int locY, int height,int number,
 			char type, int ObsticleSpawnChance,	int itemSpawnChance,int shootChance,bool obstacleVis,
 			bool laneVis,int aROS, int aROE,int aRLS,int aRLE);
+	Row(bool direction, int locY, int height,int number,RowProp* rowProperties);
 	virtual ~Row();
 	bool isDirLeft() const;
 	int getLocY() const;

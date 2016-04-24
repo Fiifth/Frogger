@@ -18,6 +18,23 @@ Row::Row(bool direction, int speed, int divider, int locY, int height,int number
 {
 
 }
+Row::Row(bool direction, int locY, int height,int number,RowProp* rowProperties) :
+		direction(direction), locY(	locY), height(height), number(number)
+{
+		int speed=rowProperties->getSpeed();
+		int divider=rowProperties->getDivider();
+		char type=rowProperties->getType();
+		int aROS;
+		int aROE;
+		int aRLS;
+		int aRLE;
+		int ObsticleSpawnChance=rowProperties->getObsticleSpawnChance();
+		int itemSpawnChance=rowProperties->getItemSpawnChance();
+		int shootChance=rowProperties->getShootChance();
+		int itemTypeChance=0;
+		bool obstacleVis=rowProperties->getObstacleVis();
+		bool laneVis=rowProperties->getLaneVis();
+}
 
 Row::~Row()
 {
