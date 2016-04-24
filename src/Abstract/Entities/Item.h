@@ -21,6 +21,10 @@ public:
 	bool roomForItem();
 	bool itemAbsent();
 	int effect = 3;
+	bool itemListEmpty()
+		{
+			return false;
+		};
 	bool spawnItem()
 	{
 		return false;

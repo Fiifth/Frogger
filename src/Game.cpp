@@ -73,8 +73,7 @@ Game::Game(Factory* F)
 				return;
 			level->levelExecution(keyStroke);
 			state = playersAlive(players, 'A') ? 'A' : 'B';
-			win->dislayData(player->getScore(), player->getLife(),
-					player->getProjectiles(), player->getRemainingTime());
+			win->dislayData(players);
 			win->updateScreen();
 			break;
 

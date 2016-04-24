@@ -18,6 +18,7 @@
 #include "Lane.h"
 #include "Projectile.h"
 #include "Item.h"
+#include <levelGenerator/RowProp.h>
 
 using namespace std;
 
@@ -39,9 +40,7 @@ public:
 	virtual Projectile* createProjectile(Entity* entity, int speed, int type)=0;
 	virtual Window* createWindow()=0;
 	virtual Events* createEvents()=0;
-	virtual Row* createRow(bool direction, int speed, int divider, int locY,
-			int width, int number, char type, int ObsticleSpawnChance,
-			int itemSpawnChance, int shootChance);
+	virtual Row* createRow(bool direction,int locY,	int width, int number, const RowProp* rowprop);
 };
 
 #endif /* FACTORY_H_ */

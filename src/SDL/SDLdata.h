@@ -35,8 +35,8 @@ public:
 	Animator getAnimator(std::vector<std::string> paths,
 			std::vector<int> ratio);
 	Animator getItemAni(int ind);
-	Animator getLaneAni();
-	Animator getObstiAni();
+	Animator getLaneAni(int ind);
+	Animator getObstiAni(int ind);
 	Animator getPlayerAni(int ind);
 	Animator getProjAni(int ind);
 	int getScreenHeight() const;

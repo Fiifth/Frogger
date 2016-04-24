@@ -44,3 +44,13 @@ bool Lane::spawnItem()
 	//std::cout<<"new"<<itemList.size()<<endl;
 	return true;
 }
+
+bool Lane::itemListEmpty()
+{
+	if (itemList.empty()&&row->getType()=='E')
+	{
+		//ani turn
+		turned=true;
+	}
+	return itemList.empty();
+}

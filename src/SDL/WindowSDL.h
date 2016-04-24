@@ -20,6 +20,8 @@
 #include <ctime>
 #include <ratio>
 #include <chrono>
+#include <list>
+#include "Player.h"
 
 class WindowSDL: public Window
 {
@@ -28,7 +30,7 @@ public:
 	virtual ~WindowSDL();
 	void makeWindow(int ScreenWidth, int ScreenHeight, int dataWindowHeight,
 			char const* title);
-	void dislayData(int score, int life, int projectiles, int time);
+	void dislayData(std::list<Player*>* players);
 	void displayHighScore(int score1, int score2, int score3, int score4);
 	void setBackground();
 	void updateScreen();
@@ -52,6 +54,7 @@ private:
 			std::chrono::high_resolution_clock::now();
 	std::vector<Row*> rowsOld;
 	std::vector<Row*>* rowsOldP;
+	string oldString="";
 };
 
 #endif /* WINDOWSDL_H_ */

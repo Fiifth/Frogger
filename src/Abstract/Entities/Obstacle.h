@@ -23,6 +23,10 @@ public:
 	virtual void draw()=0;
 	void collision(Player* player);
 	bool roomForItem();
+	bool itemListEmpty()
+	{
+		return false;
+	};
 	bool itemAbsent()
 	{
 		return true;

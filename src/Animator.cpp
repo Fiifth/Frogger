@@ -23,7 +23,11 @@ SDL_Texture* Animator::getTexture()
 	SDL_Texture* texture;
 	if (size > 1)
 	{
-		if (counter > 0)
+		if (counter >1000)
+		{
+			//MANUAL MODE
+		}
+		else if (counter > 0)
 		{
 			counter--;
 		}

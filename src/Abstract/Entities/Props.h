@@ -32,6 +32,7 @@ public:
 	bool timeToMove();
 	virtual bool fire()=0;
 	virtual bool spawnItem()=0;
+	virtual bool itemListEmpty()=0;
 
 protected:
 	Row* row;

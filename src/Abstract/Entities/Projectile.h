@@ -16,6 +16,10 @@ class Projectile: public Props
 public:
 	Projectile();
 	virtual ~Projectile();
+	bool itemListEmpty()
+	{
+		return false;
+	}
 	bool roomForItem()
 	{
 		return false;

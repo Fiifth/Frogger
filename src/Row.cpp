@@ -9,10 +9,12 @@
 #include <iostream>
 
 Row::Row(bool direction, int speed, int divider, int locY, int height,int number,
-		char type, int ObsticleSpawnChance,	int itemSpawnChance,int shootChance) :
+		char type, int ObsticleSpawnChance,	int itemSpawnChance,int shootChance,bool obstacleVis,
+		bool laneVis,int aROS, int aROE,int aRLS,int aRLE) :
 		direction(direction), laneRow(false), speed(speed), divider(divider), locY(
 				locY), height(height), number(number),type(type),ObsticleSpawnChance(ObsticleSpawnChance),
-				itemSpawnChance(itemSpawnChance),shootChance(shootChance)
+				itemSpawnChance(itemSpawnChance),shootChance(shootChance),obstacleVis(obstacleVis),	laneVis(laneVis),
+				aROS(aROS), aROE(aROE),aRLS(aRLS),aRLE(aRLE)
 {
 
 }
@@ -86,15 +88,6 @@ int Row::getShootChance() const
 	return shootChance;
 }
 
-int Row::getTextureRangeE() const
-{
-	return textureRangeE;
-}
-
-int Row::getTextureRangeS() const
-{
-	return textureRangeS;
-}
 
 char Row::getType() const
 {
@@ -113,4 +106,24 @@ void Row::setLocY(int locY)
 Row* Row::clone()
 {
 	return new Row(*this);
+}
+
+int Row::getRle() const
+{
+	return aRLE;
+}
+
+int Row::getRls() const
+{
+	return aRLS;
+}
+
+int Row::getRoe() const
+{
+	return aROE;
+}
+
+int Row::getRos() const
+{
+	return aROS;
 }

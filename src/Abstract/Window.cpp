@@ -49,10 +49,11 @@ void Window::setOldParameters(int score, int life, int projectiles, int time)
 	oldTime = time;
 }
 
-bool Window::valueChanged(int score, int life, int projectiles, int time)
+bool Window::valueChanged(int score, int life, int projectiles, int time,int score2, int life2, int projectiles2, int time2)
 {
 	return !(oldScore == score && oldLife == life
-			&& oldProjectiles == projectiles && oldTime == time);
+			&& oldProjectiles == projectiles && oldTime == time&&oldScore2 == score2 && oldLife2 == life2
+			&& oldProjectiles2 == projectiles2 && oldTime2 == time2);
 }
 
 int Window::getGameWindowHeight() const

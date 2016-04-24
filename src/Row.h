@@ -12,7 +12,8 @@ class Row
 {
 public:
 	Row(bool direction, int speed, int divider, int locY, int height,int number,
-			char type, int ObsticleSpawnChance,	int itemSpawnChance,int shootChance);
+			char type, int ObsticleSpawnChance,	int itemSpawnChance,int shootChance,bool obstacleVis,
+			bool laneVis,int aROS, int aROE,int aRLS,int aRLE);
 	virtual ~Row();
 	bool isDirLeft() const;
 	int getLocY() const;
@@ -34,6 +35,21 @@ public:
 	void setLocY(int locY);
 	Row* clone();
 
+	bool isLaneVis() const
+	{
+		return laneVis;
+	}
+
+	bool isObstacleVis() const
+	{
+		return obstacleVis;
+	}
+
+	int getRle() const;
+	int getRls() const;
+	int getRoe() const;
+	int getRos() const;
+
 private:
 	bool direction;
 	bool laneRow;
@@ -43,12 +59,16 @@ private:
 	int height;
 	int number;
 	char type;
-	int textureRangeS=0;
-	int textureRangeE=0;
+	int aROS=0;//animator range obstacle start
+	int aROE=0;
+	int aRLS=0; //animator range Lane start
+	int aRLE=0;
 	int ObsticleSpawnChance;
 	int itemSpawnChance;
 	int shootChance;
 	int itemTypeChance=0;
+	bool obstacleVis;
+	bool laneVis;
 };
 
 #endif /* ROW_H_ */

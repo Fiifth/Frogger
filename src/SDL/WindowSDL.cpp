@@ -82,16 +82,18 @@ void WindowSDL::generateBackground(vector<Row*>* rows)
 			changed=true;
 
 	}
+	//	changed=true;
 	if (rowsBackgroundGenerated == nullptr||changed)
 	{
 		rowsOld.clear();
+		setBackground();
 		std::vector<SDL_Texture*> backTextures = sdldata->getBackTextures();
 		for (Row* row : *rows)
 		{
 			rowsOld.push_back(row->clone());
 			int y = row->getLocY();
 			int height = row->getHeight();
-			int x = 0, width = 0;
+			int x = 0-rand()%20, width = 0;
 			int textureLocation = row->getType()=='C' ? 1 : 0;
 			textureLocation =row->getType()=='A'|| row->getType()=='E'|| row->getType()=='D' ?2 : textureLocation;
 			sdldata->getDependWAndH(backTextures.at(textureLocation), &width,
@@ -114,11 +116,27 @@ void WindowSDL::generateBackground(vector<Row*>* rows)
 
 	}
 }
-void WindowSDL::dislayData(int score, int life, int projectiles, int time)
+void WindowSDL::dislayData(list<Player*>* players)
 {
 //auto start_time=chrono::steady_clock::now();
-	if (valueChanged(score, life, projectiles, time)
-			&& !(surfaceMessage == nullptr))
+	string newString;
+int i=1;
+	for (Player* pl:*players)
+	{
+		newString=newString+" ||Player"+std::to_string(i)+"|| ";
+		newString=newString+"Score: ";
+		newString=newString+std::to_string(pl->getScore());
+		newString=newString+" Proj: ";
+		newString=newString+std::to_string(pl->getProjectiles());
+		newString=newString+" life: ";
+		newString=newString+std::to_string(pl->getLife());
+		newString=newString+" time: ";
+		newString=newString+std::to_string(pl->getRemainingTime());
+		newString=newString+"  ";
+		i++;
+	}
+
+	if ((oldString!=newString)&& !(surfaceMessage == nullptr))
 	{
 		SDL_FreeSurface(surfaceMessage);
 		SDL_DestroyTexture(Message);
@@ -128,31 +146,24 @@ void WindowSDL::dislayData(int score, int life, int projectiles, int time)
 		Message = nullptr;
 	}
 
-	string scoreS = to_string(score);
-	string lifeS = to_string(life);
-	string projS = to_string(projectiles);
-	string timeS = to_string(time);
-	string text = "Score: " + scoreS + " lives: " + lifeS + " Projectiles: "
-			+ projS + " time: " + timeS;
 
 	if (surfaceMessage == nullptr)
 	{
 		Sans = TTF_OpenFont("c:\\sans.ttf", 40);
-		surfaceMessage = TTF_RenderText_Blended(Sans, text.c_str(), Black);
+		surfaceMessage = TTF_RenderText_Blended(Sans, newString.c_str(), Black);
 		Message = SDL_CreateTextureFromSurface(ren, surfaceMessage);
 	}
 
 	SDL_Rect Message_rect; //create a rect
 	Message_rect.x = 0; //WIDTH/2;  //controls the rect's x coordinate
 	Message_rect.y = HEIGHT - dataWindowHeight; // controls the rect's y coordinte
-	Message_rect.w = WIDTH / 2; // controls the width of the rect
+	Message_rect.w = WIDTH; // controls the width of the rect
 	Message_rect.h = dataWindowHeight; // controls the height of the rect
 
 	SDL_RenderCopyEx(ren, Message, NULL, &Message_rect, 0, NULL, SDL_FLIP_NONE);
 
-	setOldParameters(score, life, projectiles, time);
-	//auto end_time=chrono::steady_clock::now();
-	//cout << chrono::duration_cast<chrono::microseconds>(end_time - start_time).count() << endl;
+	oldString=newString;
+
 }
 void WindowSDL::setBackground()
 {

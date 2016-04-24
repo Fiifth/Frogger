@@ -20,7 +20,8 @@ ObstacleSDL::ObstacleSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible, in
 {
 	setVisible(visible);
 	setF(F);
-	ani = sdldata->getObstiAni().clone();
+	int ind=(rand()%(1+row->getRoe()-row->getRos()))+row->getRos();
+	ani = sdldata->getObstiAni(ind).clone();
 	setRow(row);
 	setDirection(row->isDirLeft() ? 4 : 2);
 	setSpeed(row->getSpeed());
@@ -66,7 +67,8 @@ ObstacleSDL::ObstacleSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible) :
 {
 	setVisible(visible);
 	setF(F);
-	ani = sdldata->getObstiAni().clone();
+	int ind=(rand()%(1+row->getRoe()-row->getRos()))+row->getRos();
+	ani = sdldata->getObstiAni(ind).clone();
 	setRow(row);
 	//1=up,2=right,3=down,4=left;
 	setDirection(row->isDirLeft() ? 4 : 2);

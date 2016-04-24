@@ -7,6 +7,7 @@
 
 #include "Factory.h"
 
+
 using namespace std;
 
 Factory::Factory()
@@ -17,9 +18,11 @@ Factory::~Factory()
 {
 }
 
-Row* Factory::createRow(bool direction, int speed, int divider, int locY,
-		int width, int number,char type, int ObsticleSpawnChance,	int itemSpawnChance,int shootChance)
-{
-	return new Row(direction, speed, divider, locY, width, number,type,ObsticleSpawnChance,itemSpawnChance,shootChance);
-}
 
+Row* Factory::createRow(bool direction, int locY, int width, int number,const RowProp* rowprop)
+{
+	return new Row(direction, rowprop->getSpeed(), rowprop->getDivider(),
+			locY, width, number,rowprop->getType(),rowprop->getObsticleSpawnChance(),
+			rowprop->getItemSpawnChance(),rowprop->getShootChance(),rowprop->getObstacleVis(),rowprop->getLaneVis(),
+			rowprop->aROS,  rowprop->aROE, rowprop->aRLS, rowprop->aRLE);
+}

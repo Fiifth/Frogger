@@ -34,12 +34,10 @@ FactorySDL::~FactorySDL()
 Player* FactorySDL::createPlayer(int x, int y, int w, int h, int speedH,
 		int speedV, int number)
 {
-	sdldata->resetPlayerRange();
 	return new PlayerSDL(sdldata, this, x, y, w, h, speedH, speedV, number);
 }
 Obstacle* FactorySDL::createObstacle(Row* row,bool visible, int x, int y, int w, int h)
 {
-	sdldata->resetObstacleRange();
 	return new ObstacleSDL(sdldata, row, this,visible, x, y, w, h);
 }
 Window* FactorySDL::createWindow()
@@ -54,7 +52,6 @@ Events* FactorySDL::createEvents()
 
 Lane* FactorySDL::createLane(Row* row,bool visible, int x, int y, int w, int h)
 {
-	sdldata->resetLaneRange();
 	return new LaneSDL(sdldata, row, this,visible, x, y, w, h);
 }
 
@@ -65,13 +62,11 @@ Item* FactorySDL::createItem(Row* row, int x, int y, int w, int h, int type)
 
 Obstacle* FactorySDL::createObstacle(Row* row,bool visible)
 {
-	sdldata->resetObstacleRange();
 	return new ObstacleSDL(sdldata, row, this,visible);
 }
 
 Lane* FactorySDL::createLane(Row* row,bool visible)
 {
-	sdldata->resetLaneRange();
 	return new LaneSDL(sdldata, row, this,visible);
 }
 

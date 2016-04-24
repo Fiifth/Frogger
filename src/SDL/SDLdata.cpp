@@ -170,17 +170,14 @@ Animator SDLdata::getItemAni(int ind)
 	return itemAni.at(ind);
 }
 
-Animator SDLdata::getLaneAni()
+Animator SDLdata::getLaneAni(int ind)
 {
-	return laneAni.at(
-			(rand() % (laneRangeEnd - laneRangeStart)) + laneRangeStart);
+	return laneAni.at(ind);
 }
 
-Animator SDLdata::getObstiAni()
+Animator SDLdata::getObstiAni(int ind)
 {
-	return obstiAni.at(
-			(rand() % (obstacleRangeEnd - obstacleRangeStart))
-					+ obstacleRangeStart);
+	return obstiAni.at(ind);
 }
 
 Animator SDLdata::getPlayerAni(int ind)
