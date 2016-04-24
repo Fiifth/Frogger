@@ -119,6 +119,7 @@ void SDLdata::createTextures()
 	laneAni=
 	{
 			getAnimator({"lane1.png","lane2.png","lane3.png"},{40,5,10}),
+			getAnimator({"lane4.png"},{1}),
 			getAnimator({"o13.png"},{1})
 	};
 	itemAni=

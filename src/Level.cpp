@@ -9,13 +9,11 @@
 #include <levelGenerator/levelProperties.h>
 #include "levelGenerator/RowProp.h"
 
-Level::Level(Factory* F, Window* win, list<Player*>* players, int rowHeight,
-		int difficulty) :
-		F(F), win(win), players(players), difficulty(difficulty)
+Level::Level(Factory* F, Window* win, list<Player*>* players, int rowHeight,LevelProperties* lvlprop) :
+		F(F), win(win), players(players), rowHeight(rowHeight),lvlprop(lvlprop)
 {
-	rowGenerator(rowHeight, win->getGameWindowHeight(), difficultyRows, F, rows,
-			propsOnRow);
-	fillEnemyList(F, rows, propsOnRow, win->getWidth());
+	initLevel();
+
 }
 
 Level::~Level()
@@ -28,7 +26,7 @@ char Level::levelExecution(string keyStroke)
 		if(player->getRemainingTime()==0)
 			player->hit();
 		else
-		player->takeAction(keyStroke);
+			player->takeAction(keyStroke);
 	}
 	if (keyStroke=="P")
 		increaseSpeed(rows);
@@ -42,67 +40,36 @@ char Level::levelExecution(string keyStroke)
 	return 'H';
 }
 
-void Level::rowGenerator(int rowHeight, int screenHight, int difficultyRows,
-		Factory* F, vector<Row*>* rows, vector<list<Props*>>* propsOnRow)
+void Level::rowGenerator(int rowHeight, int screenHight,
+		Factory* F, vector<Row*>* rows, vector<list<Props*>>* propsOnRow,LevelProperties* lvlprop)
 {
-	int maxSpeed = 3;
-	int divider = 0;
 	int numberOfRows = (screenHight) / rowHeight;
-	int mode = 3;
 	list<Props*> enemies;
 	bool dir = true; //(rand() %2)>0)
-	LevelProperties* lvlprop=new LevelProperties();
 	const RowProp* rowProp;
-	if (mode == 3)
+	for (int n = 0; n < numberOfRows; n++)
 	{
-		for (int n = 0; n < numberOfRows; n++)
-		{
-			/*
-			 * A: start row
-			 * B: obst row
-			 * C: lane row
-			 * D: forest row
-			 * E: end row
-			 */
-//			int speed = 1;
-//			char type='B';
-//
-//			type=n < (numberOfRows / 2)?'C':type;
-//			type=n ==(numberOfRows / 2)?'D':type;
-//			type=(n == 0)?'A':type;
-//			type=(n == numberOfRows - 1)?'E':type;
-//			speed = (type == 'A' || type=='E'||type=='D') ? 0 : speed;
-//			rows->push_back(F->createRow(dir, speed, divider, (n * rowHeight),rowHeight, n,type,50,50,50));
-//			propsOnRow->push_back(enemies);
-//			dir = not (dir);
-			if(n==0)
-			{
-				rowProp=lvlprop->getLastRow();
-				cout<<rowProp->getItemRate();
+		/*
+		 * A: start row
+		 * B: obst row
+		 * C: lane row
+		 * D: forest row
+		 * E: end row
+		 */
+		if(n==0)
+			rowProp=lvlprop->getLastRow();
+		else if (n==(numberOfRows-1))
+			rowProp=lvlprop->getFirstRow();
+		else if (n==numberOfRows / 2)
+			rowProp=lvlprop->getMiddleRow();
+		else if (n < (numberOfRows / 2))
+			rowProp=lvlprop->getSeg3();
+		else if (n>(numberOfRows / 2))
+			rowProp=lvlprop->getSeg1();
 
-			}
-			else if (n==(numberOfRows-1))
-			{
-				rowProp=lvlprop->getFirstRow();
-			}
-			else if (n==numberOfRows / 2)
-			{
-				rowProp=lvlprop->getMiddleRow();
-
-			}
-			else if (n < (numberOfRows / 2))
-			{
-				rowProp=lvlprop->getSeg3();
-			}
-			else if (n>(numberOfRows / 2))
-			{
-				rowProp=lvlprop->getSeg1();
-			}
-
-			rows->push_back(F->createRow(dir, n * rowHeight, rowHeight, n,rowProp));
-			propsOnRow->push_back(enemies);
-			dir = not (dir);
-		}
+		rows->push_back(F->createRow(dir, n * rowHeight, rowHeight, n,rowProp));
+		propsOnRow->push_back(enemies);
+		dir = not (dir);
 	}
 }
 
@@ -182,12 +149,6 @@ void Level::drawGameElements(std::vector<std::list<Props*>>* propsOnRow,
 
 	for (Player* player : *players)
 	{
-		int row = player->getY() / player->getH();
-		if (row == 0)
-		{
-			player->addScore(100);
-			player->resetPosition();
-		}
 		player->draw();
 	}
 }
@@ -248,4 +209,17 @@ bool Level::objectiveCompleteCheck(std::vector<std::list<Props*> >* propsOnRow)
 		ready=prop->itemListEmpty()&&ready?true:false;
 	}
 	return ready;
+}
+
+void Level::resetLevel()
+{
+		rows->clear();
+		propsOnRow->clear();
+		initLevel();
+}
+
+void Level::initLevel()
+{
+	rowGenerator(rowHeight, win->getGameWindowHeight(), F, rows,propsOnRow,lvlprop);
+	fillEnemyList(F, rows, propsOnRow, win->getWidth());
 }

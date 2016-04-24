@@ -27,6 +27,7 @@
 #include <Obstacle.h>
 #include <Player.h>
 #include "Level.h"
+#include "LevelProperties.h"
 
 using namespace std;
 using namespace std::chrono;
@@ -59,7 +60,8 @@ Game::Game(Factory* F)
 	player2->setDifferentControls();
 	players->push_back(player);
 	players->push_back(player2);
-	Level* level = new Level(F, win, players, rowHeight, 90);
+	LevelProperties* lvlprop=new LevelProperties(); //TODO place in factory
+	Level* level = new Level(F, win, players, rowHeight,lvlprop);
 	char state = 'B';
 	while (true)
 	{
@@ -90,6 +92,7 @@ Game::Game(Factory* F)
 					play->resetRemainingTime();
 					play->setDead(false);
 				}
+				level->resetLevel();
 				state = 'A';
 				win->setBackground();
 			}

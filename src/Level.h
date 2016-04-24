@@ -10,6 +10,7 @@
 #include <vector>
 #include <Row.h>
 #include <list>
+#include "LevelProperties.h"
 #include "Projectile.h"
 #include "Props.h"
 
@@ -36,12 +37,12 @@
 class Level
 {
 public:
-	Level(Factory* F, Window* win, list<Player*>* players, int rowHeight,
-			int difficulty);
+	Level(Factory* F, Window* win, list<Player*>* players, int rowHeight,LevelProperties* lvlprop);
 	virtual ~Level();
 	char levelExecution(string keyStroke);
-	void rowGenerator(int rowHeight, int screenHight, int difficultyRows,
-			Factory* F, vector<Row*>* rows, vector<list<Props*>>* propsOnRow);
+	void rowGenerator(int rowHeight, int screenHight,
+			Factory* F, vector<Row*>* rows, vector<list<Props*>>* propsOnRow,
+			LevelProperties* lvlprop);
 	void propsGenerator(Factory* F, vector<Row*>* rows,
 			vector<list<Props*>>* propsOnRow);
 	int collisionDetection(vector<list<Props*>>* propsOnRow,
@@ -56,6 +57,8 @@ public:
 	bool increaseSpeed(vector<Row*>* rows);
 	bool objectiveCompleteCheck(std::vector<std::list<Props*>>* propsOnRow);
 	bool isObjectiveDone() const;
+	void resetLevel();
+	void initLevel();
 
 	struct drawMoveRemove
 	{
@@ -83,7 +86,7 @@ private:
 	Factory* F;
 	Window* win;
 	list<Player*>* players;
-	int difficulty;
+	int rowHeight;
 
 	//**
 	//**
@@ -95,6 +98,7 @@ private:
 	vector<Row*>* rows = &rowsR;
 	vector<list<Props*>>* propsOnRow = &propsOnRowR;
 	bool objectiveDone=false;
+	LevelProperties* lvlprop;
 
 };
 

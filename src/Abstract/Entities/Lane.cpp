@@ -24,6 +24,14 @@ void Lane::collision(Player* player)
 			player->hit();
 		else if (isVisible())
 			player->followRow(row);
+		else if (row->getType()=='E')
+		{
+			player->resetPosition();
+			itemList.clear();
+			turned=true;
+			visible=true;
+			//set texture
+		}
 	}
 
 	itemList.remove_if(collisionS(player));
@@ -40,8 +48,6 @@ bool Lane::spawnItem()
 {
 	itemList.push_back(
 			F->createItem(row, x + ((rand() % (w - h))), y, w, h, 0));
-	//itemList.push_back(F->createItem(row,0));
-	//std::cout<<"new"<<itemList.size()<<endl;
 	return true;
 }
 
