@@ -8,32 +8,11 @@
 #include "Row.h"
 #include <iostream>
 
-Row::Row(bool direction, int speed, int divider, int locY, int height,int number,
-		char type, int ObsticleSpawnChance,	int itemSpawnChance,int shootChance,bool obstacleVis,
-		bool laneVis,int aROS, int aROE,int aRLS,int aRLE) :
-		direction(direction), laneRow(false), speed(speed), divider(divider), locY(
-				locY), height(height), number(number),type(type),ObsticleSpawnChance(ObsticleSpawnChance),
-				itemSpawnChance(itemSpawnChance),shootChance(shootChance),obstacleVis(obstacleVis),	laneVis(laneVis),
-				aROS(aROS), aROE(aROE),aRLS(aRLS),aRLE(aRLE)
+
+Row::Row(bool direction, int locY, int height,int number,const RowProp* rowProperties) :
+		direction(direction), locY(	locY), height(height), number(number),rowProperties(rowProperties)
 {
 
-}
-Row::Row(bool direction, int locY, int height,int number,RowProp* rowProperties) :
-		direction(direction), locY(	locY), height(height), number(number)
-{
-		int speed=rowProperties->getSpeed();
-		int divider=rowProperties->getDivider();
-		char type=rowProperties->getType();
-		int aROS;
-		int aROE;
-		int aRLS;
-		int aRLE;
-		int ObsticleSpawnChance=rowProperties->getObsticleSpawnChance();
-		int itemSpawnChance=rowProperties->getItemSpawnChance();
-		int shootChance=rowProperties->getShootChance();
-		int itemTypeChance=0;
-		bool obstacleVis=rowProperties->getObstacleVis();
-		bool laneVis=rowProperties->getLaneVis();
 }
 
 Row::~Row()
@@ -57,7 +36,7 @@ int Row::getNumber() const
 
 int Row::getSpeed() const
 {
-	return speed;
+	return rowProperties->getSpeed();
 }
 
 int Row::getHeight() const
@@ -65,55 +44,33 @@ int Row::getHeight() const
 	return height;
 }
 
-bool Row::isLaneRow() const
-{
-	return laneRow;
-}
-
-void Row::setLaneRow(bool laneRow)
-{
-	this->laneRow = laneRow;
-}
 
 int Row::getDivider() const
 {
-	return divider;
+	return rowProperties->getDivider();
 }
 
-void Row::setDivider(int divider)
+
+int Row::getItemRate() const
 {
-	this->divider = divider;
+	return rowProperties->getItemRate();
 }
 
-int Row::getItemSpawnChance() const
+
+int Row::getObsticleRate() const
 {
-	return itemSpawnChance;
+	return rowProperties->getObsticleRate();
 }
 
-int Row::getItemTypeChance() const
+int Row::getShootRate() const
 {
-	return itemTypeChance;
-}
-
-int Row::getObsticleSpawnChance() const
-{
-	return ObsticleSpawnChance;
-}
-
-int Row::getShootChance() const
-{
-	return shootChance;
+	return rowProperties->getShootRate();
 }
 
 
 char Row::getType() const
 {
-	return type;
-}
-
-void Row::setSpeed(int speed)
-{
-	this->speed = speed;
+	return rowProperties->getType();
 }
 
 void Row::setLocY(int locY)
@@ -125,22 +82,27 @@ Row* Row::clone()
 	return new Row(*this);
 }
 
-int Row::getRle() const
+bool Row::isLaneVis() const
 {
-	return aRLE;
+	return rowProperties->getLaneVis();
 }
 
-int Row::getRls() const
+bool Row::isObstacleVis() const
 {
-	return aRLS;
+	return rowProperties->getObstacleVis();
 }
 
-int Row::getRoe() const
+const RowProp* Row::getRowProperties() const
 {
-	return aROE;
+	return rowProperties;
 }
 
-int Row::getRos() const
+int Row::getRandomObsInd()
 {
-	return aROS;
+	return rowProperties->getObstIndexes().at(rand()%rowProperties->getObstIndexes().size());
+}
+
+int Row::getRandomLaneInd()
+{
+	return rowProperties->getLaneIndexes().at(rand()%rowProperties->getLaneIndexes().size());
 }

@@ -78,7 +78,7 @@ void Level::rowGenerator(int rowHeight, int screenHight, int difficultyRows,
 			if(n==0)
 			{
 				rowProp=lvlprop->getLastRow();
-				cout<<rowProp->getItemSpawnChance();
+				cout<<rowProp->getItemRate();
 
 			}
 			else if (n==(numberOfRows-1))
@@ -200,7 +200,7 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,int x)
 	if (frontOrBack)
 	{
 
-		if ((laneRow && PreProp->front()->isVisible())|| ((number < row->getObsticleSpawnChance()) && !PreProp->front()->isVisible()))
+		if ((laneRow && PreProp->front()->isVisible())|| ((number < row->getObsticleRate()) && !PreProp->front()->isVisible()))
 		{
 			if (x==-99)
 				prop = F->createObstacle(row,row->isObstacleVis());
@@ -217,7 +217,7 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,int x)
 	}
 	else
 	{
-		if((laneRow && PreProp->back()->isVisible())|| ((number < row->getObsticleSpawnChance()) && !PreProp->back()->isVisible()))
+		if((laneRow && PreProp->back()->isVisible())|| ((number < row->getObsticleRate()) && !PreProp->back()->isVisible()))
 			prop = F->createObstacle(row,row->isObstacleVis(), x, 5, 0, row->getHeight());
 		else
 			prop = F->createLane(row,row->isLaneVis(), x, 5, 0, row->getHeight());

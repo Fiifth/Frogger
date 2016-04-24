@@ -12,55 +12,30 @@
 class RowProp
 {
 public:
-	RowProp(int speed,int divider,	char type,	int textureRangeS,
-			int textureRangeE,	int ObsticleSpawnChance,int itemSpawnChance,int shootChance, bool obstacleVis,bool laneVis
-			,int aROS, int aROE,int aRLS,int aRLE);
+	RowProp(int speed,int divider,char type,int obstRate,int itemRate,
+			int shootRate, bool obstacleVis,bool laneVis,std::vector<int> obstIndexes,
+			std::vector<int> laneIndexes,std::vector<int> itemTypeChance);
 	virtual ~RowProp();
 	int getDivider() const;
-	int getItemSpawnChance() const;
-	int getObsticleSpawnChance() const;
-	int getShootChance() const;
+	int getItemRate() const;
+	int getObsticleRate() const;
+	int getShootRate() const;
 	int getSpeed() const;
-	int getTextureRangeE() const;
-	int getTextureRangeS() const;
 	char getType() const;
 	bool getLaneVis() const;
 	bool getObstacleVis() const;
-
-	int getRle() const
-	{
-		return aRLE;
-	}
-
-	int getRls() const
-	{
-		return aRLS;
-	}
-
-	int getRoe() const
-	{
-		return aROE;
-	}
-
-	int getRos() const
-	{
-		return aROS;
-	}
+	const std::vector<int>& getItemTypeChance() const;
+	const std::vector<int>& getLaneIndexes() const;
+	const std::vector<int>& getObstIndexes() const;
 
 	int speed;
 	int divider;
 	char type;
-	int textureRangeS;
-	int textureRangeE;
-	int ObsticleSpawnChance;
-	int itemSpawnChance;
-	int shootChance;
+	int obstRate;
+	int itemRate;
+	int shootRate;
 	bool obstacleVis;
 	bool laneVis;
-	int aROS=0;//animator range obstacle start
-	int aROE=0;
-	int aRLS=0; //animator range Lane start
-	int aRLE=0;
 	std::vector<int> obstIndexes;
 	std::vector<int> laneIndexes;
 	std::vector<int> itemTypeChance;

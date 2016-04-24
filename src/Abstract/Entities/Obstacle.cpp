@@ -48,7 +48,7 @@ void Obstacle::considerFire()
 {
 	if (isVisible() && (((abs(x - previousX))) > w))
 	{
-		if (rand() % 100 > row->getShootChance())
+		if (rand() % 100 > row->getShootRate())
 			fire();
 		previousX = x;
 	}

@@ -16,7 +16,7 @@ LaneSDL::LaneSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible, int x, int
 {
 	setVisible(visible);
 	setF(F);
-	int ind=(rand()%(1+row->getRle()-row->getRls()))+row->getRls();
+	int ind=row->getRandomLaneInd();
 	ani = sdldata->getLaneAni(ind).clone();
 	setRow(row);
 	setDirection(row->isDirLeft() ? 4 : 2);
@@ -28,7 +28,7 @@ LaneSDL::LaneSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible, int x, int
 	sdldata->getDependWAndH(ani->getTexture(), &wn, &hn);
 	setSize(wn, hn);
 	setLocation(x, row->getLocY());
-	if ((rand() % 100) <row->getItemSpawnChance())
+	if ((rand() % 100) <row->getItemRate())
 	{
 		spawnItem();
 	}
@@ -43,7 +43,7 @@ LaneSDL::LaneSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible) :
 {
 	setVisible(visible);
 	setF(F);
-	int ind=(rand()%(1+row->getRle()-row->getRls()))+row->getRls();
+	int ind=row->getRandomLaneInd();
 	ani = sdldata->getLaneAni(ind).clone();
 	setRow(row);
 	//1=up,2=right,3=down,4=left;
@@ -57,7 +57,7 @@ LaneSDL::LaneSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible) :
 	setSize(wn, hn);
 	int xloc = row->isDirLeft() ? screenWidth : -getW();
 	setLocation(xloc, row->getLocY());
-	if ((rand() % 100) < row->getItemSpawnChance())
+	if ((rand() % 100) < row->getItemRate())
 	{
 		spawnItem();
 	}

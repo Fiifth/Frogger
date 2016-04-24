@@ -7,12 +7,12 @@
 
 #include <levelGenerator/RowProp.h>
 
-RowProp::RowProp(int speed,int divider,	char type,	int textureRangeS,
-		int textureRangeE,	int ObsticleSpawnChance,int itemSpawnChance,int shootChance,bool obstacleVis,bool laneVis
-		,int aROS, int aROE,int aRLS,int aRLE)
-: speed(speed),divider(divider), type(type), textureRangeS(textureRangeS),
-	textureRangeE(textureRangeE), ObsticleSpawnChance(ObsticleSpawnChance), itemSpawnChance(itemSpawnChance),
- shootChance(shootChance),obstacleVis(obstacleVis),laneVis(laneVis),aROS(aROS), aROE(aROE),aRLS(aRLS),aRLE(aRLE)
+RowProp::RowProp(int speed,int divider,char type,int obstRate,int itemRate,
+		int shootRate, bool obstacleVis,bool laneVis,std::vector<int> obstIndexes,
+		std::vector<int> laneIndexes,std::vector<int> itemTypeChance)
+: speed(speed),divider(divider), type(type), obstRate(obstRate), itemRate(itemRate),
+ shootRate(shootRate),obstacleVis(obstacleVis),laneVis(laneVis), obstIndexes(obstIndexes),
+ laneIndexes(laneIndexes),itemTypeChance(itemTypeChance)
 {
 	// TODO Auto-generated constructor stub
 
@@ -28,34 +28,24 @@ int RowProp::getDivider() const
 	return divider;
 }
 
-int RowProp::getItemSpawnChance() const
+int RowProp::getItemRate() const
 {
-	return itemSpawnChance;
+	return itemRate;
 }
 
-int RowProp::getObsticleSpawnChance() const
+int RowProp::getObsticleRate() const
 {
-	return ObsticleSpawnChance;
+	return obstRate;
 }
 
-int RowProp::getShootChance() const
+int RowProp::getShootRate() const
 {
-	return shootChance;
+	return shootRate;
 }
 
 int RowProp::getSpeed() const
 {
 	return speed;
-}
-
-int RowProp::getTextureRangeE() const
-{
-	return textureRangeE;
-}
-
-int RowProp::getTextureRangeS() const
-{
-	return textureRangeS;
 }
 
 char RowProp::getType() const
@@ -72,3 +62,19 @@ bool RowProp::getObstacleVis() const
 {
 	return obstacleVis;
 }
+
+const std::vector<int>& RowProp::getItemTypeChance() const
+{
+	return itemTypeChance;
+}
+
+const std::vector<int>& RowProp::getLaneIndexes() const
+{
+	return laneIndexes;
+}
+
+const std::vector<int>& RowProp::getObstIndexes() const
+{
+	return obstIndexes;
+}
+

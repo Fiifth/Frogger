@@ -8,6 +8,7 @@
 #ifndef LEVELGENERATOR_LEVELPROPERTIES_H_
 #define LEVELGENERATOR_LEVELPROPERTIES_H_
 #include "RowProp.h"
+#include <vector>
 class LevelProperties
 {
 public:
@@ -21,6 +22,7 @@ public:
 	const RowProp* getSeg2() const;
 	const RowProp* getSeg3() const;
 	const RowProp* getSeg4() const;
+	std::vector<int> getVec(int a,int b);
 
 private:
 	RowProp* firstRow=nullptr;
