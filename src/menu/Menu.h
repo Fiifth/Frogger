@@ -7,22 +7,25 @@
 
 #ifndef MENU_H_
 #define MENU_H_
-#include "SDLdata.h"
+#include "Window.h"
 #include "MenuButton.h"
 
 class Menu
 {
 public:
-	Menu(SDLdata* sdldata);
+	Menu(Window* win);
 	virtual ~Menu();
-	void menuExecution(std::string keyDown,int mXH,int mYH,int mXP,int mYP);
+	char menuExecution(std::string keyDown,int mXH,int mYH,int mXP,int mYP);
 	void startMenu();
 	bool isStartGame() const;
 
 private:
-	SDLdata* sdldata;
+	Window* win;
 	char state='A';
 	bool startGame=false;
+	MenuButton* start;
+	MenuButton* high;
+	MenuButton* quit;
 };
 
 #endif /* MENU_H_ */

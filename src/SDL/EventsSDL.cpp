@@ -30,6 +30,14 @@ string EventsSDL::getEvent()
 		const char* s = SDL_GetKeyName(e.key.keysym.sym);
 		return s;
 	}
+	else if (e.type==SDL_MOUSEBUTTONDOWN)
+	{
+		return "MOUSEBUTTONDOWN";
+	}
 	else
 		return "";
+}
+void EventsSDL::getMousePos(int* x,int* y)
+{
+	SDL_GetMouseState(x,y);
 }

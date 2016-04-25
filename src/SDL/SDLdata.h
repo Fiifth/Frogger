@@ -43,19 +43,19 @@ public:
 	void setScreenHeight(int screenHeight);
 	int getScreenWidth() const;
 	void setScreenWidth(int screenWidth);
-	void setPlayerRange(int start, int end);
-	void resetPlayerRange();
-
-	void setLaneRange(int start, int end);
-	void resetLaneRange();
-	void setObstacleRange(int start, int end);
-	void resetObstacleRange();
+	SDL_Texture* getBackgroundTex();
+	SDL_Texture* getHighSelTex();
+	SDL_Texture* getQuitSelTex();
+	SDL_Texture* getStartSelTex();
 
 private:
 	int screenWidth;
 	int screenHeight;
 	SDL_Renderer* re;
 	SDL_Texture* backgroundTex;
+	SDL_Texture* quitSelTex ;
+	SDL_Texture* startSelTex ;
+	SDL_Texture* highSelTex ;
 	std::vector<SDL_Texture*> playerTex;
 	std::vector<SDL_Texture*> ObstTex;
 	std::vector<SDL_Texture*> laneTex;
@@ -66,12 +66,6 @@ private:
 	std::vector<Animator> playerAni;
 	std::vector<Animator> itemAni;
 	std::vector<Animator> projAni;
-	int playerRangeStart;
-	int playerRangeEnd;
-	int laneRangeStart;
-	int laneRangeEnd;
-	int obstacleRangeStart;
-	int obstacleRangeEnd;
 };
 
 #endif /* SDLSTUFF_H_ */

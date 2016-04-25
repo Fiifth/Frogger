@@ -27,7 +27,6 @@ using namespace std::chrono;
 WindowSDL::WindowSDL(SDLdata* sdldata) :
 		sdldata(sdldata), ren(NULL), win(NULL)
 {
-
 	White =
 	{	255, 255, 255,255};
 	Black =
@@ -86,7 +85,7 @@ void WindowSDL::generateBackground(vector<Row*>* rows)
 	if (rowsBackgroundGenerated == nullptr||changed)
 	{
 		rowsOld.clear();
-		setBackground();
+		setBackground('A');
 		std::vector<SDL_Texture*> backTextures = sdldata->getBackTextures();
 		for (Row* row : *rows)
 		{
@@ -165,10 +164,19 @@ int i=1;
 	oldString=newString;
 
 }
-void WindowSDL::setBackground()
+void WindowSDL::setBackground(char state)
 {
-	sdldata->renderTexture(sdldata->getBackgroundTexture(), sdldata->getRen(),
-			0, 0, &WIDTH, &HEIGHT, 0);
+	SDL_Texture* temp;
+	if (state=='A')
+		temp=sdldata->getBackgroundTexture();
+	else if (state=='B')
+		temp=sdldata->getStartSelTex();
+	else if (state=='C')
+		temp=sdldata->getHighSelTex();
+	else if (state=='D')
+		temp=sdldata->getQuitSelTex();
+
+	sdldata->renderTexture(temp, sdldata->getRen(),	0, 0, &WIDTH, &HEIGHT, 0);
 }
 void WindowSDL::updateScreen()
 {

@@ -16,6 +16,7 @@ public:
 	EventsSDL();
 	virtual ~EventsSDL();
 	std::string getEvent();
+	void getMousePos(int* x,int* y);
 };
 
 #endif /* EVENTSSDL_H_ */

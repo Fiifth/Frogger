@@ -32,7 +32,7 @@ public:
 			char const* title);
 	void dislayData(std::list<Player*>* players);
 	void displayHighScore(int score1, int score2, int score3, int score4);
-	void setBackground();
+	void setBackground(char state);
 	void updateScreen();
 	void generateBackground(std::vector<Row*>* rows);
 	void saveCurrentWindowImage();

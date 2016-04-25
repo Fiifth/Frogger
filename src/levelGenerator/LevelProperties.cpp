@@ -10,8 +10,8 @@
 LevelProperties::LevelProperties()
 {
 	firstRow=new RowProp(0,0,'A',0,0,0,true,false,{1},{0},{0});
-	lastRow=new RowProp(0,0,'E',100,100,0,true,false,getVec(9,11),{2},{0});
-	middleRow=new RowProp(0,0,'D',50,50,0,true,false,getVec(9,11),{0},{0});
+	lastRow=new RowProp(0,0,'E',100,100,0,true,false,getVec(10,11),{2},{0});
+	middleRow=new RowProp(0,0,'D',50,50,0,true,false,getVec(10,11),{0},{0});
 	level1();
 }
 
@@ -22,10 +22,10 @@ LevelProperties::~LevelProperties()
 
 void LevelProperties::level1()
 {
-	seg1=new RowProp(1,0,'B',40,30,70,true,false,getVec(0,8),{0},{1});
-	seg2=new RowProp(2,0,'B',50,10,20,true,false,getVec(0,8),{0},{1});
-	seg3=new RowProp(1,0,'C',40,30,70,false,true,getVec(0,8),{0},{1});
-	seg4=new RowProp(2,0,'C',50,10,70,false,true,getVec(0,8),{0},{1});
+	seg1=new RowProp(1,0,'B',40,30,70,true,false,getVec(0,8),{0,3,4,5},{1});
+	seg2=new RowProp(2,0,'B',50,10,20,true,false,getVec(0,8),{0,3,4,5},{1});
+	seg3=new RowProp(1,0,'C',40,30,70,false,true,getVec(0,8),{0,3,4,5},{1});
+	seg4=new RowProp(2,0,'C',50,10,70,false,true,getVec(0,8),{0,3,4,5},{1});
 }
 
 const RowProp* LevelProperties::getFirstRow() const

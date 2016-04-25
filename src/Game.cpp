@@ -28,6 +28,7 @@
 #include <Player.h>
 #include "Level.h"
 #include "LevelProperties.h"
+#include "Menu.H"
 
 using namespace std;
 using namespace std::chrono;
@@ -62,10 +63,13 @@ Game::Game(Factory* F)
 	players->push_back(player2);
 	LevelProperties* lvlprop=new LevelProperties(); //TODO place in factory
 	Level* level = new Level(F, win, players, rowHeight,lvlprop);
+	Menu* men=new Menu(win);
 	char state = 'B';
 	while (true)
 	{
+		int x,y;
 		keyStroke = event->getEvent();
+		event->getMousePos(&x,&y);
 		switch (state)
 		{
 		//----------------------------------------------------------------------------------------------------
@@ -84,8 +88,8 @@ Game::Game(Factory* F)
 
 			//----------------------------------------------------------------------------------------------------
 		case 'B':
-			win->setBackground();
-			if (keyStroke == "Space")
+			char temp=men->menuExecution(keyStroke,x,y,x,y);
+			if (temp=='A')
 			{
 				for (Player* play : *players)
 				{
@@ -94,9 +98,8 @@ Game::Game(Factory* F)
 				}
 				level->resetLevel();
 				state = 'A';
-				win->setBackground();
 			}
-			else if (keyStroke == "Escape")
+			else if (temp=='Q')
 				return;
 			win->updateScreen();
 			break;

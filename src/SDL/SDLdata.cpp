@@ -90,12 +90,18 @@ void SDLdata::updateScreen()
 void SDLdata::createTextures()
 {
 
-	string imagePathBack = "C:/frogger/background.png";
+	string imagePathBack = "C:/frogger/menu.png";
+	string quitSel ="C:/frogger/quitSel.png";
+	string startSel ="C:/frogger/startSel.png";
+	string highSel ="C:/frogger/highSel.png";
 	string imagePathBackground1 = "C:/frogger/back1.png";
 	string imagePathBackground2 = "C:/frogger/back2.png";
 	string imagePathBackground3 = "C:/frogger/back3.png";
 
 	backgroundTex = IMG_LoadTexture(re, imagePathBack.c_str());
+	quitSelTex = IMG_LoadTexture(re, quitSel.c_str());
+	startSelTex = IMG_LoadTexture(re, startSel.c_str());
+	highSelTex = IMG_LoadTexture(re, highSel.c_str());
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground1.c_str()));
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground2.c_str()));
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground3.c_str()));
@@ -120,7 +126,10 @@ void SDLdata::createTextures()
 	{
 			getAnimator({"lane1.png","lane2.png","lane3.png"},{40,5,10}),
 			getAnimator({"lane4.png"},{1}),
-			getAnimator({"o13.png"},{1})
+			getAnimator({"o13.png"},{1}),
+			getAnimator({"turtle1.png","turtle2.png"},{20,20}),
+			getAnimator({"lane5.png"},{1}),
+			getAnimator({"turtle1.png","turtle2.png","turtle1.png","turtle2.png","turtle3.png","turtle4.png","turtle5.png","turtle4.png","turtle3.png"},{40,40,40,40,20,10,-70,10,20})
 	};
 	itemAni=
 	{
@@ -228,45 +237,28 @@ void SDLdata::setScreenWidth(int screenWidth)
 	this->screenWidth = screenWidth;
 }
 
-void SDLdata::setPlayerRange(int start, int end)
-{ //TODO controle toevoegen
-	playerRangeStart = start;
-	playerRangeEnd = end;
-}
-
-void SDLdata::resetPlayerRange()
-{
-	playerRangeStart = 0;
-	playerRangeEnd = playerAni.size();
-}
-
-void SDLdata::setLaneRange(int start, int end)
-{ //TODO controle toevoegen
-	laneRangeStart = start;
-	laneRangeEnd = end;
-}
-
-void SDLdata::resetLaneRange()
-{
-	laneRangeStart = 0;
-	laneRangeEnd = laneAni.size();
-}
-
-void SDLdata::setObstacleRange(int start, int end)
-{
-	obstacleRangeStart =
-			(obstiAni.size() >= start) && (start >= 0) ?
-					start : obstiAni.size();
-	obstacleRangeEnd = obstiAni.size() >= end ? end : obstiAni.size();
-}
-
-void SDLdata::resetObstacleRange()
-{
-	obstacleRangeStart = 0;
-	obstacleRangeEnd = obstiAni.size();
-}
 
 Animator SDLdata::getProjAni(int ind)
 {
 	return projAni.at(ind);
+}
+
+SDL_Texture* SDLdata::getBackgroundTex()
+{
+	return backgroundTex;
+}
+
+SDL_Texture* SDLdata::getHighSelTex()
+{
+	return highSelTex;
+}
+
+SDL_Texture* SDLdata::getQuitSelTex()
+{
+	return quitSelTex;
+}
+
+SDL_Texture* SDLdata::getStartSelTex()
+{
+	return startSelTex;
 }
