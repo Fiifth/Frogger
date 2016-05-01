@@ -54,11 +54,18 @@ public:
 			list<Projectile*>*projectiles, list<Player*>* players,
 			vector<Row*>* rows);
 	Props* obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,int x);
-	bool increaseSpeed(vector<Row*>* rows);
+	Props* obsOrLane(list<Props*>* PreProp, Row* row);
+	bool followFrog(vector<Row*>* rows,list<Player*>* players);
 	bool objectiveCompleteCheck(std::vector<std::list<Props*>>* propsOnRow);
 	bool isObjectiveDone() const;
 	void resetLevel();
 	void initLevel();
+	void extraRowNeeded(int rowHeight,int screenHeight,int screenWidth,
+			Factory* F, vector<Row*>* rows, vector<list<Props*>>* propsOnRow,LevelProperties* lvlprop);
+	void fillOneRow(Factory* F, Row* rows,
+				std::vector<std::list<Props*>>* propsOnRow,
+				int screenWidth);
+
 
 	struct drawMoveRemove
 	{
@@ -72,8 +79,8 @@ public:
 			}
 			else
 			{
-				prop->draw();
 				prop->moveForward();
+				prop->draw();
 			}
 			return temp;
 		}

@@ -40,7 +40,8 @@ bool Obstacle::roomForItem()
 
 bool Obstacle::fire()
 {
-	projectileList.push_back(F->createProjectile(this, 5, 0));
+	Projectile* proj(F->createProjectile(this, 5, 0));
+	projectileList.push_back(proj);
 	return true;
 }
 
@@ -56,4 +57,12 @@ void Obstacle::considerFire()
 std::list<Projectile*>* Obstacle::getProjectileList()
 {
 	return &projectileList;
+}
+
+void Obstacle::editYForProjectiles()
+{
+	for(Projectile* proje:projectileList)
+	{
+		proje->setLocation(proje->getX(),y);
+	}
 }

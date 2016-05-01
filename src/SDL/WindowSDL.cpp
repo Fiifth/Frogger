@@ -92,7 +92,8 @@ void WindowSDL::generateBackground(vector<Row*>* rows)
 			rowsOld.push_back(row->clone());
 			int y = row->getLocY();
 			int height = row->getHeight();
-			int x = 0-rand()%20, width = 0;
+			//int x = 0-rand()%20, width = 0;
+			int x = 0, width = 0;
 			int textureLocation = row->getType()=='C' ? 1 : 0;
 			textureLocation =row->getType()=='A'|| row->getType()=='E'|| row->getType()=='D' ?2 : textureLocation;
 			sdldata->getDependWAndH(backTextures.at(textureLocation), &width,
@@ -149,7 +150,8 @@ int i=1;
 	if (surfaceMessage == nullptr)
 	{
 		Sans = TTF_OpenFont("c:\\sans.ttf", 40);
-		surfaceMessage = TTF_RenderText_Blended(Sans, newString.c_str(), Black);
+		//surfaceMessage = TTF_RenderText_Blended(Sans, newString.c_str(), Black);
+		surfaceMessage=TTF_RenderText_Shaded(Sans,newString.c_str(),Black,White);
 		Message = SDL_CreateTextureFromSurface(ren, surfaceMessage);
 	}
 

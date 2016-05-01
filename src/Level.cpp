@@ -10,7 +10,7 @@
 #include "levelGenerator/RowProp.h"
 
 Level::Level(Factory* F, Window* win, list<Player*>* players, int rowHeight,LevelProperties* lvlprop) :
-		F(F), win(win), players(players), rowHeight(rowHeight),lvlprop(lvlprop)
+F(F), win(win), players(players), rowHeight(rowHeight),lvlprop(lvlprop)
 {
 	initLevel();
 
@@ -26,16 +26,22 @@ char Level::levelExecution(string keyStroke)
 		if(player->getRemainingTime()==0)
 			player->hit();
 		else
+		{
 			player->takeAction(keyStroke);
+		}
+		if (lvlprop->getMode()=='A'&&player->getY()<300)
+						followFrog(rows,players); //endless
 	}
-	if (keyStroke=="P")
-		increaseSpeed(rows);
+
+	if(lvlprop->getMode()=='A')
+	extraRowNeeded(rowHeight,win->getGameWindowHeight(),win->getWidth(), F, rows,propsOnRow,lvlprop);
 
 	win->generateBackground(rows);
 	propsGenerator(F, rows, propsOnRow);
-	collisionDetection(propsOnRow, projectiles, players);
+
 	drawGameElements(propsOnRow, projectiles, players, rows);
-	objectiveDone=objectiveCompleteCheck(propsOnRow);
+	collisionDetection(propsOnRow, projectiles, players);
+	objectiveDone=lvlprop->getMode()=='A'?false:objectiveCompleteCheck(propsOnRow);
 
 	return 'H';
 }
@@ -47,29 +53,56 @@ void Level::rowGenerator(int rowHeight, int screenHight,
 	list<Props*> enemies;
 	bool dir = true; //(rand() %2)>0)
 	const RowProp* rowProp;
-	for (int n = 0; n < numberOfRows; n++)
+	if (lvlprop->getMode()=='A')
 	{
-		/*
-		 * A: start row
-		 * B: obst row
-		 * C: lane row
-		 * D: forest row
-		 * E: end row
-		 */
-		if(n==0)
-			rowProp=lvlprop->getLastRow();
-		else if (n==(numberOfRows-1))
-			rowProp=lvlprop->getFirstRow();
-		else if (n==numberOfRows / 2)
-			rowProp=lvlprop->getMiddleRow();
-		else if (n < (numberOfRows / 2))
-			rowProp=lvlprop->getSeg3();
-		else if (n>(numberOfRows / 2))
-			rowProp=lvlprop->getSeg1();
+		for (int n = 0; n < numberOfRows+1; n++)
+		{
+			/*
+			 * A: start row
+			 * B: obst row
+			 * C: lane row
+			 * D: forest row
+			 * E: end row
+			 */
+			int yloc;
+			yloc=(screenHight-rowHeight)-(n*rowHeight);
+			if (n==(0))
+				rowProp=lvlprop->getFirstRow();
+			else
+				rowProp=lvlprop->getSeg1();
 
-		rows->push_back(F->createRow(dir, n * rowHeight, rowHeight, n,rowProp));
-		propsOnRow->push_back(enemies);
-		dir = not (dir);
+			rows->push_back(F->createRow(dir, yloc, rowHeight, n,rowProp));
+			propsOnRow->push_back(enemies);
+			dir = not (dir);
+		}
+
+	}
+	else
+	{
+		for (int n = 0; n < numberOfRows; n++)
+		{
+			/*
+			 * A: start row
+			 * B: obst row
+			 * C: lane row
+			 * D: forest row
+			 * E: end row
+			 */
+			if(n==0)
+				rowProp=lvlprop->getLastRow();
+			else if (n==(numberOfRows-1))
+				rowProp=lvlprop->getFirstRow();
+			else if (n==numberOfRows / 2)
+				rowProp=lvlprop->getMiddleRow();
+			else if (n < (numberOfRows / 2))
+				rowProp=lvlprop->getSeg3();
+			else if (n>(numberOfRows / 2))
+				rowProp=lvlprop->getSeg1();
+
+			rows->push_back(F->createRow(dir, n * rowHeight, rowHeight, n,rowProp));
+			propsOnRow->push_back(enemies);
+			dir = not (dir);
+		}
 	}
 }
 
@@ -83,7 +116,7 @@ void Level::propsGenerator(Factory* F, vector<Row*>* rows,
 			list<Props*>* PreProp = &propsOnRow->at(row->getNumber());
 			if ((PreProp->empty()) || ((PreProp->front())->isRoom()))
 			{
-				Props* prop=obsOrLane(PreProp,row, true,-99);
+				Props* prop=obsOrLane(PreProp,row);
 				propsOnRow->at(row->getNumber()).push_front(prop);
 			}
 		}
@@ -112,26 +145,9 @@ int Level::collisionDetection(vector<list<Props*>>* propsOnRow,
 void Level::fillEnemyList(Factory* F, vector<Row*>* rows,
 		vector<list<Props*>>* propsOnRow, int screenWidth)
 {
-	list<Props*> listOfProps;
 	for (Row* row : *rows)
 	{
-		int x = 0;
-		while (x < screenWidth)
-		{
-			if ((row->getType()=='B') || (row->getType()=='C')||row->getType()=='D'||row->getType()=='E')
-			{
-				list<Props*>* PreProp = &propsOnRow->at(row->getNumber());
-				Props* prop=obsOrLane(PreProp,row, row->isDirLeft(),x);
-				if (row->isDirLeft())
-					propsOnRow->at(row->getNumber()).push_front(prop);
-				else
-					propsOnRow->at(row->getNumber()).push_back(prop);
-
-				x = prop->getW() + x;
-			}
-			else
-				x = screenWidth;
-		}
+		fillOneRow(F, row,	propsOnRow,screenWidth);
 	}
 }
 
@@ -158,27 +174,19 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,int x)
 	Props* prop;
 	int number = rand() % 100;
 	int laneRow=row->getType()=='C';
+
 	if (frontOrBack)
 	{
-
-		if ((laneRow && PreProp->front()->isVisible())|| ((number < row->getObsticleRate()) && !PreProp->front()->isVisible()))
-		{
-			if (x==-99)
-				prop = F->createObstacle(row,row->isObstacleVis());
-			else
-				prop = F->createObstacle(row,row->isObstacleVis(), x, 5, 0, row->getHeight());
-		}
+		bool prevVisible=PreProp->empty()?true:PreProp->front()->isVisible();
+		if ((laneRow && prevVisible)|| ((number < row->getObsticleRate()) && !prevVisible))
+			prop = F->createObstacle(row,row->isObstacleVis(), x, 5, 0, row->getHeight());
 		else
-		{
-			if (x==-99)
-				prop = F->createLane(row,row->isLaneVis());
-			else
-				prop = F->createLane(row,row->isLaneVis(), x, 5, 0, row->getHeight());
-		}
+			prop = F->createLane(row,row->isLaneVis(), x, 5, 0, row->getHeight());
 	}
 	else
 	{
-		if((laneRow && PreProp->back()->isVisible())|| ((number < row->getObsticleRate()) && !PreProp->back()->isVisible()))
+		bool prevVisible=PreProp->empty()?true:PreProp->back()->isVisible();
+		if((laneRow && prevVisible)|| ((number < row->getObsticleRate()) && !prevVisible))
 			prop = F->createObstacle(row,row->isObstacleVis(), x, 5, 0, row->getHeight());
 		else
 			prop = F->createLane(row,row->isLaneVis(), x, 5, 0, row->getHeight());
@@ -186,13 +194,16 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,int x)
 	return prop;
 }
 
-bool Level::increaseSpeed(vector<Row*>* rows)
+bool Level::followFrog(vector<Row*>* rows,list<Player*>* players)
 {
 	for (Row* row : *rows)
 	{
-		row->setLocY(row->getLocY()+1);
+		row->setLocY(row->getLocY()+2);
 	}
-
+	for (Player* player : *players)
+	{
+		player->move(0,2,true);
+	}
 	return true;
 }
 
@@ -213,13 +224,73 @@ bool Level::objectiveCompleteCheck(std::vector<std::list<Props*> >* propsOnRow)
 
 void Level::resetLevel()
 {
-		rows->clear();
-		propsOnRow->clear();
-		initLevel();
+	rows->clear();
+	propsOnRow->clear();
+	initLevel();
 }
 
 void Level::initLevel()
 {
 	rowGenerator(rowHeight, win->getGameWindowHeight(), F, rows,propsOnRow,lvlprop);
 	fillEnemyList(F, rows, propsOnRow, win->getWidth());
+}
+
+void Level::extraRowNeeded(int rowHeight,int screenHeight,int screenWidth,
+		Factory* F, vector<Row*>* rows, vector<list<Props*>>* propsOnRow,LevelProperties* lvlprop)
+{
+	if(rows->back()->getLocY()>-10)
+	{
+		list<Props*> enemies;
+		const RowProp* rowProp;
+		rowProp=lvlprop->getSeg1();
+		rows->push_back(F->createRow(!rows->back()->isDirLeft(), rows->back()->getLocY()-rowHeight, rowHeight, rows->back()->getNumber()+1,rowProp));
+		propsOnRow->push_back(enemies);
+
+		fillOneRow(F,rows->back(),propsOnRow,1000);
+		if(rows->front()->getLocY()>screenHeight*2)
+		rows->erase(rows->begin());
+	}
+}
+
+Props* Level::obsOrLane(list<Props*>* PreProp, Row* row)
+{
+	Props* prop;
+	int number = rand() % 100;
+	int laneRow=row->getType()=='C';
+
+	bool prevVisible=PreProp->empty()?true:PreProp->front()->isVisible();
+	if ((laneRow && prevVisible)|| ((number < row->getObsticleRate()) && !prevVisible))
+		prop = F->createObstacle(row,row->isObstacleVis());
+	else
+		prop = F->createLane(row,row->isLaneVis());
+
+return prop;
+}
+
+void Level::fillOneRow(Factory* F, Row* row,
+		std::vector<std::list<Props*> >* propsOnRow, int screenWidth)
+{
+	list<Props*> listOfProps;
+	int x = 0;
+	while (x < screenWidth)
+	{
+
+		if ((row->getType()=='B') || (row->getType()=='C')||row->getType()=='D'||row->getType()=='E')
+		{
+			list<Props*>* PreProp = &propsOnRow->at(row->getNumber());
+
+			Props* prop=obsOrLane(PreProp,row, row->isDirLeft(),x);
+			if (row->isDirLeft())
+				propsOnRow->at(row->getNumber()).push_front(prop);
+			else
+				propsOnRow->at(row->getNumber()).push_back(prop);
+
+			x = prop->getW() + x;
+		}
+		else
+		{
+			x = screenWidth;
+		}
+
+	}
 }

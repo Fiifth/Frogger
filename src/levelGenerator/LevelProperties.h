@@ -12,7 +12,7 @@
 class LevelProperties
 {
 public:
-	LevelProperties();
+	LevelProperties(char mode);
 	virtual ~LevelProperties();
 	void level1();
 	const RowProp* getFirstRow() const;
@@ -23,6 +23,8 @@ public:
 	const RowProp* getSeg3() const;
 	const RowProp* getSeg4() const;
 	std::vector<int> getVec(int a,int b);
+	char getMode() const;
+	void setMode(char mode);
 
 private:
 	RowProp* firstRow=nullptr;
@@ -32,6 +34,7 @@ private:
 	RowProp* seg2=nullptr;
 	RowProp* seg3=nullptr;
 	RowProp* seg4=nullptr;
+	char mode;
 };
 
 #endif /* LEVELGENERATOR_LEVELPROPERTIES_H_ */

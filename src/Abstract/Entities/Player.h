@@ -61,7 +61,7 @@ public:
 	{
 		return (i > j);
 	}
-
+	void disableCounter();
 	bool isDead() const;
 	void setDead(bool dead);
 	bool timeToMove();
@@ -77,6 +77,7 @@ private:
 	int startX, startY;
 	int totalTime;
 	int remainingTime;
+	bool counterEnabled=true;
 	bool dead = false;
 
 	int divider = 0;

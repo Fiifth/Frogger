@@ -35,13 +35,14 @@ using namespace std::chrono;
 
 Game::Game(Factory* F)
 {
+	char mode='A';
 	int WindowHeight = 520;
 	int WindowWidth = 700;
 	int rowHeight = 50;
 	int dataWindowHeightDesired = 20;
 	int dataWindowHeight =
 			((WindowHeight - dataWindowHeightDesired) % rowHeight)
-					+ dataWindowHeightDesired;
+			+ dataWindowHeightDesired;
 	int gameWindowHeight = WindowHeight - dataWindowHeight;
 	int gameWindowWidth = WindowWidth;
 	int plStartW = rowHeight, plStartH = rowHeight, plStartSpeed = rowHeight;
@@ -60,8 +61,9 @@ Game::Game(Factory* F)
 			plStartSpeed, rowHeight, 1);
 	player2->setDifferentControls();
 	players->push_back(player);
-	players->push_back(player2);
-	LevelProperties* lvlprop=new LevelProperties(); //TODO place in factory
+	//players->push_back(player2);
+	LevelProperties* lvlprop=new LevelProperties(mode); //TODO place in factory
+
 	Level* level = new Level(F, win, players, rowHeight,lvlprop);
 	Menu* men=new Menu(win);
 	char state = 'B';
@@ -93,8 +95,14 @@ Game::Game(Factory* F)
 			{
 				for (Player* play : *players)
 				{
+
 					play->resetRemainingTime();
 					play->setDead(false);
+					if (mode=='A')
+					{
+						play->setLife(0);
+						play->disableCounter();
+					}
 				}
 				level->resetLevel();
 				state = 'A';

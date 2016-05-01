@@ -10,8 +10,8 @@
 using namespace std;
 
 Player::Player() :
-		vSpeed(0), hSpeed(0), startX(0), startY(0), totalTime(50), remainingTime(
-				totalTime)
+				vSpeed(0), hSpeed(0), startX(0), startY(0), totalTime(50), remainingTime(
+						totalTime)
 {
 }
 
@@ -178,10 +178,6 @@ bool Player::takeAction(std::string key)
 {
 	if (!isDead())
 	{
-		if (key == "")
-		{
-			return false;
-		}
 		if (key == keyDown)
 		{
 			moveDown();
@@ -192,6 +188,7 @@ bool Player::takeAction(std::string key)
 		{
 			moveUp();
 			addScore(10);
+			return true;
 		}
 		else if (key == keyLeft)
 			moveLeft();
@@ -209,7 +206,7 @@ bool Player::takeAction(std::string key)
 int Player::getRemainingTime()
 {
 	if (!dead)
-	decreaseTime();
+		decreaseTime();
 	return remainingTime;
 }
 
@@ -226,10 +223,13 @@ void Player::resetRemainingTime()
 
 void Player::decreaseTime()
 {
-	currentTime = std::chrono::high_resolution_clock::now();
-	remainingTime = totalTime
-			- (std::chrono::duration_cast<std::chrono::seconds>(
-					currentTime - previousTime).count());
+	if (counterEnabled)
+	{
+		currentTime = std::chrono::high_resolution_clock::now();
+		remainingTime = totalTime
+				- (std::chrono::duration_cast<std::chrono::seconds>(
+						currentTime - previousTime).count());
+	}
 }
 
 void Player::addHighScore(int score)
@@ -304,4 +304,9 @@ void Player::collision(Player* player)
 			player->hit();
 	}
 	//return (((player->getY()>=(y)&&player->getY()<(y+h))||(player->getY()+player->getH()>(y)&&player->getY()+player->getH()<=(y+h)))&&((player->getX()>=(x)&&player->getX()<=(x+w))||(player->getX()+player->getW()>=(x)&&player->getX()+player->getW()<=(x+w))))?3:0;
+}
+
+void Player::disableCounter()
+{
+	counterEnabled=false;
 }

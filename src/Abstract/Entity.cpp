@@ -60,7 +60,7 @@ void Entity::setScreenSize(int width, int height)
 bool Entity::inframe()
 {
 	return ((x < (screenWidth + (3 * w)) && x > (0 - (3 * w)))
-			&& ((y <= screenHeight + h) && (y >= (0 - h))));
+			&& ((y <= screenHeight + h*4) && (y >= (0 - h*4))));
 }
 
 int Entity::getH() const

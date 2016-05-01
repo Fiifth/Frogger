@@ -22,6 +22,7 @@ public:
 	virtual ~Obstacle();
 	virtual void draw()=0;
 	void collision(Player* player);
+	void editYForProjectiles();
 	bool roomForItem();
 	bool itemListEmpty()
 	{
