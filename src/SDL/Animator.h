@@ -9,7 +9,8 @@
 #define ANIMATOR_H_
 #include "SDL.h"
 #include <vector>
-
+namespace frogger
+{
 class Animator
 {
 public:
@@ -33,5 +34,6 @@ public:
 	int size;
 	bool turned = false;
 };
+}
 
 #endif /* ANIMATOR_H_ */

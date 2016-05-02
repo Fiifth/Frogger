@@ -8,6 +8,9 @@
 #ifndef ENTITY_H_
 #define ENTITY_H_
 #include <list>
+
+namespace frogger
+{
 class Projectile;
 class Factory;
 class Props;
@@ -84,5 +87,6 @@ protected:
 	Factory* F;
 
 };
+}
 
 #endif /* ABSTRACT_ENTITY_H_ */

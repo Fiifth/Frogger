@@ -8,6 +8,7 @@
 #include <Level.h>
 #include <levelGenerator/levelProperties.h>
 #include "levelGenerator/RowProp.h"
+using namespace frogger;
 
 Level::Level(Factory* F, Window* win, list<Player*>* players, int rowHeight,LevelProperties* lvlprop) :
 F(F), win(win), players(players), rowHeight(rowHeight),lvlprop(lvlprop)

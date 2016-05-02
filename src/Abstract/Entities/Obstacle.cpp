@@ -7,7 +7,7 @@
 
 #include <Obstacle.h>
 #include "Factory.h"
-
+using namespace frogger;
 Obstacle::Obstacle()
 {
 }

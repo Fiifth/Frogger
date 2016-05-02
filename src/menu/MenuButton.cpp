@@ -6,6 +6,7 @@
  */
 
 #include <MenuButton.h>
+using namespace frogger;
 
 MenuButton::MenuButton(int x,int y, int w,int h):x(x),y(y),w(w),h(h)
 {

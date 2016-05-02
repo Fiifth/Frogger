@@ -10,8 +10,9 @@
 #include "Props.h"
 #include "Entity.h"
 #include "Player.h"
-
-class Projectile: public Props
+namespace frogger
+{
+class Projectile: public frogger::Props
 {
 public:
 	Projectile();
@@ -44,5 +45,6 @@ public:
 private:
 
 };
+}
 
 #endif /* ABSTRACT_ENTITIES_PROJECTILE_H_ */

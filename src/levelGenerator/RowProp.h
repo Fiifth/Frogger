@@ -8,7 +8,8 @@
 #ifndef LVLPROP_H_
 #define LVLPROP_H_
 #include <vector>
-
+namespace frogger
+{
 class RowProp
 {
 public:
@@ -40,5 +41,6 @@ public:
 	std::vector<int> laneIndexes;
 	std::vector<int> itemTypeChance;
 };
+}
 
 #endif /* LVLPROP_H_ */

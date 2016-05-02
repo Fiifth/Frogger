@@ -21,6 +21,7 @@
 #include "Row.h"
 
 using namespace std;
+using namespace frogger;
 
 FactorySDL::FactorySDL()
 {

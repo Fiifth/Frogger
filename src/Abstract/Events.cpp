@@ -6,6 +6,7 @@
  */
 
 #include "Events.h"
+using namespace frogger;
 
 Events::Events()
 {

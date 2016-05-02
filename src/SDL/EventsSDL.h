@@ -10,7 +10,9 @@
 
 #include "Events.h"
 #include <string>
-class EventsSDL: public Events
+namespace frogger
+{
+class EventsSDL: public frogger::Events
 {
 public:
 	EventsSDL();
@@ -18,5 +20,6 @@ public:
 	std::string getEvent();
 	void getMousePos(int* x,int* y);
 };
+}
 
 #endif /* EVENTSSDL_H_ */

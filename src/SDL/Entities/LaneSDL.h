@@ -14,8 +14,9 @@
 #include <vector>
 #include "Animator.h"
 #include "Factory.h"
-
-class LaneSDL: public Lane
+namespace frogger
+{
+class LaneSDL: public frogger::Lane
 {
 public:
 	LaneSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible, int x, int y, int w, int h);
@@ -28,5 +29,6 @@ private:
 	SDLdata* sdldata;
 	Animator* ani;
 };
+}
 
 #endif /* SDL_ENTITIES_LANESDL_H_ */

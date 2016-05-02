@@ -12,12 +12,13 @@
 #include "PlayerSDL.h"
 #include "FactorySDL.h"
 #include <iostream>
+using namespace frogger;
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-	Factory* f = new FactorySDL();
+	frogger::Factory* f = new FactorySDL();
 	new Game(f);
 	return 0;
 }

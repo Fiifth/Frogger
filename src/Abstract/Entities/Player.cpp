@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "Factory.h"
 using namespace std;
+using namespace frogger;
 
 Player::Player() :
 				vSpeed(0), hSpeed(0), startX(0), startY(0), totalTime(50), remainingTime(

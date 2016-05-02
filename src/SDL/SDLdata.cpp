@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include "Animator.h"
 SDL_Renderer* re;
+using namespace frogger;
 
 SDLdata::SDLdata()
 {

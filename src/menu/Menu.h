@@ -9,7 +9,8 @@
 #define MENU_H_
 #include "Window.h"
 #include "MenuButton.h"
-
+namespace frogger
+{
 class Menu
 {
 public:
@@ -28,5 +29,5 @@ private:
 	MenuButton* quit;
 	MenuButton* back;
 };
-
+}
 #endif /* MENU_H_ */

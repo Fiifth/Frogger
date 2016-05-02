@@ -14,8 +14,9 @@
 #include "Player.h"
 #include "Projectile.h"
 #include <list>
-
-class Obstacle: public Props
+namespace frogger
+{
+class Obstacle: public frogger::Props
 {
 public:
 	Obstacle();
@@ -66,5 +67,6 @@ protected:
 		}
 	};
 };
+}
 
 #endif /* ENEMY_H_ */

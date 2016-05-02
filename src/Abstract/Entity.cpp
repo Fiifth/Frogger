@@ -8,7 +8,7 @@
 #include "Entity.h"
 #include "Props.h"
 #include "Projectile.h"
-
+using namespace frogger;
 Entity::Entity() :
 		F(nullptr)
 {

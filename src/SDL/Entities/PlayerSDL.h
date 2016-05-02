@@ -15,8 +15,9 @@
 #include "Animator.h"
 #include "Factory.h"
 #include "Props.h"
-
-class PlayerSDL: public Player
+namespace frogger
+{
+class PlayerSDL: public frogger::Player
 {
 public:
 	PlayerSDL(SDLdata* sdldata, Factory* F, int x, int y, int w, int h,
@@ -32,5 +33,6 @@ private:
 	Animator* ani;
 
 };
+}
 
 #endif /* FROGSDL_H_ */

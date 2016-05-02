@@ -15,8 +15,9 @@
 #include <list>
 #include "Animator.h"
 #include "Factory.h"
-
-class ObstacleSDL: public Obstacle
+namespace frogger
+{
+class ObstacleSDL: public frogger::Obstacle
 {
 public:
 
@@ -32,5 +33,5 @@ private:
 	SDLdata* sdldata;
 	Animator* ani;
 };
-
+}
 #endif /* ENEMYSDL_H_ */

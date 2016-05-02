@@ -7,6 +7,7 @@
 
 #include <Menu.h>
 #include "MenuButton.h"
+using namespace frogger;
 
 
 Menu::Menu(Window* win):win(win)

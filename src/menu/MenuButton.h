@@ -7,7 +7,8 @@
 
 #ifndef MENUBUTTON_H_
 #define MENUBUTTON_H_
-
+namespace frogger
+{
 class MenuButton
 {
 public:
@@ -17,5 +18,6 @@ public:
 private:
 	int x, y, w, h;
 };
+}
 
 #endif /* MENUBUTTON_H_ */

@@ -6,6 +6,7 @@
  */
 
 #include "Factory.h"
+using namespace frogger;
 
 
 using namespace std;

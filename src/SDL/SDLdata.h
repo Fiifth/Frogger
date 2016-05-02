@@ -11,7 +11,8 @@
 #include <vector>
 #include "Animator.h"
 #include <string>
-
+namespace frogger
+{
 class SDLdata
 {
 public:
@@ -71,5 +72,6 @@ private:
 	std::vector<Animator> itemAni;
 	std::vector<Animator> projAni;
 };
+}
 
 #endif /* SDLSTUFF_H_ */

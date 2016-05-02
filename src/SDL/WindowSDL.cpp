@@ -23,6 +23,7 @@
 
 using namespace std;
 using namespace std::chrono;
+using namespace frogger;
 
 WindowSDL::WindowSDL(SDLdata* sdldata) :
 		sdldata(sdldata), ren(NULL), win(NULL)

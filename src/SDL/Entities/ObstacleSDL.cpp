@@ -11,6 +11,7 @@
 #include "SDL.h"
 #include "Window.h"
 #include <string>
+using namespace frogger;
 
 using namespace std;
 

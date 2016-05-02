@@ -10,8 +10,9 @@
 #include "Entity.h"
 #include "Row.h"
 #include <iostream>
-
-class Props: public Entity
+namespace frogger
+{
+class Props: public frogger::Entity
 {
 public:
 	Props();
@@ -42,5 +43,5 @@ protected:
 	int divider;
 	int dividercounter = 0;
 };
-
+}
 #endif /* ABSTRACT_PROPS_H_ */

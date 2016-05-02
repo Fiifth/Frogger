@@ -33,7 +33,8 @@
 #include "Projectile.h"
 #include <Obstacle.h>
 #include <Player.h>
-
+namespace frogger
+{
 class Level
 {
 public:
@@ -108,5 +109,6 @@ private:
 	LevelProperties* lvlprop;
 
 };
+}
 
 #endif /* LEVEL_H_ */

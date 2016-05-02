@@ -7,6 +7,7 @@
 
 #include <Props.h>
 #include "Factory.h"
+using namespace frogger;
 
 Props::Props() :
 		row(nullptr), visible(true), divider(0)

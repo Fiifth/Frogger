@@ -6,6 +6,7 @@
  */
 
 #include <levelGenerator/LevelProperties.h>
+using namespace frogger;
 
 LevelProperties::LevelProperties(char mode) :mode(mode)
 {

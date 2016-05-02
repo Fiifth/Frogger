@@ -19,9 +19,10 @@
 #include "Projectile.h"
 #include <list>
 
-using namespace std;
+namespace frogger
+{
 
-class Player: public Entity
+class Player: public frogger::Entity
 {
 public:
 	Player();
@@ -56,7 +57,7 @@ public:
 	void resetRemainingTime();
 	void decreaseTime();
 	void addHighScore(int score);
-	const vector<int>& getHighScore() const;
+	const std::vector<int>& getHighScore() const;
 	bool myfunction(int i, int j)
 	{
 		return (i > j);
@@ -87,14 +88,14 @@ private:
 	std::chrono::high_resolution_clock::time_point currentTime =
 			std::chrono::high_resolution_clock::now();
 	float correctTime = float(totalTime);
-	vector<int> highScore =
+	std::vector<int> highScore =
 	{ 0, 0, 0, 0 };
-	string keyUp = "Up", keyDown = "Down", keyLeft = "Left", keyRight = "Right",
+	std::string keyUp = "Up", keyDown = "Down", keyLeft = "Left", keyRight = "Right",
 			fire = "Right Ctrl";
 
 protected:
 	std::list<Projectile*> projectileList;
 	bool moved=false;
 };
-
+}
 #endif /* FROG_H_ */

@@ -9,6 +9,8 @@
 #define LEVELGENERATOR_LEVELPROPERTIES_H_
 #include "RowProp.h"
 #include <vector>
+namespace frogger
+{
 class LevelProperties
 {
 public:
@@ -36,5 +38,6 @@ private:
 	RowProp* seg4=nullptr;
 	char mode;
 };
+}
 
 #endif /* LEVELGENERATOR_LEVELPROPERTIES_H_ */

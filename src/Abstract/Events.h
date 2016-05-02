@@ -8,7 +8,8 @@
 #ifndef EVENTS_H_
 #define EVENTS_H_
 #include <string>
-
+namespace frogger
+{
 class Events
 {
 public:
@@ -17,5 +18,6 @@ public:
 	virtual std::string getEvent()=0;
 	virtual void getMousePos(int* x,int* y)=0;
 };
+}
 
 #endif /* EVENTS_H_ */

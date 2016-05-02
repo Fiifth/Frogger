@@ -9,6 +9,7 @@
 #include "Row.h"
 #include <stdlib.h>
 #include <iostream>
+using namespace frogger;
 
 ItemSDL::ItemSDL(SDLdata* sdldata, Row* row, int x, int y, int w, int h,
 		int ind) :

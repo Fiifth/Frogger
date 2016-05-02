@@ -7,6 +7,7 @@
 
 #include <Lane.h>
 #include "Factory.h"
+using namespace frogger;
 Lane::Lane()
 {
 

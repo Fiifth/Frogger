@@ -6,7 +6,7 @@
  */
 
 #include <Item.h>
-
+using namespace frogger;
 Item::Item()
 {
 }

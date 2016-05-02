@@ -21,7 +21,8 @@
 #include <levelGenerator/RowProp.h>
 
 using namespace std;
-
+namespace frogger
+{
 class Factory
 {
 public:
@@ -42,5 +43,5 @@ public:
 	virtual Events* createEvents()=0;
 	virtual Row* createRow(bool direction,int locY,	int width, int number, const RowProp* rowprop);
 };
-
+}
 #endif /* FACTORY_H_ */

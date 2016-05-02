@@ -12,6 +12,9 @@
 #include "Row.h"
 #include "Player.h"
 #include <list>
+
+namespace frogger
+{
 class Player;
 class Window
 {
@@ -44,5 +47,6 @@ protected:
 	int oldScore = 0, oldLife = 0, oldProjectiles = 0, oldTime = 0;
 	int oldScore2 = 0, oldLife2 = 0, oldProjectiles2 = 0, oldTime2 = 0;
 };
+}
 
 #endif /* WINDOW_H_ */

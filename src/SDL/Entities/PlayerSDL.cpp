@@ -12,6 +12,7 @@
 #include "Animator.h"
 #include <vector>
 #include "Projectile.h"
+using namespace frogger;
 
 using namespace std;
 

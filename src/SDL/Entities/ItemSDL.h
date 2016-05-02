@@ -14,8 +14,9 @@
 #include "Row.h"
 #include <vector>
 #include "Animator.h"
-
-class ItemSDL: public Item
+namespace frogger
+{
+class ItemSDL: public frogger::Item
 {
 public:
 	ItemSDL(SDLdata* sdldata, Row* row, int x, int y, int w, int h, int ind);
@@ -28,5 +29,6 @@ private:
 	SDLdata* sdldata;
 	Animator* ani;
 };
+}
 
 #endif /* SDL_ENTITIES_ITEMSDL_H_ */

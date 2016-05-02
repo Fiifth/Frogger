@@ -22,8 +22,9 @@
 #include <chrono>
 #include <list>
 #include "Player.h"
-
-class WindowSDL: public Window
+namespace frogger
+{
+class WindowSDL: public frogger::Window
 {
 public:
 	WindowSDL(SDLdata* sdldata);
@@ -54,7 +55,8 @@ private:
 			std::chrono::high_resolution_clock::now();
 	std::vector<Row*> rowsOld;
 	std::vector<Row*>* rowsOldP;
-	string oldString="";
+	std::string oldString="";
 };
+}
 
 #endif /* WINDOWSDL_H_ */

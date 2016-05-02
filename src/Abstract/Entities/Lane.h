@@ -12,7 +12,9 @@
 #include "Player.h"
 #include <list>
 #include "Item.h"
-class Lane: public Props
+namespace frogger
+{
+class Lane: public frogger::Props
 {
 public:
 	Lane();
@@ -56,5 +58,5 @@ protected:
 		}
 	};
 };
-
+}
 #endif /* ABSTRACT_ENTITIES_LANE_H_ */

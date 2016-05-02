@@ -7,6 +7,7 @@
 
 #include <Projectile.h>
 #include "Player.h"
+using namespace frogger;
 
 Projectile::Projectile()
 {

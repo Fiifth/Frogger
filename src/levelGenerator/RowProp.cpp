@@ -6,6 +6,7 @@
  */
 
 #include <levelGenerator/RowProp.h>
+using namespace frogger;
 
 RowProp::RowProp(int speed,int divider,char type,int obstRate,int itemRate,
 		int shootRate, bool obstacleVis,bool laneVis,std::vector<int> obstIndexes,

@@ -8,6 +8,7 @@
 #include "Window.h"
 #include <string>
 using namespace std;
+using namespace frogger;
 
 Window::Window()
 {

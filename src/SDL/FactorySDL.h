@@ -20,8 +20,9 @@
 #include "ProjectileSDL.h"
 
 using namespace std;
-
-class FactorySDL: public Factory
+namespace frogger
+{
+class FactorySDL: public frogger::Factory
 {
 public:
 	FactorySDL();
@@ -39,5 +40,6 @@ public:
 	virtual Events* createEvents();
 	SDLdata* sdldata;
 };
+}
 
 #endif /* FACTORYSDL_H_ */

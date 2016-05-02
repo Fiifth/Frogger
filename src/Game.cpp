@@ -32,6 +32,7 @@
 
 using namespace std;
 using namespace std::chrono;
+using namespace frogger;
 
 Game::Game(Factory* F)
 {
@@ -81,7 +82,7 @@ Game::Game(Factory* F)
 				return;
 			level->levelExecution(keyStroke);
 
-			state = playersAlive(players, 'A') ? 'A' : 'B';
+			state = playersA(players, 'A') ? 'A' : 'B';
 			state=level->isObjectiveDone()?'B':state;
 
 			win->dislayData(players);
@@ -119,7 +120,7 @@ Game::~Game()
 {
 }
 
-bool Game::playersAlive(list<Player*>* players, char mode)
+bool Game::playersA(list<Player*>* players, char mode)
 {
 	bool temp = false;
 	for (Player* player : *players)

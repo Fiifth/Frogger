@@ -9,6 +9,7 @@
 #include "Row.h"
 #include <stdlib.h>
 #include <iostream>
+using namespace frogger;
 
 LaneSDL::LaneSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible, int x, int y, int w,
 		int h) :

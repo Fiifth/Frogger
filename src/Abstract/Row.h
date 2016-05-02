@@ -8,7 +8,8 @@
 #ifndef ROW_H_
 #define ROW_H_
 #include "levelGenerator/RowProp.h"
-
+namespace frogger
+{
 class Row
 {
 public:
@@ -42,5 +43,5 @@ private:
 	const RowProp* rowProperties;
 
 };
-
+}
 #endif /* ROW_H_ */
