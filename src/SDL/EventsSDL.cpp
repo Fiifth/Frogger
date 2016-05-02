@@ -10,7 +10,7 @@
 #include <iostream>
 
 using namespace std;
-using namespace frogger;
+using namespace frogger_sdl;
 //string event;
 
 EventsSDL::EventsSDL()

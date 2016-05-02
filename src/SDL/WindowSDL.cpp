@@ -23,7 +23,7 @@
 
 using namespace std;
 using namespace std::chrono;
-using namespace frogger;
+using namespace frogger_sdl;
 
 WindowSDL::WindowSDL(SDLdata* sdldata) :
 		sdldata(sdldata), ren(NULL), win(NULL)
@@ -62,7 +62,7 @@ void WindowSDL::makeWindow(int ScreenWidth, int ScreenHeight,
 	//cout<<difference<<endl;
 
 }
-void WindowSDL::generateBackground(vector<Row*>* rows)
+void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
 {
 	bool changed=false;
 	unsigned int i=0;
@@ -88,7 +88,7 @@ void WindowSDL::generateBackground(vector<Row*>* rows)
 		rowsOld.clear();
 		setBackground('A');
 		std::vector<SDL_Texture*> backTextures = sdldata->getBackTextures();
-		for (Row* row : *rows)
+		for (frogger::Row* row : *rows)
 		{
 			rowsOld.push_back(row->clone());
 			int y = row->getLocY();
@@ -117,12 +117,12 @@ void WindowSDL::generateBackground(vector<Row*>* rows)
 
 	}
 }
-void WindowSDL::dislayData(list<Player*>* players)
+void WindowSDL::dislayData(list<frogger::Player*>* players)
 {
 //auto start_time=chrono::steady_clock::now();
 	string newString;
 int i=1;
-	for (Player* pl:*players)
+	for (frogger::Player* pl:*players)
 	{
 		newString=newString+" ||Player"+std::to_string(i)+"|| ";
 		newString=newString+"Score: ";

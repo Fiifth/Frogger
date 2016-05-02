@@ -18,7 +18,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	frogger::Factory* f = new FactorySDL();
+	frogger::Factory* f = new frogger_sdl::FactorySDL();
 	new Game(f);
 	return 0;
 }

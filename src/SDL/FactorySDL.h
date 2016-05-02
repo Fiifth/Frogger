@@ -20,24 +20,24 @@
 #include "ProjectileSDL.h"
 
 using namespace std;
-namespace frogger
+namespace frogger_sdl
 {
 class FactorySDL: public frogger::Factory
 {
 public:
 	FactorySDL();
 	virtual ~FactorySDL();
-	virtual Player* createPlayer(int x, int y, int w, int h, int speedH,
+	virtual frogger::Player* createPlayer(int x, int y, int w, int h, int speedH,
 			int speedV, int number);
-	virtual Obstacle* createObstacle(Row* row,bool visible, int x, int y, int w, int h);
-	virtual Lane* createLane(Row* row,bool visible, int x, int y, int w, int h);
-	virtual Item* createItem(Row* row, int x, int y, int w, int h, int type);
-	virtual Projectile* createProjectile(Entity* entity, int speed, int type);
-	virtual Obstacle* createObstacle(Row* row,bool visible);
-	virtual Lane* createLane(Row* row,bool visible);
-	virtual Item* createItem(Row* row, int type);
-	virtual Window* createWindow();
-	virtual Events* createEvents();
+	virtual frogger::Obstacle* createObstacle(frogger::Row* row,bool visible, int x, int y, int w, int h);
+	virtual frogger::Lane* createLane(frogger::Row* row,bool visible, int x, int y, int w, int h);
+	virtual frogger::Item* createItem(frogger::Row* row, int x, int y, int w, int h, int type);
+	virtual frogger::Projectile* createProjectile(frogger::Entity* entity, int speed, int type);
+	virtual frogger::Obstacle* createObstacle(frogger::Row* row,bool visible);
+	virtual frogger::Lane* createLane(frogger::Row* row,bool visible);
+	virtual frogger::Item* createItem(frogger::Row* row, int type);
+	virtual frogger::Window* createWindow();
+	virtual frogger::Events* createEvents();
 	SDLdata* sdldata;
 };
 }

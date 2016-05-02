@@ -7,7 +7,8 @@
 
 #include <ProjectileSDL.h>
 #include <iostream>
-using namespace frogger;
+using namespace frogger_sdl;
+
 
 ProjectileSDL::ProjectileSDL(SDLdata* sdldata, int direction, int Xstart,
 		int Ystart, int size, int speed, int ind) :

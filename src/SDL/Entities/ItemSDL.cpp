@@ -9,9 +9,9 @@
 #include "Row.h"
 #include <stdlib.h>
 #include <iostream>
-using namespace frogger;
+using namespace frogger_sdl;
 
-ItemSDL::ItemSDL(SDLdata* sdldata, Row* row, int x, int y, int w, int h,
+ItemSDL::ItemSDL(SDLdata* sdldata, frogger::Row* row, int x, int y, int w, int h,
 		int ind) :
 		sdldata(sdldata)
 {
@@ -50,7 +50,7 @@ void ItemSDL::draw()
 	}
 }
 
-ItemSDL::ItemSDL(SDLdata* sdldata, Row* row, int ind) :
+ItemSDL::ItemSDL(SDLdata* sdldata, frogger::Row* row, int ind) :
 		sdldata(sdldata)
 {
 	ani = sdldata->getItemAni(ind).clone();

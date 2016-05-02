@@ -7,7 +7,7 @@
 
 #include <Animator.h>
 #include <iostream>
-using namespace frogger;
+using namespace frogger_sdl;
 
 Animator::Animator(std::vector<SDL_Texture*> textures, std::vector<int> ratio) :
 		textures(textures), ratio(ratio), counter(abs(ratio.at(0))), currentTexture(0)
@@ -89,6 +89,7 @@ void Animator::triggerNext(int counter)
 Animator* Animator::clone()
 {
 	return new Animator(*this);
+	//return this;
 }
 
 bool Animator::isTurned() const

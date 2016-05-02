@@ -15,12 +15,12 @@
 #include "Animator.h"
 #include "Factory.h"
 #include "Props.h"
-namespace frogger
+namespace frogger_sdl
 {
 class PlayerSDL: public frogger::Player
 {
 public:
-	PlayerSDL(SDLdata* sdldata, Factory* F, int x, int y, int w, int h,
+	PlayerSDL(SDLdata* sdldata, frogger::Factory* F, int x, int y, int w, int h,
 			int speedH, int speedV, int number);
 	virtual ~PlayerSDL();
 	void draw();

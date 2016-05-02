@@ -15,15 +15,15 @@
 #include <list>
 #include "Animator.h"
 #include "Factory.h"
-namespace frogger
+namespace frogger_sdl
 {
 class ObstacleSDL: public frogger::Obstacle
 {
 public:
 
-	ObstacleSDL(SDLdata* sdldata, Row* row, Factory* F,bool visiblen, int x, int y, int w,
+	ObstacleSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,bool visiblen, int x, int y, int w,
 			int h);
-	ObstacleSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible);
+	ObstacleSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,bool visible);
 	virtual ~ObstacleSDL();
 	void draw();
 	void move(int deltaX, int deltaY);

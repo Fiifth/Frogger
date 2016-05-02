@@ -22,7 +22,7 @@
 #include <chrono>
 #include <list>
 #include "Player.h"
-namespace frogger
+namespace frogger_sdl
 {
 class WindowSDL: public frogger::Window
 {
@@ -31,11 +31,11 @@ public:
 	virtual ~WindowSDL();
 	void makeWindow(int ScreenWidth, int ScreenHeight, int dataWindowHeight,
 			char const* title);
-	void dislayData(std::list<Player*>* players);
+	void dislayData(std::list<frogger::Player*>* players);
 	void displayHighScore(int score1, int score2, int score3, int score4);
 	void setBackground(char state);
 	void updateScreen();
-	void generateBackground(std::vector<Row*>* rows);
+	void generateBackground(std::vector<frogger::Row*>* rows);
 	void saveCurrentWindowImage();
 private:
 	SDLdata* sdldata;
@@ -53,8 +53,8 @@ private:
 			std::chrono::high_resolution_clock::now();
 	std::chrono::high_resolution_clock::time_point endP =
 			std::chrono::high_resolution_clock::now();
-	std::vector<Row*> rowsOld;
-	std::vector<Row*>* rowsOldP;
+	std::vector<frogger::Row*> rowsOld;
+	std::vector<frogger::Row*>* rowsOldP;
 	std::string oldString="";
 };
 }

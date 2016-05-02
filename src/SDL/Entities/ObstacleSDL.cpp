@@ -11,11 +11,11 @@
 #include "SDL.h"
 #include "Window.h"
 #include <string>
-using namespace frogger;
+using namespace frogger_sdl;
 
 using namespace std;
 
-ObstacleSDL::ObstacleSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible, int x, int y,
+ObstacleSDL::ObstacleSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,bool visible, int x, int y,
 		int w, int h) :
 		sdldata(sdldata)
 {
@@ -63,7 +63,7 @@ void ObstacleSDL::draw()
 	projectileList.remove_if(drawMoveRemove());
 }
 
-ObstacleSDL::ObstacleSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible) :
+ObstacleSDL::ObstacleSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,bool visible) :
 		sdldata(sdldata)
 {
 	setVisible(visible);

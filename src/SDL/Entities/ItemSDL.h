@@ -14,13 +14,13 @@
 #include "Row.h"
 #include <vector>
 #include "Animator.h"
-namespace frogger
+namespace frogger_sdl
 {
 class ItemSDL: public frogger::Item
 {
 public:
-	ItemSDL(SDLdata* sdldata, Row* row, int x, int y, int w, int h, int ind);
-	ItemSDL(SDLdata* sdldata, Row* row, int ind);
+	ItemSDL(SDLdata* sdldata, frogger::Row* row, int x, int y, int w, int h, int ind);
+	ItemSDL(SDLdata* sdldata, frogger::Row* row, int ind);
 	virtual ~ItemSDL();
 	void draw();
 private:

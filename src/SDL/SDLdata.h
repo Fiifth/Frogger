@@ -11,7 +11,7 @@
 #include <vector>
 #include "Animator.h"
 #include <string>
-namespace frogger
+namespace frogger_sdl
 {
 class SDLdata
 {
@@ -50,8 +50,7 @@ public:
 	SDL_Texture* getStartSelTex();
 	SDL_Texture* getHighScoreTex();
 	SDL_Texture* getHighScoreBackSel();
-
-private:
+protected:
 	int screenWidth;
 	int screenHeight;
 	SDL_Renderer* re;

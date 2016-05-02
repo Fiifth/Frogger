@@ -11,7 +11,7 @@
 #include "Projectile.h"
 #include "SDLdata.h"
 #include "Animator.h"
-namespace frogger
+namespace frogger_sdl
 {
 class ProjectileSDL: public frogger::Projectile
 {

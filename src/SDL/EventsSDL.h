@@ -10,7 +10,7 @@
 
 #include "Events.h"
 #include <string>
-namespace frogger
+namespace frogger_sdl
 {
 class EventsSDL: public frogger::Events
 {

@@ -21,7 +21,7 @@
 #include "Row.h"
 
 using namespace std;
-using namespace frogger;
+using namespace frogger_sdl;
 
 FactorySDL::FactorySDL()
 {
@@ -32,51 +32,51 @@ FactorySDL::~FactorySDL()
 {
 }
 
-Player* FactorySDL::createPlayer(int x, int y, int w, int h, int speedH,
+frogger::Player* FactorySDL::createPlayer(int x, int y, int w, int h, int speedH,
 		int speedV, int number)
 {
 	return new PlayerSDL(sdldata, this, x, y, w, h, speedH, speedV, number);
 }
-Obstacle* FactorySDL::createObstacle(Row* row,bool visible, int x, int y, int w, int h)
+frogger::Obstacle* FactorySDL::createObstacle(frogger::Row* row,bool visible, int x, int y, int w, int h)
 {
 	return new ObstacleSDL(sdldata, row, this,visible, x, y, w, h);
 }
-Window* FactorySDL::createWindow()
+frogger::Window* FactorySDL::createWindow()
 {
 	return new WindowSDL(sdldata);
 }
 
-Events* FactorySDL::createEvents()
+frogger::Events* FactorySDL::createEvents()
 {
 	return new EventsSDL();
 }
 
-Lane* FactorySDL::createLane(Row* row,bool visible, int x, int y, int w, int h)
+frogger::Lane* FactorySDL::createLane(frogger::Row* row,bool visible, int x, int y, int w, int h)
 {
 	return new LaneSDL(sdldata, row, this,visible, x, y, w, h);
 }
 
-Item* FactorySDL::createItem(Row* row, int x, int y, int w, int h, int type)
+frogger::Item* FactorySDL::createItem(frogger::Row* row, int x, int y, int w, int h, int type)
 {
 	return new ItemSDL(sdldata, row, x, y, w, h, type);
 }
 
-Obstacle* FactorySDL::createObstacle(Row* row,bool visible)
+frogger::Obstacle* FactorySDL::createObstacle(frogger::Row* row,bool visible)
 {
 	return new ObstacleSDL(sdldata, row, this,visible);
 }
 
-Lane* FactorySDL::createLane(Row* row,bool visible)
+frogger::Lane* FactorySDL::createLane(frogger::Row* row,bool visible)
 {
 	return new LaneSDL(sdldata, row, this,visible);
 }
 
-Item* FactorySDL::createItem(Row* row, int type)
+frogger::Item* FactorySDL::createItem(frogger::Row* row, int type)
 {
 	return new ItemSDL(sdldata, row, type);
 }
 
-Projectile* FactorySDL::createProjectile(Entity* entity, int speed, int type)
+frogger::Projectile* FactorySDL::createProjectile(frogger::Entity* entity, int speed, int type)
 {
 	int x, y;
 	int dir = entity->getDirection();

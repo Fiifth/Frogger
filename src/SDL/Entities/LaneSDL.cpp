@@ -9,9 +9,9 @@
 #include "Row.h"
 #include <stdlib.h>
 #include <iostream>
-using namespace frogger;
+using namespace frogger_sdl;
 
-LaneSDL::LaneSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible, int x, int y, int w,
+LaneSDL::LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,bool visible, int x, int y, int w,
 		int h) :
 		sdldata(sdldata)
 {
@@ -39,7 +39,7 @@ LaneSDL::~LaneSDL()
 	delete (ani);
 }
 
-LaneSDL::LaneSDL(SDLdata* sdldata, Row* row, Factory* F,bool visible) :
+LaneSDL::LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,bool visible) :
 		sdldata(sdldata)
 {
 	setVisible(visible);

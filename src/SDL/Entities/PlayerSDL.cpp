@@ -12,11 +12,11 @@
 #include "Animator.h"
 #include <vector>
 #include "Projectile.h"
-using namespace frogger;
+using namespace frogger_sdl;
 
 using namespace std;
 
-PlayerSDL::PlayerSDL(SDLdata* sdldata, Factory* F, int x, int y, int w, int h,
+PlayerSDL::PlayerSDL(SDLdata* sdldata, frogger::Factory* F, int x, int y, int w, int h,
 		int speedH, int speedV, int number) :
 		sdldata(sdldata), textures(sdldata->getPlayerTextures())
 
