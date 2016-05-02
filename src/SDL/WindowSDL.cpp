@@ -177,6 +177,10 @@ void WindowSDL::setBackground(char state)
 		temp=sdldata->getHighSelTex();
 	else if (state=='D')
 		temp=sdldata->getQuitSelTex();
+	else if (state=='E')
+			temp=sdldata->getHighScoreTex();
+	else if (state=='F')
+		temp=sdldata->getHighScoreBackSel();
 
 	sdldata->renderTexture(temp, sdldata->getRen(),	0, 0, &WIDTH, &HEIGHT, 0);
 }

@@ -94,6 +94,8 @@ void SDLdata::createTextures()
 	string quitSel ="C:/frogger/quitSel.png";
 	string startSel ="C:/frogger/startSel.png";
 	string highSel ="C:/frogger/highSel.png";
+	string HighScore="C:/frogger/highScore.png";
+	string HighScoreBackSel="C:/frogger/highScoreBackSel.png";
 	string imagePathBackground1 = "C:/frogger/back1.png";
 	string imagePathBackground2 = "C:/frogger/back2.png";
 	string imagePathBackground3 = "C:/frogger/back3.png";
@@ -102,6 +104,8 @@ void SDLdata::createTextures()
 	quitSelTex = IMG_LoadTexture(re, quitSel.c_str());
 	startSelTex = IMG_LoadTexture(re, startSel.c_str());
 	highSelTex = IMG_LoadTexture(re, highSel.c_str());
+	HighScoreTex=IMG_LoadTexture(re, HighScore.c_str());
+	HighScoreBackSelTex=IMG_LoadTexture(re, HighScoreBackSel.c_str());
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground1.c_str()));
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground2.c_str()));
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground3.c_str()));
@@ -129,7 +133,7 @@ void SDLdata::createTextures()
 			getAnimator({"o13.png"},{1}),
 			getAnimator({"turtle1.png","turtle2.png"},{20,20}),
 			getAnimator({"lane5.png"},{1}),
-			getAnimator({"turtle1.png","turtle2.png","turtle1.png","turtle2.png","turtle3.png","turtle4.png","turtle5.png","turtle4.png","turtle3.png"},{40,40,40,40,20,10,-70,10,20})
+			getAnimator({"turtle1.png","turtle2.png","turtle1.png","turtle2.png","turtle3.png","turtle4.png","turtle5.png","turtle6.png" ,"turtle4.png","turtle3.png"},{40,40,40,40,20,10,10,-70,10,20})
 	};
 	itemAni=
 	{
@@ -142,7 +146,7 @@ void SDLdata::createTextures()
 	};
 	projAni=
 	{
-			getAnimator({"item.png"},{1})
+			getAnimator({"proj.png"},{1})
 	};
 
 }
@@ -261,4 +265,14 @@ SDL_Texture* SDLdata::getQuitSelTex()
 SDL_Texture* SDLdata::getStartSelTex()
 {
 	return startSelTex;
+}
+
+SDL_Texture* SDLdata::getHighScoreTex()
+{
+	return HighScoreTex;
+}
+
+SDL_Texture* SDLdata::getHighScoreBackSel()
+{
+	return HighScoreBackSelTex;
 }

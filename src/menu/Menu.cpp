@@ -15,6 +15,8 @@ Menu::Menu(Window* win):win(win)
 	start=new MenuButton(200,230,300,35);
 	high=new MenuButton(220,310,260,35);
 	quit=new MenuButton(285,385,100,35);
+	back=new MenuButton(30,474,110,35);
+
 	//int x, int y, int w, int h, int screenWidth, int screenHeight
 
 
@@ -32,31 +34,56 @@ bool Menu::isStartGame() const
 
 char Menu::menuExecution(std::string keyDown, int mXH, int mYH, int mXP,int mYP)
 {
-	if(start->col(mXH,mYH))
+	if (state=='A')
 	{
-		win->setBackground('B');
-		if(keyDown=="MOUSEBUTTONDOWN")
-			return 'A';
-	}
-	else if(high->col(mXH,mYH))
-	{
-		win->setBackground('C');
-		if(keyDown=="MOUSEBUTTONDOWN")
-			return 'H';
-	}
-	else if(quit->col(mXH,mYH))
-	{
-		win->setBackground('D');
-		if(keyDown=="MOUSEBUTTONDOWN")
-			return 'Q';
-	}
-	else
-	{
-		win->setBackground('A');
-		if (keyDown=="Escape")
-		return 'Q';
+		if(start->col(mXH,mYH))
+		{
+			win->setBackground('B');
+			if(keyDown=="MOUSEBUTTONDOWN")
+				return 'A';
+		}
+		else if(high->col(mXH,mYH))
+		{
+			win->setBackground('C');
+			if(keyDown=="MOUSEBUTTONDOWN")
+			{
+				state='B';
+				return 'H';
+			}
+		}
+		else if(quit->col(mXH,mYH))
+		{
+			win->setBackground('D');
+			if(keyDown=="MOUSEBUTTONDOWN")
+				return 'Q';
+		}
 		else
-			return 'B';
+		{
+			win->setBackground('A');
+			if (keyDown=="Escape")
+			return 'Q';
+			else
+				return 'B';
+		}
+	}
+	else if (state=='B')
+	{
+		if(back->col(mXH,mYH))
+		{
+			win->setBackground('F');
+			if(keyDown=="MOUSEBUTTONDOWN")
+			{
+				state='A';
+			}
+		}
+		else
+		{
+			win->setBackground('E');
+					if (keyDown=="Escape")
+					return 'Q';
+					else
+						return 'B';
+		}
 	}
 }
 

@@ -26,6 +26,7 @@ private:
 	MenuButton* start;
 	MenuButton* high;
 	MenuButton* quit;
+	MenuButton* back;
 };
 
 #endif /* MENU_H_ */

@@ -47,6 +47,8 @@ public:
 	SDL_Texture* getHighSelTex();
 	SDL_Texture* getQuitSelTex();
 	SDL_Texture* getStartSelTex();
+	SDL_Texture* getHighScoreTex();
+	SDL_Texture* getHighScoreBackSel();
 
 private:
 	int screenWidth;
@@ -56,6 +58,8 @@ private:
 	SDL_Texture* quitSelTex ;
 	SDL_Texture* startSelTex ;
 	SDL_Texture* highSelTex ;
+	SDL_Texture* HighScoreTex;
+	SDL_Texture* HighScoreBackSelTex;
 	std::vector<SDL_Texture*> playerTex;
 	std::vector<SDL_Texture*> ObstTex;
 	std::vector<SDL_Texture*> laneTex;
