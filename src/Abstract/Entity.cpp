@@ -138,12 +138,6 @@ bool Entity::drawMoveRemove::operator ()(Props* prop)
 bool Entity::colli(Entity* entity)
 {
 	return (colli2(this,entity)||colli2(entity,this));
-//	return (((entity->getY() >= (y) && entity->getY() < (y + h))
-//			|| (entity->getY() + entity->getH() > (y)
-//					&& entity->getY() + entity->getH() <= (y + h)))
-//			&& ((entity->getX() >= (x) && entity->getX() <= (x + w))
-//					|| (entity->getX() + entity->getW() >= (x)
-//							&& entity->getX() + entity->getW() <= (x + w))));
 }
 bool Entity::colli2(Entity* entity1,Entity* entity2)
 {

@@ -106,3 +106,8 @@ int Row::getRandomLaneInd()
 {
 	return rowProperties->getLaneIndexes().at(rand()%rowProperties->getLaneIndexes().size());
 }
+
+void Row::setRowProperties(const RowProp* rowProp)
+{
+	rowProperties=rowProp;
+}

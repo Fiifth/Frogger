@@ -13,7 +13,6 @@ Level::Level(Factory* F, Window* win, list<Player*>* players, int rowHeight,Leve
 F(F), win(win), players(players), rowHeight(rowHeight),lvlprop(lvlprop)
 {
 	initLevel();
-
 }
 
 Level::~Level()
@@ -29,8 +28,14 @@ char Level::levelExecution(string keyStroke)
 		{
 			player->takeAction(keyStroke);
 		}
-		if (lvlprop->getMode()=='A'&&player->getY()<300)
-						followFrog(rows,players); //endless
+		if (lvlprop->getMode()=='A'&&player->getY()<win->getGameWindowHeight()-rowHeight*2)
+		{
+			int factor=1;
+			factor=player->getY()<win->getGameWindowHeight()-rowHeight*3?2:factor;
+			factor=player->getY()<win->getGameWindowHeight()-rowHeight*4?3:factor;
+			factor=player->getY()<win->getGameWindowHeight()-rowHeight*5?4:factor;
+						followFrog(rows,players,factor); //endless
+		}
 	}
 
 	if(lvlprop->getMode()=='A')
@@ -194,15 +199,15 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,int x)
 	return prop;
 }
 
-bool Level::followFrog(vector<Row*>* rows,list<Player*>* players)
+bool Level::followFrog(vector<Row*>* rows,list<Player*>* players, int factor)
 {
 	for (Row* row : *rows)
 	{
-		row->setLocY(row->getLocY()+2);
+		row->setLocY(row->getLocY()+factor);
 	}
 	for (Player* player : *players)
 	{
-		player->move(0,2,true);
+		player->move(0,factor,true);
 	}
 	return true;
 }
@@ -238,17 +243,28 @@ void Level::initLevel()
 void Level::extraRowNeeded(int rowHeight,int screenHeight,int screenWidth,
 		Factory* F, vector<Row*>* rows, vector<list<Props*>>* propsOnRow,LevelProperties* lvlprop)
 {
-	if(rows->back()->getLocY()>-10)
+	Row* lowestRow=rows->back();
+	Row* highestRow=rows->back();
+	for (Row* row:*rows)
 	{
-		list<Props*> enemies;
-		const RowProp* rowProp;
-		rowProp=lvlprop->getSeg1();
-		rows->push_back(F->createRow(!rows->back()->isDirLeft(), rows->back()->getLocY()-rowHeight, rowHeight, rows->back()->getNumber()+1,rowProp));
-		propsOnRow->push_back(enemies);
-
-		fillOneRow(F,rows->back(),propsOnRow,1000);
-		if(rows->front()->getLocY()>screenHeight*2)
-		rows->erase(rows->begin());
+		if (row->getLocY()<lowestRow->getLocY())
+		{
+			lowestRow=row;
+		}
+		else if (row->getLocY()>highestRow->getLocY())
+		{
+			highestRow=row;
+		}
+	}
+	if(highestRow->getLocY()>screenHeight)
+	{
+		highestRow->setLocY(lowestRow->getLocY()-lowestRow->getHeight());
+		if(highestRow->getRowProperties()->getType()=='A')
+		{
+			highestRow->setRowProperties(lowestRow->getRowProperties());
+		}
+		propsOnRow->at(highestRow->getNumber()).clear();
+		fillOneRow(F,highestRow,propsOnRow,screenWidth);
 	}
 }
 

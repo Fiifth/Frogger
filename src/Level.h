@@ -55,7 +55,7 @@ public:
 			vector<Row*>* rows);
 	Props* obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,int x);
 	Props* obsOrLane(list<Props*>* PreProp, Row* row);
-	bool followFrog(vector<Row*>* rows,list<Player*>* players);
+	bool followFrog(vector<Row*>* rows,list<Player*>* players,int factor);
 	bool objectiveCompleteCheck(std::vector<std::list<Props*>>* propsOnRow);
 	bool isObjectiveDone() const;
 	void resetLevel();

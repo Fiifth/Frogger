@@ -30,6 +30,7 @@ public:
 	bool isLaneVis() const;
 	bool isObstacleVis() const;
 	const RowProp* getRowProperties() const;
+	void setRowProperties(const RowProp* rowProp);
 	int getRandomObsInd();
 	int getRandomLaneInd();
 
