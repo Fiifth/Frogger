@@ -80,7 +80,6 @@ void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
 		}
 		else
 			changed=true;
-
 	}
 	//	changed=true;
 	if (rowsBackgroundGenerated == nullptr||changed)
@@ -112,8 +111,7 @@ void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
 	}
 	else
 	{
-		sdldata->renderTexture(backgourndTexture, ren, 0, 0, &WIDTH, &HEIGHT,
-				0);
+		sdldata->renderTexture(backgourndTexture, ren, 0, 0, &WIDTH, &HEIGHT, 0);
 
 	}
 }

@@ -27,6 +27,7 @@ public:
 	std::vector<int> getVec(int a,int b);
 	char getMode() const;
 	void setMode(char mode);
+	const RowProp* getRandomRow() const;
 
 private:
 	RowProp* firstRow=nullptr;
@@ -39,5 +40,6 @@ private:
 	char mode;
 };
 }
+
 
 #endif /* LEVELGENERATOR_LEVELPROPERTIES_H_ */

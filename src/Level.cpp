@@ -75,7 +75,7 @@ void Level::rowGenerator(int rowHeight, int screenHight,
 			if (n==(0))
 				rowProp=lvlprop->getFirstRow();
 			else
-				rowProp=lvlprop->getSeg1();
+				rowProp=lvlprop->getRandomRow();
 
 			rows->push_back(F->createRow(dir, yloc, rowHeight, n,rowProp));
 			propsOnRow->push_back(enemies);
@@ -260,10 +260,11 @@ void Level::extraRowNeeded(int rowHeight,int screenHeight,int screenWidth,
 	if(highestRow->getLocY()>screenHeight)
 	{
 		highestRow->setLocY(lowestRow->getLocY()-lowestRow->getHeight());
-		if(highestRow->getRowProperties()->getType()=='A')
-		{
-			highestRow->setRowProperties(lowestRow->getRowProperties());
-		}
+		//if(highestRow->getRowProperties()->getType()=='A')
+
+		//	highestRow->setRowProperties(lowestRow->getRowProperties());
+			highestRow->setRowProperties(lvlprop->getRandomRow());
+
 		propsOnRow->at(highestRow->getNumber()).clear();
 		fillOneRow(F,highestRow,propsOnRow,screenWidth);
 	}

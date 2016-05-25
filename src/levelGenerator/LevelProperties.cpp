@@ -6,6 +6,7 @@
  */
 
 #include <levelGenerator/LevelProperties.h>
+#include <stdlib.h>     /* srand, rand */
 using namespace frogger;
 
 LevelProperties::LevelProperties(char mode) :mode(mode)
@@ -83,4 +84,14 @@ char LevelProperties::getMode() const
 void LevelProperties::setMode(char mode)
 {
 	this->mode = mode;
+}
+
+const RowProp* LevelProperties::getRandomRow() const
+{
+	if (rand()%100>25)
+	{
+		return seg1;
+	}
+	else
+		return seg3;
 }
