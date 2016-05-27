@@ -82,7 +82,7 @@ void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
 			changed=true;
 	}
 	//	changed=true;
-	if (rowsBackgroundGenerated == nullptr||changed)
+	if (true ||rowsBackgroundGenerated == nullptr||changed)
 	{
 		rowsOld.clear();
 		setBackground('A');
@@ -107,7 +107,7 @@ void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
 			}
 		}
 
-		saveCurrentWindowImage();
+		//saveCurrentWindowImage();
 	}
 	else
 	{
@@ -200,6 +200,7 @@ void WindowSDL::updateScreen()
 	//cout<<difference-15<<":"<<correction<<endl;
 	//startP = chrono::high_resolution_clock::now();
 	SDL_RenderPresent(ren);
+	SDL_RenderClear(ren);
 
 }
 
@@ -244,8 +245,7 @@ void WindowSDL::saveCurrentWindowImage()
 		SDL_RenderReadPixels(ren, NULL, SDL_GetWindowPixelFormat(win),
 				rowsBackgroundGenerated->pixels,
 				rowsBackgroundGenerated->pitch);
-		backgourndTexture = SDL_CreateTextureFromSurface(ren,
-				rowsBackgroundGenerated);
+		backgourndTexture = SDL_CreateTextureFromSurface(ren,	rowsBackgroundGenerated);
 	}
 	temp = true;
 }

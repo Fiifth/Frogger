@@ -81,7 +81,7 @@ void SDLdata::setRen(SDL_Renderer* rende)
 }
 void SDLdata::setBackground(SDL_Texture* texB)
 {
-	SDL_RenderClear(re);
+	//SDL_RenderClear(re);
 	SDL_RenderCopy(re, texB, NULL, NULL);
 }
 void SDLdata::updateScreen()
