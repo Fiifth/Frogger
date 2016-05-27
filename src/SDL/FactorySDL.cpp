@@ -81,22 +81,22 @@ frogger::Projectile* FactorySDL::createProjectile(frogger::Entity* entity, int s
 	int x, y;
 	int dir = entity->getDirection();
 	//int direction=0;//1=up,2=right,3=down,4=left;
-	if (dir == 1)
+	if (dir == 'U')
 	{
 		x = entity->getX();
 		y = entity->getY();
 	}
-	else if (dir == 2)
+	else if (dir == 'R')
 	{
 		x = entity->getX();
 		y = entity->getY();
 	}
-	else if (dir == 3)
+	else if (dir == 'D')
 	{
 		x = entity->getX();
 		y = entity->getY();
 	}
-	else if (dir == 4)
+	else if (dir == 'L')
 	{
 		x = entity->getX();
 		y = entity->getY();

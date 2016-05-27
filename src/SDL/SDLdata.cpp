@@ -134,7 +134,7 @@ void SDLdata::createTextures()
 			getAnimator({"o13.png"},{1}),
 			getAnimator({"turtle1.png","turtle2.png"},{20,20}),
 			getAnimator({"lane5.png"},{1}),
-			getAnimator({"turtle1.png","turtle2.png","turtle1.png","turtle2.png","turtle3.png","turtle4.png","turtle5.png","turtle6.png" ,"turtle4.png","turtle3.png"},{40,40,40,40,20,10,10,-70,10,20})
+			getAnimator({"turtle1.png","turtle2.png","turtle1.png","turtle2.png","turtle3.png","turtle4.png","turtle5.png","turtle6.png" ,"turtle4.png","turtle3.png"},{40,40,40,40,30,20,20,-70,10,20})
 	};
 	itemAni=
 	{

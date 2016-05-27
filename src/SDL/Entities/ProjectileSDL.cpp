@@ -10,7 +10,7 @@
 using namespace frogger_sdl;
 
 
-ProjectileSDL::ProjectileSDL(SDLdata* sdldata, int direction, int Xstart,
+ProjectileSDL::ProjectileSDL(SDLdata* sdldata, char direction, int Xstart,
 		int Ystart, int size, int speed, int ind) :
 		sdldata(sdldata)
 {
@@ -36,9 +36,9 @@ ProjectileSDL::~ProjectileSDL()
 void ProjectileSDL::draw()
 { //int direction=0;//1=up,2=right,3=down,4=left;
 	int angle = 0;
-	angle = (getDirection() == 2) ? 90 : angle;
-	angle = (getDirection() == 3) ? 180 : angle;
-	angle = (getDirection() == 4) ? 270 : angle;
+	angle = (getDirection() == 'R') ? 90 : angle;
+	angle = (getDirection() == 'D') ? 180 : angle;
+	angle = (getDirection() == 'L') ? 270 : angle;
 	sdldata->renderTexture(ani->getTexture(), sdldata->getRen(), x, y, &w, &h,
 			angle);
 	if (ani->isTurned() && !turned)

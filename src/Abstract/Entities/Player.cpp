@@ -19,11 +19,11 @@ Player::Player() :
 Player::~Player()
 {
 }
-//int direction=0;//1=up,2=right,3=down,4=left;
+
 void Player::moveUp()
 {
 	move(0, (-vSpeed), false);
-	direction = 1;
+	direction = 'U';
 	counter = 10;
 	moved=true;
 }
@@ -31,7 +31,7 @@ void Player::moveUp()
 void Player::moveDown()
 {
 	move(0, vSpeed, false);
-	direction = 3;
+	direction = 'D';
 	counter = 10;
 	moved=true;
 }
@@ -39,7 +39,7 @@ void Player::moveDown()
 void Player::moveRight()
 {
 	move(hSpeed / 2, 0, false);
-	direction = 2;
+	direction = 'R';
 	counter = 10;
 	moved=true;
 }
@@ -47,7 +47,7 @@ void Player::moveRight()
 void Player::moveLeft()
 {
 	move(-(hSpeed / 2), 0, false);
-	direction = 4;
+	direction = 'L';
 	counter = 10;
 	moved=true;
 }
@@ -165,7 +165,7 @@ void Player::resetPosition()
 {
 	x = startX;
 	y = startY;
-	direction = 1;
+	direction = 'U';
 	resetRemainingTime();
 }
 

@@ -45,8 +45,8 @@ char Level::levelExecution(string keyStroke)
 	win->generateBackground(rows);
 	propsGenerator(F, rows, propsOnRow);
 
-	drawGameElements(propsOnRow, projectiles, players, rows);
-	collisionDetection(propsOnRow, projectiles, players);
+	drawGameElements(propsOnRow, NULL, players, rows);
+	collisionDetection(propsOnRow, NULL, players);
 	objectiveDone=lvlprop->getMode()=='A'?false:objectiveCompleteCheck(propsOnRow);
 
 	return 'H';
@@ -57,7 +57,7 @@ void Level::rowGenerator(int rowHeight, int screenHight,
 {
 	int numberOfRows = (screenHight) / rowHeight;
 	list<Props*> enemies;
-	bool dir = true; //(rand() %2)>0)
+	char dir = 'L'; //(rand() %2)>0)
 	const RowProp* rowProp;
 	if (lvlprop->getMode()=='A')
 	{
@@ -79,7 +79,7 @@ void Level::rowGenerator(int rowHeight, int screenHight,
 
 			rows->push_back(F->createRow(dir, yloc, rowHeight, n,rowProp));
 			propsOnRow->push_back(enemies);
-			dir = not (dir);
+			dir=dir=='R'?'L':'R';
 		}
 
 	}

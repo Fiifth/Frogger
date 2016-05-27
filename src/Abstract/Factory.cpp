@@ -6,6 +6,7 @@
  */
 
 #include "Factory.h"
+
 using namespace frogger;
 
 
@@ -20,7 +21,7 @@ Factory::~Factory()
 }
 
 
-Row* Factory::createRow(bool direction, int locY, int width, int number,const RowProp* rowprop)
+Row* Factory::createRow(char direction, int locY, int width, int number,const RowProp* rowprop)
 {
 	return new Row(direction, locY, width,number,rowprop);
 }

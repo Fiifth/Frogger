@@ -41,7 +41,7 @@ public:
 	virtual Projectile* createProjectile(Entity* entity, int speed, int type)=0;
 	virtual Window* createWindow()=0;
 	virtual Events* createEvents()=0;
-	virtual Row* createRow(bool direction,int locY,	int width, int number, const RowProp* rowprop);
+	virtual Row* createRow(char direction,int locY,	int width, int number, const RowProp* rowprop);
 };
 }
 #endif /* FACTORY_H_ */

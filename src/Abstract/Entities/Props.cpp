@@ -32,20 +32,20 @@ void Props::moveForward()
 	if (row!=nullptr)
 	{
 		y=row->getLocY();
-		setDirection(row->isDirLeft() ? 4 : 2);
+		setDirection(row->getDirection());
 		setSpeed(row->getSpeed());
 		divider = row->getDivider();
 	}
 	if (timeToMove())
 	{
 		//1=up,2=right,3=down,4=left;
-		if (direction == 2)
+		if (direction == 'R')
 			move(speed, 0, true);
-		else if (direction == 4)
+		else if (direction == 'L')
 			move(-speed, 0, true);
-		else if ((direction == 1))
+		else if ((direction == 'U'))
 			move(0, -speed, true);
-		else if (direction == 3)
+		else if (direction == 'D')
 			move(0, speed, true);
 	}
 }

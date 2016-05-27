@@ -9,6 +9,7 @@
 #define ABSTRACT_PROPS_H_
 #include "Entity.h"
 #include "Row.h"
+#include <levelGenerator/RowProp.h>
 #include <iostream>
 namespace frogger
 {
@@ -37,6 +38,7 @@ public:
 
 protected:
 	Row* row;
+	RowProp* rowprop;
 	bool visible;
 	bool turned = false;
 	bool isTurenedByAni = false;

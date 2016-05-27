@@ -41,9 +41,9 @@ void PlayerSDL::draw()
 	{
 		//int direction=0;//1=up,2=right,3=down,4=left;
 		int angle = 0;
-		angle = (getDirection() == 2) ? 90 : angle;
-		angle = (getDirection() == 3) ? 180 : angle;
-		angle = (getDirection() == 4) ? 270 : angle;
+		angle = (getDirection() == 'R') ? 90 : angle;
+		angle = (getDirection() == 'D') ? 180 : angle;
+		angle = (getDirection() == 'L') ? 270 : angle;
 
 		if(moved)
 		{

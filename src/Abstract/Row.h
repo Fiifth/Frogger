@@ -14,7 +14,7 @@ class Row
 {
 public:
 
-	Row(bool direction, int locY, int height,int number,const RowProp* rowProperties);
+	Row(char direction, int locY, int height,int number,const RowProp* rowProperties);
 	virtual ~Row();
 	bool isDirLeft() const;
 	int getLocY() const;
@@ -34,9 +34,11 @@ public:
 	void setRowProperties(const RowProp* rowProp);
 	int getRandomObsInd();
 	int getRandomLaneInd();
+	char getDirection() const;
+	void setDirection(char direction);
 
 private:
-	bool direction;
+	char direction;
 	int locY;
 	int height;
 	int number;

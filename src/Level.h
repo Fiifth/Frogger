@@ -101,8 +101,6 @@ private:
 	string keyStroke;
 	vector<Row*> rowsR;
 	vector<list<Props*>> propsOnRowR;
-	list<Projectile*> projectilesR;
-	list<Projectile*>*projectiles = &projectilesR;
 	vector<Row*>* rows = &rowsR;
 	vector<list<Props*>>* propsOnRow = &propsOnRowR;
 	bool objectiveDone=false;

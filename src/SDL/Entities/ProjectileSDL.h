@@ -16,7 +16,7 @@ namespace frogger_sdl
 class ProjectileSDL: public frogger::Projectile
 {
 public:
-	ProjectileSDL(SDLdata* sdldata, int direction, int Xstart, int Ystart,
+	ProjectileSDL(SDLdata* sdldata, char direction, int Xstart, int Ystart,
 			int size, int speed, int ind);
 	virtual ~ProjectileSDL();
 	void draw();

@@ -102,12 +102,12 @@ void Entity::setSpeed(int speed)
 {
 	this->speed = speed;
 }
-int Entity::getDirection() const
+char Entity::getDirection() const
 {
 	return direction;
 }
 
-void Entity::setDirection(int direction)
+void Entity::setDirection(char direction)
 {
 	this->direction = direction;
 }

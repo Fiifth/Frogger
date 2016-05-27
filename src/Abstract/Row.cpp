@@ -10,7 +10,7 @@
 using namespace frogger;
 
 
-Row::Row(bool direction, int locY, int height,int number,const RowProp* rowProperties) :
+Row::Row(char direction, int locY, int height,int number,const RowProp* rowProperties) :
 		direction(direction), locY(	locY), height(height), number(number),rowProperties(rowProperties)
 {
 
@@ -22,7 +22,7 @@ Row::~Row()
 
 bool Row::isDirLeft() const
 {
-	return direction;
+	return direction=='L';
 }
 
 int Row::getLocY() const
@@ -111,4 +111,12 @@ int Row::getRandomLaneInd()
 void Row::setRowProperties(const RowProp* rowProp)
 {
 	rowProperties=rowProp;
+}
+
+char frogger::Row::getDirection() const {
+	return direction;
+}
+
+void frogger::Row::setDirection(char direction) {
+	this->direction = direction;
 }
