@@ -10,7 +10,7 @@
 using namespace frogger;
 
 
-Row::Row(char direction, int locY, int height,int number,const RowProp* rowProperties) :
+Row::Row(char direction, int locY, int height,int number,RowProp* rowProperties) :
 		direction(direction), locY(	locY), height(height), number(number),rowProperties(rowProperties)
 {
 
@@ -25,9 +25,9 @@ bool Row::isDirLeft() const
 	return direction=='L';
 }
 
-int Row::getLocY() const
+int* Row::getLocY()
 {
-	return locY;
+	return &locY;
 }
 
 int Row::getNumber() const
@@ -35,10 +35,6 @@ int Row::getNumber() const
 	return number;
 }
 
-int Row::getSpeed() const
-{
-	return rowProperties->getSpeed();
-}
 
 int Row::getHeight() const
 {
@@ -46,37 +42,9 @@ int Row::getHeight() const
 }
 
 
-int Row::getDivider() const
+void Row::setLocY(int NewlocY)
 {
-	return rowProperties->getDivider();
-}
-
-
-int Row::getItemRate() const
-{
-	return rowProperties->getItemRate();
-}
-
-
-int Row::getObsticleRate() const
-{
-	return rowProperties->getObsticleRate();
-}
-
-int Row::getShootRate() const
-{
-	return rowProperties->getShootRate();
-}
-
-
-char Row::getType() const
-{
-	return rowProperties->getType();
-}
-
-void Row::setLocY(int locY)
-{
-	this->locY = locY;
+	locY = NewlocY;
 }
 Row* Row::clone()
 {
@@ -93,7 +61,7 @@ bool Row::isObstacleVis() const
 	return rowProperties->getObstacleVis();
 }
 
-const RowProp* Row::getRowProperties() const
+RowProp* Row::getRowProperties()
 {
 	return rowProperties;
 }
@@ -108,15 +76,19 @@ int Row::getRandomLaneInd()
 	return rowProperties->getLaneIndexes().at(rand()%rowProperties->getLaneIndexes().size());
 }
 
-void Row::setRowProperties(const RowProp* rowProp)
+void Row::setRowProperties(RowProp* rowProp)
 {
 	rowProperties=rowProp;
 }
 
-char frogger::Row::getDirection() const {
-	return direction;
+char* frogger::Row::getDirection() {
+	return &direction;
 }
 
 void frogger::Row::setDirection(char direction) {
 	this->direction = direction;
+}
+
+int* frogger::Row::getYP() {
+	return &locY;
 }

@@ -10,7 +10,7 @@
 using namespace frogger;
 
 Props::Props() :
-		row(nullptr), visible(true), divider(0)
+		row(nullptr), visible(true)
 {
 }
 
@@ -29,24 +29,18 @@ Row* Props::getRow()
 }
 void Props::moveForward()
 {
-	if (row!=nullptr)
-	{
-		y=row->getLocY();
-		setDirection(row->getDirection());
-		setSpeed(row->getSpeed());
-		divider = row->getDivider();
-	}
+
 	if (timeToMove())
 	{
 		//1=up,2=right,3=down,4=left;
-		if (direction == 'R')
-			move(speed, 0, true);
-		else if (direction == 'L')
-			move(-speed, 0, true);
-		else if ((direction == 'U'))
-			move(0, -speed, true);
-		else if (direction == 'D')
-			move(0, speed, true);
+		if (*direction == 'R')
+			move(*speed, 0, true);
+		else if (*direction == 'L')
+			move(-*speed, 0, true);
+		else if ((*direction == 'U'))
+			move(0, -*speed, true);
+		else if (*direction == 'D')
+			move(0, *speed, true);
 	}
 }
 bool Props::isRoom()
@@ -76,15 +70,27 @@ void Props::setTurned(bool turned)
 
 bool Props::timeToMove()
 {
-	if (dividercounter == 0)
+	if (dividerCounter == 0)
 	{
 
-		dividercounter = divider;
+		dividerCounter = *divider;
 		return true;
 	}
 	else
 	{
-		dividercounter = dividercounter - 1;
+		dividerCounter = dividerCounter - 1;
 		return false;
 	}
+}
+
+void frogger::Props::setProperties()
+{
+
+		direction=row->getDirection();
+		y=row->getLocY();
+
+		speed=row->getRowProperties()->getSpeed();
+		divider=row->getRowProperties()->getDivider();
+		itemRate=row->getRowProperties()->getItemRate();
+		shootRate=row->getRowProperties()->getShootRate();
 }

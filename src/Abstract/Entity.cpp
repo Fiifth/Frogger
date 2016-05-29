@@ -13,12 +13,12 @@ Entity::Entity() :
 		F(nullptr)
 {
 	x = 30;
-	y = 30;
+	*y = 30;
 	w = 10;
 	h = 10;
 	screenWidth = 640;
 	screenHeight = 480;
-	speed = 50;
+	*speed = 50;
 }
 
 Entity::~Entity()
@@ -36,9 +36,9 @@ void Entity::move(int deltaX, int deltaY, bool leaveScreen)
 	{
 		x = x + deltaX;
 	}
-	if (((y + deltaY + h) <= lowerlimit) && (y + deltaY) >= upperLimit)
+	if (((*y + deltaY + h) <= lowerlimit) && (*y + deltaY) >= upperLimit)
 	{
-		y = y + deltaY;
+		*y = *y + deltaY;
 	}
 }
 
@@ -50,7 +50,7 @@ void Entity::setSize(int wNew, int hNew)
 void Entity::setLocation(int xNew, int yNew)
 {
 	x = xNew;
-	y = yNew;
+	*y = yNew;
 }
 void Entity::setScreenSize(int width, int height)
 {
@@ -60,7 +60,7 @@ void Entity::setScreenSize(int width, int height)
 bool Entity::inframe()
 {
 	return ((x < (screenWidth + (3 * w)) && x > (0 - (3 * w)))
-			&& ((y <= screenHeight + h*4) && (y >= (0 - h*4))));
+			&& ((*y <= screenHeight + h*4) && (*y >= (0 - h*4))));
 }
 
 int Entity::getH() const
@@ -80,7 +80,7 @@ int Entity::getX() const
 
 int Entity::getY() const
 {
-	return y;
+	return *y;
 }
 
 int Entity::getHeight() const
@@ -95,22 +95,15 @@ int Entity::getWidth() const
 
 int Entity::getSpeed() const
 {
-	return speed;
+	return *speed;
 }
 
-void Entity::setSpeed(int speed)
-{
-	this->speed = speed;
-}
+
 char Entity::getDirection() const
 {
-	return direction;
+	return *direction;
 }
 
-void Entity::setDirection(char direction)
-{
-	this->direction = direction;
-}
 
 void Entity::setF(Factory* f)
 {
@@ -139,6 +132,12 @@ bool Entity::colli(Entity* entity)
 {
 	return (colli2(this,entity)||colli2(entity,this));
 }
+
+void frogger::Entity::setYPointer(int* y)
+{
+	this->y=y;
+}
+
 bool Entity::colli2(Entity* entity1,Entity* entity2)
 {
 	int ay1=entity1->getY();

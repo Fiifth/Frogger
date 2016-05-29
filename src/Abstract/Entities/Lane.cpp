@@ -21,11 +21,15 @@ void Lane::collision(Player* player)
 {
 	if (colli(player))
 	{
+		std::cout<<"hello"<<std::endl;
 		if ((isTurned()))
+		{
 			player->hit();
+
+		}
 		else if (isVisible())
 			player->followRow(row);
-		else if (row->getType()=='E')
+		else if ((row->getRowProperties()->getType())=='E')
 		{
 			player->resetPosition();
 			itemList.clear();
@@ -48,13 +52,13 @@ bool Lane::roomForItem()
 bool Lane::spawnItem()
 {
 	itemList.push_back(
-			F->createItem(row, x + ((rand() % (w - h))), y, w, h, 0));
+			F->createItem(row, x + ((rand() % (w - h))), *y, w, h, 0));
 	return true;
 }
 
 bool Lane::itemListEmpty()
 {
-	if (itemList.empty()&&row->getType()=='E')
+	if (itemList.empty()&&row->getRowProperties()->getType()=='E')
 	{
 		//ani turn
 		turned=true;

@@ -40,7 +40,7 @@ bool Obstacle::roomForItem()
 
 bool Obstacle::fire()
 {
-	Projectile* proj(F->createProjectile(this, 5, 0));
+	Projectile* proj(F->createProjectile(this,y, 5, 0));
 	projectileList.push_back(proj);
 	return true;
 }
@@ -49,7 +49,7 @@ void Obstacle::considerFire()
 {
 	if (isVisible() && (((abs(x - previousX))) > w))
 	{
-		if (rand() % 100 > row->getShootRate())
+		if (rand() % 100 > *shootRate)
 			fire();
 		previousX = x;
 	}
@@ -63,6 +63,6 @@ void Obstacle::editYForProjectiles()
 {
 	for(Projectile* proje:projectileList)
 	{
-		proje->setLocation(proje->getX(),y);
+		proje->setLocation(proje->getX(),*y);
 	}
 }

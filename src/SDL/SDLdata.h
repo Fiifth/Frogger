@@ -23,8 +23,8 @@ public:
 	SDL_Renderer* getRen();
 	void setRen(SDL_Renderer* rende);
 	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y,
-			int* w, int* h, int angle);
-	void getDependWAndH(SDL_Texture* tex, int* w, int* h);
+			int* w, int h, int angle);
+	int getDependW(SDL_Texture* tex, int w, int h);
 	void createTextures();
 	SDL_Texture* getBackgroundTexture();
 	std::vector<SDL_Texture*> getPlayerTextures();

@@ -17,17 +17,17 @@ public:
 	LevelProperties(char mode);
 	virtual ~LevelProperties();
 	void level1();
-	const RowProp* getFirstRow() const;
-	const RowProp* getLastRow() const;
-	const RowProp* getMiddleRow() const;
-	const RowProp* getSeg1() const;
-	const RowProp* getSeg2() const;
-	const RowProp* getSeg3() const;
-	const RowProp* getSeg4() const;
+	RowProp* getFirstRow();
+	RowProp* getLastRow();
+	RowProp* getMiddleRow() ;
+	RowProp* getSeg1();
+	RowProp* getSeg2();
+	RowProp* getSeg3();
+	RowProp* getSeg4();
 	std::vector<int> getVec(int a,int b);
 	char getMode() const;
 	void setMode(char mode);
-	const RowProp* getRandomRow() const;
+	RowProp* getRandomRow();
 
 private:
 	RowProp* firstRow=nullptr;

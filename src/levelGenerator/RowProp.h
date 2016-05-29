@@ -17,11 +17,11 @@ public:
 			int shootRate, bool obstacleVis,bool laneVis,std::vector<int> obstIndexes,
 			std::vector<int> laneIndexes,std::vector<int> itemTypeChance);
 	virtual ~RowProp();
-	int getDivider() const;
-	int getItemRate() const;
+	int* getDivider();
+	int* getItemRate();
 	int getObsticleRate() const;
-	int getShootRate() const;
-	int getSpeed() const;
+	int* getShootRate();
+	int* getSpeed();
 	char getType() const;
 	bool getLaneVis() const;
 	bool getObstacleVis() const;

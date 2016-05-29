@@ -58,18 +58,11 @@ void Level::rowGenerator(int rowHeight, int screenHight,
 	int numberOfRows = (screenHight) / rowHeight;
 	list<Props*> enemies;
 	char dir = 'L'; //(rand() %2)>0)
-	const RowProp* rowProp;
+	RowProp* rowProp;
 	if (lvlprop->getMode()=='A')
 	{
 		for (int n = 0; n < numberOfRows+1; n++)
 		{
-			/*
-			 * A: start row
-			 * B: obst row
-			 * C: lane row
-			 * D: forest row
-			 * E: end row
-			 */
 			int yloc;
 			yloc=(screenHight-rowHeight)-(n*rowHeight);
 			if (n==(0))
@@ -87,13 +80,6 @@ void Level::rowGenerator(int rowHeight, int screenHight,
 	{
 		for (int n = 0; n < numberOfRows; n++)
 		{
-			/*
-			 * A: start row
-			 * B: obst row
-			 * C: lane row
-			 * D: forest row
-			 * E: end row
-			 */
 			if(n==0)
 				rowProp=lvlprop->getLastRow();
 			else if (n==(numberOfRows-1))
@@ -117,7 +103,7 @@ void Level::propsGenerator(Factory* F, vector<Row*>* rows,
 {
 	for (Row* row : *rows)
 	{
-		if ((row->getType()=='B') || (row->getType()=='C'))
+		if ((row->getRowProperties()->getType()=='B') || (row->getRowProperties()->getType()=='C'))
 		{
 			list<Props*>* PreProp = &propsOnRow->at(row->getNumber());
 			if ((PreProp->empty()) || ((PreProp->front())->isRoom()))
@@ -179,12 +165,12 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,int x)
 {
 	Props* prop;
 	int number = rand() % 100;
-	int laneRow=row->getType()=='C';
+	int laneRow=row->getRowProperties()->getType()=='C';
 
 	if (frontOrBack)
 	{
 		bool prevVisible=PreProp->empty()?true:PreProp->front()->isVisible();
-		if ((laneRow && prevVisible)|| ((number < row->getObsticleRate()) && !prevVisible))
+		if ((laneRow && prevVisible)|| ((number < row->getRowProperties()->getObsticleRate()) && !prevVisible))
 			prop = F->createObstacle(row,row->isObstacleVis(), x, 5, 0, row->getHeight());
 		else
 			prop = F->createLane(row,row->isLaneVis(), x, 5, 0, row->getHeight());
@@ -192,7 +178,7 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,int x)
 	else
 	{
 		bool prevVisible=PreProp->empty()?true:PreProp->back()->isVisible();
-		if((laneRow && prevVisible)|| ((number < row->getObsticleRate()) && !prevVisible))
+		if((laneRow && prevVisible)|| ((number < row->getRowProperties()->getObsticleRate()) && !prevVisible))
 			prop = F->createObstacle(row,row->isObstacleVis(), x, 5, 0, row->getHeight());
 		else
 			prop = F->createLane(row,row->isLaneVis(), x, 5, 0, row->getHeight());
@@ -204,11 +190,11 @@ bool Level::followFrog(vector<Row*>* rows,list<Player*>* players, int factor)
 {
 	for (Row* row : *rows)
 	{
-		row->setLocY(row->getLocY()+factor);
+		row->setLocY(*row->getLocY()+factor);
 	}
 	for (Player* player : *players)
 	{
-		player->move(0,factor,true);
+		player->followScreen(factor);
 	}
 	return true;
 }
@@ -248,23 +234,19 @@ void Level::extraRowNeeded(int rowHeight,int screenHeight,int screenWidth,
 	Row* highestRow=rows->back();
 	for (Row* row:*rows)
 	{
-		if (row->getLocY()<lowestRow->getLocY())
+		if (*row->getLocY()<*lowestRow->getLocY())
 		{
 			lowestRow=row;
 		}
-		else if (row->getLocY()>highestRow->getLocY())
+		else if (*row->getLocY()>*highestRow->getLocY())
 		{
 			highestRow=row;
 		}
 	}
-	if(highestRow->getLocY()>screenHeight)
+	if(*highestRow->getLocY()>screenHeight)
 	{
-		highestRow->setLocY(lowestRow->getLocY()-lowestRow->getHeight());
-		//if(highestRow->getRowProperties()->getType()=='A')
-
-		//	highestRow->setRowProperties(lowestRow->getRowProperties());
-			highestRow->setRowProperties(lvlprop->getRandomRow());
-
+		highestRow->setLocY(*lowestRow->getLocY()-lowestRow->getHeight());
+		highestRow->setRowProperties(lvlprop->getRandomRow());
 		propsOnRow->at(highestRow->getNumber()).clear();
 		fillOneRow(F,highestRow,propsOnRow,screenWidth);
 	}
@@ -274,10 +256,10 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row)
 {
 	Props* prop;
 	int number = rand() % 100;
-	int laneRow=row->getType()=='C';
+	int laneRow=row->getRowProperties()->getType()=='C';
 
 	bool prevVisible=PreProp->empty()?true:PreProp->front()->isVisible();
-	if ((laneRow && prevVisible)|| ((number < row->getObsticleRate()) && !prevVisible))
+	if ((laneRow && prevVisible)|| ((number < row->getRowProperties()->getObsticleRate()) && !prevVisible))
 		prop = F->createObstacle(row,row->isObstacleVis());
 	else
 		prop = F->createLane(row,row->isLaneVis());
@@ -293,7 +275,7 @@ void Level::fillOneRow(Factory* F, Row* row,
 	while (x < screenWidth)
 	{
 
-		if ((row->getType()=='B') || (row->getType()=='C')||row->getType()=='D'||row->getType()=='E')
+		if ((row->getRowProperties()->getType()=='B') || (row->getRowProperties()->getType()=='C')||row->getRowProperties()->getType()=='D'||row->getRowProperties()->getType()=='E')
 		{
 			list<Props*>* PreProp = &propsOnRow->at(row->getNumber());
 

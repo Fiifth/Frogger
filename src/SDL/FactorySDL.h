@@ -32,7 +32,7 @@ public:
 	virtual frogger::Obstacle* createObstacle(frogger::Row* row,bool visible, int x, int y, int w, int h);
 	virtual frogger::Lane* createLane(frogger::Row* row,bool visible, int x, int y, int w, int h);
 	virtual frogger::Item* createItem(frogger::Row* row, int x, int y, int w, int h, int type);
-	virtual frogger::Projectile* createProjectile(frogger::Entity* entity, int speed, int type);
+	virtual frogger::Projectile* createProjectile(frogger::Entity* entity,int* Ypoint, int speed, int type);
 	virtual frogger::Obstacle* createObstacle(frogger::Row* row,bool visible);
 	virtual frogger::Lane* createLane(frogger::Row* row,bool visible);
 	virtual frogger::Item* createItem(frogger::Row* row, int type);

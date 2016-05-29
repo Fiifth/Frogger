@@ -14,35 +14,33 @@ class Row
 {
 public:
 
-	Row(char direction, int locY, int height,int number,const RowProp* rowProperties);
+	Row(char direction, int locY, int height,int number,RowProp* rowProperties);
 	virtual ~Row();
 	bool isDirLeft() const;
-	int getLocY() const;
+
 	int getNumber() const;
-	int getSpeed() const;
+	int* getSpeed() const;
 	int getHeight() const;
-	int getDivider() const;
-	int getItemRate() const;
-	int getObsticleRate() const;
-	int getShootRate() const;
-	char getType() const;
-	void setLocY(int locY);
+	int* getLocY();
+	void setLocY(int NewlocY);
+	char getType();
 	Row* clone();
 	bool isLaneVis() const;
 	bool isObstacleVis() const;
-	const RowProp* getRowProperties() const;
-	void setRowProperties(const RowProp* rowProp);
+	RowProp* getRowProperties();
+	void setRowProperties(RowProp* rowProp);
 	int getRandomObsInd();
 	int getRandomLaneInd();
-	char getDirection() const;
+	char* getDirection();
 	void setDirection(char direction);
+	int* getYP();
 
 private:
 	char direction;
 	int locY;
 	int height;
 	int number;
-	const RowProp* rowProperties;
+	RowProp* rowProperties;
 
 };
 }

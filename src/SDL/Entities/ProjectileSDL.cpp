@@ -11,21 +11,25 @@ using namespace frogger_sdl;
 
 
 ProjectileSDL::ProjectileSDL(SDLdata* sdldata, char direction, int Xstart,
-		int Ystart, int size, int speed, int ind) :
+		int Ystart,int* Ypoint, int size, int speed, int ind) :
 		sdldata(sdldata)
 {
-	//1=up,2=right,3=down,4=left;
 	ani = sdldata->getProjAni(ind).clone();
-	setDirection(direction);
-	setSpeed(speed);
-	divider = 0;
+	directionR=direction;
+	speedR=speed;
+	dividerR = 0;
 	setSize(0, size);
 	setScreenSize(sdldata->getScreenWidth(), sdldata->getScreenHeight());
 	int wn = 0, hn = size;
-	sdldata->getDependWAndH(ani->getTexture(), &wn, &hn);
+	wn=sdldata->getDependW(ani->getTexture(), wn, hn);
 	setSize(wn, hn);
 	setLocation(Xstart, Ystart);
 	this->setVisible(true);
+	if(!(Ypoint==nullptr))
+		y=Ypoint;
+	else
+		yR=Ystart;
+
 }
 
 ProjectileSDL::~ProjectileSDL()
@@ -39,8 +43,8 @@ void ProjectileSDL::draw()
 	angle = (getDirection() == 'R') ? 90 : angle;
 	angle = (getDirection() == 'D') ? 180 : angle;
 	angle = (getDirection() == 'L') ? 270 : angle;
-	sdldata->renderTexture(ani->getTexture(), sdldata->getRen(), x, y, &w, &h,
-			angle);
+	sdldata->renderTexture(ani->getTexture(), sdldata->getRen(), x, *y, &w, h,	angle);
+	//TODO w has to be pointer
 	if (ani->isTurned() && !turned)
 	{
 		isTurenedByAni = true;

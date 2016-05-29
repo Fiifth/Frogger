@@ -69,6 +69,7 @@ public:
 	void setDifferentControls();
 	std::list<Projectile*>* getProjectileList();
 	void collision(Player* player);
+	void followScreen(int offset);
 
 private:
 	int vSpeed;
@@ -81,8 +82,7 @@ private:
 	bool counterEnabled=true;
 	bool dead = false;
 
-	int divider = 0;
-	int dividerCounter = 0;
+
 	std::chrono::high_resolution_clock::time_point previousTime =
 			std::chrono::high_resolution_clock::now();
 	std::chrono::high_resolution_clock::time_point currentTime =

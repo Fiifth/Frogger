@@ -23,7 +23,7 @@ Player::~Player()
 void Player::moveUp()
 {
 	move(0, (-vSpeed), false);
-	direction = 'U';
+	*direction = 'U';
 	counter = 10;
 	moved=true;
 }
@@ -31,7 +31,7 @@ void Player::moveUp()
 void Player::moveDown()
 {
 	move(0, vSpeed, false);
-	direction = 'D';
+	*direction = 'D';
 	counter = 10;
 	moved=true;
 }
@@ -39,7 +39,7 @@ void Player::moveDown()
 void Player::moveRight()
 {
 	move(hSpeed / 2, 0, false);
-	direction = 'R';
+	*direction = 'R';
 	counter = 10;
 	moved=true;
 }
@@ -47,25 +47,25 @@ void Player::moveRight()
 void Player::moveLeft()
 {
 	move(-(hSpeed / 2), 0, false);
-	direction = 'L';
+	*direction = 'L';
 	counter = 10;
 	moved=true;
 }
 
 void Player::followRow(Row* row)
 {
-	if (divider != row->getDivider())
+	if (*divider != *(row->getRowProperties()->getDivider()))
 	{
-		divider = row->getDivider();
+		*divider = *(row->getRowProperties()->getDivider());
 		dividerCounter = 0;
 	}
 
 	if (timeToMove())
 	{
 		if (!row->isDirLeft())
-			move(row->getSpeed(), 0, false);
+			move(*row->getRowProperties()->getSpeed(), 0, false);
 		else
-			move(-row->getSpeed(), 0, false);
+			move(-*row->getRowProperties()->getSpeed(), 0, false);
 	}
 
 }
@@ -164,8 +164,8 @@ void Player::hit()
 void Player::resetPosition()
 {
 	x = startX;
-	y = startY;
-	direction = 'U';
+	*y = startY;
+	*direction = 'U';
 	resetRemainingTime();
 }
 
@@ -182,7 +182,7 @@ bool Player::takeAction(std::string key)
 		if (key == keyDown)
 		{
 			moveDown();
-			if (y > startY)
+			if (*y > startY)
 				addScore(-10);
 		}
 		else if (key == keyUp)
@@ -198,7 +198,7 @@ bool Player::takeAction(std::string key)
 		else if (key == fire && getProjectiles() > 0)
 		{
 			addProjectiles(-1);
-			projectileList.push_back(F->createProjectile(this, 5, 0));
+			projectileList.push_back(F->createProjectile(this,nullptr, 5, 0));
 		}
 	}
 	return false;
@@ -269,7 +269,7 @@ bool Player::timeToMove()
 	if (dividerCounter == 0)
 	{
 
-		dividerCounter = divider;
+		dividerCounter = *divider;
 		return true;
 	}
 	else
@@ -310,4 +310,15 @@ void Player::collision(Player* player)
 void Player::disableCounter()
 {
 	counterEnabled=false;
+}
+
+void frogger::Player::followScreen(int offset)
+{
+	move(0,offset,false);
+
+for(Projectile* proj:projectileList)
+{
+	proj->move(0,offset,true);
+}
+
 }

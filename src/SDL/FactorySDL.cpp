@@ -76,7 +76,7 @@ frogger::Item* FactorySDL::createItem(frogger::Row* row, int type)
 	return new ItemSDL(sdldata, row, type);
 }
 
-frogger::Projectile* FactorySDL::createProjectile(frogger::Entity* entity, int speed, int type)
+frogger::Projectile* FactorySDL::createProjectile(frogger::Entity* entity,int* Ypoint, int speed, int type)
 {
 	int x, y;
 	int dir = entity->getDirection();
@@ -101,6 +101,6 @@ frogger::Projectile* FactorySDL::createProjectile(frogger::Entity* entity, int s
 		x = entity->getX();
 		y = entity->getY();
 	}
-	return new ProjectileSDL(sdldata, entity->getDirection(), x, y,
+	return new ProjectileSDL(sdldata, entity->getDirection(), x, y,Ypoint,
 			entity->getH(), speed, type);
 }

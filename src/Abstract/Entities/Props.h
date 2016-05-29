@@ -24,6 +24,7 @@ public:
 	bool isRoom();
 	bool isVisible() const;
 	void setVisible(bool visible);
+	void setProperties();
 	virtual void draw()=0;
 
 	//type true=player, false=bullet return type of effect 0=no effect, 1 player dies, 2-6 object disappears and player gets effect
@@ -38,12 +39,13 @@ public:
 
 protected:
 	Row* row;
-	RowProp* rowprop;
 	bool visible;
 	bool turned = false;
 	bool isTurenedByAni = false;
-	int divider;
-	int dividercounter = 0;
+
+	int* itemRate;
+	int* shootRate;
+
 };
 }
 #endif /* ABSTRACT_PROPS_H_ */

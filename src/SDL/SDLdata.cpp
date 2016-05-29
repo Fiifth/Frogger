@@ -28,25 +28,16 @@ SDLdata::~SDLdata()
 }
 
 void SDLdata::renderTexture(SDL_Texture* tex, SDL_Renderer* ren, int x, int y,
-		int* w, int* h, int angle)
+		int* w, int h, int angle)
 {
-	int aQ, wQ, hQ;
-	Uint32 fQ;
-	SDL_QueryTexture(tex, &fQ, &aQ, &wQ, &hQ);
 
-	if (*w == 0)
-	{
-		*w = (float) (((float) *h) / (float) hQ) * wQ;
-	}
-	else if (*h == 0)
-	{
-		*h = (float) (((float) *w) / (float) wQ) * hQ;
-	}
+	*w=getDependW(tex,*w,h);
+
 	SDL_Rect dst;
 	dst.x = x;
 	dst.y = y;
 	dst.w = *w;
-	dst.h = *h;
+	dst.h = h;
 
 	SDL_RendererFlip temp = SDL_FLIP_NONE;
 	if (angle == 1)
@@ -56,20 +47,21 @@ void SDLdata::renderTexture(SDL_Texture* tex, SDL_Renderer* ren, int x, int y,
 	}
 	SDL_RenderCopyEx(ren, tex, NULL, &dst, angle, NULL, temp);
 }
-void SDLdata::getDependWAndH(SDL_Texture* tex, int* w, int* h)
+int SDLdata::getDependW(SDL_Texture* tex, int w, int h)
 {
 	int aQ, wQ, hQ;
 	Uint32 fQ;
 	SDL_QueryTexture(tex, &fQ, &aQ, &wQ, &hQ);
 
-	if (*w == 0)
-	{
-		*w = (float) (((float) *h) / (float) hQ) * wQ;
-	}
-	else if (*h == 0)
-	{
-		*h = (float) (((float) *w) / (float) wQ) * hQ;
-	}
+	//if (*w == 0)
+	//{
+		w = (float) (((float) h) / (float) hQ) * wQ;
+	//}
+//	else if (*h == 0)
+//	{
+//		*h = (float) (((float) *w) / (float) wQ) * hQ;
+	//}
+		return w;
 }
 SDL_Renderer* SDLdata::getRen()
 {

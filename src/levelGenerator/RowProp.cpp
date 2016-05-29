@@ -24,14 +24,14 @@ RowProp::~RowProp()
 	// TODO Auto-generated destructor stub
 }
 
-int RowProp::getDivider() const
+int* RowProp::getDivider()
 {
-	return divider;
+	return &divider;
 }
 
-int RowProp::getItemRate() const
+int* RowProp::getItemRate()
 {
-	return itemRate;
+	return &itemRate;
 }
 
 int RowProp::getObsticleRate() const
@@ -39,14 +39,14 @@ int RowProp::getObsticleRate() const
 	return obstRate;
 }
 
-int RowProp::getShootRate() const
+int* RowProp::getShootRate()
 {
-	return shootRate;
+	return &shootRate;
 }
 
-int RowProp::getSpeed() const
+int* RowProp::getSpeed()
 {
-	return speed;
+	return &speed;
 }
 
 char RowProp::getType() const

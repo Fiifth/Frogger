@@ -50,8 +50,8 @@ void PlayerSDL::draw()
 			ani->setCurrentTextureFor(1,10);
 			moved=false;
 		}
-		sdldata->renderTexture(ani->getTexture(), sdldata->getRen(), x, y, &w,
-				&h, angle);
+		sdldata->renderTexture(ani->getTexture(), sdldata->getRen(), x, *y, &w,
+				h, angle);
 		projectileList.remove_if(drawMoveRemove());
 
 	}

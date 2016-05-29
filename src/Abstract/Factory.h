@@ -38,10 +38,10 @@ public:
 	virtual Obstacle* createObstacle(Row* row, bool visible)=0;
 	virtual Lane* createLane(Row* row, bool visible)=0;
 	virtual Item* createItem(Row* row, int type)=0;
-	virtual Projectile* createProjectile(Entity* entity, int speed, int type)=0;
+	virtual Projectile* createProjectile(Entity* entity,int* Ypoint, int speed, int type)=0;
 	virtual Window* createWindow()=0;
 	virtual Events* createEvents()=0;
-	virtual Row* createRow(char direction,int locY,	int width, int number, const RowProp* rowprop);
+	virtual Row* createRow(char direction,int locY,	int width, int number, RowProp* rowprop);
 };
 }
 #endif /* FACTORY_H_ */

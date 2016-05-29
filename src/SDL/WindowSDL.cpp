@@ -74,7 +74,7 @@ void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
 			{
 				bool temp=rows->at(i)->getLocY()==rowsOld.at(i)->getLocY();
 				changed=temp?changed:true;
-				temp=rows->at(i)->getType()==rowsOld.at(i)->getType();
+				temp=rows->at(i)->getRowProperties()->getType()==rowsOld.at(i)->getRowProperties()->getType();
 				changed=temp?changed:true;
 			}
 		}
@@ -90,19 +90,17 @@ void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
 		for (frogger::Row* row : *rows)
 		{
 			rowsOld.push_back(row->clone());
-			int y = row->getLocY();
+			int y = *row->getLocY();
 			int height = row->getHeight();
 			//int x = 0-rand()%20, width = 0;
 			int x = 0, width = 0;
-			int textureLocation = row->getType()=='C' ? 1 : 0;
-			textureLocation =row->getType()=='A'|| row->getType()=='E'|| row->getType()=='D' ?2 : textureLocation;
-			sdldata->getDependWAndH(backTextures.at(textureLocation), &width,
-					&height);
+			int textureLocation = row->getRowProperties()->getType()=='C' ? 1 : 0;
+			textureLocation =row->getRowProperties()->getType()=='A'|| row->getRowProperties()->getType()=='E'|| row->getRowProperties()->getType()=='D' ?2 : textureLocation;
+		//	sdldata->getDependW(backTextures.at(textureLocation), &width,		height);
 
 			while (x <= getWidth())
 			{
-				sdldata->renderTexture(backTextures.at(textureLocation), ren, x,
-						y, &width, &height, 0);
+				sdldata->renderTexture(backTextures.at(textureLocation), ren, x,y, &width, height, 0);
 				x = x + width;
 			}
 		}
@@ -111,7 +109,7 @@ void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
 	}
 	else
 	{
-		sdldata->renderTexture(backgourndTexture, ren, 0, 0, &WIDTH, &HEIGHT, 0);
+		sdldata->renderTexture(backgourndTexture, ren, 0, 0, &WIDTH, HEIGHT, 0);
 
 	}
 }
@@ -181,7 +179,7 @@ void WindowSDL::setBackground(char state)
 	else if (state=='F')
 		temp=sdldata->getHighScoreBackSel();
 
-	sdldata->renderTexture(temp, sdldata->getRen(),	0, 0, &WIDTH, &HEIGHT, 0);
+	sdldata->renderTexture(temp, sdldata->getRen(),	0, 0, &WIDTH, HEIGHT, 0);
 }
 void WindowSDL::updateScreen()
 {

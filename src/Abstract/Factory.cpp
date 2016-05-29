@@ -21,7 +21,7 @@ Factory::~Factory()
 }
 
 
-Row* Factory::createRow(char direction, int locY, int width, int number,const RowProp* rowprop)
+Row* Factory::createRow(char direction, int locY, int width, int number,RowProp* rowprop)
 {
 	return new Row(direction, locY, width,number,rowprop);
 }

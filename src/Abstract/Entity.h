@@ -37,6 +37,7 @@ public:
 	char getDirection() const;
 	void setDirection(char direction);
 	void setF(Factory* f);
+	void setYPointer(int* y);
 	virtual void collision(Player* player)=0;
 	bool colli(Entity* entity);
 	bool colli2(Entity* entity1,Entity* entity2);
@@ -81,11 +82,18 @@ public:
 	};
 
 protected:
-	int x, y, w, h, speed;
-	int screenWidth, screenHeight;
-	char direction = 'U'; //=up,2=right,3=down,4=left;
+
 	Factory* F;
 
+	int x, yR, w, h, speedR,dividerR,dividerCounter=0;
+	char directionR = 'U';
+
+	char* direction=&directionR;
+	int* y=&yR;
+	int* speed=&speedR;
+	int* divider=&dividerR;
+
+	int screenWidth, screenHeight;
 };
 }
 
