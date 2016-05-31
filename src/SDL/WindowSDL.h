@@ -22,6 +22,7 @@
 #include <chrono>
 #include <list>
 #include "Player.h"
+#include "menu/MenuButton.h"
 namespace frogger_sdl
 {
 class WindowSDL: public frogger::Window
@@ -37,6 +38,7 @@ public:
 	void updateScreen();
 	void generateBackground(std::vector<frogger::Row*>* rows);
 	void saveCurrentWindowImage();
+	void drawLineUnder(frogger::MenuButton* mode,frogger::MenuButton* numPlay,frogger::MenuButton* diff);
 private:
 	SDLdata* sdldata;
 	SDL_Renderer* ren;
@@ -57,6 +59,7 @@ private:
 	std::vector<frogger::Row*>* rowsOldP;
 	std::string oldString="";
 	std::vector<SDL_Texture*>* MenuTextures;
+
 };
 }
 

@@ -81,22 +81,26 @@ void SDLdata::updateScreen()
 }
 void SDLdata::createTextures()
 {
-	string path="C:/frogger/";
+	string path="C:/frogger/menu/";
 
+	SDL_Texture* B=IMG_LoadTexture(re, (path+"B.png").c_str());
+	SDL_Texture* BH=IMG_LoadTexture(re, (path+"BH.png").c_str());
+	SDL_Texture* BHE=IMG_LoadTexture(re, (path+"BHE.png").c_str());
+	SDL_Texture* BQ=IMG_LoadTexture(re, (path+"BQ.png").c_str());
+	SDL_Texture* BS=IMG_LoadTexture(re, (path+"BS.png").c_str());
+	SDL_Texture* BST=IMG_LoadTexture(re, (path+"BST.png").c_str());
 	SDL_Texture* G=IMG_LoadTexture(re, (path+"G.png").c_str());
 	SDL_Texture* GM=IMG_LoadTexture(re, (path+"GM.png").c_str());
 	SDL_Texture* GR=IMG_LoadTexture(re, (path+"GR.png").c_str());
-	SDL_Texture* M=IMG_LoadTexture(re, (path+"M.png").c_str());
-	SDL_Texture* MCL=IMG_LoadTexture(re, (path+"MCL.png").c_str());
-	SDL_Texture* ME=IMG_LoadTexture(re, (path+"ME.png").c_str());
-	SDL_Texture* MH=IMG_LoadTexture(re, (path+"MH.png").c_str());
-	SDL_Texture* MQ=IMG_LoadTexture(re, (path+"MQ.png").c_str());
-	SDL_Texture* PS=IMG_LoadTexture(re, (path+"PS.png").c_str());
-	SDL_Texture* PS1=IMG_LoadTexture(re, (path+"PS1.png").c_str());
-	SDL_Texture* PS2=IMG_LoadTexture(re, (path+"PS2.png").c_str());
 	SDL_Texture* H=IMG_LoadTexture(re, (path+"H.png").c_str());
 	SDL_Texture* HB=IMG_LoadTexture(re, (path+"HB.png").c_str());
-	menuTextures={M,MCL,ME,MH,MQ,PS,PS1,PS2,G,GM,GR,H,HB};
+	SDL_Texture* S=IMG_LoadTexture(re, (path+"S.png").c_str());
+	SDL_Texture* SB=IMG_LoadTexture(re, (path+"SB.png").c_str());
+	SDL_Texture* V=IMG_LoadTexture(re, (path+"V.png").c_str());
+	SDL_Texture* VM=IMG_LoadTexture(re, (path+"VM.png").c_str());
+	SDL_Texture* VN=IMG_LoadTexture(re, (path+"VN.png").c_str());
+	menuTextures={B,BH,BHE,BQ,BS,BST,G,GM,GR,H,HB,S,SB,V,VM,VN};
+	line=IMG_LoadTexture(re, (path+"line.png").c_str());
 
 
 	string imagePathBackground1 = "C:/frogger/back1.png";
@@ -276,4 +280,8 @@ SDL_Texture* SDLdata::getHighScoreBackSel()
 std::vector<SDL_Texture*>* frogger_sdl::SDLdata::getMenuTextures()
 {
 	return &menuTextures;
+}
+
+SDL_Texture* frogger_sdl::SDLdata::getLine() {
+	return line;
 }

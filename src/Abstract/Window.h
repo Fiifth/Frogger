@@ -16,6 +16,7 @@
 namespace frogger
 {
 class Player;
+class MenuButton;
 class Window
 {
 public:
@@ -37,6 +38,7 @@ public:
 	bool valueChanged(int score, int life, int projectiles, int time,int score2, int life2, int projectiles2, int time2);
 	int* getGameWindowHeight() const;
 	virtual void dislayData(std::list<Player*>* players)=0;
+	virtual void drawLineUnder(frogger::MenuButton* mode,frogger::MenuButton* numPlay,frogger::MenuButton* diff)=0;
 
 protected:
 	int WIDTHR;

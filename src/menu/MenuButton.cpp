@@ -8,9 +8,12 @@
 #include <MenuButton.h>
 using namespace frogger;
 
-MenuButton::MenuButton(int x,int y, int w,int h):x(x),y(y),w(w),h(h)
+MenuButton::MenuButton(float x,float y,float w,float h,frogger::Window* win)
 {
-	// TODO Auto-generated constructor stub
+	this->x=x*(*win->getWidth());
+	this->y=y*(*win->getHeight());
+	this->w=w*(*win->getWidth());
+	this->h=h*(*win->getHeight());
 
 }
 
@@ -22,3 +25,18 @@ bool MenuButton::col(int xCo,int yCo)
 	return ((yCo>=y)&&(yCo<=(y+h)))&&((xCo>=x)&&(xCo<=(x+w)));
 }
 
+int frogger::MenuButton::getH() const {
+	return h;
+}
+
+int frogger::MenuButton::getX() const {
+	return x;
+}
+
+int frogger::MenuButton::getY() const {
+	return y;
+}
+
+int frogger::MenuButton::getW() const {
+	return w;
+}

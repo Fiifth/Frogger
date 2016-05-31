@@ -14,7 +14,7 @@ namespace frogger
 class Menu
 {
 public:
-	Menu(Window* win);
+	Menu(Window* win,char* gameMode,int* amountOfPlayers,char* difficulty);
 	virtual ~Menu();
 	char menuExecution(std::string keyDown,char state, int mXH,int mYH,int mXP,int mYP);
 	void startMenu();
@@ -24,15 +24,32 @@ private:
 	Window* win;
 	char state='A';
 	bool startGame=false;
-	MenuButton* classic;
-	MenuButton* endless;
-	MenuButton* high;
-	MenuButton* quit;
-	MenuButton* p1;
-	MenuButton* p2;
-	MenuButton* menu;
-	MenuButton* restart;
-	MenuButton* back;
+	char* gameMode;
+	int* amountOfPlayers;
+	char* difficulty;
+	MenuButton* BST;
+	MenuButton* BH;
+	MenuButton* BQ;
+	MenuButton* BHE;
+	MenuButton* BS;
+	MenuButton* HB;
+	MenuButton* S1;
+	MenuButton* S2;
+	MenuButton* S3;
+	MenuButton* SB;
+	MenuButton* SEN;
+	MenuButton* SC;
+	MenuButton* SE;
+	MenuButton* SM;
+	MenuButton* SH;
+	MenuButton* GR;
+	MenuButton* GM;
+	MenuButton* VN;
+	MenuButton* VM;
+
+	MenuButton* DrawLineUnderMode;
+	MenuButton* DrawLineUnderNumPlayers;
+	MenuButton* DrawLineUnderDifficulty;
 };
 }
 #endif /* MENU_H_ */

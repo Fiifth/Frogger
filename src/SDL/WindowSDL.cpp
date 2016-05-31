@@ -199,3 +199,16 @@ void WindowSDL::saveCurrentWindowImage()
 	}
 	temp = true;
 }
+
+void frogger_sdl::WindowSDL::drawLineUnder(frogger::MenuButton* mode,
+		frogger::MenuButton* numPlay, frogger::MenuButton* diff)
+{
+	SDL_Texture* line=sdldata->getLine();
+	//int x, int y,	int* w, int h, int angle
+	int w;
+	sdldata->renderTexture(line, sdldata->getRen(),	mode->getX()-mode->getH(), mode->getY(), &w, mode->getH(), 0);
+	sdldata->renderTexture(line, sdldata->getRen(),	diff->getX()-diff->getH(), diff->getY(), &w, diff->getH(), 0);
+	sdldata->renderTexture(line, sdldata->getRen(),	numPlay->getX()-numPlay->getH(), numPlay->getY(), &w, numPlay->getH(), 0);
+
+
+}

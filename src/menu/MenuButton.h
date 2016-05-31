@@ -7,14 +7,20 @@
 
 #ifndef MENUBUTTON_H_
 #define MENUBUTTON_H_
+#include "Window.h"
 namespace frogger
 {
 class MenuButton
 {
 public:
-	MenuButton(int x,int y,int w,int h);
+	MenuButton(float x,float y,float w,float h,Window* win);
 	virtual ~MenuButton();
 	bool col(int xCo,int yCo);
+	int getH() const;
+	int getX() const;
+	int getY() const;
+	int getW() const;
+
 private:
 	int x, y, w, h;
 };

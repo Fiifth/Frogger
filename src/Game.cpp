@@ -36,8 +36,11 @@ using namespace frogger;
 
 Game::Game(Factory* F)
 {
-	char state = 'S';
-	char PrevState = 'S';
+	char state = 'B';
+	char PrevState = 'B';
+	int amountOfPlayers=1;
+	char gameMode='E';
+	char difficulty='E';
 	int WindowHeight = 520;
 	int WindowWidth = 700;
 	int rowHeight = 50;
@@ -54,15 +57,12 @@ Game::Game(Factory* F)
 	list<Player*>* players = &playersR;
 	Events* event = F->createEvents();
 	Window* win = F->createWindow();
+	LevelProperties* lvlprop;
+	Level* level;
 
 	win->makeWindow(WindowWidth, WindowHeight, dataWindowHeight, "frogger");
 
-
-
-	LevelProperties* lvlprop;
-
-	Level* level;
-	Menu* men=new Menu(win);
+	Menu* men=new Menu(win,&gameMode,&amountOfPlayers,&difficulty);
 
 
 	while (true)
@@ -73,14 +73,14 @@ Game::Game(Factory* F)
 
 		switch (state)
 		{
-		case 'S':case'H':case'G':case'V':case'M':case'N':
+		case 'B':case'H':case'G':case'S':case 'V':
 			//menu case modes
 			PrevState=state;
-			state =men->menuExecution(keyStroke,state,x,y,x,y);
+			state=men->menuExecution(keyStroke,state,x,y,x,y);
 
 			win->updateScreen();
 			break;
-		case 'C':case'E':case 'I':case'O':
+		case 'E':case'C':
 			//level execution modes
 			if(PrevState==state)
 			{
@@ -91,28 +91,28 @@ Game::Game(Factory* F)
 				win->updateScreen();
 			}
 
-			else if (PrevState=='M')
+			else if (PrevState=='B')
 			{
-				//classic
 
-				int amount=(state=='I')?1:0;
-				amount=(state=='O')?2:amount;
+			//TODO get amount pointer number of players
+				//get game mode pointer
+				int amount=1;
+				addPlayers(F,players,amountOfPlayers,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
+
+				lvlprop=new LevelProperties(gameMode);
+				level = new Level(F, win, players, rowHeight,lvlprop);
+				state=gameMode;
+				PrevState=state;
+			}
+			else if (PrevState=='V')
+			{
+				//TODO level up
+				int amount=1;
+
 				addPlayers(F,players,amount,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
-
 				lvlprop=new LevelProperties('C');
 				level = new Level(F, win, players, rowHeight,lvlprop);
 				state='C';
-				PrevState=state;
-			}
-			else if (PrevState=='N')
-			{
-				//endeless
-				int amount=(state=='I')?1:0;
-				amount=(state=='O')?2:amount;
-				addPlayers(F,players,amount,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
-				lvlprop=new LevelProperties('E');
-				level = new Level(F, win, players, rowHeight,lvlprop);
-				state='E';
 				PrevState=state;
 			}
 
