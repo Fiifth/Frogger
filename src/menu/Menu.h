@@ -16,7 +16,7 @@ class Menu
 public:
 	Menu(Window* win);
 	virtual ~Menu();
-	char menuExecution(std::string keyDown,int mXH,int mYH,int mXP,int mYP);
+	char menuExecution(std::string keyDown,char state, int mXH,int mYH,int mXP,int mYP);
 	void startMenu();
 	bool isStartGame() const;
 
@@ -24,9 +24,14 @@ private:
 	Window* win;
 	char state='A';
 	bool startGame=false;
-	MenuButton* start;
+	MenuButton* classic;
+	MenuButton* endless;
 	MenuButton* high;
 	MenuButton* quit;
+	MenuButton* p1;
+	MenuButton* p2;
+	MenuButton* menu;
+	MenuButton* restart;
 	MenuButton* back;
 };
 }

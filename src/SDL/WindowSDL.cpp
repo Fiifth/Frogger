@@ -28,6 +28,7 @@ using namespace frogger_sdl;
 WindowSDL::WindowSDL(SDLdata* sdldata) :
 		sdldata(sdldata), ren(NULL), win(NULL)
 {
+	MenuTextures=sdldata->getMenuTextures();
 	White =
 	{	255, 255, 255,255};
 	Black =
@@ -57,7 +58,7 @@ void WindowSDL::makeWindow(int ScreenWidth, int ScreenHeight,	int dataWindowHeig
 void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
 {
 		rowsOld.clear();
-		setBackground('A');
+	//	setBackground('A');
 		std::vector<SDL_Texture*> backTextures = sdldata->getBackTextures();
 		for (frogger::Row* row : *rows)
 		{
@@ -127,23 +128,9 @@ int i=1;
 	oldString=newString;
 
 }
-void WindowSDL::setBackground(char state)
+void WindowSDL::setBackground(int index)
 {
-	SDL_Texture* temp;
-	if (state=='A')
-		temp=sdldata->getBackgroundTexture();
-	else if (state=='B')
-		temp=sdldata->getStartSelTex();
-	else if (state=='C')
-		temp=sdldata->getHighSelTex();
-	else if (state=='D')
-		temp=sdldata->getQuitSelTex();
-	else if (state=='E')
-			temp=sdldata->getHighScoreTex();
-	else if (state=='F')
-		temp=sdldata->getHighScoreBackSel();
-
-	sdldata->renderTexture(temp, sdldata->getRen(),	0, 0, WIDTH, *HEIGHT, 0);
+	sdldata->renderTexture((*MenuTextures).at(index), sdldata->getRen(),	0, 0, WIDTH, *HEIGHT, 0);
 }
 void WindowSDL::updateScreen()
 {

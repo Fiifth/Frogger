@@ -81,6 +81,7 @@ public:
 			else
 			{
 				prop->moveForward();
+
 				prop->draw();
 			}
 			return temp;

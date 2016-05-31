@@ -33,7 +33,7 @@ public:
 			char const* title);
 	void dislayData(std::list<frogger::Player*>* players);
 	void displayHighScore(int score1, int score2, int score3, int score4);
-	void setBackground(char state);
+	void setBackground(int index);
 	void updateScreen();
 	void generateBackground(std::vector<frogger::Row*>* rows);
 	void saveCurrentWindowImage();
@@ -56,6 +56,7 @@ private:
 	std::vector<frogger::Row*> rowsOld;
 	std::vector<frogger::Row*>* rowsOldP;
 	std::string oldString="";
+	std::vector<SDL_Texture*>* MenuTextures;
 };
 }
 

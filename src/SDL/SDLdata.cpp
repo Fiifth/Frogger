@@ -81,23 +81,28 @@ void SDLdata::updateScreen()
 }
 void SDLdata::createTextures()
 {
+	string path="C:/frogger/";
 
-	string imagePathBack = "C:/frogger/menu.png";
-	string quitSel ="C:/frogger/quitSel.png";
-	string startSel ="C:/frogger/startSel.png";
-	string highSel ="C:/frogger/highSel.png";
-	string HighScore="C:/frogger/highScore.png";
-	string HighScoreBackSel="C:/frogger/highScoreBackSel.png";
+	SDL_Texture* G=IMG_LoadTexture(re, (path+"G.png").c_str());
+	SDL_Texture* GM=IMG_LoadTexture(re, (path+"GM.png").c_str());
+	SDL_Texture* GR=IMG_LoadTexture(re, (path+"GR.png").c_str());
+	SDL_Texture* M=IMG_LoadTexture(re, (path+"M.png").c_str());
+	SDL_Texture* MCL=IMG_LoadTexture(re, (path+"MCL.png").c_str());
+	SDL_Texture* ME=IMG_LoadTexture(re, (path+"ME.png").c_str());
+	SDL_Texture* MH=IMG_LoadTexture(re, (path+"MH.png").c_str());
+	SDL_Texture* MQ=IMG_LoadTexture(re, (path+"MQ.png").c_str());
+	SDL_Texture* PS=IMG_LoadTexture(re, (path+"PS.png").c_str());
+	SDL_Texture* PS1=IMG_LoadTexture(re, (path+"PS1.png").c_str());
+	SDL_Texture* PS2=IMG_LoadTexture(re, (path+"PS2.png").c_str());
+	SDL_Texture* H=IMG_LoadTexture(re, (path+"H.png").c_str());
+	SDL_Texture* HB=IMG_LoadTexture(re, (path+"HB.png").c_str());
+	menuTextures={M,MCL,ME,MH,MQ,PS,PS1,PS2,G,GM,GR,H,HB};
+
+
 	string imagePathBackground1 = "C:/frogger/back1.png";
 	string imagePathBackground2 = "C:/frogger/back2.png";
 	string imagePathBackground3 = "C:/frogger/back3.png";
 
-	backgroundTex = IMG_LoadTexture(re, imagePathBack.c_str());
-	quitSelTex = IMG_LoadTexture(re, quitSel.c_str());
-	startSelTex = IMG_LoadTexture(re, startSel.c_str());
-	highSelTex = IMG_LoadTexture(re, highSel.c_str());
-	HighScoreTex=IMG_LoadTexture(re, HighScore.c_str());
-	HighScoreBackSelTex=IMG_LoadTexture(re, HighScoreBackSel.c_str());
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground1.c_str()));
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground2.c_str()));
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground3.c_str()));
@@ -196,7 +201,6 @@ Animator SDLdata::getObstiAni(int ind)
 
 Animator SDLdata::getPlayerAni(int ind)
 {
-	//return playerAni.at((rand()%(playerRangeEnd-playerRangeStart))+playerRangeStart);
 	return playerAni.at(ind);
 }
 
@@ -267,4 +271,9 @@ SDL_Texture* SDLdata::getHighScoreTex()
 SDL_Texture* SDLdata::getHighScoreBackSel()
 {
 	return HighScoreBackSelTex;
+}
+
+std::vector<SDL_Texture*>* frogger_sdl::SDLdata::getMenuTextures()
+{
+	return &menuTextures;
 }

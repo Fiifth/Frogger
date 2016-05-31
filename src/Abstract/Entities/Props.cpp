@@ -98,7 +98,9 @@ void frogger::Props::setProperties(Row* row,int* screenWidth,int* screenHeight,i
 			y=row->getLocY();
 			this->h=row->getHeight();
 			speed=row->getRowProperties()->getSpeed();
+
 			divider=row->getRowProperties()->getDivider();
+
 			itemRate=row->getRowProperties()->getItemRate();
 			shootRate=row->getRowProperties()->getShootRate();
 		}

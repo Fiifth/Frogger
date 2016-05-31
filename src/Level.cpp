@@ -21,6 +21,7 @@ Level::~Level()
 }
 char Level::levelExecution(string keyStroke)
 {
+
 	for (Player* player : *players)
 	{
 		if(player->getRemainingTime()==0)
@@ -29,7 +30,7 @@ char Level::levelExecution(string keyStroke)
 		{
 			player->takeAction(keyStroke);
 		}
-		if (lvlprop->getMode()=='A'&&player->getY()<*win->getGameWindowHeight()-rowHeight*2)
+		if (lvlprop->getMode()=='E'&&player->getY()<*win->getGameWindowHeight()-rowHeight*2)
 		{
 			int factor=1;
 			factor=player->getY()<*win->getGameWindowHeight()-rowHeight*3?2:factor;
@@ -39,15 +40,17 @@ char Level::levelExecution(string keyStroke)
 		}
 	}
 
-	if(lvlprop->getMode()=='A')
+
+	if(lvlprop->getMode()=='E')
 	extraRowNeeded(rowHeight,*win->getGameWindowHeight(),*win->getWidth(), F, rows,propsOnRow,lvlprop);
 
 	win->generateBackground(rows);
+
 	propsGenerator(F, rows, propsOnRow);
 
 	drawGameElements(propsOnRow, NULL, players, rows);
 	collisionDetection(propsOnRow, NULL, players);
-	objectiveDone=lvlprop->getMode()=='A'?false:objectiveCompleteCheck(propsOnRow);
+	objectiveDone=lvlprop->getMode()=='E'?false:objectiveCompleteCheck(propsOnRow);
 
 	return 'H';
 }
@@ -59,7 +62,7 @@ void Level::rowGenerator(int rowHeight, int screenHight,
 	list<Props*> enemies;
 	char dir = 'L'; //(rand() %2)>0)
 	RowProp* rowProp;
-	if (lvlprop->getMode()=='A')
+	if (lvlprop->getMode()=='E')
 	{
 		for (int n = 0; n < numberOfRows+1; n++)
 		{
@@ -93,7 +96,7 @@ void Level::rowGenerator(int rowHeight, int screenHight,
 
 			rows->push_back(F->createRow(dir, n * rowHeight, rowHeight, n,rowProp));
 			propsOnRow->push_back(enemies);
-			dir = not (dir);
+			dir=dir=='R'?'L':'R';
 		}
 	}
 }

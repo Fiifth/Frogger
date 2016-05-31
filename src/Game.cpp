@@ -36,7 +36,8 @@ using namespace frogger;
 
 Game::Game(Factory* F)
 {
-	char mode='A';
+	char state = 'S';
+	char PrevState = 'S';
 	int WindowHeight = 520;
 	int WindowWidth = 700;
 	int rowHeight = 50;
@@ -56,62 +57,71 @@ Game::Game(Factory* F)
 
 	win->makeWindow(WindowWidth, WindowHeight, dataWindowHeight, "frogger");
 
-	Player* player = F->createPlayer(plStartX, plStartY, plStartW, plStartH,
-			plStartSpeed, rowHeight, 0);
-	Player* player2 = F->createPlayer(plStartX, plStartY, plStartW, plStartH,
-			plStartSpeed, rowHeight, 1);
-	player2->setDifferentControls();
-	players->push_back(player);
-	//players->push_back(player2);
-	LevelProperties* lvlprop=new LevelProperties(mode); //TODO place in factory
 
-	Level* level = new Level(F, win, players, rowHeight,lvlprop);
+
+	LevelProperties* lvlprop;
+
+	Level* level;
 	Menu* men=new Menu(win);
-	char state = 'B';
+
+
 	while (true)
 	{
 		int x,y;
 		keyStroke = event->getEvent();
 		event->getMousePos(&x,&y);
+
 		switch (state)
 		{
-		//----------------------------------------------------------------------------------------------------
-		case 'A':
+		case 'S':case'H':case'G':case'V':case'M':case'N':
+			//menu case modes
+			PrevState=state;
+			state =men->menuExecution(keyStroke,state,x,y,x,y);
 
-			if (keyStroke == "Escape")
-				return;
-			level->levelExecution(keyStroke);
-
-			state = playersA(players, 'A') ? 'A' : 'B';
-			state=level->isObjectiveDone()?'B':state;
-
-			win->dislayData(players);
 			win->updateScreen();
 			break;
-
-			//----------------------------------------------------------------------------------------------------
-		case 'B':
-			char temp=men->menuExecution(keyStroke,x,y,x,y);
-			if (temp=='A')
+		case 'C':case'E':case 'I':case'O':
+			//level execution modes
+			if(PrevState==state)
 			{
-				for (Player* play : *players)
-				{
-
-					play->resetRemainingTime();
-					play->setDead(false);
-					if (mode=='A')
-					{
-						play->setLife(0);
-						play->disableCounter();
-					}
-				}
-				level->resetLevel();
-				state = 'A';
+				level->levelExecution(keyStroke);
+				state = playersAlive(players, state) ? state : 'G';
+				state=level->isObjectiveDone()?'V':state;
+				win->dislayData(players);
+				win->updateScreen();
 			}
-			else if (temp=='Q')
-				return;
-			win->updateScreen();
+
+			else if (PrevState=='M')
+			{
+				//classic
+
+				int amount=(state=='I')?1:0;
+				amount=(state=='O')?2:amount;
+				addPlayers(F,players,amount,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
+
+				lvlprop=new LevelProperties('C');
+				level = new Level(F, win, players, rowHeight,lvlprop);
+				state='C';
+				PrevState=state;
+			}
+			else if (PrevState=='N')
+			{
+				//endeless
+				int amount=(state=='I')?1:0;
+				amount=(state=='O')?2:amount;
+				addPlayers(F,players,amount,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
+				lvlprop=new LevelProperties('E');
+				level = new Level(F, win, players, rowHeight,lvlprop);
+				state='E';
+				PrevState=state;
+			}
+
 			break;
+		case 'Q':
+				//remove everything
+			return;
+
+				break;
 		}
 	}
 }
@@ -120,7 +130,7 @@ Game::~Game()
 {
 }
 
-bool Game::playersA(list<Player*>* players, char mode)
+bool Game::playersAlive(list<Player*>* players, char mode)
 {
 	bool temp = false;
 	for (Player* player : *players)
@@ -128,6 +138,22 @@ bool Game::playersA(list<Player*>* players, char mode)
 		temp = temp || !player->isDead();
 	}
 	return temp;
+}
+
+void frogger::Game::addPlayers(Factory* F,list<Player*>* players, int amount,int X,int Y,int W,int H,int speed, int rowHeight)
+{
+	players->clear();
+	if (amount >=1)
+	{
+	Player* player = F->createPlayer(X, Y, W, H,	speed, rowHeight, 0);
+	players->push_back(player);
+	}
+	if (amount>1)
+	{
+		Player* player2 = F->createPlayer(X, Y, W, H,	speed, rowHeight, 1);
+		player2->setDifferentControls();
+		players->push_back(player2);
+	}
 }
 //start_time=chrono::steady_clock::now();
 //			end_time=chrono::steady_clock::now();

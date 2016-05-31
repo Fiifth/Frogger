@@ -24,7 +24,8 @@ class Game
 public:
 	Game(Factory* F);
 	virtual ~Game();
-	bool playersA(list<Player*>* players, char mode);
+	bool playersAlive(list<Player*>* players, char mode);
+	void addPlayers (Factory* F,list<Player*>* players, int amount,int X,int Y,int W,int H,int speed, int rowHeight);
 
 };
 }

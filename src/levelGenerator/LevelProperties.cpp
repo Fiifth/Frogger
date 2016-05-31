@@ -15,9 +15,7 @@ LevelProperties::LevelProperties(char mode) :mode(mode)
 	lastRow=new RowProp(0,0,'E',100,100,0,true,false,getVec(10,11),{2},{0});
 	middleRow=new RowProp(0,0,'D',50,50,0,true,false,getVec(10,11),{0},{0});
 	level1();
-	//int speed,int divider,char type,int obstRate,int itemRate,
-//	int shootRate, bool obstacleVis,bool laneVis,std::vector<int> obstIndexes,
-//	std::vector<int> laneIndexes,std::vector<int> itemTypeChance);
+
 }
 
 LevelProperties::~LevelProperties()

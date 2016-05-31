@@ -50,6 +50,7 @@ public:
 	SDL_Texture* getStartSelTex();
 	SDL_Texture* getHighScoreTex();
 	SDL_Texture* getHighScoreBackSel();
+	std::vector<SDL_Texture*>* getMenuTextures();
 protected:
 	int* screenWidth;
 	int* screenHeight;
@@ -60,6 +61,8 @@ protected:
 	SDL_Texture* highSelTex ;
 	SDL_Texture* HighScoreTex;
 	SDL_Texture* HighScoreBackSelTex;
+
+	std::vector<SDL_Texture*> menuTextures;
 	std::vector<SDL_Texture*> playerTex;
 	std::vector<SDL_Texture*> ObstTex;
 	std::vector<SDL_Texture*> laneTex;

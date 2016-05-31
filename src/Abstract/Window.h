@@ -25,7 +25,7 @@ public:
 			int dataWindowHeight, char const* title)=0;
 	void setProp(int width, int height, int dataWindowHeight,
 			char const* title);
-	virtual void setBackground(char state)=0;
+	virtual void setBackground(int index)=0;
 	virtual void updateScreen()=0;
 	int* getHeight() const;
 	int* getWidth() const;
