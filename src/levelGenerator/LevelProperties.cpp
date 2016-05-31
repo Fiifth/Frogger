@@ -27,7 +27,7 @@ LevelProperties::~LevelProperties()
 
 void LevelProperties::level1()
 {
-	seg1=new RowProp(1,0,'B',40,30,90,true,false,getVec(0,8),{0,3,4,5},{1});
+	seg1=new RowProp(1,0,'B',40,30,60,true,false,getVec(0,8),{0,3,4,5},{1});
 	seg2=new RowProp(2,0,'B',50,10,20,true,false,getVec(0,8),{0,3,4,5},{1});
 	seg3=new RowProp(1,0,'C',40,30,70,false,true,getVec(0,8),{0,3,4,5},{1});
 	seg4=new RowProp(2,0,'C',50,10,70,false,true,getVec(0,8),{0,3,4,5},{1});

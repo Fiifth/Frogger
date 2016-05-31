@@ -18,13 +18,10 @@ ProjectileSDL::ProjectileSDL(SDLdata* sdldata, char direction, int Xstart,
 	directionR=direction;
 	speedR=speed;
 	dividerR = 0;
-	setSize(0, size);
-	setScreenSize(sdldata->getScreenWidth(), sdldata->getScreenHeight());
-	int wn = 0, hn = size;
-	wn=sdldata->getDependW(ani->getTexture(), wn, hn);
-	setSize(wn, hn);
-	setLocation(Xstart, Ystart);
-	this->setVisible(true);
+	this->h=size;
+
+	setProperties(nullptr,sdldata->getScrW(), sdldata->getScrH(), Xstart,sdldata->getDW(ani->getTex(), size),true);
+
 	if(!(Ypoint==nullptr))
 		y=Ypoint;
 	else
@@ -43,7 +40,7 @@ void ProjectileSDL::draw()
 	angle = (getDirection() == 'R') ? 90 : angle;
 	angle = (getDirection() == 'D') ? 180 : angle;
 	angle = (getDirection() == 'L') ? 270 : angle;
-	sdldata->renderTexture(ani->getTexture(), sdldata->getRen(), x, *y, &w, h,	angle);
+	sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w, h,	angle);
 	//TODO w has to be pointer
 	if (ani->isTurned() && !turned)
 	{

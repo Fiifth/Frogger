@@ -15,23 +15,12 @@ LaneSDL::LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,bool v
 		int h) :
 		sdldata(sdldata)
 {
-	setVisible(visible);
 	setF(F);
 	int ind=row->getRandomLaneInd();
 	ani = sdldata->getLaneAni(ind).clone();
-	setRow(row);
-	setProperties(); //pointer: screenWidth,Height normal: visibility,factory,row,w,x
-	//TODO remove h,w,visible from parameters
-	this->x=x;
-	setSize(0, h);
-	setScreenSize(sdldata->getScreenWidth(), sdldata->getScreenHeight());
-	int wn = 0, hn = h;
-	wn=sdldata->getDependW(ani->getTexture(), wn, hn);
-	setSize(wn, hn);
-	if ((rand() % 100) <*itemRate)
-	{
-		spawnItem();
-	}
+	setProperties(row,sdldata->getScrW(), sdldata->getScrH(),x,sdldata->getDW(ani->getTex(), row->getHeight()),visible);
+	spawnItem();
+
 }
 LaneSDL::~LaneSDL()
 {
@@ -41,24 +30,11 @@ LaneSDL::~LaneSDL()
 LaneSDL::LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,bool visible) :
 		sdldata(sdldata)
 {
-	setVisible(visible);
 	setF(F);
-	int ind=row->getRandomLaneInd();
-	ani = sdldata->getLaneAni(ind).clone();
-	setRow(row);
-	setProperties();
-	setSize(0, row->getHeight());
-	setScreenSize(sdldata->getScreenWidth(), sdldata->getScreenHeight());
-	int wn = 0, hn = row->getHeight();
-	wn=sdldata->getDependW(ani->getTexture(), wn, hn);
-	setSize(wn, hn);
-	int xloc = row->isDirLeft() ? screenWidth : -getW();
-this->x=xloc;
-
-	if ((rand() % 100) < *itemRate)
-	{
-		spawnItem();
-	}
+	ani = sdldata->getLaneAni(row->getRandomLaneInd()).clone();
+	int wi=sdldata->getDW(ani->getTex(), row->getHeight());
+	setProperties(row,sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -wi,wi,visible);
+	spawnItem();
 }
 
 void LaneSDL::draw()
@@ -67,7 +43,7 @@ void LaneSDL::draw()
 	{
 		int angle = 0;
 		angle = row->isDirLeft() ? 1 : 0;
-		sdldata->renderTexture(ani->getTexture(), sdldata->getRen(), x, *y, &w,
+		sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w,
 				h, angle);
 
 		if (ani->isTurned() && !turned)

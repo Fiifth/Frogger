@@ -16,7 +16,7 @@ class Animator
 public:
 	Animator(std::vector<SDL_Texture*> textures, std::vector<int> ratio);
 	virtual ~Animator();
-	SDL_Texture* getTexture();
+	SDL_Texture* getTex();
 	int getCounter() const;
 	void setCounter(int counter);
 	int getCurrentTexture() const;

@@ -19,20 +19,10 @@ ObstacleSDL::ObstacleSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* 
 		int w, int h) :
 		sdldata(sdldata)
 {
-	setVisible(visible);
 	setF(F);
 	int ind=row->getRandomObsInd();
 	ani = sdldata->getObstiAni(ind).clone();
-	setRow(row);
-	setProperties();
-	this->x=x;
-	setSize(0, h);
-	setScreenSize(sdldata->getScreenWidth(), sdldata->getScreenHeight());
-	int wn = 0, hn = h;
-	wn=sdldata->getDependW(ani->getTexture(), wn, hn);
-	setSize(wn, hn);
-
-	setYPointer(row->getYP());
+	setProperties(row,sdldata->getScrW(), sdldata->getScrH(),x,sdldata->getDW(ani->getTex(), row->getHeight()),visible);
 	previousX = x;
 }
 
@@ -43,12 +33,13 @@ ObstacleSDL::~ObstacleSDL()
 
 void ObstacleSDL::draw()
 {
+
 	if (isVisible())
 	{
 
 		int angle = 0;
 		angle = row->isDirLeft() ? 1 : 0;
-		sdldata->renderTexture(ani->getTexture(), sdldata->getRen(), x, *y, &w,
+		sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w,
 				h, angle);
 		if (ani->isTurned() && !turned)
 		{
@@ -61,24 +52,19 @@ void ObstacleSDL::draw()
 		}
 	}
 	projectileList.remove_if(drawMoveRemove());
+
 }
 
 ObstacleSDL::ObstacleSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,bool visible) :
 		sdldata(sdldata)
 {
-	setVisible(visible);
 	setF(F);
 	int ind=row->getRandomObsInd();
 	ani = sdldata->getObstiAni(ind).clone();
-	setRow(row);
-	setProperties();
-	setSize(0, row->getHeight());
-	setScreenSize(sdldata->getScreenWidth(), sdldata->getScreenHeight());
-	int wn = 0, hn = row->getHeight();
-	wn=sdldata->getDependW(ani->getTexture(), wn, hn);
-	setSize(wn, hn);
-	int xloc = row->isDirLeft() ? screenWidth : -getW();
-	this->x=xloc;
+	int wi=sdldata->getDW(ani->getTex(), row->getHeight());
+	setProperties(row,sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -wi,wi,visible);
+
 	previousX = x;
+
 
 }

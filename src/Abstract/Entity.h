@@ -24,7 +24,7 @@ public:
 	void move(int deltaX, int deltaY, bool leaveScreen);
 	void setSize(int wNew, int hNew);
 	void setLocation(int xNew, int yNew);
-	void setScreenSize(int width, int height);
+	void setScreenSize(int* width, int* height);
 	bool inframe();
 	int getH() const;
 	int getW() const;
@@ -93,7 +93,8 @@ protected:
 	int* speed=&speedR;
 	int* divider=&dividerR;
 
-	int screenWidth, screenHeight;
+	int* screenWidth ;
+	int* screenHeight;
 };
 }
 

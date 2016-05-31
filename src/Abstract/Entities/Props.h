@@ -24,7 +24,7 @@ public:
 	bool isRoom();
 	bool isVisible() const;
 	void setVisible(bool visible);
-	void setProperties();
+	void setProperties(Row* row,int* screenWidth,int* screenHeight,int x,int w,bool vis);
 	virtual void draw()=0;
 
 	//type true=player, false=bullet return type of effect 0=no effect, 1 player dies, 2-6 object disappears and player gets effect

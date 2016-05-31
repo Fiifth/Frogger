@@ -16,8 +16,6 @@ using namespace frogger_sdl;
 
 SDLdata::SDLdata()
 {
-	screenWidth = 640;
-	screenHeight = 480;
 	re = NULL;
 	backgroundTex = NULL;
 }
@@ -31,7 +29,7 @@ void SDLdata::renderTexture(SDL_Texture* tex, SDL_Renderer* ren, int x, int y,
 		int* w, int h, int angle)
 {
 
-	*w=getDependW(tex,*w,h);
+	*w=getDW(tex,h);
 
 	SDL_Rect dst;
 	dst.x = x;
@@ -47,10 +45,11 @@ void SDLdata::renderTexture(SDL_Texture* tex, SDL_Renderer* ren, int x, int y,
 	}
 	SDL_RenderCopyEx(ren, tex, NULL, &dst, angle, NULL, temp);
 }
-int SDLdata::getDependW(SDL_Texture* tex, int w, int h)
+int SDLdata::getDW(SDL_Texture* tex, int h)
 {
 	int aQ, wQ, hQ;
 	Uint32 fQ;
+	int w;
 	SDL_QueryTexture(tex, &fQ, &aQ, &wQ, &hQ);
 
 	//if (*w == 0)
@@ -174,10 +173,10 @@ std::vector<SDL_Texture*> SDLdata::getBackTextures()
 	return backTex;
 }
 
-void SDLdata::setScreenDimension(int width, int height, int dataWindowHeight)
+void SDLdata::setScreenDimension(int* gameWidth, int* gameHeight)
 {
-	screenHeight = height - dataWindowHeight;
-	screenWidth = width;
+	screenHeight = gameHeight;
+	screenWidth = gameWidth;
 }
 
 Animator SDLdata::getItemAni(int ind)
@@ -214,22 +213,22 @@ Animator SDLdata::getAnimator(std::vector<std::string> paths,
 	return temp;
 }
 
-int SDLdata::getScreenHeight() const
+int* SDLdata::getScrH() const
 {
 	return screenHeight;
 }
 
-void SDLdata::setScreenHeight(int screenHeight)
+void SDLdata::setScreenHeight(int* screenHeight)
 {
 	this->screenHeight = screenHeight;
 }
 
-int SDLdata::getScreenWidth() const
+int* SDLdata::getScrW() const
 {
 	return screenWidth;
 }
 
-void SDLdata::setScreenWidth(int screenWidth)
+void SDLdata::setScreenWidth(int* screenWidth)
 {
 	this->screenWidth = screenWidth;
 }

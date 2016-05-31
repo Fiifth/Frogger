@@ -39,51 +39,23 @@ WindowSDL::~WindowSDL()
 	TTF_CloseFont(Sans);
 }
 
-void WindowSDL::makeWindow(int ScreenWidth, int ScreenHeight,
-		int dataWindowHeight, char const* title)
+void WindowSDL::makeWindow(int ScreenWidth, int ScreenHeight,	int dataWindowHeight, char const* title)
 {
+
 	setProp(ScreenWidth, ScreenHeight, dataWindowHeight, title);
-	sdldata->setScreenDimension(ScreenWidth, ScreenHeight, dataWindowHeight);
+	sdldata->setScreenDimension(WIDTH, gameWindowHeight);
+
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init();
-	win = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED,
-			SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
-	ren = SDL_CreateRenderer(win, -1,
-			SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	//
+	win = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED,	SDL_WINDOWPOS_CENTERED, *WIDTH, *HEIGHT, SDL_WINDOW_SHOWN);
+	ren = SDL_CreateRenderer(win, -1,	SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
 	sdldata->setRen(ren);
 	sdldata->createTextures();
 	updateScreen();
-	//startP = chrono::high_resolution_clock::now();
-	//SDL_RenderPresent(ren);
-	//SDL_RenderPresent(ren);
-	//endP = chrono::high_resolution_clock::now();
-	//int difference=std::chrono::duration_cast<std::chrono::milliseconds>(endP- startP).count();
-	//cout<<difference<<endl;
-
 }
 void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
 {
-	bool changed=false;
-	unsigned int i=0;
-	if(rowsBackgroundGenerated != nullptr)
-	{
-		if(rows->size()==rowsOld.size())
-		{
-			for (i =0;i<rows->size();i++)
-			{
-				bool temp=rows->at(i)->getLocY()==rowsOld.at(i)->getLocY();
-				changed=temp?changed:true;
-				temp=rows->at(i)->getRowProperties()->getType()==rowsOld.at(i)->getRowProperties()->getType();
-				changed=temp?changed:true;
-			}
-		}
-		else
-			changed=true;
-	}
-	//	changed=true;
-	if (true ||rowsBackgroundGenerated == nullptr||changed)
-	{
 		rowsOld.clear();
 		setBackground('A');
 		std::vector<SDL_Texture*> backTextures = sdldata->getBackTextures();
@@ -96,22 +68,14 @@ void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
 			int x = 0, width = 0;
 			int textureLocation = row->getRowProperties()->getType()=='C' ? 1 : 0;
 			textureLocation =row->getRowProperties()->getType()=='A'|| row->getRowProperties()->getType()=='E'|| row->getRowProperties()->getType()=='D' ?2 : textureLocation;
-		//	sdldata->getDependW(backTextures.at(textureLocation), &width,		height);
 
-			while (x <= getWidth())
+			while (x <= *getWidth())
 			{
 				sdldata->renderTexture(backTextures.at(textureLocation), ren, x,y, &width, height, 0);
 				x = x + width;
 			}
 		}
 
-		//saveCurrentWindowImage();
-	}
-	else
-	{
-		sdldata->renderTexture(backgourndTexture, ren, 0, 0, &WIDTH, HEIGHT, 0);
-
-	}
 }
 void WindowSDL::dislayData(list<frogger::Player*>* players)
 {
@@ -154,9 +118,9 @@ int i=1;
 
 	SDL_Rect Message_rect; //create a rect
 	Message_rect.x = 0; //WIDTH/2;  //controls the rect's x coordinate
-	Message_rect.y = HEIGHT - dataWindowHeight; // controls the rect's y coordinte
-	Message_rect.w = WIDTH; // controls the width of the rect
-	Message_rect.h = dataWindowHeight; // controls the height of the rect
+	Message_rect.y = *dataWindowHeight; // controls the rect's y coordinte
+	Message_rect.w = *WIDTH; // controls the width of the rect
+	Message_rect.h = *HEIGHT-*dataWindowHeight; // controls the height of the rect
 
 	SDL_RenderCopyEx(ren, Message, NULL, &Message_rect, 0, NULL, SDL_FLIP_NONE);
 
@@ -179,7 +143,7 @@ void WindowSDL::setBackground(char state)
 	else if (state=='F')
 		temp=sdldata->getHighScoreBackSel();
 
-	sdldata->renderTexture(temp, sdldata->getRen(),	0, 0, &WIDTH, HEIGHT, 0);
+	sdldata->renderTexture(temp, sdldata->getRen(),	0, 0, WIDTH, *HEIGHT, 0);
 }
 void WindowSDL::updateScreen()
 {
@@ -223,9 +187,10 @@ void WindowSDL::displayHighScore(int score1, int score2, int score3, int score4)
 
 	SDL_Rect Message_rect; //create a rect
 	Message_rect.x = 0; //WIDTH/2;  //controls the rect's x coordinate
-	Message_rect.y = HEIGHT - dataWindowHeight; // controls the rect's y coordinte
-	Message_rect.w = WIDTH; // controls the width of the rect
-	Message_rect.h = dataWindowHeight; // controls the height of the rect
+	Message_rect.y = *HEIGHT - *dataWindowHeight; // controls the rect's y coordinte
+
+	Message_rect.w = *WIDTH; // controls the width of the rect
+	Message_rect.h = *dataWindowHeight; // controls the height of the rect
 
 	SDL_RenderCopyEx(ren, Message, NULL, &Message_rect, 0, NULL, SDL_FLIP_NONE);
 	TTF_CloseFont(Sans);
@@ -235,7 +200,7 @@ void WindowSDL::displayHighScore(int score1, int score2, int score3, int score4)
 
 void WindowSDL::saveCurrentWindowImage()
 {
-	rowsBackgroundGenerated = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32,
+	rowsBackgroundGenerated = SDL_CreateRGBSurface(0, *WIDTH, *HEIGHT, 32,
 			0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 
 	if (rowsBackgroundGenerated)

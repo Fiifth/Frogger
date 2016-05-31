@@ -16,14 +16,7 @@ ItemSDL::ItemSDL(SDLdata* sdldata, frogger::Row* row, int x, int y, int w, int h
 		sdldata(sdldata)
 {
 	ani = sdldata->getItemAni(ind).clone();
-	setRow(row);
-	setProperties();
-	this->x=x;
-	setSize(0, h);
-	setScreenSize(sdldata->getScreenWidth(), sdldata->getScreenHeight());
-	int wn = 0, hn = h;
-	wn=sdldata->getDependW(ani->getTexture(), wn, hn);
-	setSize(wn, hn);
+	setProperties(row,sdldata->getScrW(), sdldata->getScrH(),x,sdldata->getDW(ani->getTex(), row->getHeight()),true);
 }
 
 ItemSDL::~ItemSDL()
@@ -35,7 +28,7 @@ void ItemSDL::draw()
 {
 	int angle = 0;
 	angle = row->isDirLeft() ? 1 : 0;
-	sdldata->renderTexture(ani->getTexture(), sdldata->getRen(), x,*y, &w, h,
+	sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x,*y, &w, h,
 			angle);
 	if (ani->isTurned() && !turned)
 	{
@@ -52,13 +45,7 @@ ItemSDL::ItemSDL(SDLdata* sdldata, frogger::Row* row, int ind) :
 		sdldata(sdldata)
 {
 	ani = sdldata->getItemAni(ind).clone();
-	setRow(row);
-	setProperties();
-	setSize(0, row->getHeight());
-	setScreenSize(sdldata->getScreenWidth(), sdldata->getScreenHeight());
-	int wn = 0, hn = row->getHeight();
-	wn=sdldata->getDependW(ani->getTexture(), wn, hn);
-	setSize(wn, hn);
-	int xloc = row->isDirLeft() ? screenWidth : -getW();
-	this->x=xloc;
+	int wi=sdldata->getDW(ani->getTex(), row->getHeight());
+	setProperties(row,sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -wi,wi,visible);
+
 }

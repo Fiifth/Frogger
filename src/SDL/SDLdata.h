@@ -24,7 +24,7 @@ public:
 	void setRen(SDL_Renderer* rende);
 	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y,
 			int* w, int h, int angle);
-	int getDependW(SDL_Texture* tex, int w, int h);
+	int getDW(SDL_Texture* tex, int h);
 	void createTextures();
 	SDL_Texture* getBackgroundTexture();
 	std::vector<SDL_Texture*> getPlayerTextures();
@@ -32,7 +32,7 @@ public:
 	std::vector<SDL_Texture*> getLaneTextures();
 	std::vector<SDL_Texture*> getItemTextures();
 	std::vector<SDL_Texture*> getBackTextures();
-	void setScreenDimension(int width, int height, int dataWindowHeight);
+	void setScreenDimension(int* gameWidth, int* gameHeight);
 	Animator getAnimator(std::vector<std::string> paths,
 			std::vector<int> ratio);
 	Animator getItemAni(int ind);
@@ -40,10 +40,10 @@ public:
 	Animator getObstiAni(int ind);
 	Animator getPlayerAni(int ind);
 	Animator getProjAni(int ind);
-	int getScreenHeight() const;
-	void setScreenHeight(int screenHeight);
-	int getScreenWidth() const;
-	void setScreenWidth(int screenWidth);
+	int* getScrH() const;
+	void setScreenHeight(int* screenHeight);
+	int* getScrW() const;
+	void setScreenWidth(int* screenWidth);
 	SDL_Texture* getBackgroundTex();
 	SDL_Texture* getHighSelTex();
 	SDL_Texture* getQuitSelTex();
@@ -51,8 +51,8 @@ public:
 	SDL_Texture* getHighScoreTex();
 	SDL_Texture* getHighScoreBackSel();
 protected:
-	int screenWidth;
-	int screenHeight;
+	int* screenWidth;
+	int* screenHeight;
 	SDL_Renderer* re;
 	SDL_Texture* backgroundTex;
 	SDL_Texture* quitSelTex ;

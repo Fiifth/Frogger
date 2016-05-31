@@ -29,18 +29,18 @@ char Level::levelExecution(string keyStroke)
 		{
 			player->takeAction(keyStroke);
 		}
-		if (lvlprop->getMode()=='A'&&player->getY()<win->getGameWindowHeight()-rowHeight*2)
+		if (lvlprop->getMode()=='A'&&player->getY()<*win->getGameWindowHeight()-rowHeight*2)
 		{
 			int factor=1;
-			factor=player->getY()<win->getGameWindowHeight()-rowHeight*3?2:factor;
-			factor=player->getY()<win->getGameWindowHeight()-rowHeight*4?3:factor;
-			factor=player->getY()<win->getGameWindowHeight()-rowHeight*5?4:factor;
+			factor=player->getY()<*win->getGameWindowHeight()-rowHeight*3?2:factor;
+			factor=player->getY()<*win->getGameWindowHeight()-rowHeight*4?3:factor;
+			factor=player->getY()<*win->getGameWindowHeight()-rowHeight*5?4:factor;
 						followFrog(rows,players,factor); //endless
 		}
 	}
 
 	if(lvlprop->getMode()=='A')
-	extraRowNeeded(rowHeight,win->getGameWindowHeight(),win->getWidth(), F, rows,propsOnRow,lvlprop);
+	extraRowNeeded(rowHeight,*win->getGameWindowHeight(),*win->getWidth(), F, rows,propsOnRow,lvlprop);
 
 	win->generateBackground(rows);
 	propsGenerator(F, rows, propsOnRow);
@@ -223,8 +223,8 @@ void Level::resetLevel()
 
 void Level::initLevel()
 {
-	rowGenerator(rowHeight, win->getGameWindowHeight(), F, rows,propsOnRow,lvlprop);
-	fillEnemyList(F, rows, propsOnRow, win->getWidth());
+	rowGenerator(rowHeight, *win->getGameWindowHeight(), F, rows,propsOnRow,lvlprop);
+	fillEnemyList(F, rows, propsOnRow, *win->getWidth());
 }
 
 void Level::extraRowNeeded(int rowHeight,int screenHeight,int screenWidth,

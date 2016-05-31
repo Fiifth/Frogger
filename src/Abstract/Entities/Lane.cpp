@@ -21,11 +21,9 @@ void Lane::collision(Player* player)
 {
 	if (colli(player))
 	{
-		std::cout<<"hello"<<std::endl;
 		if ((isTurned()))
 		{
 			player->hit();
-
 		}
 		else if (isVisible())
 			player->followRow(row);
@@ -45,14 +43,17 @@ void Lane::collision(Player* player)
 bool Lane::roomForItem()
 {
 	//height item = row->getHeight();
-	int itemX = row->isDirLeft() ? screenWidth : -row->getHeight();
+	int itemX = row->isDirLeft() ? *screenWidth : -row->getHeight();
 	return (getX() <= itemX) && (getX() + getW() >= row->getHeight() + itemX);
 }
 
 bool Lane::spawnItem()
 {
-	itemList.push_back(
-			F->createItem(row, x + ((rand() % (w - h))), *y, w, h, 0));
+	if ((rand() % 100) <*itemRate)
+	{
+		itemList.push_back(
+		F->createItem(row, x + ((rand() % (w - h))), *y, w, h, 0));
+	}
 	return true;
 }
 

@@ -16,8 +16,6 @@ Entity::Entity() :
 	*y = 30;
 	w = 10;
 	h = 10;
-	screenWidth = 640;
-	screenHeight = 480;
 	*speed = 50;
 }
 
@@ -28,10 +26,10 @@ Entity::~Entity()
 void Entity::move(int deltaX, int deltaY, bool leaveScreen)
 {
 	int leftLimit, rightLimit, upperLimit, lowerlimit;
-	leftLimit = leaveScreen ? -getWidth() * 4 : 0;
-	rightLimit = leaveScreen ? screenWidth + getWidth() * 4 : screenWidth;
-	upperLimit = leaveScreen ? -getWidth() * 4 : 0;
-	lowerlimit = leaveScreen ? screenHeight + getWidth() * 4 : screenHeight;
+	leftLimit = leaveScreen ? -*screenWidth * 4 : 0;
+	rightLimit = leaveScreen ? *screenWidth + getWidth() * 4 : *screenWidth;
+	upperLimit = leaveScreen ? -*screenWidth * 4 : 0;
+	lowerlimit = leaveScreen ? (*screenHeight) + (*screenWidth) * 4 : (*screenHeight);
 	if (((x + deltaX + w) <= rightLimit) && (x + deltaX) >= leftLimit)
 	{
 		x = x + deltaX;
@@ -52,15 +50,15 @@ void Entity::setLocation(int xNew, int yNew)
 	x = xNew;
 	*y = yNew;
 }
-void Entity::setScreenSize(int width, int height)
+void Entity::setScreenSize(int* width, int* height)
 {
 	screenWidth = width;
 	screenHeight = height;
 }
 bool Entity::inframe()
 {
-	return ((x < (screenWidth + (3 * w)) && x > (0 - (3 * w)))
-			&& ((*y <= screenHeight + h*4) && (*y >= (0 - h*4))));
+	return ((x < (*screenWidth + (3 * w)) && x > (0 - (3 * w)))
+			&& ((*y <= *screenHeight + h*4) && (*y >= (0 - h*4))));
 }
 
 int Entity::getH() const
@@ -85,12 +83,12 @@ int Entity::getY() const
 
 int Entity::getHeight() const
 {
-	return screenHeight;
+	return *screenHeight;
 }
 
 int Entity::getWidth() const
 {
-	return screenWidth;
+	return *screenWidth;
 }
 
 int Entity::getSpeed() const

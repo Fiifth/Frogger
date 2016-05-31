@@ -19,7 +19,7 @@ Animator::~Animator()
 {
 }
 
-SDL_Texture* Animator::getTexture()
+SDL_Texture* Animator::getTex()
 {
 	SDL_Texture* texture;
 	if (size > 1)

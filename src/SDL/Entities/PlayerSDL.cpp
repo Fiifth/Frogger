@@ -28,7 +28,7 @@ PlayerSDL::PlayerSDL(SDLdata* sdldata, frogger::Factory* F, int x, int y, int w,
 	setSize(w, h);
 	setLocation(x, y);
 	setStartPosition(x, y);
-	setScreenSize(sdldata->getScreenWidth(), sdldata->getScreenHeight());
+	setScreenSize(sdldata->getScrW(), sdldata->getScrH());
 }
 
 PlayerSDL::~PlayerSDL()
@@ -50,7 +50,7 @@ void PlayerSDL::draw()
 			ani->setCurrentTextureFor(1,10);
 			moved=false;
 		}
-		sdldata->renderTexture(ani->getTexture(), sdldata->getRen(), x, *y, &w,
+		sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w,
 				h, angle);
 		projectileList.remove_if(drawMoveRemove());
 

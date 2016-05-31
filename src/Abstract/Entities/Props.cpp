@@ -83,14 +83,23 @@ bool Props::timeToMove()
 	}
 }
 
-void frogger::Props::setProperties()
+//row,sdldata->getScreenWidth(), sdldata->getScreenHeight(),x,w,vis
+void frogger::Props::setProperties(Row* row,int* screenWidth,int* screenHeight,int x,int w,bool vis)
 {
-
-		direction=row->getDirection();
-		y=row->getLocY();
-
-		speed=row->getRowProperties()->getSpeed();
-		divider=row->getRowProperties()->getDivider();
-		itemRate=row->getRowProperties()->getItemRate();
-		shootRate=row->getRowProperties()->getShootRate();
+		this->row=row;
+		this->screenWidth=screenWidth;
+		this->screenHeight=screenHeight;
+		this->x=x;
+		this->w=w;
+		this->visible=vis;
+		if(row!=nullptr)
+		{
+			direction=row->getDirection();
+			y=row->getLocY();
+			this->h=row->getHeight();
+			speed=row->getRowProperties()->getSpeed();
+			divider=row->getRowProperties()->getDivider();
+			itemRate=row->getRowProperties()->getItemRate();
+			shootRate=row->getRowProperties()->getShootRate();
+		}
 }

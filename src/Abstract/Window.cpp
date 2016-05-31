@@ -12,10 +12,10 @@ using namespace frogger;
 
 Window::Window()
 {
-	WIDTH = 640;
-	HEIGHT = 480;
-	dataWindowHeight = 20;
-	gameWindowHeight = HEIGHT - dataWindowHeight;
+	*WIDTH = 640;
+	*HEIGHT = 480;
+	*dataWindowHeight = 20;
+	*gameWindowHeight = *HEIGHT - *dataWindowHeight;
 	TITLE = "frogger";
 }
 Window::~Window()
@@ -25,19 +25,19 @@ Window::~Window()
 void Window::setProp(int width, int height, int dataWindowHeight,
 		char const* title)
 {
-	WIDTH = width;
-	HEIGHT = height;
-	this->dataWindowHeight = dataWindowHeight;
-	gameWindowHeight = height - dataWindowHeight;
+	*WIDTH = width;
+	*HEIGHT = height;
+	*this->dataWindowHeight = dataWindowHeight;
+	*gameWindowHeight = height - dataWindowHeight;
 	TITLE = title;
 }
 
-int Window::getHeight() const
+int* Window::getHeight() const
 {
 	return HEIGHT;
 }
 
-int Window::getWidth() const
+int* Window::getWidth() const
 {
 	return WIDTH;
 }
@@ -57,7 +57,7 @@ bool Window::valueChanged(int score, int life, int projectiles, int time,int sco
 			&& oldProjectiles2 == projectiles2 && oldTime2 == time2);
 }
 
-int Window::getGameWindowHeight() const
+int* Window::getGameWindowHeight() const
 {
 	return gameWindowHeight;
 }

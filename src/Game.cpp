@@ -41,21 +41,21 @@ Game::Game(Factory* F)
 	int WindowWidth = 700;
 	int rowHeight = 50;
 	int dataWindowHeightDesired = 20;
-	int dataWindowHeight =
-			((WindowHeight - dataWindowHeightDesired) % rowHeight)
-			+ dataWindowHeightDesired;
+	int dataWindowHeight =((WindowHeight - dataWindowHeightDesired) % rowHeight)+ dataWindowHeightDesired;
 	int gameWindowHeight = WindowHeight - dataWindowHeight;
 	int gameWindowWidth = WindowWidth;
 	int plStartW = rowHeight, plStartH = rowHeight, plStartSpeed = rowHeight;
-	int plStartX = (gameWindowWidth / 2), plStartY = (gameWindowHeight
-			- plStartW);
+	int plStartX = (gameWindowWidth / 2), plStartY = (gameWindowHeight	- plStartW);
 	string keyStroke;
+
 
 	list<Player*> playersR;
 	list<Player*>* players = &playersR;
 	Events* event = F->createEvents();
 	Window* win = F->createWindow();
+
 	win->makeWindow(WindowWidth, WindowHeight, dataWindowHeight, "frogger");
+
 	Player* player = F->createPlayer(plStartX, plStartY, plStartW, plStartH,
 			plStartSpeed, rowHeight, 0);
 	Player* player2 = F->createPlayer(plStartX, plStartY, plStartW, plStartH,
