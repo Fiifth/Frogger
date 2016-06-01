@@ -28,7 +28,7 @@ public:
 	const std::vector<int>& getItemTypeChance() const;
 	const std::vector<int>& getLaneIndexes() const;
 	const std::vector<int>& getObstIndexes() const;
-
+	void increaseProp(int deltaSpe,int deltaDiv,int deltaObsRate,int deltaItemRate,int deltaShootRate);
 	int speed;
 	int divider;
 	char type;

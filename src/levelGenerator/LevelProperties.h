@@ -28,6 +28,7 @@ public:
 	char getMode() const;
 	void setMode(char mode);
 	RowProp* getRandomRow();
+	void levelUp();
 
 private:
 	RowProp* firstRow=nullptr;
@@ -38,6 +39,7 @@ private:
 	RowProp* seg3=nullptr;
 	RowProp* seg4=nullptr;
 	char mode;
+	int level=1;
 };
 }
 

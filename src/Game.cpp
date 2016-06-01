@@ -64,10 +64,11 @@ Game::Game(Factory* F)
 
 	Menu* men=new Menu(win,&gameMode,&amountOfPlayers,&difficulty);
 
-
+	int temp=0;
 	while (true)
 	{
 		int x,y;
+
 		keyStroke = event->getEvent();
 		event->getMousePos(&x,&y);
 
@@ -87,16 +88,17 @@ Game::Game(Factory* F)
 				level->levelExecution(keyStroke);
 				state = playersAlive(players, state) ? state : 'G';
 				state=level->isObjectiveDone()?'V':state;
+				if (((players->back()->getScore()%100)==0)&&(players->back()->getScore()>temp))
+				{
+					lvlprop->levelUp();
+					temp=players->back()->getScore();
+				}
 				win->dislayData(players);
 				win->updateScreen();
 			}
 
-			else if (PrevState=='B')
+			else if (PrevState=='B'||PrevState=='G')
 			{
-
-			//TODO get amount pointer number of players
-				//get game mode pointer
-				int amount=1;
 				addPlayers(F,players,amountOfPlayers,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
 
 				lvlprop=new LevelProperties(gameMode);
@@ -106,11 +108,8 @@ Game::Game(Factory* F)
 			}
 			else if (PrevState=='V')
 			{
-				//TODO level up
-				int amount=1;
-
-				addPlayers(F,players,amount,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
-				lvlprop=new LevelProperties('C');
+				addPlayers(F,players,amountOfPlayers,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
+				lvlprop->levelUp();
 				level = new Level(F, win, players, rowHeight,lvlprop);
 				state='C';
 				PrevState=state;

@@ -79,3 +79,11 @@ const std::vector<int>& RowProp::getObstIndexes() const
 	return obstIndexes;
 }
 
+void frogger::RowProp::increaseProp(int deltaSpe, int deltaDiv,
+		int deltaObsRate, int deltaItemRate, int deltaShootRate) {
+	speed=speed+deltaSpe;
+	divider=divider+deltaDiv;
+	obstRate=obstRate+deltaObsRate;
+	itemRate=itemRate+deltaItemRate;
+	shootRate=shootRate+deltaShootRate;
+}
