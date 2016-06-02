@@ -47,10 +47,8 @@ protected:
 		{
 			if (item->colli(player))
 			{
-				player->addHighScore(1);
-				player->addProjectiles(1);
+				item->effectOnPlayer(player);
 				delete (item);
-				//TODO fix effects
 				return true;
 			}
 			else

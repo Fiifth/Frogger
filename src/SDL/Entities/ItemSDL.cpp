@@ -15,6 +15,7 @@ ItemSDL::ItemSDL(SDLdata* sdldata, frogger::Row* row, int x, int y, int w, int h
 		int ind) :
 		sdldata(sdldata)
 {
+	effect=ind;
 	ani = sdldata->getItemAni(ind).clone();
 	setProperties(row,sdldata->getScrW(), sdldata->getScrH(),x,sdldata->getDW(ani->getTex(), row->getHeight()),true);
 }

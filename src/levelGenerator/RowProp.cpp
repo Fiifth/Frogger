@@ -64,7 +64,7 @@ bool RowProp::getObstacleVis() const
 	return obstacleVis;
 }
 
-const std::vector<int>& RowProp::getItemTypeChance() const
+std::vector<int> RowProp::getItemTypeChance()
 {
 	return itemTypeChance;
 }
@@ -86,4 +86,15 @@ void frogger::RowProp::increaseProp(int deltaSpe, int deltaDiv,
 	obstRate=obstRate+deltaObsRate;
 	itemRate=itemRate+deltaItemRate;
 	shootRate=shootRate+deltaShootRate;
+}
+
+int frogger::RowProp::getItemType()
+{
+int temp=rand()%100;
+	if (temp<itemTypeChance.at(0))
+		return 0;
+	else if (temp<itemTypeChance.at(0)+itemTypeChance.at(1))
+			return 1;
+	else
+	return 2;
 }

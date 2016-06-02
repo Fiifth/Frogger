@@ -21,6 +21,7 @@
 #include <ratio>
 #include <chrono>
 #include <list>
+#include <string>
 #include "Player.h"
 #include "menu/MenuButton.h"
 namespace frogger_sdl
@@ -33,7 +34,7 @@ public:
 	void makeWindow(int ScreenWidth, int ScreenHeight, int dataWindowHeight,
 			char const* title);
 	void dislayData(std::list<frogger::Player*>* players);
-	void displayHighScore(int score1, int score2, int score3, int score4);
+	void displayHighScore(std::vector<int> highScore);
 	void setBackground(int index);
 	void updateScreen();
 	void generateBackground(std::vector<frogger::Row*>* rows);

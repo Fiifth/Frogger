@@ -36,6 +36,7 @@ using namespace frogger;
 
 Game::Game(Factory* F)
 {
+
 	char state = 'B';
 	char PrevState = 'B';
 	int amountOfPlayers=1;
@@ -76,16 +77,26 @@ Game::Game(Factory* F)
 		{
 		case 'B':case'H':case'G':case'S':case 'V':
 			//menu case modes
+			if(state=='G'&&PrevState!=state)
+				addHighScore(players,gameMode);
 			PrevState=state;
 			state=men->menuExecution(keyStroke,state,x,y,x,y);
-
+			if(state=='H')
+			{
+				if(gameMode=='E')
+				win->displayHighScore(highScoreEndless);
+				else
+					win->displayHighScore(highScoreClassic);
+			}
 			win->updateScreen();
 			break;
 		case 'E':case'C':
 			//level execution modes
 			if(PrevState==state)
 			{
+
 				level->levelExecution(keyStroke);
+
 				state = playersAlive(players, state) ? state : 'G';
 				state=level->isObjectiveDone()?'V':state;
 				if (((players->back()->getScore()%100)==0)&&(players->back()->getScore()>temp))
@@ -99,16 +110,17 @@ Game::Game(Factory* F)
 
 			else if (PrevState=='B'||PrevState=='G')
 			{
-				addPlayers(F,players,amountOfPlayers,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
 
+				addPlayers(F,players,amountOfPlayers,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight,gameMode,difficulty);
 				lvlprop=new LevelProperties(gameMode);
 				level = new Level(F, win, players, rowHeight,lvlprop);
+
 				state=gameMode;
 				PrevState=state;
 			}
 			else if (PrevState=='V')
 			{
-				addPlayers(F,players,amountOfPlayers,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight);
+				addPlayers(F,players,amountOfPlayers,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight,gameMode,difficulty);
 				lvlprop->levelUp();
 				level = new Level(F, win, players, rowHeight,lvlprop);
 				state='C';
@@ -139,19 +151,61 @@ bool Game::playersAlive(list<Player*>* players, char mode)
 	return temp;
 }
 
-void frogger::Game::addPlayers(Factory* F,list<Player*>* players, int amount,int X,int Y,int W,int H,int speed, int rowHeight)
+void frogger::Game::addPlayers(Factory* F,list<Player*>* players, int amount,int X,int Y,int W,int H,int speed, int rowHeight,char gameMode,char difficulty)
 {
+	int life=4,totalTime=50,scorePerStep=10,projectiles=3; //classic easy mode
+	bool counterEnabled=true;
+
+	counterEnabled=(gameMode=='E')?false:true;
+
+	life=(difficulty=='M')?3:life;
+	life=(difficulty=='H')?2:life;
+	life=(gameMode=='E')?0:life;
+
+	totalTime=(difficulty=='M')?40:totalTime;
+	totalTime=(difficulty=='H')?30:totalTime;
+
+	scorePerStep=(difficulty=='M')?20:scorePerStep;
+	scorePerStep=(difficulty=='H')?30:scorePerStep;
+
+	projectiles=(difficulty=='M')?2:projectiles;
+	projectiles=(difficulty=='H')?1:projectiles;
+
 	players->clear();
 	if (amount >=1)
 	{
 	Player* player = F->createPlayer(X, Y, W, H,	speed, rowHeight, 0);
+	player->setParameters(life,totalTime,counterEnabled,scorePerStep,projectiles);
 	players->push_back(player);
 	}
 	if (amount>1)
 	{
 		Player* player2 = F->createPlayer(X, Y, W, H,	speed, rowHeight, 1);
 		player2->setDifferentControls();
+		player2->setParameters(life,totalTime,counterEnabled,scorePerStep,projectiles);
 		players->push_back(player2);
+	}
+}
+
+void frogger::Game::addHighScore(list<Player*>* players,char gameMode)
+{
+	for(Player* play :*players)
+	{
+		int score=play->getScore();
+		if(gameMode=='C')
+		{
+			highScoreClassic.push_back(score);
+			std::sort(highScoreClassic.begin(), highScoreClassic.end());
+			std::reverse(highScoreClassic.begin(), highScoreClassic.end());
+			highScoreClassic.pop_back();
+		}
+		else
+		{
+			highScoreEndless.push_back(score);
+			std::sort(highScoreEndless.begin(), highScoreEndless.end());
+			std::reverse(highScoreEndless.begin(), highScoreEndless.end());
+			highScoreEndless.pop_back();
+		}
 	}
 }
 //start_time=chrono::steady_clock::now();

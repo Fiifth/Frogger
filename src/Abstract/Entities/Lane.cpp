@@ -52,7 +52,7 @@ bool Lane::spawnItem()
 	if ((rand() % 100) <*itemRate)
 	{
 		itemList.push_back(
-		F->createItem(row, x + ((rand() % (w - h))), *y, w, h, 0));
+		F->createItem(row, x + ((rand() % (w - h))), *y, w, h, row->getRowProperties()->getItemType()));
 	}
 	return true;
 }

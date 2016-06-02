@@ -153,36 +153,38 @@ void WindowSDL::updateScreen()
 
 }
 
-void WindowSDL::displayHighScore(int score1, int score2, int score3, int score4)
+void WindowSDL::displayHighScore(std::vector<int> highScore)
 {
-	string scoreS = to_string(score1);
-	string lifeS = to_string(score2);
-	string projS = to_string(score3);
-	string timeS = to_string(score4);
-	string text = "HighScore1: " + scoreS + " HighScore2: " + lifeS
-			+ " HighScore3: " + projS + "      your score: " + timeS;
+	if (Sans==nullptr)
+		Sans = TTF_OpenFont("c:\\sans.ttf", 40);
+	int i=0;
+	SDL_Rect Message_rect;
+	for(int score :highScore)
+	{
+		std::string highScore1=(std::to_string(i+1)+". "+std::to_string(score));
 
-	TTF_Font* Sans = TTF_OpenFont("c:\\sans.ttf", 60);
-	SDL_Color White ={ 255, 255, 255, 255 };
-	SDL_Color Black ={ 0, 0, 0, 0 };
+		Message_rect.x = (*WIDTH/2)-highScore1.size()*20;
+		Message_rect.y = *HEIGHT/3+(i*40);
+	//	Message_rect.w = highScore1.size()*20;
+	//	Message_rect.h = 40;
 
-	//auto start_time=chrono::steady_clock::now();
-	SDL_Surface* surfaceMessage = TTF_RenderText_Blended(Sans, text.c_str(),
-			White);
-	//auto end_time=chrono::steady_clock::now();
-	SDL_Texture* Message = SDL_CreateTextureFromSurface(ren, surfaceMessage);
+		SDL_Surface* surfaceMessage = TTF_RenderText_Blended(Sans, highScore1.c_str(),Black);
+		SDL_Texture* Message = SDL_CreateTextureFromSurface(ren, surfaceMessage);
 
-	SDL_Rect Message_rect; //create a rect
-	Message_rect.x = 0; //WIDTH/2;  //controls the rect's x coordinate
-	Message_rect.y = *HEIGHT - *dataWindowHeight; // controls the rect's y coordinte
+		int iW, iH;
+			SDL_QueryTexture(Message, NULL, NULL, &iW, &iH);
+			Message_rect.x = (*WIDTH/2)-iW/2;
+					Message_rect.y = ((*HEIGHT)*2)/5+(iH*i);
+				Message_rect.w = iW;
+				Message_rect.h = iH;
 
-	Message_rect.w = *WIDTH; // controls the width of the rect
-	Message_rect.h = *dataWindowHeight; // controls the height of the rect
+		SDL_RenderCopyEx(ren, Message, NULL, &Message_rect, 0, NULL, SDL_FLIP_NONE);
+		SDL_FreeSurface(surfaceMessage);
+		SDL_DestroyTexture(Message);
+		i++;
+	}
 
-	SDL_RenderCopyEx(ren, Message, NULL, &Message_rect, 0, NULL, SDL_FLIP_NONE);
-	TTF_CloseFont(Sans);
-	SDL_FreeSurface(surfaceMessage);
-	SDL_DestroyTexture(Message);
+
 }
 
 void WindowSDL::saveCurrentWindowImage()

@@ -8,6 +8,7 @@
 #ifndef LVLPROP_H_
 #define LVLPROP_H_
 #include <vector>
+#include <stdlib.h>     /* srand, rand */
 namespace frogger
 {
 class RowProp
@@ -25,10 +26,11 @@ public:
 	char getType() const;
 	bool getLaneVis() const;
 	bool getObstacleVis() const;
-	const std::vector<int>& getItemTypeChance() const;
+	std::vector<int> getItemTypeChance();
 	const std::vector<int>& getLaneIndexes() const;
 	const std::vector<int>& getObstIndexes() const;
 	void increaseProp(int deltaSpe,int deltaDiv,int deltaObsRate,int deltaItemRate,int deltaShootRate);
+	int getItemType();
 	int speed;
 	int divider;
 	char type;

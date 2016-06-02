@@ -150,14 +150,11 @@ void Player::hit()
 	resetPosition();
 	if (life == 0)
 	{
-		addHighScore(score);
 		setDead(true);
 	}
 	else
 	{
 		addLife(-1);
-		addScore(-10);
-
 	}
 }
 
@@ -183,12 +180,12 @@ bool Player::takeAction(std::string key)
 		{
 			moveDown();
 			if (*y > startY)
-				addScore(-10);
+				addScore(-scorePerStep);
 		}
 		else if (key == keyUp)
 		{
 			moveUp();
-			addScore(10);
+			addScore(scorePerStep);
 			return true;
 		}
 		else if (key == keyLeft)
@@ -233,20 +230,6 @@ void Player::decreaseTime()
 	}
 }
 
-void Player::addHighScore(int score)
-{
-	highScore.pop_back();
-	highScore.push_back(score);
-	std::sort(highScore.begin(), highScore.end());
-	std::reverse(highScore.begin(), highScore.end());
-	highScore.pop_back();
-	highScore.push_back(score);
-}
-
-const vector<int>& Player::getHighScore() const
-{
-	return highScore;
-}
 
 bool Player::isDead() const
 {
@@ -257,7 +240,7 @@ void Player::setDead(bool dead)
 {
 	if (!dead)
 	{
-		setScore(0);
+		//setScore(0);
 		setLife(3);
 		projectiles = 3;
 		resetPosition();
@@ -321,4 +304,14 @@ for(Projectile* proj:projectileList)
 	proj->move(0,offset,true);
 }
 
+}
+
+void frogger::Player::setParameters(int life, int totalTime,
+		bool counterEnabled,int scorePerStep,int projectiles) {
+	this->totalTime=totalTime;
+	remainingTime=totalTime;
+	this->counterEnabled=counterEnabled;
+	this->life=life;
+	this->scorePerStep=scorePerStep;
+	this->projectiles=projectiles;
 }

@@ -17,6 +17,7 @@
 #include "Player.h"
 #include <chrono>
 #include <iostream>
+#include <algorithm>    // std::sort
 namespace frogger
 {
 class Game
@@ -25,7 +26,11 @@ public:
 	Game(Factory* F);
 	virtual ~Game();
 	bool playersAlive(list<Player*>* players, char mode);
-	void addPlayers (Factory* F,list<Player*>* players, int amount,int X,int Y,int W,int H,int speed, int rowHeight);
+	void addPlayers (Factory* F,list<Player*>* players, int amount,int X,int Y,int W,int H,int speed, int rowHeight,char gameMode,char difficulty);
+	void addHighScore(list<Player*>* players,char gameMode);
+protected:
+	std::vector<int> highScoreClassic ={ 0, 0, 0, 0 };
+	std::vector<int> highScoreEndless ={ 0, 0, 0, 0 };
 
 };
 }

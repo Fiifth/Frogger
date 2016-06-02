@@ -174,9 +174,14 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,int x)
 	{
 		bool prevVisible=PreProp->empty()?true:PreProp->front()->isVisible();
 		if ((laneRow && prevVisible)|| ((number < row->getRowProperties()->getObsticleRate()) && !prevVisible))
+		{
 			prop = F->createObstacle(row,row->isObstacleVis(), x, 5, 0, row->getHeight());
+		}
 		else
+		{
 			prop = F->createLane(row,row->isLaneVis(), x, 5, 0, row->getHeight());
+		}
+
 	}
 	else
 	{
@@ -228,6 +233,7 @@ void Level::initLevel()
 {
 	rowGenerator(rowHeight, *win->getGameWindowHeight(), F, rows,propsOnRow,lvlprop);
 	fillEnemyList(F, rows, propsOnRow, *win->getWidth());
+
 }
 
 void Level::extraRowNeeded(int rowHeight,int screenHeight,int screenWidth,
@@ -277,7 +283,6 @@ void Level::fillOneRow(Factory* F, Row* row,
 	int x = 0;
 	while (x < screenWidth)
 	{
-
 		if ((row->getRowProperties()->getType()=='B') || (row->getRowProperties()->getType()=='C')||row->getRowProperties()->getType()=='D'||row->getRowProperties()->getType()=='E')
 		{
 			list<Props*>* PreProp = &propsOnRow->at(row->getNumber());

@@ -37,3 +37,15 @@ bool Item::itemAbsent()
 	//(x3>x2)||(x4<x1)
 	return ((x3 > x2) || (x4 < x1));
 }
+
+void frogger::Item::effectOnPlayer(Player* player)
+{
+	if (effect==0)
+		player->addLife(1);
+	else if (effect==1)
+		player->addScore(10);
+	else
+		player->addProjectiles(1);
+
+
+}

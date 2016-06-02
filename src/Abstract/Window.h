@@ -31,8 +31,7 @@ public:
 	int* getHeight() const;
 	int* getWidth() const;
 	//virtual void dislayData(std::list<Player*>* players)=0;
-	virtual void displayHighScore(int score1, int score2, int score3,
-			int score4)=0;
+	virtual void displayHighScore(std::vector<int> highScore)=0;
 	virtual void generateBackground(std::vector<Row*>* rows)=0;
 	void setOldParameters(int score, int life, int projectiles, int time);
 	bool valueChanged(int score, int life, int projectiles, int time,int score2, int life2, int projectiles2, int time2);

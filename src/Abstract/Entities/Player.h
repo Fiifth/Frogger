@@ -56,8 +56,6 @@ public:
 	void setRemainingTime(int remainingTime);
 	void resetRemainingTime();
 	void decreaseTime();
-	void addHighScore(int score);
-	const std::vector<int>& getHighScore() const;
 	bool myfunction(int i, int j)
 	{
 		return (i > j);
@@ -70,6 +68,7 @@ public:
 	std::list<Projectile*>* getProjectileList();
 	void collision(Player* player);
 	void followScreen(int offset);
+	void setParameters(int life,int totalTime,bool counterEnabled,int scorePerStep,int projectiles);
 
 private:
 	int vSpeed;
@@ -81,6 +80,7 @@ private:
 	int remainingTime;
 	bool counterEnabled=true;
 	bool dead = false;
+	int scorePerStep=10;
 
 
 	std::chrono::high_resolution_clock::time_point previousTime =
@@ -88,8 +88,6 @@ private:
 	std::chrono::high_resolution_clock::time_point currentTime =
 			std::chrono::high_resolution_clock::now();
 	float correctTime = float(totalTime);
-	std::vector<int> highScore =
-	{ 0, 0, 0, 0 };
 	std::string keyUp = "Up", keyDown = "Down", keyLeft = "Left", keyRight = "Right",
 			fire = "Right Ctrl";
 

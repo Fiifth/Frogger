@@ -21,7 +21,8 @@ public:
 	void collision(Player* player);
 	bool roomForItem();
 	bool itemAbsent();
-	int effect = 3;
+	void effectOnPlayer(Player* player);
+	int effect;
 	bool itemListEmpty()
 		{
 			return false;

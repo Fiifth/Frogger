@@ -138,7 +138,9 @@ void SDLdata::createTextures()
 	};
 	itemAni=
 	{
-			getAnimator({"item.png"},{1})
+			getAnimator({"item1.png"},{1}),
+			getAnimator({"item2.png"},{1}),
+			getAnimator({"item3.png"},{1})
 	};
 	playerAni=
 	{
