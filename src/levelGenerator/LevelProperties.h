@@ -14,9 +14,11 @@ namespace frogger
 class LevelProperties
 {
 public:
-	LevelProperties(char mode);
+	LevelProperties(char mode,char difficulty);
 	virtual ~LevelProperties();
-	void level1();
+	void easyLevel();
+	void mediumLevel();
+	void hardLevel();
 	RowProp* getFirstRow();
 	RowProp* getLastRow();
 	RowProp* getMiddleRow() ;
@@ -29,6 +31,7 @@ public:
 	void setMode(char mode);
 	RowProp* getRandomRow();
 	void levelUp();
+	char getDifficulty();
 
 private:
 	RowProp* firstRow=nullptr;
@@ -40,6 +43,8 @@ private:
 	RowProp* seg4=nullptr;
 	char mode;
 	int level=1;
+	char difficulty='E';
+	int freeRows=3;
 };
 }
 

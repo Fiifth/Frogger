@@ -64,7 +64,7 @@ public:
 	bool isDead() const;
 	void setDead(bool dead);
 	bool timeToMove();
-	void setDifferentControls();
+	void setDifferentControls(char set);
 	std::list<Projectile*>* getProjectileList();
 	void collision(Player* player);
 	void followScreen(int offset);

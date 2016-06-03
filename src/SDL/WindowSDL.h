@@ -43,9 +43,11 @@ public:
 private:
 	SDLdata* sdldata;
 	SDL_Renderer* ren;
-	TTF_Font* Sans = nullptr;
+	TTF_Font* Sans1 = nullptr;
+	TTF_Font* Sans2 = nullptr;
 	SDL_Color White;
 	SDL_Color Black;
+	SDL_Color Blue=	{173,216,230};
 	SDL_Surface* surfaceMessage = nullptr;
 	SDL_Texture* Message = nullptr;
 	SDL_Window* win;

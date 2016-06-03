@@ -23,7 +23,7 @@ public:
 	SDL_Renderer* getRen();
 	void setRen(SDL_Renderer* rende);
 	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y,
-			int* w, int h, int angle);
+			int* w, int h, int angle,bool ratio);
 	int getDW(SDL_Texture* tex, int h);
 	void createTextures();
 	SDL_Texture* getBackgroundTexture();

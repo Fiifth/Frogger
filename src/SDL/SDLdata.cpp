@@ -26,9 +26,9 @@ SDLdata::~SDLdata()
 }
 
 void SDLdata::renderTexture(SDL_Texture* tex, SDL_Renderer* ren, int x, int y,
-		int* w, int h, int angle)
+		int* w, int h, int angle,bool ratio)
 {
-
+if (ratio)
 	*w=getDW(tex,h);
 
 	SDL_Rect dst;

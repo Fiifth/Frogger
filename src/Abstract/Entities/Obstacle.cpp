@@ -19,7 +19,7 @@ Obstacle::~Obstacle()
 void Obstacle::collision(Player* player)
 {
 	considerFire();
-	if (colli(player) && (!isTurned()))
+	if (colli(player) && ((!isTurned())||(row->getRowProperties()->getType())=='E'))
 		player->hit();
 	else
 	{

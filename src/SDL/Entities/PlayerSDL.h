@@ -26,8 +26,7 @@ public:
 	void draw();
 	void move(int deltaX, int deltaY);
 private:
-	void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w,
-			int h);
+	//void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w,	int h);
 	SDLdata* sdldata;
 	std::vector<SDL_Texture*> textures;
 	Animator* ani;

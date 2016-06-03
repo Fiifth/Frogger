@@ -8,10 +8,10 @@
 #include <levelGenerator/RowProp.h>
 using namespace frogger;
 
-RowProp::RowProp(int speed,int divider,char type,int obstRate,int itemRate,
+RowProp::RowProp(int speed,int divider,char type,char mode,int obstRate,int itemRate,
 		int shootRate, bool obstacleVis,bool laneVis,std::vector<int> obstIndexes,
 		std::vector<int> laneIndexes,std::vector<int> itemTypeChance)
-: speed(speed),divider(divider), type(type), obstRate(obstRate), itemRate(itemRate),
+: speed(speed),divider(divider), type(type),mode(mode), obstRate(obstRate), itemRate(itemRate),
  shootRate(shootRate),obstacleVis(obstacleVis),laneVis(laneVis), obstIndexes(obstIndexes),
  laneIndexes(laneIndexes),itemTypeChance(itemTypeChance)
 {
@@ -97,4 +97,8 @@ int temp=rand()%100;
 			return 1;
 	else
 	return 2;
+}
+
+char frogger::RowProp::getMode() const {
+	return mode;
 }

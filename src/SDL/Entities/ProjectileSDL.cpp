@@ -40,7 +40,7 @@ void ProjectileSDL::draw()
 	angle = (getDirection() == 'R') ? 90 : angle;
 	angle = (getDirection() == 'D') ? 180 : angle;
 	angle = (getDirection() == 'L') ? 270 : angle;
-	sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w, h,	angle);
+	sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w, h,	angle,true);
 	//TODO w has to be pointer
 	if (ani->isTurned() && !turned)
 	{

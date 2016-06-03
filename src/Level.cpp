@@ -21,25 +21,32 @@ Level::~Level()
 }
 char Level::levelExecution(string keyStroke)
 {
-
+int factor=3;
+int freeRows=4;
+freeRows=(lvlprop->getDifficulty()=='M')?3:freeRows;
+freeRows=(lvlprop->getDifficulty()=='H')?2:freeRows;
+int tempFactor=0;
 	for (Player* player : *players)
 	{
+		tempFactor=0;
 		if(player->getRemainingTime()==0)
 			player->hit();
 		else
 		{
 			player->takeAction(keyStroke);
 		}
-		if (lvlprop->getMode()=='E'&&player->getY()<*win->getGameWindowHeight()-rowHeight*2)
+		if (lvlprop->getMode()=='E'&&player->getY()<*win->getGameWindowHeight()-rowHeight*freeRows)
 		{
-			int factor=1;
-			factor=player->getY()<*win->getGameWindowHeight()-rowHeight*3?2:factor;
-			factor=player->getY()<*win->getGameWindowHeight()-rowHeight*4?3:factor;
-			factor=player->getY()<*win->getGameWindowHeight()-rowHeight*5?4:factor;
-						followFrog(rows,players,factor); //endless
+			tempFactor=1;
+			tempFactor=player->getY()<*win->getGameWindowHeight()-rowHeight*(freeRows+1)?2:tempFactor;
+			tempFactor=player->getY()<*win->getGameWindowHeight()-rowHeight*(freeRows+2)?3:tempFactor;
+			tempFactor=player->getY()<*win->getGameWindowHeight()-rowHeight*(freeRows+3)?4:tempFactor;
 		}
+		if(!player->isDead())
+		factor=(factor>tempFactor)?tempFactor:factor;
 	}
-
+	if(lvlprop->getMode()=='E')
+	followFrog(rows,players,factor);
 
 	if(lvlprop->getMode()=='E')
 	extraRowNeeded(rowHeight,*win->getGameWindowHeight(),*win->getWidth(), F, rows,propsOnRow,lvlprop);
@@ -83,16 +90,24 @@ void Level::rowGenerator(int rowHeight, int screenHight,
 	{
 		for (int n = 0; n < numberOfRows; n++)
 		{
+
+
 			if(n==0)
 				rowProp=lvlprop->getLastRow();
 			else if (n==(numberOfRows-1))
 				rowProp=lvlprop->getFirstRow();
 			else if (n==numberOfRows / 2)
 				rowProp=lvlprop->getMiddleRow();
-			else if (n < (numberOfRows / 2))
-				rowProp=lvlprop->getSeg3();
-			else if (n>(numberOfRows / 2))
-				rowProp=lvlprop->getSeg1();
+
+			else if (n <= (numberOfRows / 4))
+				rowProp=lvlprop->getSeg4();
+			else if (n <= (numberOfRows / 2))
+						rowProp=lvlprop->getSeg3();
+
+			else if (n<(3*numberOfRows / 4))
+				rowProp=lvlprop->getSeg2();
+			else if (n<=(numberOfRows))
+					rowProp=lvlprop->getSeg1();
 
 			rows->push_back(F->createRow(dir, n * rowHeight, rowHeight, n,rowProp));
 			propsOnRow->push_back(enemies);

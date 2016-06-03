@@ -42,10 +42,10 @@ Game::Game(Factory* F)
 	int amountOfPlayers=1;
 	char gameMode='E';
 	char difficulty='E';
-	int WindowHeight = 520;
-	int WindowWidth = 700;
-	int rowHeight = 50;
-	int dataWindowHeightDesired = 20;
+	int WindowHeight = 660;
+	int WindowWidth = 800;
+	int rowHeight = 45;
+	int dataWindowHeightDesired = 30;
 	int dataWindowHeight =((WindowHeight - dataWindowHeightDesired) % rowHeight)+ dataWindowHeightDesired;
 	int gameWindowHeight = WindowHeight - dataWindowHeight;
 	int gameWindowWidth = WindowWidth;
@@ -53,7 +53,7 @@ Game::Game(Factory* F)
 	int plStartX = (gameWindowWidth / 2), plStartY = (gameWindowHeight	- plStartW);
 	string keyStroke;
 
-
+std::cout<<dataWindowHeight<<std::endl;
 	list<Player*> playersR;
 	list<Player*>* players = &playersR;
 	Events* event = F->createEvents();
@@ -99,7 +99,7 @@ Game::Game(Factory* F)
 
 				state = playersAlive(players, state) ? state : 'G';
 				state=level->isObjectiveDone()?'V':state;
-				if (((players->back()->getScore()%100)==0)&&(players->back()->getScore()>temp))
+				if (gameMode=='E'&&((players->back()->getScore()%100)==0)&&(players->back()->getScore()>temp))
 				{
 					lvlprop->levelUp();
 					temp=players->back()->getScore();
@@ -112,7 +112,7 @@ Game::Game(Factory* F)
 			{
 
 				addPlayers(F,players,amountOfPlayers,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight,gameMode,difficulty);
-				lvlprop=new LevelProperties(gameMode);
+				lvlprop=new LevelProperties(gameMode,difficulty);
 				level = new Level(F, win, players, rowHeight,lvlprop);
 
 				state=gameMode;
@@ -178,12 +178,19 @@ void frogger::Game::addPlayers(Factory* F,list<Player*>* players, int amount,int
 	player->setParameters(life,totalTime,counterEnabled,scorePerStep,projectiles);
 	players->push_back(player);
 	}
-	if (amount>1)
+	if (amount>=2)
 	{
 		Player* player2 = F->createPlayer(X, Y, W, H,	speed, rowHeight, 1);
-		player2->setDifferentControls();
+		player2->setDifferentControls('A');
 		player2->setParameters(life,totalTime,counterEnabled,scorePerStep,projectiles);
 		players->push_back(player2);
+	}
+	if (amount >=3)
+	{
+		Player* player3 = F->createPlayer(X, Y, W, H,	speed, rowHeight, 1);
+		player3->setDifferentControls('B');
+		player3->setParameters(life,totalTime,counterEnabled,scorePerStep,projectiles);
+		players->push_back(player3);
 	}
 }
 

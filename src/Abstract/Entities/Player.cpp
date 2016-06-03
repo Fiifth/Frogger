@@ -262,13 +262,32 @@ bool Player::timeToMove()
 	}
 }
 
-void Player::setDifferentControls()
+void Player::setDifferentControls(char set)
 {
+	if(set=='A')
+	{
 	keyUp = "Z";
 	keyDown = "S";
 	keyLeft = "Q";
 	keyRight = "D";
-	fire = "Space";
+	fire = "E";
+	}
+	else if(set=='B')
+	{
+		keyUp = "Y";
+			keyDown = "H";
+			keyLeft = "G";
+			keyRight = "J";
+			fire = "U";
+			}
+else if(set=='C')
+{
+	keyUp = "Up";
+	keyDown = "Down";
+	keyLeft = "Left";
+	keyRight = "Right";
+
+			}
 }
 
 std::list<Projectile*>* Player::getProjectileList()

@@ -97,8 +97,6 @@ private:
 	list<Player*>* players;
 	int rowHeight;
 
-	//**
-	//**
 	string keyStroke;
 	vector<Row*> rowsR;
 	vector<list<Props*>> propsOnRowR;

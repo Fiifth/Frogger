@@ -40,7 +40,7 @@ void ObstacleSDL::draw()
 		int angle = 0;
 		angle = row->isDirLeft() ? 1 : 0;
 		sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w,
-				h, angle);
+				h, angle,true);
 		if (ani->isTurned() && !turned)
 		{
 			isTurenedByAni = true;

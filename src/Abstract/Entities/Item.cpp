@@ -34,14 +34,21 @@ bool Item::itemAbsent()
 	int x2 = itemX + row->getHeight();
 	int x3 = getX();
 	int x4 = getX() + getW();
-	//(x3>x2)||(x4<x1)
 	return ((x3 > x2) || (x4 < x1));
 }
 
 void frogger::Item::effectOnPlayer(Player* player)
 {
 	if (effect==0)
+	{
+		if(row->getRowProperties()->getMode()=='C')
 		player->addLife(1);
+		else
+		{
+			player->addScore(10);
+		player->addProjectiles(1);
+		}
+	}
 	else if (effect==1)
 		player->addScore(10);
 	else

@@ -21,7 +21,7 @@ void Lane::collision(Player* player)
 {
 	if (colli(player))
 	{
-		if ((isTurned()))
+		if (isTurned())
 		{
 			player->hit();
 		}
