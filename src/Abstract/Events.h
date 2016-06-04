@@ -10,14 +10,14 @@
 #include <string>
 namespace frogger
 {
-class Events
-{
-public:
-	Events();
-	virtual ~Events();
-	virtual std::string getEvent()=0;
-	virtual void getMousePos(int* x,int* y)=0;
-};
+	class Events
+	{
+		public:
+			Events();
+			virtual ~Events();
+			virtual std::string getEvent()=0;
+			virtual void getMousePos(int* x, int* y)=0;
+	};
 }
 
 #endif /* EVENTS_H_ */

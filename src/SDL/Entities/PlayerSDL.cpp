@@ -6,20 +6,10 @@
  */
 
 #include "PlayerSDL.h"
-#include <iostream>
-#include "SDL.h"
-#include "Window.h"
-#include "Animator.h"
-#include <vector>
-#include "Projectile.h"
 using namespace frogger_sdl;
 
-using namespace std;
-
-PlayerSDL::PlayerSDL(SDLdata* sdldata, frogger::Factory* F, int x, int y, int w, int h,
-		int speedH, int speedV, int number) :
-		sdldata(sdldata), textures(sdldata->getPlayerTextures())
-
+PlayerSDL::PlayerSDL(SDLdata* sdldata, frogger::Factory* F, int x, int y, int w,int h, int speedH, int speedV, int number) :
+		sdldata(sdldata)
 {
 	setF(F);
 	ani = sdldata->getPlayerAni(number).clone();
@@ -33,27 +23,25 @@ PlayerSDL::PlayerSDL(SDLdata* sdldata, frogger::Factory* F, int x, int y, int w,
 
 PlayerSDL::~PlayerSDL()
 {
+	delete(ani);
 }
 
 void PlayerSDL::draw()
 {
 	if (!isDead())
 	{
-		//int direction=0;//1=up,2=right,3=down,4=left;
 		int angle = 0;
 		angle = (getDirection() == 'R') ? 90 : angle;
 		angle = (getDirection() == 'D') ? 180 : angle;
 		angle = (getDirection() == 'L') ? 270 : angle;
 
-		if(moved)
+		if (moved)
 		{
-			ani->setCurrentTextureFor(1,10);
-			moved=false;
+			ani->setCurrentTextureFor(1, 10);
+			moved = false;
 		}
-		sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w,
-				h, angle,true);
+		sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w, h, angle, true);
 		projectileList.remove_if(drawMoveRemove());
-
 	}
 }
 

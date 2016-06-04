@@ -16,47 +16,32 @@
 #include <list>
 namespace frogger
 {
-class Obstacle: public frogger::Props
-{
-public:
-	Obstacle();
-	virtual ~Obstacle();
-	virtual void draw()=0;
-	void collision(Player* player);
-	void editYForProjectiles();
-	bool itemListEmpty()
+	class Obstacle: public frogger::Props
 	{
-		return true;
-	};
-	bool fire();
-	void considerFire();
+		public:
+			Obstacle();
+			virtual ~Obstacle();
+			virtual void draw()=0;
+			void collision(Player* player);
+			void editYForProjectiles();
+			bool itemListEmpty();
+			void fire();
+			void considerFire();
+			std::list<Projectile*>* getProjectileList();
 
-	std::list<Projectile*>* getProjectileList();
-protected:
-	int previousX = 0;
-	std::list<Projectile*> projectileList;
+		protected:
+			int previousX = 0;
+			std::list<Projectile*> projectileList;
 
-	struct playerProjectiles
-	{
-		playerProjectiles(Obstacle* obstacle) :
-				obstacle(obstacle)
-		{
-		}
-		Obstacle* obstacle;
-		bool operator()(Projectile* projectile) const
-		{
-			if (obstacle->isVisible() && obstacle->colli(projectile))
+			struct playerProjectiles
 			{
-				delete (projectile);
-				obstacle->setVisible(false);
-				obstacle->setTurned(true);
-				return true;
-			}
-			else
-				return false;
-		}
+					playerProjectiles(Obstacle* obstacle) :	obstacle(obstacle)
+					{
+					}
+					Obstacle* obstacle;
+					bool operator()(Projectile* projectile) const;
+			};
 	};
-};
 }
 
 #endif /* ENEMY_H_ */

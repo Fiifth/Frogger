@@ -12,20 +12,20 @@
 #include "Player.h"
 namespace frogger
 {
-class Item: public frogger::Props
-{
-public:
-	Item();
-	virtual ~Item();
-	virtual void draw()=0;
-	void collision(Player* player);
-	void effectOnPlayer(Player* player);
-	bool itemListEmpty();
+	class Item: public frogger::Props
+	{
+		public:
+			Item();
+			virtual ~Item();
+			virtual void draw()=0;
+			void collision(Player* player);
+			void effectOnPlayer(Player* player);
+			bool itemListEmpty();
 
-protected:
-	int effect;
+		protected:
+			int effect;
 
-};
+	};
 }
 
 #endif /* ABSTRACT_ENTITIES_ITEM_H_ */

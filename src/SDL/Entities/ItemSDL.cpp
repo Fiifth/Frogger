@@ -6,18 +6,14 @@
  */
 
 #include <ItemSDL.h>
-#include "Row.h"
-#include <stdlib.h>
-#include <iostream>
 using namespace frogger_sdl;
 
-ItemSDL::ItemSDL(SDLdata* sdldata, frogger::Row* row, int x, int y, int w, int h,
-		int ind) :
+ItemSDL::ItemSDL(SDLdata* sdldata, frogger::Row* row, int x, int ind) :
 		sdldata(sdldata)
 {
-	effect=ind;
+	effect = ind;
 	ani = sdldata->getItemAni(ind).clone();
-	setProperties(row,sdldata->getScrW(), sdldata->getScrH(),x,sdldata->getDW(ani->getTex(), row->getHeight()),true);
+	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,sdldata->getDW(ani->getTex(), row->getHeight()), true);
 }
 
 ItemSDL::~ItemSDL()
@@ -27,10 +23,7 @@ ItemSDL::~ItemSDL()
 
 void ItemSDL::draw()
 {
-	int angle = 0;
-	angle = row->isDirLeft() ? 1 : 0;
-	sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x,*y, &w, h,
-			angle,true);
+	sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w, h,row->isDirLeft(), true);
 	if (ani->isTurned() && !turned)
 	{
 		isTurenedByAni = true;
@@ -46,7 +39,6 @@ ItemSDL::ItemSDL(SDLdata* sdldata, frogger::Row* row, int ind) :
 		sdldata(sdldata)
 {
 	ani = sdldata->getItemAni(ind).clone();
-	int wi=sdldata->getDW(ani->getTex(), row->getHeight());
-	setProperties(row,sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -wi,wi,visible);
-
+	int wi = sdldata->getDW(ani->getTex(), row->getHeight());
+	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -wi, wi, visible);
 }

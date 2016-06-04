@@ -5,22 +5,8 @@
  *      Author: msn-w
  */
 
-#include "Obstacle.h"
-#include "ObstacleSDL.h"
-#include "Player.h"
-#include <PlayerSDL.h>
 #include "FactorySDL.h"
-#include "SDL.h"
-#include "EventsSDL.h"
-#include "LaneSDL.h"
-#include "ItemSDL.h"
-#include "ProjectileSDL.h"
 
-#include "Window.h"
-#include "WindowSDL.h"
-#include "Row.h"
-
-using namespace std;
 using namespace frogger_sdl;
 
 FactorySDL::FactorySDL()
@@ -30,16 +16,17 @@ FactorySDL::FactorySDL()
 
 FactorySDL::~FactorySDL()
 {
+	delete(sdldata);
 }
 
-frogger::Player* FactorySDL::createPlayer(int x, int y, int w, int h, int speedH,
-		int speedV, int number)
+frogger::Player* FactorySDL::createPlayer(int x, int y, int w, int h,
+		int speedH, int speedV, int number)
 {
 	return new PlayerSDL(sdldata, this, x, y, w, h, speedH, speedV, number);
 }
-frogger::Obstacle* FactorySDL::createObstacle(frogger::Row* row,bool visible, int x, int y, int w, int h)
+frogger::Obstacle* FactorySDL::createObstacle(frogger::Row* row, bool visible,	int x)
 {
-	return new ObstacleSDL(sdldata, row, this,visible, x, y, w, h);
+	return new ObstacleSDL(sdldata, row, this, visible, x);
 }
 frogger::Window* FactorySDL::createWindow()
 {
@@ -51,24 +38,24 @@ frogger::Events* FactorySDL::createEvents()
 	return new EventsSDL();
 }
 
-frogger::Lane* FactorySDL::createLane(frogger::Row* row,bool visible, int x, int y, int w, int h)
+frogger::Lane* FactorySDL::createLane(frogger::Row* row, bool visible, int x)
 {
-	return new LaneSDL(sdldata, row, this,visible, x, y, w, h);
+	return new LaneSDL(sdldata, row, this, visible, x);
 }
 
-frogger::Item* FactorySDL::createItem(frogger::Row* row, int x, int y, int w, int h, int type)
+frogger::Item* FactorySDL::createItem(frogger::Row* row, int x,int type)
 {
-	return new ItemSDL(sdldata, row, x, y, w, h, type);
+	return new ItemSDL(sdldata, row, x, type);
 }
 
-frogger::Obstacle* FactorySDL::createObstacle(frogger::Row* row,bool visible)
+frogger::Obstacle* FactorySDL::createObstacle(frogger::Row* row, bool visible)
 {
-	return new ObstacleSDL(sdldata, row, this,visible);
+	return new ObstacleSDL(sdldata, row, this, visible);
 }
 
-frogger::Lane* FactorySDL::createLane(frogger::Row* row,bool visible)
+frogger::Lane* FactorySDL::createLane(frogger::Row* row, bool visible)
 {
-	return new LaneSDL(sdldata, row, this,visible);
+	return new LaneSDL(sdldata, row, this, visible);
 }
 
 frogger::Item* FactorySDL::createItem(frogger::Row* row, int type)
@@ -76,11 +63,11 @@ frogger::Item* FactorySDL::createItem(frogger::Row* row, int type)
 	return new ItemSDL(sdldata, row, type);
 }
 
-frogger::Projectile* FactorySDL::createProjectile(frogger::Entity* entity,int* Ypoint, int speed, int type)
+frogger::Projectile* FactorySDL::createProjectile(frogger::Entity* entity,
+		int* Ypoint, int speed, int type)
 {
 	int x, y;
-	int dir = entity->getDirection();
-	//int direction=0;//1=up,2=right,3=down,4=left;
+	char dir = entity->getDirection();
 	if (dir == 'U')
 	{
 		x = entity->getX();
@@ -101,6 +88,6 @@ frogger::Projectile* FactorySDL::createProjectile(frogger::Entity* entity,int* Y
 		x = entity->getX();
 		y = entity->getY();
 	}
-	return new ProjectileSDL(sdldata, entity->getDirection(), x, y,Ypoint,
+	return new ProjectileSDL(sdldata, entity->getDirection(), x, y, Ypoint,
 			entity->getH(), speed, type);
 }

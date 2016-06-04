@@ -13,19 +13,17 @@
 #include "Animator.h"
 namespace frogger_sdl
 {
-class ProjectileSDL: public frogger::Projectile
-{
-public:
-	ProjectileSDL(SDLdata* sdldata, char direction, int Xstart, int Ystart,int* Ypoint,
-			int size, int speed, int ind);
-	virtual ~ProjectileSDL();
-	void draw();
+	class ProjectileSDL: public frogger::Projectile
+	{
+		public:
+			ProjectileSDL(SDLdata* sdldata, char direction, int Xstart,	int Ystart, int* Ypoint, int size, int speed, int ind);
+			virtual ~ProjectileSDL();
+			void draw();
 
-private:
-	SDLdata* sdldata;
-	Animator* ani;
-
-};
+		private:
+			SDLdata* sdldata;
+			Animator* ani;
+	};
 }
 
 #endif /* SDL_ENTITIES_PROJECTILESDL_H_ */

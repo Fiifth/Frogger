@@ -16,18 +16,18 @@
 #include "Animator.h"
 namespace frogger_sdl
 {
-class ItemSDL: public frogger::Item
-{
-public:
-	ItemSDL(SDLdata* sdldata, frogger::Row* row, int x, int y, int w, int h, int ind);
-	ItemSDL(SDLdata* sdldata, frogger::Row* row, int ind);
-	virtual ~ItemSDL();
-	void draw();
-private:
+	class ItemSDL: public frogger::Item
+	{
+		public:
+			ItemSDL(SDLdata* sdldata, frogger::Row* row, int x, int ind);
+			ItemSDL(SDLdata* sdldata, frogger::Row* row, int ind);
+			virtual ~ItemSDL();
+			void draw();
+		private:
 
-	SDLdata* sdldata;
-	Animator* ani;
-};
+			SDLdata* sdldata;
+			Animator* ani;
+	};
 }
 
 #endif /* SDL_ENTITIES_ITEMSDL_H_ */

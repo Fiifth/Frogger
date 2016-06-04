@@ -12,21 +12,14 @@
 #include "Player.h"
 namespace frogger
 {
-class Projectile: public frogger::Props
-{
-public:
-	Projectile();
-	virtual ~Projectile();
-	bool itemListEmpty()
+	class Projectile: public frogger::Props
 	{
-		return false;
-	}
-
-	void collision(Player* player);
-
-private:
-
-};
+		public:
+			Projectile();
+			virtual ~Projectile();
+			bool itemListEmpty();
+			void collision(Player* player);
+	};
 }
 
 #endif /* ABSTRACT_ENTITIES_PROJECTILE_H_ */

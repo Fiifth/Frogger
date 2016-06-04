@@ -9,11 +9,10 @@
 #include <iostream>
 using namespace frogger;
 
-
-Row::Row(char direction, int locY, int height,int number,RowProp* rowProperties) :
-		direction(direction), locY(	locY), height(height), number(number),rowProperties(rowProperties)
+Row::Row(char direction, int locY, int height, int number,RowProp* rowProperties) :
+		direction(direction), locY(locY), height(height), number(number),
+		rowProperties(rowProperties)
 {
-
 }
 
 Row::~Row()
@@ -22,7 +21,7 @@ Row::~Row()
 
 bool Row::isDirLeft() const
 {
-	return direction=='L';
+	return direction == 'L';
 }
 
 int* Row::getLocY()
@@ -35,12 +34,10 @@ int Row::getNumber() const
 	return number;
 }
 
-
 int Row::getHeight() const
 {
 	return height;
 }
-
 
 void Row::setLocY(int NewlocY)
 {
@@ -68,27 +65,32 @@ RowProp* Row::getRowProperties()
 
 int Row::getRandomObsInd()
 {
-	return rowProperties->getObstIndexes().at(rand()%rowProperties->getObstIndexes().size());
+	return rowProperties->getObstIndexes().at(
+			rand() % rowProperties->getObstIndexes().size());
 }
 
 int Row::getRandomLaneInd()
 {
-	return rowProperties->getLaneIndexes().at(rand()%rowProperties->getLaneIndexes().size());
+	return rowProperties->getLaneIndexes().at(
+			rand() % rowProperties->getLaneIndexes().size());
 }
 
 void Row::setRowProperties(RowProp* rowProp)
 {
-	rowProperties=rowProp;
+	rowProperties = rowProp;
 }
 
-char* frogger::Row::getDirection() {
+char* frogger::Row::getDirection()
+{
 	return &direction;
 }
 
-void frogger::Row::setDirection(char direction) {
+void frogger::Row::setDirection(char direction)
+{
 	this->direction = direction;
 }
 
-int* frogger::Row::getYP() {
+int* frogger::Row::getYP()
+{
 	return &locY;
 }

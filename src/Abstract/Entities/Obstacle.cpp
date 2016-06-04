@@ -19,7 +19,8 @@ Obstacle::~Obstacle()
 void Obstacle::collision(Player* player)
 {
 	considerFire();
-	if (colli(player) && ((!isTurned())||(row->getRowProperties()->getType())=='E'))
+	if (colli(player)
+			&& ((!isTurned()) || (row->getRowProperties()->getType()) == 'E'))
 		player->hit();
 	else
 	{
@@ -33,11 +34,10 @@ void Obstacle::collision(Player* player)
 	projectileList.remove_if(ProjCol(player->getProjectileList()));
 }
 
-bool Obstacle::fire()
+void Obstacle::fire()
 {
-	Projectile* proj(F->createProjectile(this,y, 5, 0));
+	Projectile* proj(F->createProjectile(this, y, 5, 0));
 	projectileList.push_back(proj);
-	return true;
 }
 
 void Obstacle::considerFire()
@@ -49,6 +49,12 @@ void Obstacle::considerFire()
 		previousX = x;
 	}
 }
+
+bool frogger::Obstacle::itemListEmpty()
+{
+	return true;
+}
+
 std::list<Projectile*>* Obstacle::getProjectileList()
 {
 	return &projectileList;
@@ -56,8 +62,23 @@ std::list<Projectile*>* Obstacle::getProjectileList()
 
 void Obstacle::editYForProjectiles()
 {
-	for(Projectile* proje:projectileList)
+	for (Projectile* proje : projectileList)
 	{
-		proje->setLocation(proje->getX(),*y);
+		proje->setLocation(proje->getX(), *y);
 	}
+}
+
+bool frogger::Obstacle::playerProjectiles::operator ()(
+		Projectile* projectile) const
+{
+	if (obstacle->isVisible()
+			&& obstacle->colli(projectile))
+	{
+		delete (projectile);
+		obstacle->setVisible(false);
+		obstacle->setTurned(true);
+		return true;
+	}
+	else
+		return false;
 }

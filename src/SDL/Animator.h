@@ -11,29 +11,29 @@
 #include <vector>
 namespace frogger_sdl
 {
-class Animator
-{
-public:
-	Animator(std::vector<SDL_Texture*> textures, std::vector<int> ratio);
-	virtual ~Animator();
-	SDL_Texture* getTex();
-	int getCounter() const;
-	void setCounter(int counter);
-	int getCurrentTexture() const;
-	void setCurrentTexture(int currentTexture);
-	void triggerNext(int counter);
-	Animator* clone();
-	bool isTurned() const;
-	void setTurned(bool turned);
-	void setCurrentTextureFor(int texture,int counter);
-
-	std::vector<SDL_Texture*> textures;
-	std::vector<int> ratio;
-	int counter = 0;
-	int currentTexture = 0;
-	int size;
-	bool turned = false;
-};
+	class Animator
+	{
+		public:
+			Animator(std::vector<SDL_Texture*> textures, std::vector<int> ratio);
+			virtual ~Animator();
+			SDL_Texture* getTex();
+			int getCounter() const;
+			void setCounter(int counter);
+			int getCurrentTexture() const;
+			void setCurrentTexture(int currentTexture);
+			void triggerNext(int counter);
+			Animator* clone();
+			bool isTurned() const;
+			void setTurned(bool turned);
+			void setCurrentTextureFor(int texture, int counter);
+		protected:
+			std::vector<SDL_Texture*> textures;
+			std::vector<int> ratio;
+			int counter;
+			int currentTexture;
+			int size;
+			bool turned;
+	};
 }
 
 #endif /* ANIMATOR_H_ */

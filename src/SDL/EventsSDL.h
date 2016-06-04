@@ -12,14 +12,14 @@
 #include <string>
 namespace frogger_sdl
 {
-class EventsSDL: public frogger::Events
-{
-public:
-	EventsSDL();
-	virtual ~EventsSDL();
-	std::string getEvent();
-	void getMousePos(int* x,int* y);
-};
+	class EventsSDL: public frogger::Events
+	{
+		public:
+			EventsSDL();
+			virtual ~EventsSDL();
+			std::string getEvent();
+			void getMousePos(int* x, int* y);
+	};
 }
 
 #endif /* EVENTSSDL_H_ */

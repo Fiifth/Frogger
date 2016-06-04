@@ -9,8 +9,7 @@
 #include "Factory.h"
 using namespace frogger;
 
-Props::Props() :
-		row(nullptr), visible(true)
+Props::Props():	row(nullptr), visible(true),turned(false),isTurenedByAni(false),itemRate(nullptr),shootRate(nullptr)
 {
 }
 
@@ -29,10 +28,8 @@ Row* Props::getRow()
 }
 void Props::moveForward()
 {
-
 	if (timeToMove())
 	{
-		//1=up,2=right,3=down,4=left;
 		if (*direction == 'R')
 			move(*speed, 0, true);
 		else if (*direction == 'L')
@@ -72,7 +69,6 @@ bool Props::timeToMove()
 {
 	if (dividerCounter == 0)
 	{
-
 		dividerCounter = *divider;
 		return true;
 	}
@@ -83,25 +79,23 @@ bool Props::timeToMove()
 	}
 }
 
-//row,sdldata->getScreenWidth(), sdldata->getScreenHeight(),x,w,vis
-void frogger::Props::setProperties(Row* row,int* screenWidth,int* screenHeight,int x,int w,bool vis)
+void frogger::Props::setProperties(Row* row, int* screenWidth,
+		int* screenHeight, int x, int w, bool vis)
 {
-		this->row=row;
-		this->screenWidth=screenWidth;
-		this->screenHeight=screenHeight;
-		this->x=x;
-		this->w=w;
-		this->visible=vis;
-		if(row!=nullptr)
-		{
-			direction=row->getDirection();
-			y=row->getLocY();
-			this->h=row->getHeight();
-			speed=row->getRowProperties()->getSpeed();
-
-			divider=row->getRowProperties()->getDivider();
-
-			itemRate=row->getRowProperties()->getItemRate();
-			shootRate=row->getRowProperties()->getShootRate();
-		}
+	this->row = row;
+	this->screenWidth = screenWidth;
+	this->screenHeight = screenHeight;
+	this->x = x;
+	this->w = w;
+	this->visible = vis;
+	if (row != nullptr) //projectiles do not have rows when shot from player
+	{
+		direction = row->getDirection();
+		y = row->getLocY();
+		this->h = row->getHeight();
+		speed = row->getRowProperties()->getSpeed();
+		divider = row->getRowProperties()->getDivider();
+		itemRate = row->getRowProperties()->getItemRate();
+		shootRate = row->getRowProperties()->getShootRate();
+	}
 }

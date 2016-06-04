@@ -13,16 +13,12 @@
 #include <string>
 using namespace frogger_sdl;
 
-using namespace std;
-
-ObstacleSDL::ObstacleSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,bool visible, int x, int y,
-		int w, int h) :
+ObstacleSDL::ObstacleSDL(SDLdata* sdldata, frogger::Row* row,	frogger::Factory* F, bool visible, int x) :
 		sdldata(sdldata)
 {
 	setF(F);
-	int ind=row->getRandomObsInd();
-	ani = sdldata->getObstiAni(ind).clone();
-	setProperties(row,sdldata->getScrW(), sdldata->getScrH(),x,sdldata->getDW(ani->getTex(), row->getHeight()),visible);
+	ani = sdldata->getObstiAni(row->getRandomObsInd()).clone();
+	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,	sdldata->getDW(ani->getTex(), row->getHeight()), visible);
 	previousX = x;
 }
 
@@ -33,14 +29,9 @@ ObstacleSDL::~ObstacleSDL()
 
 void ObstacleSDL::draw()
 {
-
 	if (isVisible())
 	{
-
-		int angle = 0;
-		angle = row->isDirLeft() ? 1 : 0;
-		sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w,
-				h, angle,true);
+		sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w, h, row->isDirLeft(), true);
 		if (ani->isTurned() && !turned)
 		{
 			isTurenedByAni = true;
@@ -52,19 +43,14 @@ void ObstacleSDL::draw()
 		}
 	}
 	projectileList.remove_if(drawMoveRemove());
-
 }
 
-ObstacleSDL::ObstacleSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,bool visible) :
+ObstacleSDL::ObstacleSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F, bool visible) :
 		sdldata(sdldata)
 {
 	setF(F);
-	int ind=row->getRandomObsInd();
-	ani = sdldata->getObstiAni(ind).clone();
-	int wi=sdldata->getDW(ani->getTex(), row->getHeight());
-	setProperties(row,sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -wi,wi,visible);
-
+	ani = sdldata->getObstiAni(row->getRandomObsInd()).clone();
+	int wi = sdldata->getDW(ani->getTex(), row->getHeight());
+	setProperties(row, sdldata->getScrW(), sdldata->getScrH(),row->isDirLeft() ? *sdldata->getScrW() : -wi, wi, visible);
 	previousX = x;
-
-
 }

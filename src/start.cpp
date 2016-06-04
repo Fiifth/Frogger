@@ -21,7 +21,8 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	frogger::Factory* f = new frogger_sdl::FactorySDL();
-	Game* game=new Game(f);
-	delete(game);
+	Game* game = new Game(f);
+	delete(f);
+	delete (game);
 	return 0;
 }

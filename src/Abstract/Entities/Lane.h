@@ -8,30 +8,29 @@
 #ifndef ABSTRACT_ENTITIES_LANE_H_
 #define ABSTRACT_ENTITIES_LANE_H_
 #include "Props.h"
-#include <iostream>
 #include "Player.h"
 #include <list>
 #include "Item.h"
 namespace frogger
 {
-class Lane: public frogger::Props
-{
-public:
-	Lane();
-	virtual ~Lane();
-	virtual void draw()=0;
-	void collision(Player* player);
-	bool itemListEmpty();
-	bool spawnItem();
-protected:
-	std::list<Item*> itemList;
-	struct collisionS
+	class Lane: public frogger::Props
 	{
-		collisionS(Player* player) :
-				player(player){}
-		Player* player;
-		bool operator()(Item* item) const;
+		public:
+			Lane();
+			virtual ~Lane();
+			virtual void draw()=0;
+			void collision(Player* player);
+			bool itemListEmpty();
+			void spawnItem();
+		protected:
+			std::list<Item*> itemList;
+			struct collisionS
+			{
+					collisionS(Player* player):	player(player)
+					{}
+					Player* player;
+					bool operator()(Item* item) const;
+			};
 	};
-};
 }
 #endif /* ABSTRACT_ENTITIES_LANE_H_ */

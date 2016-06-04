@@ -11,8 +11,8 @@ using namespace std;
 using namespace frogger;
 
 Player::Player() :
-				vSpeed(0), hSpeed(0), startX(0), startY(0), totalTime(50), remainingTime(
-						totalTime)
+		vSpeed(0), hSpeed(0), startX(0), startY(0), totalTime(50), remainingTime(
+				totalTime)
 {
 }
 
@@ -25,7 +25,7 @@ void Player::moveUp()
 	move(0, (-vSpeed), false);
 	*direction = 'U';
 	counter = 10;
-	moved=true;
+	moved = true;
 }
 
 void Player::moveDown()
@@ -33,7 +33,7 @@ void Player::moveDown()
 	move(0, vSpeed, false);
 	*direction = 'D';
 	counter = 10;
-	moved=true;
+	moved = true;
 }
 
 void Player::moveRight()
@@ -41,7 +41,7 @@ void Player::moveRight()
 	move(hSpeed / 2, 0, false);
 	*direction = 'R';
 	counter = 10;
-	moved=true;
+	moved = true;
 }
 
 void Player::moveLeft()
@@ -49,7 +49,7 @@ void Player::moveLeft()
 	move(-(hSpeed / 2), 0, false);
 	*direction = 'L';
 	counter = 10;
-	moved=true;
+	moved = true;
 }
 
 void Player::followRow(Row* row)
@@ -195,7 +195,7 @@ bool Player::takeAction(std::string key)
 		else if (key == fire && getProjectiles() > 0)
 		{
 			addProjectiles(-1);
-			projectileList.push_back(F->createProjectile(this,nullptr, 5, 0));
+			projectileList.push_back(F->createProjectile(this, nullptr, 5, 0));
 		}
 	}
 	return false;
@@ -230,7 +230,6 @@ void Player::decreaseTime()
 	}
 }
 
-
 bool Player::isDead() const
 {
 	return dead;
@@ -238,20 +237,12 @@ bool Player::isDead() const
 
 void Player::setDead(bool dead)
 {
-	if (!dead)
-	{
-		//setScore(0);
-		setLife(3);
-		projectiles = 3;
-		resetPosition();
-	}
 	this->dead = dead;
 }
 bool Player::timeToMove()
 {
 	if (dividerCounter == 0)
 	{
-
 		dividerCounter = *divider;
 		return true;
 	}
@@ -264,30 +255,29 @@ bool Player::timeToMove()
 
 void Player::setDifferentControls(char set)
 {
-	if(set=='A')
+	if (set == 'A')
 	{
-	keyUp = "Z";
-	keyDown = "S";
-	keyLeft = "Q";
-	keyRight = "D";
-	fire = "E";
+		keyUp = "Z";
+		keyDown = "S";
+		keyLeft = "Q";
+		keyRight = "D";
+		fire = "E";
 	}
-	else if(set=='B')
+	else if (set == 'B')
 	{
 		keyUp = "Y";
-			keyDown = "H";
-			keyLeft = "G";
-			keyRight = "J";
-			fire = "U";
-			}
-else if(set=='C')
-{
-	keyUp = "Up";
-	keyDown = "Down";
-	keyLeft = "Left";
-	keyRight = "Right";
-
-			}
+		keyDown = "H";
+		keyLeft = "G";
+		keyRight = "J";
+		fire = "U";
+	}
+	else if (set == 'C')
+	{
+		keyUp = "Up";
+		keyDown = "Down";
+		keyLeft = "Left";
+		keyRight = "Right";
+	}
 }
 
 std::list<Projectile*>* Player::getProjectileList()
@@ -300,37 +290,36 @@ void Player::collision(Player* player)
 	if (player != this)
 	{
 		projectileList.remove_if(ProjCol(player->getProjectileList()));
-		int temp = projectileList.size();
+		int oldSize = projectileList.size();
 		projectileList.remove_if(ProjCol2(player));
-		int temp2 = projectileList.size();
-		if (temp2 < temp)
+		int newSize = projectileList.size();
+		if (newSize < oldSize)
 			player->hit();
 	}
-	//return (((player->getY()>=(y)&&player->getY()<(y+h))||(player->getY()+player->getH()>(y)&&player->getY()+player->getH()<=(y+h)))&&((player->getX()>=(x)&&player->getX()<=(x+w))||(player->getX()+player->getW()>=(x)&&player->getX()+player->getW()<=(x+w))))?3:0;
 }
 
 void Player::disableCounter()
 {
-	counterEnabled=false;
+	counterEnabled = false;
 }
 
 void frogger::Player::followScreen(int offset)
 {
-	move(0,offset,false);
+	move(0, offset, false);
 
-for(Projectile* proj:projectileList)
-{
-	proj->move(0,offset,true);
-}
-
+	for (Projectile* proj : projectileList)
+	{
+		proj->move(0, offset, true);
+	}
 }
 
 void frogger::Player::setParameters(int life, int totalTime,
-		bool counterEnabled,int scorePerStep,int projectiles) {
-	this->totalTime=totalTime;
-	remainingTime=totalTime;
-	this->counterEnabled=counterEnabled;
-	this->life=life;
-	this->scorePerStep=scorePerStep;
-	this->projectiles=projectiles;
+		bool counterEnabled, int scorePerStep, int projectiles)
+{
+	this->totalTime = totalTime;
+	this->remainingTime = totalTime;
+	this->counterEnabled = counterEnabled;
+	this->life = life;
+	this->scorePerStep = scorePerStep;
+	this->projectiles = projectiles;
 }

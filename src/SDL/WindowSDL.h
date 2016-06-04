@@ -26,51 +26,49 @@
 #include "menu/MenuButton.h"
 namespace frogger_sdl
 {
-class WindowSDL: public frogger::Window
-{
-public:
-	WindowSDL(SDLdata* sdldata);
-	virtual ~WindowSDL();
-	void makeWindow(int ScreenWidth, int ScreenHeight, int dataWindowHeight,
-			char const* title);
-	void dislayData(std::list<frogger::Player*>* players);
-	void displayHighScore(std::vector<int> highScore);
-	void setBackground(int index);
-	void updateScreen();
-	void generateBackground(std::vector<frogger::Row*>* rows);
-	void saveCurrentWindowImage();
-	void drawLineUnder(frogger::MenuButton* mode,frogger::MenuButton* numPlay,frogger::MenuButton* diff);
-private:
-	SDLdata* sdldata;
-	SDL_Renderer* ren;
-	TTF_Font* Sans1 = nullptr;
-	TTF_Font* Sans2 = nullptr;
-	SDL_Color White;
-	SDL_Color Black;
-	SDL_Color Blue=	{173,216,230};
-	SDL_Surface* surfaceMessage = nullptr;
-	SDL_Texture* Message = nullptr;
-	SDL_Window* win;
-	bool temp = false;
-	SDL_Surface* rowsBackgroundGenerated = nullptr;
-	SDL_Texture* backgourndTexture = nullptr;
-	std::chrono::high_resolution_clock::time_point startP =
-			std::chrono::high_resolution_clock::now();
-	std::chrono::high_resolution_clock::time_point endP =
-			std::chrono::high_resolution_clock::now();
+	class WindowSDL: public frogger::Window
+	{
+		public:
+			WindowSDL(SDLdata* sdldata);
+			virtual ~WindowSDL();
+			void makeWindow(int ScreenWidth, int ScreenHeight,int dataWindowHeight, char const* title);
+			void dislayData(std::list<frogger::Player*>* players);
+			void displayHighScore(std::vector<int> highScore,bool newScore);
+			void makeHighScoreTexture(std::vector<int> highScore);
+			void setBackground(int index);
+			void updateScreen();
+			void generateBackground(std::vector<frogger::Row*>* rows);
+			void drawLineUnder(frogger::MenuButton* mode,	frogger::MenuButton* numPlay, frogger::MenuButton* diff);
+		private:
+			SDLdata* sdldata;
+			SDL_Renderer* ren;
+			TTF_Font* sans1 = nullptr;
+			TTF_Font* sans2 = nullptr;
+			SDL_Color white;
+			SDL_Color black;
+			SDL_Color blue;
 
-	std::chrono::high_resolution_clock::time_point startT =
-				std::chrono::high_resolution_clock::now();
-		std::chrono::high_resolution_clock::time_point endT =
-				std::chrono::high_resolution_clock::now();
+			SDL_Texture* playerDataTex = nullptr;
+			SDL_Rect PlayerMessageRect;
+			std::vector<SDL_Texture*> highScoreTexV;
+			std::vector<SDL_Rect> highScoreRectV;
 
+			SDL_Window* win;
 
-	std::vector<frogger::Row*> rowsOld;
-	std::vector<frogger::Row*>* rowsOldP;
-	std::string oldString="";
-	std::vector<SDL_Texture*>* MenuTextures;
+			std::chrono::high_resolution_clock::time_point startP =
+					std::chrono::high_resolution_clock::now();
+			std::chrono::high_resolution_clock::time_point endP =
+					std::chrono::high_resolution_clock::now();
 
-};
+			std::chrono::high_resolution_clock::time_point startT =
+					std::chrono::high_resolution_clock::now();
+			std::chrono::high_resolution_clock::time_point endT =
+					std::chrono::high_resolution_clock::now();
+
+			std::string oldString = "";
+			std::vector<SDL_Texture*>* MenuTextures;
+
+	};
 }
 
 #endif /* WINDOWSDL_H_ */

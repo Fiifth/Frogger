@@ -16,18 +16,17 @@
 #include "Factory.h"
 namespace frogger_sdl
 {
-class LaneSDL: public frogger::Lane
-{
-public:
-	LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,bool visible, int x, int y, int w, int h);
-	LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,bool visible);
-	virtual ~LaneSDL();
-	void draw();
-private:
-
-	SDLdata* sdldata;
-	Animator* ani;
-};
+	class LaneSDL: public frogger::Lane
+	{
+		public:
+			LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,	bool visible, int x);
+			LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,	bool visible);
+			virtual ~LaneSDL();
+			void draw();
+		private:
+			SDLdata* sdldata;
+			Animator* ani;
+	};
 }
 
 #endif /* SDL_ENTITIES_LANESDL_H_ */

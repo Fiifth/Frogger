@@ -12,11 +12,15 @@ using namespace frogger;
 
 Window::Window()
 {
-	*WIDTH = 640;
-	*HEIGHT = 480;
-	*dataWindowHeight = 20;
-	*gameWindowHeight = *HEIGHT - *dataWindowHeight;
-	TITLE = "frogger";
+	WIDTHR=640;
+	HEIGHTR=480;
+	WIDTH = &WIDTHR;
+	HEIGHT = &HEIGHTR;
+	dataWindowHeightR=20;
+	gameWindowHeightR=460;
+	dataWindowHeight = &dataWindowHeightR;
+	gameWindowHeight = &gameWindowHeightR;
+	TITLE="Frogger";
 }
 Window::~Window()
 {
@@ -25,10 +29,10 @@ Window::~Window()
 void Window::setProp(int width, int height, int dataWindowHeight,
 		char const* title)
 {
-	*WIDTH = width;
-	*HEIGHT = height;
-	*this->dataWindowHeight = dataWindowHeight;
-	*gameWindowHeight = height - dataWindowHeight;
+	WIDTHR = width;
+	HEIGHTR = height;
+	dataWindowHeightR = dataWindowHeight;
+	gameWindowHeightR = height - dataWindowHeight;
 	TITLE = title;
 }
 
@@ -40,21 +44,6 @@ int* Window::getHeight() const
 int* Window::getWidth() const
 {
 	return WIDTH;
-}
-
-void Window::setOldParameters(int score, int life, int projectiles, int time)
-{
-	oldScore = score;
-	oldLife = life;
-	oldProjectiles = projectiles;
-	oldTime = time;
-}
-
-bool Window::valueChanged(int score, int life, int projectiles, int time,int score2, int life2, int projectiles2, int time2)
-{
-	return !(oldScore == score && oldLife == life
-			&& oldProjectiles == projectiles && oldTime == time&&oldScore2 == score2 && oldLife2 == life2
-			&& oldProjectiles2 == projectiles2 && oldTime2 == time2);
 }
 
 int* Window::getGameWindowHeight() const

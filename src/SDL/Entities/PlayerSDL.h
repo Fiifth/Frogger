@@ -15,23 +15,22 @@
 #include "Animator.h"
 #include "Factory.h"
 #include "Props.h"
+#include "SDL.h"
+#include "Projectile.h"
 namespace frogger_sdl
 {
-class PlayerSDL: public frogger::Player
-{
-public:
-	PlayerSDL(SDLdata* sdldata, frogger::Factory* F, int x, int y, int w, int h,
-			int speedH, int speedV, int number);
-	virtual ~PlayerSDL();
-	void draw();
-	void move(int deltaX, int deltaY);
-private:
-	//void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w,	int h);
-	SDLdata* sdldata;
-	std::vector<SDL_Texture*> textures;
-	Animator* ani;
+	class PlayerSDL: public frogger::Player
+	{
+		public:
+			PlayerSDL(SDLdata* sdldata, frogger::Factory* F, int x, int y,	int w, int h, int speedH, int speedV, int number);
+			virtual ~PlayerSDL();
+			void draw();
+			void move(int deltaX, int deltaY);
+		private:
+			SDLdata* sdldata;
+			Animator* ani;
 
-};
+	};
 }
 
 #endif /* FROGSDL_H_ */

@@ -38,100 +38,124 @@ Game::Game(Factory* F)
 {
 	char state = 'B';
 	char PrevState = 'B';
-	int amountOfPlayers=1;
-	char gameMode='E';
-	char difficulty='E';
+	int amountOfPlayers = 1;
+	char gameMode = 'E';
+	char difficulty = 'E';
 	int WindowHeight = 660;
 	int WindowWidth = 800;
 	int rowHeight = 45;
 	int dataWindowHeightDesired = 30;
-	int dataWindowHeight =((WindowHeight - dataWindowHeightDesired) % rowHeight)+ dataWindowHeightDesired;
+	int dataWindowHeight =
+			((WindowHeight - dataWindowHeightDesired) % rowHeight)
+					+ dataWindowHeightDesired;
 	int gameWindowHeight = WindowHeight - dataWindowHeight;
 	int gameWindowWidth = WindowWidth;
 	int plStartW = rowHeight, plStartH = rowHeight, plStartSpeed = rowHeight;
-	int plStartX = (gameWindowWidth / 2), plStartY = (gameWindowHeight	- plStartW);
+	int plStartX = (gameWindowWidth / 2), plStartY = (gameWindowHeight- plStartW);
 	string keyStroke;
-
 
 	list<Player*> playersR;
 	list<Player*>* players = &playersR;
 	Events* event = F->createEvents();
 	Window* win = F->createWindow();
-	LevelProperties* lvlprop;
-	Level* level;
+	LevelProperties* lvlprop=nullptr;
+	Level* level=nullptr;
+	bool newHighscore;
 
 	win->makeWindow(WindowWidth, WindowHeight, dataWindowHeight, "frogger");
 
-	Menu* men=new Menu(win,&gameMode,&amountOfPlayers,&difficulty);
+	Menu* men = new Menu(win, &gameMode, &amountOfPlayers, &difficulty);
 
-	int temp=0;
+	int temp = 0;
 	while (true)
 	{
-		int x,y;
+		int x, y;
 
 		keyStroke = event->getEvent();
-		event->getMousePos(&x,&y);
+		event->getMousePos(&x, &y);
 
 		switch (state)
 		{
-		case 'B':case'H':case'G':case'S':case 'V':
-			//menu case modes
-			if(state=='G'&&PrevState!=state)
-				addHighScore(players,gameMode);
-			PrevState=state;
-			state=men->menuExecution(keyStroke,state,x,y,x,y);
-			if(state=='H')
-			{
-				if(gameMode=='E')
-				win->displayHighScore(highScoreEndless);
-				else
-					win->displayHighScore(highScoreClassic);
-			}
-			win->updateScreen();
-			break;
-		case 'E':case'C':
-			//level execution modes
-			if(PrevState==state)
-			{
-
-				level->levelExecution(keyStroke);
-
-				state = playersAlive(players, state) ? state : 'G';
-				state=level->isObjectiveDone()?'V':state;
-				if (gameMode=='E'&&((players->back()->getScore()%100)==0)&&(players->back()->getScore()>temp))
+			case 'B':
+			case 'H':
+			case 'G':
+			case 'S':
+			case 'V':
+				//menu case modes
+				if (state == 'G' && PrevState != state)
 				{
-					lvlprop->levelUp();
-					temp=players->back()->getScore();
+					addHighScore(players, gameMode);
+					for(Player* player:*players)
+						delete(player);
 				}
-				win->dislayData(players);
+
+				newHighscore=PrevState!='H';
+
+				PrevState = state;
+				state = men->menuExecution(keyStroke, state, x, y, x, y);
+				if (state == 'H')
+				{
+					if (gameMode == 'E')
+						win->displayHighScore(highScoreEndless,(newHighscore));
+					else
+						win->displayHighScore(highScoreClassic,(newHighscore));
+				}
 				win->updateScreen();
-			}
 
-			else if (PrevState=='B'||PrevState=='G')
-			{
+				break;
+			case 'E':
+			case 'C':
+				//level execution modes
+				if (PrevState == state)
+				{
 
-				addPlayers(F,players,amountOfPlayers,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight,gameMode,difficulty);
-				lvlprop=new LevelProperties(gameMode,difficulty);
-				level = new Level(F, win, players, rowHeight,lvlprop);
+					level->levelExecution(keyStroke);
 
-				state=gameMode;
-				PrevState=state;
-			}
-			else if (PrevState=='V')
-			{
-				addPlayers(F,players,amountOfPlayers,plStartX,plStartY,plStartW,plStartH,plStartSpeed,rowHeight,gameMode,difficulty);
-				lvlprop->levelUp();
-				level = new Level(F, win, players, rowHeight,lvlprop);
-				state='C';
-				PrevState=state;
-			}
+					state = playersAlive(players, state) ? state : 'G';
+					state = level->isObjectiveDone() ? 'V' : state;
+					if (gameMode == 'E'
+							&& ((players->back()->getScore() % 100) == 0)
+							&& (players->back()->getScore() > temp))
+					{
+						lvlprop->levelUp();
+						temp = players->back()->getScore();
+					}
+					win->dislayData(players);
+					win->updateScreen();
+				}
 
-			break;
-		case 'Q':
-			delete(win);
+				else if (PrevState == 'B' || PrevState == 'G')
+				{
 
-			return;
+					addPlayers(F, players, amountOfPlayers, plStartX, plStartY,
+							plStartW, plStartH, plStartSpeed, rowHeight,
+							gameMode, difficulty);
+					lvlprop = new LevelProperties(gameMode, difficulty);
+					level = new Level(F, win, players, rowHeight, lvlprop);
 
+					state = gameMode;
+					PrevState = state;
+				}
+				else if (PrevState == 'V')
+				{
+					addPlayers(F, players, amountOfPlayers, plStartX, plStartY,
+							plStartW, plStartH, plStartSpeed, rowHeight,
+							gameMode, difficulty);
+					lvlprop->levelUp();
+					level = new Level(F, win, players, rowHeight, lvlprop);
+					state = 'C';
+					PrevState = state;
+				}
+				break;
+
+			case 'Q':
+				delete(event);
+				delete(win);
+				if(lvlprop!=nullptr)
+					delete(lvlprop);
+				if(level!=nullptr)
+					delete(level);
+				return;
 				break;
 		}
 	}
@@ -152,55 +176,60 @@ bool Game::playersAlive(list<Player*>* players, char mode)
 	return temp;
 }
 
-void frogger::Game::addPlayers(Factory* F,list<Player*>* players, int amount,int X,int Y,int W,int H,int speed, int rowHeight,char gameMode,char difficulty)
+void frogger::Game::addPlayers(Factory* F, list<Player*>* players, int amount,
+		int X, int Y, int W, int H, int speed, int rowHeight, char gameMode,
+		char difficulty)
 {
-	int life=4,totalTime=50,scorePerStep=10,projectiles=3; //classic easy mode
-	bool counterEnabled=true;
+	int life = 4, totalTime = 50, scorePerStep = 10, projectiles = 3; //classic easy mode
+	bool counterEnabled = true;
 
-	counterEnabled=(gameMode=='E')?false:true;
+	counterEnabled = (gameMode == 'E') ? false : true;
 
-	life=(difficulty=='M')?3:life;
-	life=(difficulty=='H')?2:life;
-	life=(gameMode=='E')?0:life;
+	life = (difficulty == 'M') ? 3 : life;
+	life = (difficulty == 'H') ? 2 : life;
+	life = (gameMode == 'E') ? 0 : life;
 
-	totalTime=(difficulty=='M')?40:totalTime;
-	totalTime=(difficulty=='H')?30:totalTime;
+	totalTime = (difficulty == 'M') ? 40 : totalTime;
+	totalTime = (difficulty == 'H') ? 30 : totalTime;
 
-	scorePerStep=(difficulty=='M')?20:scorePerStep;
-	scorePerStep=(difficulty=='H')?30:scorePerStep;
+	scorePerStep = (difficulty == 'M') ? 20 : scorePerStep;
+	scorePerStep = (difficulty == 'H') ? 30 : scorePerStep;
 
-	projectiles=(difficulty=='M')?2:projectiles;
-	projectiles=(difficulty=='H')?1:projectiles;
+	projectiles = (difficulty == 'M') ? 2 : projectiles;
+	projectiles = (difficulty == 'H') ? 1 : projectiles;
 
 	players->clear();
-	if (amount >=1)
+	if (amount >= 1)
 	{
-	Player* player = F->createPlayer(X, Y, W, H,	speed, rowHeight, 0);
-	player->setParameters(life,totalTime,counterEnabled,scorePerStep,projectiles);
-	players->push_back(player);
+		Player* player = F->createPlayer(X, Y, W, H, speed, rowHeight, 0);
+		player->setParameters(life, totalTime, counterEnabled, scorePerStep,
+				projectiles);
+		players->push_back(player);
 	}
-	if (amount>=2)
+	if (amount >= 2)
 	{
-		Player* player2 = F->createPlayer(X, Y, W, H,	speed, rowHeight, 1);
+		Player* player2 = F->createPlayer(X, Y, W, H, speed, rowHeight, 1);
 		player2->setDifferentControls('A');
-		player2->setParameters(life,totalTime,counterEnabled,scorePerStep,projectiles);
+		player2->setParameters(life, totalTime, counterEnabled, scorePerStep,
+				projectiles);
 		players->push_back(player2);
 	}
-	if (amount >=3)
+	if (amount >= 3)
 	{
-		Player* player3 = F->createPlayer(X, Y, W, H,	speed, rowHeight, 1);
+		Player* player3 = F->createPlayer(X, Y, W, H, speed, rowHeight, 1);
 		player3->setDifferentControls('B');
-		player3->setParameters(life,totalTime,counterEnabled,scorePerStep,projectiles);
+		player3->setParameters(life, totalTime, counterEnabled, scorePerStep,
+				projectiles);
 		players->push_back(player3);
 	}
 }
 
-void frogger::Game::addHighScore(list<Player*>* players,char gameMode)
+void frogger::Game::addHighScore(list<Player*>* players, char gameMode)
 {
-	for(Player* play :*players)
+	for (Player* play : *players)
 	{
-		int score=play->getScore();
-		if(gameMode=='C')
+		int score = play->getScore();
+		if (gameMode == 'C')
 		{
 			highScoreClassic.push_back(score);
 			std::sort(highScoreClassic.begin(), highScoreClassic.end());

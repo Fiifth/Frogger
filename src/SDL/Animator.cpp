@@ -10,7 +10,7 @@
 using namespace frogger_sdl;
 
 Animator::Animator(std::vector<SDL_Texture*> textures, std::vector<int> ratio) :
-		textures(textures), ratio(ratio), counter(abs(ratio.at(0))), currentTexture(0)
+		textures(textures), ratio(ratio), counter(abs(ratio.at(0))), currentTexture(0),turned(false)
 {
 	size = textures.size();
 }
@@ -24,9 +24,8 @@ SDL_Texture* Animator::getTex()
 	SDL_Texture* texture;
 	if (size > 1)
 	{
-		if (counter >1000)
+		if (counter >= 1000)
 		{
-			//MANUAL MODE
 		}
 		else if (counter > 0)
 		{
@@ -79,7 +78,7 @@ void Animator::setCurrentTexture(int currentTexture)
 
 void Animator::triggerNext(int counter)
 {
-	if (ratio.size() < (unsigned)currentTexture + 1)
+	if (ratio.size() < (unsigned) currentTexture + 1)
 	{
 		currentTexture = currentTexture + 1;
 		this->counter = counter;
@@ -89,7 +88,6 @@ void Animator::triggerNext(int counter)
 Animator* Animator::clone()
 {
 	return new Animator(*this);
-	//return this;
 }
 
 bool Animator::isTurned() const

@@ -27,33 +27,29 @@ void Lane::collision(Player* player)
 		}
 		else if (isVisible())
 			player->followRow(row);
-		else if ((row->getRowProperties()->getType())=='E')
+		else if ((row->getRowProperties()->getType()) == 'E')
 		{
+			//Player collides with a lane that is on the last row of classic frogger mode
 			player->resetPosition();
 			itemList.clear();
-			turned=true;
-			visible=true;
+			turned = true;
+			visible = true;
 		}
 	}
 
 	itemList.remove_if(collisionS(player));
 }
 
-bool Lane::spawnItem()
+void Lane::spawnItem()
 {
-	if ((rand() % 100) <*itemRate)
+	if ((rand() % 100) < *itemRate)
 	{
-		itemList.push_back(
-		F->createItem(row, x + ((rand() % (w - h))), *y, w, h, row->getRowProperties()->getItemType()));
+		itemList.push_back(	F->createItem(row, x + ((rand() % (w - h))), row->getRowProperties()->getItemType()));
 	}
-	return true;
 }
 
 bool Lane::itemListEmpty()
 {
-	if (itemList.empty()&&row->getRowProperties()->getType()=='E')
-		turned=true;
-
 	return itemList.empty();
 }
 
