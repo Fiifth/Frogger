@@ -58,6 +58,13 @@ private:
 			std::chrono::high_resolution_clock::now();
 	std::chrono::high_resolution_clock::time_point endP =
 			std::chrono::high_resolution_clock::now();
+
+	std::chrono::high_resolution_clock::time_point startT =
+				std::chrono::high_resolution_clock::now();
+		std::chrono::high_resolution_clock::time_point endT =
+				std::chrono::high_resolution_clock::now();
+
+
 	std::vector<frogger::Row*> rowsOld;
 	std::vector<frogger::Row*>* rowsOldP;
 	std::string oldString="";

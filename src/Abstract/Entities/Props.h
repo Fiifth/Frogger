@@ -28,13 +28,9 @@ public:
 	virtual void draw()=0;
 
 	//type true=player, false=bullet return type of effect 0=no effect, 1 player dies, 2-6 object disappears and player gets effect
-	virtual bool roomForItem()=0;
-	virtual bool itemAbsent()=0;
 	bool isTurned() const;
 	void setTurned(bool turned);
 	bool timeToMove();
-	virtual bool fire()=0;
-	virtual bool spawnItem()=0;
 	virtual bool itemListEmpty()=0;
 
 protected:

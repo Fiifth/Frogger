@@ -48,7 +48,7 @@ void WindowSDL::makeWindow(int ScreenWidth, int ScreenHeight,	int dataWindowHeig
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init();
 	win = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED,	SDL_WINDOWPOS_CENTERED, *WIDTH, *HEIGHT, SDL_WINDOW_SHOWN);
-	ren = SDL_CreateRenderer(win, -1,	SDL_RENDERER_ACCELERATED);
+	ren = SDL_CreateRenderer(win, -1,SDL_RENDERER_ACCELERATED);
 
 	sdldata->setRen(ren);
 	sdldata->createTextures();
@@ -56,6 +56,7 @@ void WindowSDL::makeWindow(int ScreenWidth, int ScreenHeight,	int dataWindowHeig
 }
 void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
 {
+	startT =	std::chrono::high_resolution_clock::now();
 		std::vector<SDL_Texture*> backTextures = sdldata->getBackTextures();
 		for (frogger::Row* row : *rows)
 		{
@@ -69,9 +70,12 @@ void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
 			{
 				sdldata->renderTexture(backTextures.at(textureLocation), ren, x,y, &width, height, 0,true);
 				x = x + width;
+				//std::cout<<x<<std::endl;
 			}
 		}
-
+		 endT =	std::chrono::high_resolution_clock::now();
+	int difference=std::chrono::duration_cast<std::chrono::milliseconds>(endT- startT).count();
+	//std::cout<<difference<<std::endl;
 }
 void WindowSDL::dislayData(list<frogger::Player*>* players)
 {
@@ -133,9 +137,10 @@ void WindowSDL::updateScreen()
 {
 	endP = chrono::high_resolution_clock::now();
 	int difference=std::chrono::duration_cast<std::chrono::milliseconds>(endP- startP).count();
-	int delay=((15-difference))>=0?((15-difference)):0;
+	int delay=((13-difference))>=0?((13-difference)):0;
 	SDL_Delay(delay);
 	SDL_RenderPresent(ren);
+	std::cout<<delay<<std::endl;
 	startP = chrono::high_resolution_clock::now();
 	SDL_RenderClear(ren);
 

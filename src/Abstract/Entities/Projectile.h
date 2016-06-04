@@ -21,27 +21,9 @@ public:
 	{
 		return false;
 	}
-	bool roomForItem()
-	{
-		return false;
-	}
-	;
-	bool itemAbsent()
-	{
-		return true;
-	}
-	;
+
 	void collision(Player* player);
-	bool spawnItem()
-	{
-		return false;
-	}
-	;
-	bool fire()
-	{
-		return false;
-	}
-	;
+
 private:
 
 };

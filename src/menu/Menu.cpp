@@ -43,7 +43,7 @@ Menu::Menu(Window* win,char* gameMode,int* amountOfPlayers,char* difficulty):win
 
 Menu::~Menu()
 {
-	// TODO Auto-generated destructor stub
+
 }
 
 bool Menu::isStartGame() const

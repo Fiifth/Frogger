@@ -33,11 +33,6 @@ void Obstacle::collision(Player* player)
 	projectileList.remove_if(ProjCol(player->getProjectileList()));
 }
 
-bool Obstacle::roomForItem()
-{
-	return false;
-}
-
 bool Obstacle::fire()
 {
 	Projectile* proj(F->createProjectile(this,y, 5, 0));

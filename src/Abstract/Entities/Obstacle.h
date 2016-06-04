@@ -24,23 +24,13 @@ public:
 	virtual void draw()=0;
 	void collision(Player* player);
 	void editYForProjectiles();
-	bool roomForItem();
 	bool itemListEmpty()
 	{
 		return true;
 	};
-	bool itemAbsent()
-	{
-		return true;
-	}
-	;
 	bool fire();
 	void considerFire();
-	bool spawnItem()
-	{
-		return false;
-	}
-	;
+
 	std::list<Projectile*>* getProjectileList();
 protected:
 	int previousX = 0;

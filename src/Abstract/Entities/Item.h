@@ -2,7 +2,7 @@
  * Item.h
  *
  *  Created on: 18-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef ABSTRACT_ENTITIES_ITEM_H_
@@ -19,24 +19,11 @@ public:
 	virtual ~Item();
 	virtual void draw()=0;
 	void collision(Player* player);
-	bool roomForItem();
-	bool itemAbsent();
 	void effectOnPlayer(Player* player);
+	bool itemListEmpty();
+
+protected:
 	int effect;
-	bool itemListEmpty()
-		{
-			return false;
-		};
-	bool spawnItem()
-	{
-		return false;
-	}
-	;
-	bool fire()
-	{
-		return false;
-	}
-	;
 
 };
 }

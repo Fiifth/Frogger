@@ -21,39 +21,16 @@ public:
 	virtual ~Lane();
 	virtual void draw()=0;
 	void collision(Player* player);
-	bool roomForItem();
 	bool itemListEmpty();
-	bool itemAbsent()
-	{
-		return true;
-	}
-	;
 	bool spawnItem();
-	bool fire()
-	{
-		return false;
-	}
-	;
 protected:
 	std::list<Item*> itemList;
 	struct collisionS
 	{
 		collisionS(Player* player) :
-				player(player)
-		{
-		}
+				player(player){}
 		Player* player;
-		bool operator()(Item* item) const
-		{
-			if (item->colli(player))
-			{
-				item->effectOnPlayer(player);
-				delete (item);
-				return true;
-			}
-			else
-				return false;
-		}
+		bool operator()(Item* item) const;
 	};
 };
 }

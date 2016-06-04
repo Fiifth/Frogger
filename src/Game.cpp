@@ -36,7 +36,6 @@ using namespace frogger;
 
 Game::Game(Factory* F)
 {
-
 	char state = 'B';
 	char PrevState = 'B';
 	int amountOfPlayers=1;
@@ -53,7 +52,7 @@ Game::Game(Factory* F)
 	int plStartX = (gameWindowWidth / 2), plStartY = (gameWindowHeight	- plStartW);
 	string keyStroke;
 
-std::cout<<dataWindowHeight<<std::endl;
+
 	list<Player*> playersR;
 	list<Player*>* players = &playersR;
 	Events* event = F->createEvents();
@@ -129,7 +128,8 @@ std::cout<<dataWindowHeight<<std::endl;
 
 			break;
 		case 'Q':
-				//remove everything
+			delete(win);
+
 			return;
 
 				break;
@@ -139,6 +139,7 @@ std::cout<<dataWindowHeight<<std::endl;
 
 Game::~Game()
 {
+
 }
 
 bool Game::playersAlive(list<Player*>* players, char mode)

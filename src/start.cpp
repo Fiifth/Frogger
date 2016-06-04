@@ -12,6 +12,8 @@
 #include "PlayerSDL.h"
 #include "FactorySDL.h"
 #include <iostream>
+#include <unistd.h>
+#include <windows.h>
 using namespace frogger;
 
 using namespace std;
@@ -19,6 +21,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	frogger::Factory* f = new frogger_sdl::FactorySDL();
-	new Game(f);
+	Game* game=new Game(f);
+	delete(game);
 	return 0;
 }

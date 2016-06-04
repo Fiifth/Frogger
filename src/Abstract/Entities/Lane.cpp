@@ -33,18 +33,10 @@ void Lane::collision(Player* player)
 			itemList.clear();
 			turned=true;
 			visible=true;
-			//set texture
 		}
 	}
 
 	itemList.remove_if(collisionS(player));
-}
-
-bool Lane::roomForItem()
-{
-	//height item = row->getHeight();
-	int itemX = row->isDirLeft() ? *screenWidth : -row->getHeight();
-	return (getX() <= itemX) && (getX() + getW() >= row->getHeight() + itemX);
 }
 
 bool Lane::spawnItem()
@@ -60,9 +52,19 @@ bool Lane::spawnItem()
 bool Lane::itemListEmpty()
 {
 	if (itemList.empty()&&row->getRowProperties()->getType()=='E')
-	{
-		//ani turn
 		turned=true;
-	}
+
 	return itemList.empty();
+}
+
+bool frogger::Lane::collisionS::operator ()(Item* item) const
+{
+	if (item->colli(player))
+	{
+		item->effectOnPlayer(player);
+		delete (item);
+		return true;
+	}
+	else
+		return false;
 }
