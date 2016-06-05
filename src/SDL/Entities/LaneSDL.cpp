@@ -11,11 +11,16 @@ using namespace frogger_sdl;
 LaneSDL::LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,	bool visible, int x) :
 		sdldata(sdldata)
 {
+
+	laneTex=sdldata->getTextureVector('L');
 	setF(F);
 	int ind = row->getRandomLaneInd();
 	ani = sdldata->getLaneAni(ind).clone();
-	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x, sdldata->getDW(ani->getTex(), row->getHeight()), visible);
+	int tempInd=ani->getIndex();
+	int getW=sdldata->getDW(laneTex->at(tempInd), row->getHeight());
+	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,getW , visible);
 	spawnItem();
+
 }
 LaneSDL::~LaneSDL()
 {
@@ -26,9 +31,11 @@ LaneSDL::LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,
 		bool visible) :
 		sdldata(sdldata)
 {
+	laneTex=sdldata->getTextureVector('L');
 	setF(F);
-	ani = sdldata->getLaneAni(row->getRandomLaneInd()).clone();
-	int wi = sdldata->getDW(ani->getTex(), row->getHeight());
+	int ind=row->getRandomLaneInd();
+	ani = sdldata->getLaneAni(ind).clone();
+	int wi = sdldata->getDW(laneTex->at(ani->getIndex()), row->getHeight());
 	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -wi, wi, visible);
 	spawnItem();
 }
@@ -37,7 +44,7 @@ void LaneSDL::draw()
 {
 	if (isVisible())
 	{
-		sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w, h, row->isDirLeft(), true);
+		sdldata->renderTexture(laneTex->at(ani->getIndex()), sdldata->getRen(), x, *y, &w, h, row->isDirLeft(), true);
 
 		if (ani->isTurned() && !turned)
 		{

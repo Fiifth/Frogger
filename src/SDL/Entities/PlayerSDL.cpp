@@ -11,6 +11,7 @@ using namespace frogger_sdl;
 PlayerSDL::PlayerSDL(SDLdata* sdldata, frogger::Factory* F, int x, int y, int w,int h, int speedH, int speedV, int number) :
 		sdldata(sdldata)
 {
+	playerTex=sdldata->getTextureVector('P');
 	setF(F);
 	ani = sdldata->getPlayerAni(number).clone();
 	sethSpeed(speedH);
@@ -40,7 +41,7 @@ void PlayerSDL::draw()
 			ani->setCurrentTextureFor(1, 10);
 			moved = false;
 		}
-		sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w, h, angle, true);
+		sdldata->renderTexture(playerTex->at(ani->getIndex()), sdldata->getRen(), x, *y, &w, h, angle, true);
 		projectileList.remove_if(drawMoveRemove());
 	}
 }

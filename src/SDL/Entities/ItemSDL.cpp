@@ -6,14 +6,18 @@
  */
 
 #include <ItemSDL.h>
+#include <iostream>
 using namespace frogger_sdl;
 
 ItemSDL::ItemSDL(SDLdata* sdldata, frogger::Row* row, int x, int ind) :
 		sdldata(sdldata)
 {
+	itemTex=sdldata->getTextureVector('I');
 	effect = ind;
+
 	ani = sdldata->getItemAni(ind).clone();
-	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,sdldata->getDW(ani->getTex(), row->getHeight()), true);
+	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,sdldata->getDW(itemTex->at(ani->getIndex()), row->getHeight()), true);
+
 }
 
 ItemSDL::~ItemSDL()
@@ -23,7 +27,7 @@ ItemSDL::~ItemSDL()
 
 void ItemSDL::draw()
 {
-	sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w, h,row->isDirLeft(), true);
+	sdldata->renderTexture(itemTex->at(ani->getIndex()), sdldata->getRen(), x, *y, &w, h,row->isDirLeft(), true);
 	if (ani->isTurned() && !turned)
 	{
 		isTurenedByAni = true;
@@ -38,7 +42,8 @@ void ItemSDL::draw()
 ItemSDL::ItemSDL(SDLdata* sdldata, frogger::Row* row, int ind) :
 		sdldata(sdldata)
 {
+	itemTex=sdldata->getTextureVector('I');
 	ani = sdldata->getItemAni(ind).clone();
-	int wi = sdldata->getDW(ani->getTex(), row->getHeight());
+	int wi = sdldata->getDW(itemTex->at(ani->getIndex()), row->getHeight());
 	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -wi, wi, visible);
 }

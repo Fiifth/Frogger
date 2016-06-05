@@ -14,9 +14,9 @@ namespace frogger_sdl
 	class Animator
 	{
 		public:
-			Animator(std::vector<SDL_Texture*> textures, std::vector<int> ratio);
+			Animator(std::vector<int> index, std::vector<int> ratio);
 			virtual ~Animator();
-			SDL_Texture* getTex();
+			int getIndex();
 			int getCounter() const;
 			void setCounter(int counter);
 			int getCurrentTexture() const;
@@ -27,7 +27,7 @@ namespace frogger_sdl
 			void setTurned(bool turned);
 			void setCurrentTextureFor(int texture, int counter);
 		protected:
-			std::vector<SDL_Texture*> textures;
+			std::vector<int> index;
 			std::vector<int> ratio;
 			int counter;
 			int currentTexture;

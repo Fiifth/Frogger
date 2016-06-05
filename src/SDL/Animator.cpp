@@ -9,19 +9,18 @@
 #include <iostream>
 using namespace frogger_sdl;
 
-Animator::Animator(std::vector<SDL_Texture*> textures, std::vector<int> ratio) :
-		textures(textures), ratio(ratio), counter(abs(ratio.at(0))), currentTexture(0),turned(false)
+Animator::Animator(std::vector<int> index, std::vector<int> ratio) :
+		index(index), ratio(ratio), counter(abs(ratio.at(0))), currentTexture(0),turned(false)
 {
-	size = textures.size();
+	size = index.size();
 }
 
 Animator::~Animator()
 {
 }
 
-SDL_Texture* Animator::getTex()
+int Animator::getIndex()
 {
-	SDL_Texture* texture;
 	if (size > 1)
 	{
 		if (counter >= 1000)
@@ -47,12 +46,12 @@ SDL_Texture* Animator::getTex()
 				turned = (ratio.at(currentTexture) < 0);
 			}
 		}
-		texture = textures.at(currentTexture);
-		return texture;
+
+		return index.at(currentTexture);
 	}
 	else
 	{
-		return textures.back();
+		return index.back();
 	}
 }
 

@@ -11,7 +11,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include "Animator.h"
-SDL_Renderer* re;
+
 using namespace frogger_sdl;
 
 SDLdata::SDLdata()
@@ -21,7 +21,11 @@ SDLdata::~SDLdata()
 {
 	deleteTextures(menuTextures);
 	deleteTextures(backTex);
-	deleteTextures(animatorTexCollection);
+	deleteTextures(playerTex);
+	deleteTextures(ObstTex);
+	deleteTextures(laneTex);
+	deleteTextures(itemTex);
+	deleteTextures(projTex);
 }
 
 void SDLdata::renderTexture(SDL_Texture* tex, SDL_Renderer* ren, int x, int y,
@@ -99,96 +103,26 @@ void SDLdata::createTextures()
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground2.c_str()));
 	backTex.push_back(IMG_LoadTexture(re, imagePathBackground3.c_str()));
 
-	obstiAni=
-	{
-		getAnimator(
-				{	"o1.png"},
-				{	0}),
-		getAnimator(
-				{	"o2.png"},
-				{	0}),
-		getAnimator(
-				{	"o3.png"},
-				{	0}),
-		getAnimator(
-				{	"o4.png"},
-				{	0}),
-		getAnimator(
-				{	"o5.png"},
-				{	0}),
-		getAnimator(
-				{	"o6.png"},
-				{	0}),
-		getAnimator(
-				{	"o7.png"},
-				{	0}),
-		getAnimator(
-				{	"o8.png"},
-				{	0}),
-		getAnimator(
-				{	"o9.png"},
-				{	0}),
-		getAnimator(
-				{	"o10.png"},
-				{	0}),
-		getAnimator(
-				{	"o11.png"},
-				{	0}),
-		getAnimator(
-				{	"o12.png"},
-				{	0}),
-		getAnimator(
-				{	"o13.png"},
-				{	0})
-	};
-	laneAni=
-	{
-		getAnimator(
-				{	"lane1.png","lane2.png","lane3.png"},
-				{	40,5,10}),
-		getAnimator(
-				{	"lane4.png"},
-				{	0}),
-		getAnimator(
-				{	"o13.png"},
-				{	0}),
-		getAnimator(
-				{	"turtle1.png","turtle2.png"},
-				{	20,20}),
-		getAnimator(
-				{	"lane5.png"},
-				{	0}),
-		getAnimator(
-				{	"turtle1.png","turtle2.png","turtle1.png","turtle2.png","turtle3.png","turtle4.png","turtle5.png","turtle6.png" ,"turtle4.png","turtle3.png"},
-				{	40,40,40,40,30,20,20,-70,10,20})
-	};
-	itemAni=
-	{
-		getAnimator(
-				{	"item1.png"},
-				{	0}),
-		getAnimator(
-				{	"item2.png"},
-				{	0}),
-		getAnimator(
-				{	"item3.png"},
-				{	0})
-	};
-	playerAni=
-	{
-		getAnimator(
-				{	"frog1.png","frog2.png"},
-				{	1,0}),
-		getAnimator(
-				{	"frog3.png","frog4.png"},
-				{	1,0})
-	};
-	projAni=
-	{
-		getAnimator(
-				{	"proj.png"},
-				{	0})
-	};
+	fillTextureVectors(&playerTex,"frog",3);
+	fillTextureVectors(&ObstTex,"o",12);
+	fillTextureVectors(&laneTex,"lane",9);
+	fillTextureVectors(&itemTex,"item",2);
+	fillTextureVectors(&projTex,"proj",0);
+
+	obstiAni=	{getAnimator({0},{0}),getAnimator({1},{0}),getAnimator({2},{0}),
+			getAnimator({3},{0}),getAnimator({4},{0}),getAnimator({5},{0}),
+			getAnimator({6},{0}),getAnimator({7},{0}),getAnimator({8},{0}),
+			getAnimator({9},{0}),getAnimator({10},{0}),getAnimator({11},{0})};
+
+	laneAni={getAnimator({0,1,2},{40,5,10}),getAnimator({3},{0}),getAnimator({4,5},{20,20}),
+			getAnimator({4,5,4,5,6,7,8,9,7,6},{40,40,40,40,30,20,20,-70,10,20})};
+
+	playerAni={getAnimator({0,1},{1,0}),getAnimator({2,3},{1,0})};
+
+	itemAni={getAnimator({0},{0}),getAnimator({1},{0}),getAnimator({2},{0})};
+
+	projAni={getAnimator({0},{0})};
+
 
 }
 
@@ -225,16 +159,9 @@ Animator SDLdata::getPlayerAni(int ind)
 	return playerAni.at(ind);
 }
 
-Animator SDLdata::getAnimator(std::vector<std::string> paths,	std::vector<int> ratio)
+Animator SDLdata::getAnimator(std::vector<int> indexes,	std::vector<int> ratio)
 {
-	std::vector<SDL_Texture*> textures;
-	std::string dir = "C:/frogger/";
-	for (std::string temp : paths)
-	{
-		textures.push_back(IMG_LoadTexture(re, (dir + temp).c_str()));
-		animatorTexCollection.push_back(textures.back());
-	}
-	Animator temp(textures, ratio);
+	Animator temp(indexes, ratio);
 	return temp;
 }
 
@@ -279,3 +206,31 @@ void frogger_sdl::SDLdata::deleteTextures(std::vector<SDL_Texture*> textureVecto
 		SDL_DestroyTexture(tex);
 }
 
+void frogger_sdl::SDLdata::fillTextureVectors(std::vector<SDL_Texture*>* textureVector, std::string prefix,	int endNumber)
+{
+	std::string dir = "C:/frogger/"+prefix;
+		for (int i=0;i<=endNumber;i++)
+		{
+			std::string completeDir=dir + std::to_string(i)+".png";
+			SDL_Texture* tex=IMG_LoadTexture(re, (completeDir).c_str());
+			textureVector->push_back(tex);
+
+		}
+
+
+
+}
+
+std::vector<SDL_Texture*>* frogger_sdl::SDLdata::getTextureVector(char type)
+{
+	if(type=='O')
+		return &ObstTex;
+	else if(type=='L')
+		return &laneTex;
+	else if(type=='I')
+		return &itemTex;
+	else if(type=='B')
+		return &projTex;
+	else
+		return &playerTex;
+}

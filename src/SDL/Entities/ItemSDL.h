@@ -27,6 +27,7 @@ namespace frogger_sdl
 
 			SDLdata* sdldata;
 			Animator* ani;
+			std::vector<SDL_Texture*>* itemTex;
 	};
 }
 

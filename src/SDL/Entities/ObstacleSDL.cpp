@@ -16,9 +16,12 @@ using namespace frogger_sdl;
 ObstacleSDL::ObstacleSDL(SDLdata* sdldata, frogger::Row* row,	frogger::Factory* F, bool visible, int x) :
 		sdldata(sdldata)
 {
+	obstTex=sdldata->getTextureVector('O');
 	setF(F);
-	ani = sdldata->getObstiAni(row->getRandomObsInd()).clone();
-	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,	sdldata->getDW(ani->getTex(), row->getHeight()), visible);
+	int ind=row->getRandomObsInd();
+	ani = sdldata->getObstiAni(ind).clone();
+int tempInd=ani->getIndex();
+	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,	sdldata->getDW(obstTex->at(tempInd), row->getHeight()), visible);
 	previousX = x;
 }
 
@@ -31,7 +34,7 @@ void ObstacleSDL::draw()
 {
 	if (isVisible())
 	{
-		sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w, h, row->isDirLeft(), true);
+		sdldata->renderTexture(obstTex->at(ani->getIndex()), sdldata->getRen(), x, *y, &w, h, row->isDirLeft(), true);
 		if (ani->isTurned() && !turned)
 		{
 			isTurenedByAni = true;
@@ -48,9 +51,11 @@ void ObstacleSDL::draw()
 ObstacleSDL::ObstacleSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F, bool visible) :
 		sdldata(sdldata)
 {
+	obstTex=sdldata->getTextureVector('O');
 	setF(F);
 	ani = sdldata->getObstiAni(row->getRandomObsInd()).clone();
-	int wi = sdldata->getDW(ani->getTex(), row->getHeight());
+	int wi = sdldata->getDW(obstTex->at(ani->getIndex()), row->getHeight());
 	setProperties(row, sdldata->getScrW(), sdldata->getScrH(),row->isDirLeft() ? *sdldata->getScrW() : -wi, wi, visible);
 	previousX = x;
+
 }

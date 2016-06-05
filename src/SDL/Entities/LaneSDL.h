@@ -26,6 +26,7 @@ namespace frogger_sdl
 		private:
 			SDLdata* sdldata;
 			Animator* ani;
+			std::vector<SDL_Texture*>* laneTex;
 	};
 }
 

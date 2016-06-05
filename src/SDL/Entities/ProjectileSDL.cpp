@@ -11,13 +11,14 @@ using namespace frogger_sdl;
 ProjectileSDL::ProjectileSDL(SDLdata* sdldata, char direction, int Xstart,int Ystart, int* Ypoint, int size, int speed, int ind) :
 		sdldata(sdldata)
 {
+	projTex=sdldata->getTextureVector('B');
 	ani = sdldata->getProjAni(ind).clone();
 	directionR = direction;
 	speedR = speed;
 	dividerR = 0;
 	this->h = size;
 
-	setProperties(nullptr, sdldata->getScrW(), sdldata->getScrH(), Xstart,sdldata->getDW(ani->getTex(), size), true);
+	setProperties(nullptr, sdldata->getScrW(), sdldata->getScrH(), Xstart,sdldata->getDW(projTex->at(ani->getIndex()), size), true);
 
 	if (Ypoint != nullptr)
 		y = Ypoint;
@@ -36,7 +37,7 @@ void ProjectileSDL::draw()
 	angle = (getDirection() == 'R') ? 90 : angle;
 	angle = (getDirection() == 'D') ? 180 : angle;
 	angle = (getDirection() == 'L') ? 270 : angle;
-	sdldata->renderTexture(ani->getTex(), sdldata->getRen(), x, *y, &w, h,	angle, true);
+	sdldata->renderTexture(projTex->at(ani->getIndex()), sdldata->getRen(), x, *y, &w, h,	angle, true);
 	if (ani->isTurned() && !turned)
 	{
 		isTurenedByAni = true;

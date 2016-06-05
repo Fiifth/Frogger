@@ -11,11 +11,25 @@ using namespace frogger;
 LevelProperties::LevelProperties(char mode, char difficulty) :
 		mode(mode), difficulty(difficulty)
 {
+	obstiAni=	{getAnimator({0},{0}),getAnimator({1},{0}),getAnimator({2},{0}),
+				getAnimator({3},{0}),getAnimator({4},{0}),getAnimator({5},{0}),
+				getAnimator({6},{0}),getAnimator({7},{0}),getAnimator({8},{0}),
+				getAnimator({9},{0}),getAnimator({10},{0}),getAnimator({11},{0})};
+
+		laneAni={getAnimator({0,1,2},{40,5,10}),getAnimator({3},{0}),getAnimator({4,5},{20,20}),
+				getAnimator({4,5,4,5,6,7,8,9,7,6},{40,40,40,40,30,20,20,-70,10,20})};
+
+		playerAni={getAnimator({0,1},{1,0}),getAnimator({2,3},{1,0})};
+
+		itemAni={getAnimator({0},{0}),getAnimator({1},{0}),getAnimator({2},{0})};
+
+		projAni={getAnimator({0},{0})};
+
 	level=1;
 
 	firstRow = new RowProp(0, 0, 'A', mode, 0, 0, 0, true, false, { 1 }, { 0 }, { 10, 20, 70 });
-	lastRow = new RowProp(0, 0, 'E', mode, 100, 100, 0, true, false, getVec(10, 11), { 2 }, { 10, 20, 70 });
-	middleRow = new RowProp(0, 0, 'D', mode, 50, 50, 0, true, false, getVec(10, 11), { 0 }, { 10, 20, 70 });
+	lastRow = new RowProp(0, 0, 'E', mode, 100, 100, 0, true, false, getVec(9, 10), { 2 }, { 10, 20, 70 });
+	middleRow = new RowProp(0, 0, 'D', mode, 50, 50, 0, true, false, getVec(9, 10), { 0 }, { 10, 20, 70 });
 
 	if (difficulty == 'E')
 		easyLevel();
@@ -38,25 +52,25 @@ LevelProperties::~LevelProperties()
 
 void LevelProperties::easyLevel()
 {
-	seg1 = new RowProp(1, 0, 'B', mode, 40, 30, 0, true, false, getVec(0, 8), {0, 3, 4, 5 }, { 10, 30, 70 });
-	seg2 = new RowProp(1, 0, 'B', mode, 50, 10, 20, true, false, getVec(0, 8), {0, 3, 4, 5 }, { 10, 20, 70 });
-	seg3 = new RowProp(1, 0, 'C', mode, 40, 30, 70, false, true, getVec(0, 8), {0, 3, 4, 5 }, { 10, 20, 70 });
-	seg4 = new RowProp(1, 0, 'C', mode, 50, 10, 70, false, true, getVec(0, 8), {0, 3, 4, 5 }, { 10, 20, 70 });
+	seg1 = new RowProp(1, 0, 'B', mode, 40, 30, 0, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 30, 70 });
+	seg2 = new RowProp(1, 0, 'B', mode, 50, 10, 20, true, false, getVec(0, 8), {0, 1, 2, 3}, { 10, 20, 70 });
+	seg3 = new RowProp(1, 0, 'C', mode, 40, 30, 70, false, true, getVec(0, 8), {0, 1, 2, 3}, { 10, 20, 70 });
+	seg4 = new RowProp(1, 0, 'C', mode, 50, 10, 70, false, true, getVec(0, 8), {0, 1, 2, 3}, { 10, 20, 70 });
 }
 void frogger::LevelProperties::mediumLevel()
 {
-	seg1 = new RowProp(2, 0, 'B', mode, 40, 30, 0, true, false, getVec(0, 8), {0, 3, 4, 5 }, { 10, 20, 70 });
-	seg2 = new RowProp(2, 0, 'B', mode, 50, 10, 20, true, false, getVec(0, 8), {0, 3, 4, 5 }, { 10, 20, 70 });
-	seg3 = new RowProp(2, 0, 'C', mode, 40, 30, 70, false, true, getVec(0, 8), {0, 3, 4, 5 }, { 10, 20, 70 });
-	seg4 = new RowProp(2, 0, 'C', mode, 50, 10, 70, false, true, getVec(0, 8), {0, 3, 4, 5 }, { 10, 20, 70 });
+	seg1 = new RowProp(1, 0, 'B', mode, 40, 30, 0, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 30, 70 });
+	seg2 = new RowProp(1, 0, 'B', mode, 50, 10, 20, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
+	seg3 = new RowProp(1, 0, 'C', mode, 40, 30, 70, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
+	seg4 = new RowProp(1, 0, 'C', mode, 50, 10, 70, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
 }
 
 void frogger::LevelProperties::hardLevel()
 {
-	seg1 = new RowProp(2, 0, 'B', mode, 40, 30, 0, true, false, getVec(0, 8), {0, 3, 4, 5 }, { 10, 20, 70 });
-	seg2 = new RowProp(2, 0, 'B', mode, 50, 10, 20, true, false, getVec(0, 8), {0, 3, 4, 5 }, { 10, 20, 70 });
-	seg3 = new RowProp(2, 0, 'C', mode, 40, 30, 70, false, true, getVec(0, 8), {0, 3, 4, 5 }, { 10, 20, 70 });
-	seg4 = new RowProp(2, 0, 'C', mode, 50, 10, 70, false, true, getVec(0, 8), {0, 3, 4, 5 }, { 10, 20, 70 });
+	seg1 = new RowProp(1, 0, 'B', mode, 40, 30, 0, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 30, 70 });
+	seg2 = new RowProp(1, 0, 'B', mode, 50, 10, 20, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
+	seg3 = new RowProp(1, 0, 'C', mode, 40, 30, 70, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
+	seg4 = new RowProp(1, 0, 'C', mode, 50, 10, 70, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
 }
 
 RowProp* LevelProperties::getFirstRow()
@@ -238,4 +252,36 @@ void frogger::LevelProperties::levelUp()
 char frogger::LevelProperties::getDifficulty()
 {
 	return difficulty;
+}
+
+frogger_sdl::Animator frogger::LevelProperties::getItemAni(int ind)
+{
+	return itemAni.at(ind);
+}
+
+frogger_sdl::Animator frogger::LevelProperties::getLaneAni(int ind)
+{
+	return laneAni.at(ind);
+}
+
+frogger_sdl::Animator frogger::LevelProperties::getObstiAni(int ind)
+{
+	return obstiAni.at(ind);
+}
+
+frogger_sdl::Animator frogger::LevelProperties::getPlayerAni(int ind)
+{
+	return playerAni.at(ind);
+}
+
+frogger_sdl::Animator frogger::LevelProperties::getProjAni(int ind)
+{
+	return projAni.at(ind);
+}
+
+frogger_sdl::Animator frogger::LevelProperties::getAnimator(
+		std::vector<int> indexes, std::vector<int> ratio)
+{
+	frogger_sdl::Animator temp(indexes, ratio);
+		return temp;
 }
