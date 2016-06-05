@@ -254,34 +254,34 @@ char frogger::LevelProperties::getDifficulty()
 	return difficulty;
 }
 
-frogger_sdl::Animator frogger::LevelProperties::getItemAni(int ind)
+frogger::Animator frogger::LevelProperties::getItemAni(int ind)
 {
 	return itemAni.at(ind);
 }
 
-frogger_sdl::Animator frogger::LevelProperties::getLaneAni(int ind)
+frogger::Animator frogger::LevelProperties::getLaneAni(int ind)
 {
 	return laneAni.at(ind);
 }
 
-frogger_sdl::Animator frogger::LevelProperties::getObstiAni(int ind)
+frogger::Animator frogger::LevelProperties::getObstiAni(int ind)
 {
 	return obstiAni.at(ind);
 }
 
-frogger_sdl::Animator frogger::LevelProperties::getPlayerAni(int ind)
+frogger::Animator frogger::LevelProperties::getPlayerAni(int ind)
 {
 	return playerAni.at(ind);
 }
 
-frogger_sdl::Animator frogger::LevelProperties::getProjAni(int ind)
+frogger::Animator frogger::LevelProperties::getProjAni(int ind)
 {
 	return projAni.at(ind);
 }
 
-frogger_sdl::Animator frogger::LevelProperties::getAnimator(
+frogger::Animator frogger::LevelProperties::getAnimator(
 		std::vector<int> indexes, std::vector<int> ratio)
 {
-	frogger_sdl::Animator temp(indexes, ratio);
+	frogger::Animator temp(indexes, ratio);
 		return temp;
 }

@@ -11,7 +11,6 @@ using namespace frogger_sdl;
 LaneSDL::LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,	bool visible, int x) :
 		sdldata(sdldata)
 {
-
 	laneTex=sdldata->getTextureVector('L');
 	setF(F);
 	int ind = row->getRandomLaneInd();
@@ -20,7 +19,6 @@ LaneSDL::LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,	bool 
 	int getW=sdldata->getDW(laneTex->at(tempInd), row->getHeight());
 	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,getW , visible);
 	spawnItem();
-
 }
 LaneSDL::~LaneSDL()
 {
@@ -38,6 +36,10 @@ LaneSDL::LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,
 	int wi = sdldata->getDW(laneTex->at(ani->getIndex()), row->getHeight());
 	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -wi, wi, visible);
 	spawnItem();
+}
+
+frogger_sdl::LaneSDL::LaneSDL(SDLdata* sdldata):sdldata(sdldata)
+{
 }
 
 void LaneSDL::draw()

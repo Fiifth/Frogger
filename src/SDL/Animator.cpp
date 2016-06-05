@@ -7,7 +7,7 @@
 
 #include <Animator.h>
 #include <iostream>
-using namespace frogger_sdl;
+using namespace frogger;
 
 Animator::Animator(std::vector<int> index, std::vector<int> ratio) :
 		index(index), ratio(ratio), counter(abs(ratio.at(0))), currentTexture(0),turned(false)

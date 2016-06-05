@@ -30,6 +30,10 @@ ObstacleSDL::~ObstacleSDL()
 	delete (ani);
 }
 
+frogger_sdl::ObstacleSDL::ObstacleSDL(SDLdata* sdldata):sdldata(sdldata)
+{
+}
+
 void ObstacleSDL::draw()
 {
 	if (isVisible())

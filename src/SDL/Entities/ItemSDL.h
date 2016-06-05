@@ -21,12 +21,12 @@ namespace frogger_sdl
 		public:
 			ItemSDL(SDLdata* sdldata, frogger::Row* row, int x, int ind);
 			ItemSDL(SDLdata* sdldata, frogger::Row* row, int ind);
+			ItemSDL(SDLdata* sdldata);
 			virtual ~ItemSDL();
 			void draw();
 		private:
 
 			SDLdata* sdldata;
-			Animator* ani;
 			std::vector<SDL_Texture*>* itemTex;
 	};
 }

@@ -139,29 +139,29 @@ void SDLdata::setScreenDimension(int* gameWidth, int* gameHeight)
 	screenWidth = gameWidth;
 }
 
-Animator SDLdata::getItemAni(int ind)
+frogger::Animator SDLdata::getItemAni(int ind)
 {
 	return itemAni.at(ind);
 }
 
-Animator SDLdata::getLaneAni(int ind)
+frogger::Animator SDLdata::getLaneAni(int ind)
 {
 	return laneAni.at(ind);
 }
 
-Animator SDLdata::getObstiAni(int ind)
+frogger::Animator SDLdata::getObstiAni(int ind)
 {
 	return obstiAni.at(ind);
 }
 
-Animator SDLdata::getPlayerAni(int ind)
+frogger::Animator SDLdata::getPlayerAni(int ind)
 {
 	return playerAni.at(ind);
 }
 
-Animator SDLdata::getAnimator(std::vector<int> indexes,	std::vector<int> ratio)
+frogger::Animator SDLdata::getAnimator(std::vector<int> indexes,	std::vector<int> ratio)
 {
-	Animator temp(indexes, ratio);
+	frogger::Animator temp(indexes, ratio);
 	return temp;
 }
 
@@ -185,7 +185,7 @@ void SDLdata::setScreenWidth(int* screenWidth)
 	this->screenWidth = screenWidth;
 }
 
-Animator SDLdata::getProjAni(int ind)
+frogger::Animator SDLdata::getProjAni(int ind)
 {
 	return projAni.at(ind);
 }

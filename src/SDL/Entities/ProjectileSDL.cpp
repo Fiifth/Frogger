@@ -31,6 +31,10 @@ ProjectileSDL::~ProjectileSDL()
 	delete (ani);
 }
 
+frogger_sdl::ProjectileSDL::ProjectileSDL(SDLdata* sdldata):sdldata(sdldata)
+{
+}
+
 void ProjectileSDL::draw()
 {
 	int angle = 0;

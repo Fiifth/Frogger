@@ -8,6 +8,7 @@
 #ifndef ENTITY_H_
 #define ENTITY_H_
 #include <list>
+#include "Animator.h"
 
 
 namespace frogger
@@ -41,6 +42,8 @@ namespace frogger
 			virtual void collision(Player* player)=0;
 			bool colli(Entity* entity);
 			bool colli2(Entity* entity1, Entity* entity2);
+			void setAni(frogger::Animator* ani);
+			frogger::Animator* getAni();
 			struct drawMoveRemove
 			{
 					bool operator()(Props* prop);
@@ -66,6 +69,7 @@ namespace frogger
 			Factory* F;
 			int x, yR, w, h, speedR, dividerR, dividerCounter;
 			char directionR = 'U';
+			frogger::Animator* ani;
 
 			char* direction;
 			int* y;

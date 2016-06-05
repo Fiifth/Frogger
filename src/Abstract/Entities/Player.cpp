@@ -323,3 +323,18 @@ void frogger::Player::setParameters(int life, int totalTime,
 	this->scorePerStep = scorePerStep;
 	this->projectiles = projectiles;
 }
+
+void frogger::Player::initPlayer(int hSpeed, int vSpeed, int w, int h, int x,
+		int y, int xS, int yS, int* screenW, int* screenH)
+{
+	this->vSpeed=vSpeed;
+	this->hSpeed=hSpeed;
+	this->startX=xS;
+	this->startY=yS;
+	this->w=w;
+	this->h=h;
+	this->x=x;
+	*this->y=y;
+	this->screenWidth=screenW;
+	this->screenHeight=screenH;
+}

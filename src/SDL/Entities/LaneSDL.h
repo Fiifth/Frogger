@@ -21,11 +21,11 @@ namespace frogger_sdl
 		public:
 			LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,	bool visible, int x);
 			LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,	bool visible);
+			LaneSDL(SDLdata* sdldata);
 			virtual ~LaneSDL();
 			void draw();
 		private:
 			SDLdata* sdldata;
-			Animator* ani;
 			std::vector<SDL_Texture*>* laneTex;
 	};
 }

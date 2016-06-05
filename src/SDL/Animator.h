@@ -9,7 +9,7 @@
 #define ANIMATOR_H_
 #include "SDL.h"
 #include <vector>
-namespace frogger_sdl
+namespace frogger
 {
 	class Animator
 	{

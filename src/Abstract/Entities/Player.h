@@ -60,6 +60,7 @@ namespace frogger
 			std::list<Projectile*>* getProjectileList();
 			void collision(Player* player);
 			void followScreen(int offset);
+			void initPlayer(int hSpeed,int vSpeed,int w, int h, int x,int y, int Xs, int Ys,int* screenW,int* screenH);
 			void setParameters(int life, int totalTime, bool counterEnabled,
 					int scorePerStep, int projectiles);
 

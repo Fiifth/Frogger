@@ -23,12 +23,11 @@ namespace frogger_sdl
 	{
 		public:
 			PlayerSDL(SDLdata* sdldata, frogger::Factory* F, int x, int y,	int w, int h, int speedH, int speedV, int number);
+			PlayerSDL(SDLdata* sdldata);
 			virtual ~PlayerSDL();
 			void draw();
-			void move(int deltaX, int deltaY);
 		private:
 			SDLdata* sdldata;
-			Animator* ani;
 			std::vector<SDL_Texture*>* playerTex;
 
 	};

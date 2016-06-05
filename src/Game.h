@@ -18,6 +18,7 @@
 #include <chrono>
 #include <iostream>
 #include <algorithm>    // std::sort
+#include <LevelProperties.h>
 namespace frogger
 {
 	class Game
@@ -27,7 +28,8 @@ namespace frogger
 			virtual ~Game();
 			bool playersAlive(list<Player*>* players, char mode);
 			void addPlayers(Factory* F, list<Player*>* players, int amount,	int X, int Y,
-					int W, int H, int speed, int rowHeight,char gameMode, char difficulty);
+					int W, int H, int speed, int rowHeight,char gameMode, char difficulty,
+					LevelProperties* lvlProp,Window* win);
 			void addHighScore(list<Player*>* players, char gameMode);
 		protected:
 			std::vector<int> highScoreClassic = { 0, 0, 0, 0 };

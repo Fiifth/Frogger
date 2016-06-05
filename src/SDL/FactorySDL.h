@@ -33,8 +33,6 @@ namespace frogger_sdl
 		public:
 			FactorySDL();
 			virtual ~FactorySDL();
-			virtual frogger::Player* createPlayer(int x, int y, int w, int h,
-					int speedH, int speedV, int number);
 			virtual frogger::Obstacle* createObstacle(frogger::Row* row, bool visible, int x);
 			virtual frogger::Lane* createLane(frogger::Row* row, bool visible,int x);
 			virtual frogger::Item* createItem(frogger::Row* row, int x, int type);
@@ -44,6 +42,14 @@ namespace frogger_sdl
 			virtual frogger::Item* createItem(frogger::Row* row, int type);
 			virtual frogger::Window* createWindow();
 			virtual frogger::Events* createEvents();
+
+			virtual frogger::Player* createPlayer1();
+			virtual frogger::Obstacle* createObstacle1();
+			virtual frogger::Lane* createLane1();
+			virtual frogger::Item* createItem1();
+			virtual frogger::Projectile* createProjectile1();
+
+
 		protected:
 			SDLdata* sdldata;
 	};

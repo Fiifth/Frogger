@@ -173,6 +173,16 @@ bool frogger::Entity::ProjCol2::operator ()(Entity* projectile) const
 		return false;
 }
 
+frogger::Animator* frogger::Entity::getAni()
+{
+	return ani;
+}
+
+void frogger::Entity::setAni(frogger::Animator* ani)
+{
+	this->ani = ani;
+}
+
 bool frogger::Entity::ProjCol::operator ()(Entity* projectile) const
 {
 	int prevSize = projectList->size();

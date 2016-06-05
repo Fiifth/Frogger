@@ -28,8 +28,6 @@ namespace frogger
 		public:
 			Factory();
 			virtual ~Factory();
-			virtual Player* createPlayer(int x, int y, int w, int h, int speedH,
-					int speedV, int number)=0;
 			virtual Obstacle* createObstacle(Row* row, bool visible, int x)=0;
 			virtual Lane* createLane(Row* row, bool visible, int x)=0;
 			virtual Item* createItem(Row* row, int x, int type)=0;
@@ -42,6 +40,12 @@ namespace frogger
 			virtual Events* createEvents()=0;
 			virtual Row* createRow(char direction, int locY, int width,
 					int number, RowProp* rowprop);
+
+			virtual Player* createPlayer1()=0;
+			virtual Obstacle* createObstacle1()=0;
+			virtual Lane* createLane1()=0;
+			virtual Item* createItem1()=0;
+			virtual Projectile* createProjectile1()=0;
 	};
 }
 #endif /* FACTORY_H_ */

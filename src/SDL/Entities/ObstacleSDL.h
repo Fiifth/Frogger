@@ -24,12 +24,11 @@ namespace frogger_sdl
 
 			ObstacleSDL(SDLdata* sdldata, frogger::Row* row,frogger::Factory* F, bool visible, int x);
 			ObstacleSDL(SDLdata* sdldata, frogger::Row* row,frogger::Factory* F, bool visible);
+			ObstacleSDL(SDLdata* sdldata);
 			virtual ~ObstacleSDL();
 			void draw();
-			void move(int deltaX, int deltaY);
 		private:
 			SDLdata* sdldata;
-			Animator* ani;
 			std::vector<SDL_Texture*>* obstTex;
 	};
 }

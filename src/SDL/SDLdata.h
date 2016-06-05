@@ -27,12 +27,12 @@ namespace frogger_sdl
 			void createTextures();
 			std::vector<SDL_Texture*> getBackTextures();
 			void setScreenDimension(int* gameWidth, int* gameHeight);
-			Animator getAnimator(std::vector<int> indexes,std::vector<int> ratio);
-			Animator getItemAni(int ind);
-			Animator getLaneAni(int ind);
-			Animator getObstiAni(int ind);
-			Animator getPlayerAni(int ind);
-			Animator getProjAni(int ind);
+			frogger::Animator getAnimator(std::vector<int> indexes,std::vector<int> ratio);
+			frogger::Animator getItemAni(int ind);
+			frogger::Animator getLaneAni(int ind);
+			frogger::Animator getObstiAni(int ind);
+			frogger::Animator getPlayerAni(int ind);
+			frogger::Animator getProjAni(int ind);
 			int* getScrH() const;
 			void setScreenHeight(int* screenHeight);
 			int* getScrW() const;
@@ -51,11 +51,11 @@ namespace frogger_sdl
 
 			std::vector<SDL_Texture*> menuTextures;
 			std::vector<SDL_Texture*> backTex;
-			std::vector<Animator> obstiAni;
-			std::vector<Animator> laneAni;
-			std::vector<Animator> playerAni;
-			std::vector<Animator> itemAni;
-			std::vector<Animator> projAni;
+			std::vector<frogger::Animator> obstiAni;
+			std::vector<frogger::Animator> laneAni;
+			std::vector<frogger::Animator> playerAni;
+			std::vector<frogger::Animator> itemAni;
+			std::vector<frogger::Animator> projAni;
 			std::vector<SDL_Texture*> playerTex;
 			std::vector<SDL_Texture*> ObstTex;
 			std::vector<SDL_Texture*> laneTex;

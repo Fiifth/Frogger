@@ -25,6 +25,10 @@ ItemSDL::~ItemSDL()
 	delete (ani);
 }
 
+frogger_sdl::ItemSDL::ItemSDL(SDLdata* sdldata):sdldata(sdldata)
+{
+}
+
 void ItemSDL::draw()
 {
 	sdldata->renderTexture(itemTex->at(ani->getIndex()), sdldata->getRen(), x, *y, &w, h,row->isDirLeft(), true);

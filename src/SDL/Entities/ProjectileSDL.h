@@ -17,12 +17,12 @@ namespace frogger_sdl
 	{
 		public:
 			ProjectileSDL(SDLdata* sdldata, char direction, int Xstart,	int Ystart, int* Ypoint, int size, int speed, int ind);
+			ProjectileSDL(SDLdata* sdldata);
 			virtual ~ProjectileSDL();
 			void draw();
 
 		private:
 			SDLdata* sdldata;
-			Animator* ani;
 			std::vector<SDL_Texture*>* projTex;
 	};
 }

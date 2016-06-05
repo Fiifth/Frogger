@@ -126,11 +126,11 @@ Game::Game(Factory* F)
 
 				else if (PrevState == 'B' || PrevState == 'G')
 				{
-
+					lvlprop = new LevelProperties(gameMode, difficulty);
 					addPlayers(F, players, amountOfPlayers, plStartX, plStartY,
 							plStartW, plStartH, plStartSpeed, rowHeight,
-							gameMode, difficulty);
-					lvlprop = new LevelProperties(gameMode, difficulty);
+							gameMode, difficulty,lvlprop,win);
+
 					level = new Level(F, win, players, rowHeight, lvlprop);
 
 					state = gameMode;
@@ -138,10 +138,11 @@ Game::Game(Factory* F)
 				}
 				else if (PrevState == 'V')
 				{
+					lvlprop->levelUp();
 					addPlayers(F, players, amountOfPlayers, plStartX, plStartY,
 							plStartW, plStartH, plStartSpeed, rowHeight,
-							gameMode, difficulty);
-					lvlprop->levelUp();
+							gameMode, difficulty,lvlprop,win);
+
 					level = new Level(F, win, players, rowHeight, lvlprop);
 					state = 'C';
 					PrevState = state;
@@ -178,8 +179,9 @@ bool Game::playersAlive(list<Player*>* players, char mode)
 
 void frogger::Game::addPlayers(Factory* F, list<Player*>* players, int amount,
 		int X, int Y, int W, int H, int speed, int rowHeight, char gameMode,
-		char difficulty)
+		char difficulty,LevelProperties* lvlProp,Window* win)
 {
+	players->clear();
 	int life = 4, totalTime = 50, scorePerStep = 10, projectiles = 3; //classic easy mode
 	bool counterEnabled = true;
 
@@ -201,25 +203,32 @@ void frogger::Game::addPlayers(Factory* F, list<Player*>* players, int amount,
 	players->clear();
 	if (amount >= 1)
 	{
-		Player* player = F->createPlayer(X, Y, W, H, speed, rowHeight, 0);
-		player->setParameters(life, totalTime, counterEnabled, scorePerStep,
-				projectiles);
+		Player* player = F->createPlayer1();
+		player->setAni(lvlProp->getPlayerAni(0).clone());
+		player->setF(F);
+		player->initPlayer(speed,speed,W,H,X,Y,X,Y,win->getWidth(),win->getGameWindowHeight());
+
+		player->setParameters(life, totalTime, counterEnabled, scorePerStep, projectiles);
 		players->push_back(player);
 	}
 	if (amount >= 2)
 	{
-		Player* player2 = F->createPlayer(X, Y, W, H, speed, rowHeight, 1);
+		Player* player2 = F->createPlayer1();
+		player2->setAni(lvlProp->getPlayerAni(1).clone());
+		player2->setF(F);
+		player2->initPlayer(speed,speed,W,H,X,Y,X,Y,win->getWidth(),win->getGameWindowHeight());
 		player2->setDifferentControls('A');
-		player2->setParameters(life, totalTime, counterEnabled, scorePerStep,
-				projectiles);
+		player2->setParameters(life, totalTime, counterEnabled, scorePerStep, projectiles);
 		players->push_back(player2);
 	}
 	if (amount >= 3)
 	{
-		Player* player3 = F->createPlayer(X, Y, W, H, speed, rowHeight, 1);
+		Player* player3 = F->createPlayer1();
+		player3->setAni(lvlProp->getPlayerAni(1).clone());
+		player3->setF(F);
+		player3->initPlayer(speed,speed,W,H,X,Y,X,Y,win->getWidth(),win->getGameWindowHeight());
 		player3->setDifferentControls('B');
-		player3->setParameters(life, totalTime, counterEnabled, scorePerStep,
-				projectiles);
+		player3->setParameters(life, totalTime, counterEnabled, scorePerStep, projectiles);
 		players->push_back(player3);
 	}
 }
