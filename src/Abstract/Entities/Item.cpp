@@ -41,3 +41,13 @@ bool frogger::Item::itemListEmpty()
 {
 	return false;
 }
+
+void frogger::Item::setEffect(int effect)
+{
+	this->effect=effect;
+}
+
+int frogger::Item::getEffect()
+{
+	return effect;
+}

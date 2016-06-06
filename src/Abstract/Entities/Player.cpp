@@ -11,8 +11,8 @@ using namespace std;
 using namespace frogger;
 
 Player::Player() :
-		vSpeed(0), hSpeed(0), startX(0), startY(0), totalTime(50), remainingTime(
-				totalTime)
+				vSpeed(0), hSpeed(0), startX(0), startY(0), totalTime(50), remainingTime(
+						totalTime)
 {
 }
 
@@ -178,9 +178,12 @@ bool Player::takeAction(std::string key)
 	{
 		if (key == keyDown)
 		{
+			int yTemp=yR;
 			moveDown();
-			if (*y > startY)
+			if (yTemp!=yR)
+			{
 				addScore(-scorePerStep);
+			}
 		}
 		else if (key == keyUp)
 		{
@@ -195,7 +198,12 @@ bool Player::takeAction(std::string key)
 		else if (key == fire && getProjectiles() > 0)
 		{
 			addProjectiles(-1);
-			projectileList.push_back(F->createProjectile(this, nullptr, 5, 0));
+			Projectile* proj=F->createProjectile1();
+			proj->setAni(projAni->at(0).clone());
+			proj->queryW(h);
+			proj->setProperties(nullptr,screenWidth,screenHeight,x,proj->getW(),true);
+			proj->initProjectile(5,0,*direction,h,*y,x);
+			projectileList.push_back(proj);
 		}
 	}
 	return false;
@@ -337,4 +345,9 @@ void frogger::Player::initPlayer(int hSpeed, int vSpeed, int w, int h, int x,
 	*this->y=y;
 	this->screenWidth=screenW;
 	this->screenHeight=screenH;
+}
+
+void frogger::Player::setProjAniList(std::vector<frogger::Animator>* projAni)
+{
+	this->projAni=projAni;
 }

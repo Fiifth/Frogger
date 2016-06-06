@@ -204,6 +204,7 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,
 		{
 			Obstacle* obs=F->createObstacle1();
 			obs->setF(F);
+			obs->setProjAniList(lvlprop->getProjAni());
 			obs->setAni(lvlprop->getObstiAni(row->getRandomObsInd()).clone());
 			obs->queryW(row->getHeight());
 			obs->setProperties(row, win->getWidth(), win->getGameWindowHeight(),x, obs->getW(), row->isObstacleVis());
@@ -213,6 +214,7 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,
 		{
 			Lane* lane=F->createLane1();
 			lane->setF(F);
+			lane->setItemAniList(lvlprop->getItemAni());
 			lane->setAni(lvlprop->getLaneAni((row->getRandomLaneInd())).clone());
 			lane->queryW(row->getHeight());
 			lane->setProperties(row,  win->getWidth(), win->getGameWindowHeight(), x,lane->getW(), row->isLaneVis());
@@ -228,6 +230,7 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,
 		{
 			Obstacle* obs=F->createObstacle1();
 			obs->setF(F);
+			obs->setProjAniList(lvlprop->getProjAni());
 			obs->setAni(lvlprop->getObstiAni(row->getRandomObsInd()).clone());
 			obs->queryW(row->getHeight());
 			obs->setProperties(row, win->getWidth(), win->getGameWindowHeight(),x, obs->getW(), row->isObstacleVis());
@@ -237,6 +240,7 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,
 		{
 			Lane* lane=F->createLane1();
 			lane->setF(F);
+			lane->setItemAniList(lvlprop->getItemAni());
 			lane->setAni(lvlprop->getLaneAni((row->getRandomLaneInd())).clone());
 			lane->queryW(row->getHeight());
 			lane->setProperties(row,  win->getWidth(), win->getGameWindowHeight(), x,lane->getW(), row->isLaneVis());
@@ -327,6 +331,7 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row)
 	{
 		Obstacle* obs=F->createObstacle1();
 		obs->setF(F);
+		obs->setProjAniList(lvlprop->getProjAni());
 		obs->setAni(lvlprop->getObstiAni(row->getRandomObsInd()).clone());
 		obs->queryW(row->getHeight());
 		obs->setProperties(row, win->getWidth(), win->getGameWindowHeight(),row->isDirLeft() ? *win->getWidth() : -obs->getW(), obs->getW(), row->isObstacleVis());
@@ -336,6 +341,7 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row)
 	{
 		Lane* lane=F->createLane1();
 		lane->setF(F);
+		lane->setItemAniList(lvlprop->getItemAni());
 		lane->setAni(lvlprop->getLaneAni((row->getRandomLaneInd())).clone());
 		lane->queryW(row->getHeight());
 		lane->setProperties(row, win->getWidth(), win->getGameWindowHeight(), row->isDirLeft() ? *win->getWidth() : -lane->getW(), lane->getW(), row->isLaneVis());

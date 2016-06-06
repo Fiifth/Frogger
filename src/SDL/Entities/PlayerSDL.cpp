@@ -8,24 +8,14 @@
 #include "PlayerSDL.h"
 using namespace frogger_sdl;
 
-PlayerSDL::PlayerSDL(SDLdata* sdldata, frogger::Factory* F, int x, int y, int w,int h, int speedH, int speedV, int number) :
-		sdldata(sdldata)
+frogger_sdl::PlayerSDL::PlayerSDL(SDLdata* sdldata):sdldata(sdldata)
 {
 	playerTex=sdldata->getTextureVector('P');
-	setF(F);
-	ani = sdldata->getPlayerAni(number).clone();
-	initPlayer(speedH, speedV, w, h, x, y, x, y, sdldata->getScrW(), sdldata->getScrH());
-
 }
 
 PlayerSDL::~PlayerSDL()
 {
 	delete(ani);
-}
-
-frogger_sdl::PlayerSDL::PlayerSDL(SDLdata* sdldata):sdldata(sdldata)
-{
-	playerTex=sdldata->getTextureVector('P');
 }
 
 void PlayerSDL::draw()

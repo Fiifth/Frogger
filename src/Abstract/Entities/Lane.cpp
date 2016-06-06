@@ -44,7 +44,12 @@ void Lane::spawnItem()
 {
 	if ((rand() % 100) < *itemRate)
 	{
-		itemList.push_back(	F->createItem(row, x + ((rand() % (w - h))), row->getRowProperties()->getItemType()));
+		Item* item=F->createItem1();
+		item->setEffect(row->getRowProperties()->getItemType());
+		item->setAni(itemAni->at(item->getEffect()).clone());
+		item->queryW(row->getHeight());
+		item->setProperties(row,screenWidth,screenHeight, x + ((rand() % (w - h))),item->getW(),true);
+		itemList.push_back(item);
 	}
 }
 
@@ -63,4 +68,9 @@ bool frogger::Lane::collisionS::operator ()(Item* item) const
 	}
 	else
 		return false;
+}
+
+void frogger::Lane::setItemAniList(std::vector<frogger::Animator>* itemAni)
+{
+	this->itemAni=itemAni;
 }

@@ -36,7 +36,12 @@ void Obstacle::collision(Player* player)
 
 void Obstacle::fire()
 {
-	Projectile* proj(F->createProjectile(this, y, 5, 0));
+	//Projectile* proj(F->createProjectile(this, y, 5, 0));
+	Projectile* proj=F->createProjectile1();
+	proj->setAni(projAni->at(0).clone());
+	proj->queryW(row->getHeight());
+	proj->setProperties(row,screenWidth,screenHeight,x,proj->getW(),true);
+	proj->setSpeed(5);
 	projectileList.push_back(proj);
 }
 
@@ -86,4 +91,9 @@ bool frogger::Obstacle::playerProjectiles::operator ()(
 void frogger::Obstacle::setPrevX()
 {
 	previousX=x;
+}
+
+void frogger::Obstacle::setProjAniList(std::vector<frogger::Animator>* projAni)
+{
+	this->projAni=projAni;
 }

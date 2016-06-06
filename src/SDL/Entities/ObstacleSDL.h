@@ -21,9 +21,6 @@ namespace frogger_sdl
 	class ObstacleSDL: public frogger::Obstacle
 	{
 		public:
-
-			ObstacleSDL(SDLdata* sdldata, frogger::Row* row,frogger::Factory* F, bool visible, int x);
-			ObstacleSDL(SDLdata* sdldata, frogger::Row* row,frogger::Factory* F, bool visible);
 			ObstacleSDL(SDLdata* sdldata);
 			virtual ~ObstacleSDL();
 			void draw();

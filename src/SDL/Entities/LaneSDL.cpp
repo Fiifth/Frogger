@@ -8,38 +8,14 @@
 #include <LaneSDL.h>
 using namespace frogger_sdl;
 
-LaneSDL::LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,	bool visible, int x) :
-		sdldata(sdldata)
-{
-	laneTex=sdldata->getTextureVector('L');
-	setF(F);
-	int ind = row->getRandomLaneInd();
-	ani = sdldata->getLaneAni(ind).clone();
-	queryW(row->getHeight());
-	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,w , visible);
-	spawnItem();
-}
-LaneSDL::~LaneSDL()
-{
-	delete (ani);
-}
-
-LaneSDL::LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,
-		bool visible) :
-		sdldata(sdldata)
-{
-	laneTex=sdldata->getTextureVector('L');
-	setF(F);
-	int ind=row->getRandomLaneInd();
-	ani = sdldata->getLaneAni(ind).clone();
-	queryW(row->getHeight());
-	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -w, w, visible);
-	spawnItem();
-}
-
 frogger_sdl::LaneSDL::LaneSDL(SDLdata* sdldata):sdldata(sdldata)
 {
 	laneTex=sdldata->getTextureVector('L');
+}
+
+LaneSDL::~LaneSDL()
+{
+	delete (ani);
 }
 
 void LaneSDL::draw()

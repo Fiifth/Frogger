@@ -22,9 +22,11 @@ namespace frogger
 			void collision(Player* player);
 			bool itemListEmpty();
 			void spawnItem();
-			void initLane();
+			void setItemAniList(std::vector<frogger::Animator>* itemAni);
 		protected:
 			std::list<Item*> itemList;
+			std::vector<frogger::Animator>* itemAni=nullptr;
+
 			struct collisionS
 			{
 					collisionS(Player* player):	player(player)

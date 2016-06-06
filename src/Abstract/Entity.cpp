@@ -28,6 +28,7 @@ Entity::Entity()
 	F=nullptr;
 	screenWidth=nullptr;
 	screenHeight=nullptr;
+	ani=nullptr;
 }
 
 Entity::~Entity()
@@ -171,6 +172,12 @@ bool frogger::Entity::ProjCol2::operator ()(Entity* projectile) const
 	}
 	else
 		return false;
+}
+
+void frogger::Entity::setSpeed(int speed)
+{
+	speedR=speed;
+	this->speed = &speedR;
 }
 
 frogger::Animator* frogger::Entity::getAni()

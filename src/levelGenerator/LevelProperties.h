@@ -29,11 +29,15 @@ namespace frogger
 			RowProp* getSeg2();
 			RowProp* getSeg3();
 			RowProp* getSeg4();
-			frogger::Animator getItemAni(int ind);
+
 			frogger::Animator getLaneAni(int ind);
 			frogger::Animator getObstiAni(int ind);
 			frogger::Animator getPlayerAni(int ind);
-			frogger::Animator getProjAni(int ind);
+
+			std::vector<frogger::Animator>* getItemAni();
+			std::vector<frogger::Animator>* getProjAni();
+
+
 			std::vector<int> getVec(int a, int b);
 			char getMode() const;
 			void setMode(char mode);

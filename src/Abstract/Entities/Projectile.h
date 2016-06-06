@@ -19,6 +19,7 @@ namespace frogger
 			virtual ~Projectile();
 			bool itemListEmpty();
 			void collision(Player* player);
+			void initProjectile(int speedR ,int dividerR ,char directionR,int h,int yR,int x);
 	};
 }
 

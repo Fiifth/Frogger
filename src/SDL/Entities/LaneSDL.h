@@ -19,8 +19,6 @@ namespace frogger_sdl
 	class LaneSDL: public frogger::Lane
 	{
 		public:
-			LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,	bool visible, int x);
-			LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,	bool visible);
 			LaneSDL(SDLdata* sdldata);
 			virtual ~LaneSDL();
 			void draw();

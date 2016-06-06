@@ -9,7 +9,6 @@
 #define SDLSTUFF_H_
 #include "SDL.h"
 #include <vector>
-#include "Animator.h"
 #include <string>
 namespace frogger_sdl
 {
@@ -27,12 +26,6 @@ namespace frogger_sdl
 			void createTextures();
 			std::vector<SDL_Texture*> getBackTextures();
 			void setScreenDimension(int* gameWidth, int* gameHeight);
-			frogger::Animator getAnimator(std::vector<int> indexes,std::vector<int> ratio);
-			frogger::Animator getItemAni(int ind);
-			frogger::Animator getLaneAni(int ind);
-			frogger::Animator getObstiAni(int ind);
-			frogger::Animator getPlayerAni(int ind);
-			frogger::Animator getProjAni(int ind);
 			int* getScrH() const;
 			void setScreenHeight(int* screenHeight);
 			int* getScrW() const;
@@ -51,11 +44,6 @@ namespace frogger_sdl
 
 			std::vector<SDL_Texture*> menuTextures;
 			std::vector<SDL_Texture*> backTex;
-			std::vector<frogger::Animator> obstiAni;
-			std::vector<frogger::Animator> laneAni;
-			std::vector<frogger::Animator> playerAni;
-			std::vector<frogger::Animator> itemAni;
-			std::vector<frogger::Animator> projAni;
 			std::vector<SDL_Texture*> playerTex;
 			std::vector<SDL_Texture*> ObstTex;
 			std::vector<SDL_Texture*> laneTex;

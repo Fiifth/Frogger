@@ -22,7 +22,6 @@ namespace frogger_sdl
 	class PlayerSDL: public frogger::Player
 	{
 		public:
-			PlayerSDL(SDLdata* sdldata, frogger::Factory* F, int x, int y,	int w, int h, int speedH, int speedV, int number);
 			PlayerSDL(SDLdata* sdldata);
 			virtual ~PlayerSDL();
 			void draw();

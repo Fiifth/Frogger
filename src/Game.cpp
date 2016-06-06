@@ -206,6 +206,7 @@ void frogger::Game::addPlayers(Factory* F, list<Player*>* players, int amount,
 		Player* player = F->createPlayer1();
 		player->setAni(lvlProp->getPlayerAni(0).clone());
 		player->setF(F);
+		player->setProjAniList(lvlProp->getProjAni());
 		player->initPlayer(speed,speed,W,H,X,Y,X,Y,win->getWidth(),win->getGameWindowHeight());
 
 		player->setParameters(life, totalTime, counterEnabled, scorePerStep, projectiles);
@@ -216,7 +217,8 @@ void frogger::Game::addPlayers(Factory* F, list<Player*>* players, int amount,
 		Player* player2 = F->createPlayer1();
 		player2->setAni(lvlProp->getPlayerAni(1).clone());
 		player2->setF(F);
-		player2->initPlayer(speed,speed,W,H,X,Y,X,Y,win->getWidth(),win->getGameWindowHeight());
+		player2->setProjAniList(lvlProp->getProjAni());
+		player2->initPlayer(speed,speed,W,H,X-W,Y,X-W,Y,win->getWidth(),win->getGameWindowHeight());
 		player2->setDifferentControls('A');
 		player2->setParameters(life, totalTime, counterEnabled, scorePerStep, projectiles);
 		players->push_back(player2);
@@ -226,7 +228,8 @@ void frogger::Game::addPlayers(Factory* F, list<Player*>* players, int amount,
 		Player* player3 = F->createPlayer1();
 		player3->setAni(lvlProp->getPlayerAni(1).clone());
 		player3->setF(F);
-		player3->initPlayer(speed,speed,W,H,X,Y,X,Y,win->getWidth(),win->getGameWindowHeight());
+		player3->setProjAniList(lvlProp->getProjAni());
+		player3->initPlayer(speed,speed,W,H,X+W,Y,X+W,Y,win->getWidth(),win->getGameWindowHeight());
 		player3->setDifferentControls('B');
 		player3->setParameters(life, totalTime, counterEnabled, scorePerStep, projectiles);
 		players->push_back(player3);

@@ -63,6 +63,7 @@ namespace frogger
 			void initPlayer(int hSpeed,int vSpeed,int w, int h, int x,int y, int Xs, int Ys,int* screenW,int* screenH);
 			void setParameters(int life, int totalTime, bool counterEnabled,
 					int scorePerStep, int projectiles);
+			void setProjAniList(std::vector<frogger::Animator>* projAni);
 
 		private:
 			int vSpeed;
@@ -86,6 +87,7 @@ namespace frogger
 
 		protected:
 			std::list<Projectile*> projectileList;
+			std::vector<frogger::Animator>* projAni=nullptr;
 			bool moved = false;
 	};
 }

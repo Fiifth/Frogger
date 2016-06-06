@@ -9,15 +9,9 @@
 #include <iostream>
 using namespace frogger_sdl;
 
-ItemSDL::ItemSDL(SDLdata* sdldata, frogger::Row* row, int x, int ind) :
-		sdldata(sdldata)
+frogger_sdl::ItemSDL::ItemSDL(SDLdata* sdldata):sdldata(sdldata)
 {
 	itemTex=sdldata->getTextureVector('I');
-	effect = ind;
-	queryW(row->getHeight());
-	ani = sdldata->getItemAni(ind).clone();
-	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,w, true);
-
 }
 
 ItemSDL::~ItemSDL()
@@ -25,10 +19,7 @@ ItemSDL::~ItemSDL()
 	delete (ani);
 }
 
-frogger_sdl::ItemSDL::ItemSDL(SDLdata* sdldata):sdldata(sdldata)
-{
-	itemTex=sdldata->getTextureVector('I');
-}
+
 
 void ItemSDL::draw()
 {
@@ -44,14 +35,6 @@ void ItemSDL::draw()
 	}
 }
 
-ItemSDL::ItemSDL(SDLdata* sdldata, frogger::Row* row, int ind) :
-		sdldata(sdldata)
-{
-	itemTex=sdldata->getTextureVector('I');
-	ani = sdldata->getItemAni(ind).clone();
-	queryW(row->getHeight());
-	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -w, w, visible);
-}
 
 void frogger_sdl::ItemSDL::queryW(int height)
 {

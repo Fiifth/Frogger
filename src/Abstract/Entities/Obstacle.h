@@ -29,11 +29,12 @@ namespace frogger
 			void considerFire();
 			std::list<Projectile*>* getProjectileList();
 			void setPrevX();
+			void setProjAniList(std::vector<frogger::Animator>* projAni);
 
 		protected:
 			int previousX = 0;
 			std::list<Projectile*> projectileList;
-
+			std::vector<frogger::Animator>* projAni=nullptr;
 			struct playerProjectiles
 			{
 					playerProjectiles(Obstacle* obstacle) :	obstacle(obstacle)

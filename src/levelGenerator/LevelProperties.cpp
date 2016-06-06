@@ -254,9 +254,9 @@ char frogger::LevelProperties::getDifficulty()
 	return difficulty;
 }
 
-frogger::Animator frogger::LevelProperties::getItemAni(int ind)
+std::vector<frogger::Animator>* frogger::LevelProperties::getItemAni()
 {
-	return itemAni.at(ind);
+	return &itemAni;
 }
 
 frogger::Animator frogger::LevelProperties::getLaneAni(int ind)
@@ -274,9 +274,9 @@ frogger::Animator frogger::LevelProperties::getPlayerAni(int ind)
 	return playerAni.at(ind);
 }
 
-frogger::Animator frogger::LevelProperties::getProjAni(int ind)
+std::vector<frogger::Animator>* frogger::LevelProperties::getProjAni()
 {
-	return projAni.at(ind);
+	return &projAni;
 }
 
 frogger::Animator frogger::LevelProperties::getAnimator(

@@ -13,26 +13,14 @@
 #include <string>
 using namespace frogger_sdl;
 
-ObstacleSDL::ObstacleSDL(SDLdata* sdldata, frogger::Row* row,	frogger::Factory* F, bool visible, int x) :
-		sdldata(sdldata)
+frogger_sdl::ObstacleSDL::ObstacleSDL(SDLdata* sdldata):sdldata(sdldata)
 {
 	obstTex=sdldata->getTextureVector('O');
-	setF(F);
-	int ind=row->getRandomObsInd();
-	ani = sdldata->getObstiAni(ind).clone();
-queryW(row->getHeight());
-	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,	w, visible);
-	setPrevX();
 }
 
 ObstacleSDL::~ObstacleSDL()
 {
 	delete (ani);
-}
-
-frogger_sdl::ObstacleSDL::ObstacleSDL(SDLdata* sdldata):sdldata(sdldata)
-{
-	obstTex=sdldata->getTextureVector('O');
 }
 
 void ObstacleSDL::draw()
@@ -51,18 +39,6 @@ void ObstacleSDL::draw()
 		}
 	}
 	projectileList.remove_if(drawMoveRemove());
-}
-
-ObstacleSDL::ObstacleSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F, bool visible) :
-		sdldata(sdldata)
-{
-	obstTex=sdldata->getTextureVector('O');
-	setF(F);
-	ani = sdldata->getObstiAni(row->getRandomObsInd()).clone();
-	queryW(row->getHeight());
-	setProperties(row, sdldata->getScrW(), sdldata->getScrH(),row->isDirLeft() ? *sdldata->getScrW() : -w, w, visible);
-	setPrevX();
-
 }
 
 void frogger_sdl::ObstacleSDL::queryW(int height)

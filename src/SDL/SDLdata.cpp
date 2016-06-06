@@ -108,22 +108,6 @@ void SDLdata::createTextures()
 	fillTextureVectors(&laneTex,"lane",9);
 	fillTextureVectors(&itemTex,"item",2);
 	fillTextureVectors(&projTex,"proj",0);
-
-	obstiAni=	{getAnimator({0},{0}),getAnimator({1},{0}),getAnimator({2},{0}),
-			getAnimator({3},{0}),getAnimator({4},{0}),getAnimator({5},{0}),
-			getAnimator({6},{0}),getAnimator({7},{0}),getAnimator({8},{0}),
-			getAnimator({9},{0}),getAnimator({10},{0}),getAnimator({11},{0})};
-
-	laneAni={getAnimator({0,1,2},{40,5,10}),getAnimator({3},{0}),getAnimator({4,5},{20,20}),
-			getAnimator({4,5,4,5,6,7,8,9,7,6},{40,40,40,40,30,20,20,-70,10,20})};
-
-	playerAni={getAnimator({0,1},{1,0}),getAnimator({2,3},{1,0})};
-
-	itemAni={getAnimator({0},{0}),getAnimator({1},{0}),getAnimator({2},{0})};
-
-	projAni={getAnimator({0},{0})};
-
-
 }
 
 
@@ -137,32 +121,6 @@ void SDLdata::setScreenDimension(int* gameWidth, int* gameHeight)
 {
 	screenHeight = gameHeight;
 	screenWidth = gameWidth;
-}
-
-frogger::Animator SDLdata::getItemAni(int ind)
-{
-	return itemAni.at(ind);
-}
-
-frogger::Animator SDLdata::getLaneAni(int ind)
-{
-	return laneAni.at(ind);
-}
-
-frogger::Animator SDLdata::getObstiAni(int ind)
-{
-	return obstiAni.at(ind);
-}
-
-frogger::Animator SDLdata::getPlayerAni(int ind)
-{
-	return playerAni.at(ind);
-}
-
-frogger::Animator SDLdata::getAnimator(std::vector<int> indexes,	std::vector<int> ratio)
-{
-	frogger::Animator temp(indexes, ratio);
-	return temp;
 }
 
 int* SDLdata::getScrH() const
@@ -183,11 +141,6 @@ int* SDLdata::getScrW() const
 void SDLdata::setScreenWidth(int* screenWidth)
 {
 	this->screenWidth = screenWidth;
-}
-
-frogger::Animator SDLdata::getProjAni(int ind)
-{
-	return projAni.at(ind);
 }
 
 std::vector<SDL_Texture*>* frogger_sdl::SDLdata::getMenuTextures()
@@ -214,11 +167,7 @@ void frogger_sdl::SDLdata::fillTextureVectors(std::vector<SDL_Texture*>* texture
 			std::string completeDir=dir + std::to_string(i)+".png";
 			SDL_Texture* tex=IMG_LoadTexture(re, (completeDir).c_str());
 			textureVector->push_back(tex);
-
 		}
-
-
-
 }
 
 std::vector<SDL_Texture*>* frogger_sdl::SDLdata::getTextureVector(char type)

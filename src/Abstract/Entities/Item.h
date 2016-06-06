@@ -21,6 +21,8 @@ namespace frogger
 			void collision(Player* player);
 			void effectOnPlayer(Player* player);
 			bool itemListEmpty();
+			void setEffect(int effect);
+			int getEffect();
 
 		protected:
 			int effect;

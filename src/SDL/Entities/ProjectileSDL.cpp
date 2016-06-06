@@ -8,32 +8,14 @@
 #include <ProjectileSDL.h>
 using namespace frogger_sdl;
 
-ProjectileSDL::ProjectileSDL(SDLdata* sdldata, char direction, int Xstart,int Ystart, int* Ypoint, int size, int speed, int ind) :
-		sdldata(sdldata)
+frogger_sdl::ProjectileSDL::ProjectileSDL(SDLdata* sdldata):sdldata(sdldata)
 {
 	projTex=sdldata->getTextureVector('B');
-	ani = sdldata->getProjAni(ind).clone();
-	directionR = direction;
-	speedR = speed;
-	dividerR = 0;
-	this->h = size;
-	queryW(h);
-	setProperties(nullptr, sdldata->getScrW(), sdldata->getScrH(), Xstart,w, true);
-
-	if (Ypoint != nullptr)
-		y = Ypoint;
-	else
-		yR = Ystart;
 }
 
 ProjectileSDL::~ProjectileSDL()
 {
 	delete (ani);
-}
-
-frogger_sdl::ProjectileSDL::ProjectileSDL(SDLdata* sdldata):sdldata(sdldata)
-{
-	projTex=sdldata->getTextureVector('B');
 }
 
 void ProjectileSDL::draw()

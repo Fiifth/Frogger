@@ -19,8 +19,6 @@ namespace frogger_sdl
 	class ItemSDL: public frogger::Item
 	{
 		public:
-			ItemSDL(SDLdata* sdldata, frogger::Row* row, int x, int ind);
-			ItemSDL(SDLdata* sdldata, frogger::Row* row, int ind);
 			ItemSDL(SDLdata* sdldata);
 			virtual ~ItemSDL();
 			void draw();
