@@ -27,6 +27,7 @@ namespace frogger_sdl
 			ObstacleSDL(SDLdata* sdldata);
 			virtual ~ObstacleSDL();
 			void draw();
+			void queryW(int height);
 		private:
 			SDLdata* sdldata;
 			std::vector<SDL_Texture*>* obstTex;

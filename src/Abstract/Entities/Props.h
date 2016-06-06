@@ -18,6 +18,7 @@ namespace frogger
 		public:
 			Props();
 			virtual ~Props();
+			virtual void queryW(int height)=0;
 			void setRow(Row* row);
 			Row* getRow();
 			void moveForward();

@@ -24,6 +24,7 @@ namespace frogger_sdl
 			LaneSDL(SDLdata* sdldata);
 			virtual ~LaneSDL();
 			void draw();
+			void queryW(int height);
 		private:
 			SDLdata* sdldata;
 			std::vector<SDL_Texture*>* laneTex;

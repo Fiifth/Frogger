@@ -22,6 +22,7 @@ namespace frogger
 			void collision(Player* player);
 			bool itemListEmpty();
 			void spawnItem();
+			void initLane();
 		protected:
 			std::list<Item*> itemList;
 			struct collisionS

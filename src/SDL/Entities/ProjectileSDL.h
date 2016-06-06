@@ -20,6 +20,7 @@ namespace frogger_sdl
 			ProjectileSDL(SDLdata* sdldata);
 			virtual ~ProjectileSDL();
 			void draw();
+			void queryW(int height);
 
 		private:
 			SDLdata* sdldata;

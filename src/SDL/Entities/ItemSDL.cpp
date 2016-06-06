@@ -14,9 +14,9 @@ ItemSDL::ItemSDL(SDLdata* sdldata, frogger::Row* row, int x, int ind) :
 {
 	itemTex=sdldata->getTextureVector('I');
 	effect = ind;
-
+	queryW(row->getHeight());
 	ani = sdldata->getItemAni(ind).clone();
-	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,sdldata->getDW(itemTex->at(ani->getIndex()), row->getHeight()), true);
+	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,w, true);
 
 }
 
@@ -27,6 +27,7 @@ ItemSDL::~ItemSDL()
 
 frogger_sdl::ItemSDL::ItemSDL(SDLdata* sdldata):sdldata(sdldata)
 {
+	itemTex=sdldata->getTextureVector('I');
 }
 
 void ItemSDL::draw()
@@ -48,6 +49,11 @@ ItemSDL::ItemSDL(SDLdata* sdldata, frogger::Row* row, int ind) :
 {
 	itemTex=sdldata->getTextureVector('I');
 	ani = sdldata->getItemAni(ind).clone();
-	int wi = sdldata->getDW(itemTex->at(ani->getIndex()), row->getHeight());
-	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -wi, wi, visible);
+	queryW(row->getHeight());
+	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -w, w, visible);
+}
+
+void frogger_sdl::ItemSDL::queryW(int height)
+{
+	w=sdldata->getDW(itemTex->at(ani->getIndex()), height);
 }

@@ -28,6 +28,7 @@ namespace frogger
 			void fire();
 			void considerFire();
 			std::list<Projectile*>* getProjectileList();
+			void setPrevX();
 
 		protected:
 			int previousX = 0;

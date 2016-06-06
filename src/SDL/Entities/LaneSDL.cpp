@@ -15,9 +15,8 @@ LaneSDL::LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,	bool 
 	setF(F);
 	int ind = row->getRandomLaneInd();
 	ani = sdldata->getLaneAni(ind).clone();
-	int tempInd=ani->getIndex();
-	int getW=sdldata->getDW(laneTex->at(tempInd), row->getHeight());
-	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,getW , visible);
+	queryW(row->getHeight());
+	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), x,w , visible);
 	spawnItem();
 }
 LaneSDL::~LaneSDL()
@@ -33,13 +32,14 @@ LaneSDL::LaneSDL(SDLdata* sdldata, frogger::Row* row, frogger::Factory* F,
 	setF(F);
 	int ind=row->getRandomLaneInd();
 	ani = sdldata->getLaneAni(ind).clone();
-	int wi = sdldata->getDW(laneTex->at(ani->getIndex()), row->getHeight());
-	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -wi, wi, visible);
+	queryW(row->getHeight());
+	setProperties(row, sdldata->getScrW(), sdldata->getScrH(), row->isDirLeft() ? *sdldata->getScrW() : -w, w, visible);
 	spawnItem();
 }
 
 frogger_sdl::LaneSDL::LaneSDL(SDLdata* sdldata):sdldata(sdldata)
 {
+	laneTex=sdldata->getTextureVector('L');
 }
 
 void LaneSDL::draw()
@@ -59,4 +59,9 @@ void LaneSDL::draw()
 		}
 	}
 	itemList.remove_if(drawMoveRemove());
+}
+
+void frogger_sdl::LaneSDL::queryW(int height)
+{
+		w=sdldata->getDW(laneTex->at(ani->getIndex()), height);
 }

@@ -82,3 +82,8 @@ bool frogger::Obstacle::playerProjectiles::operator ()(
 	else
 		return false;
 }
+
+void frogger::Obstacle::setPrevX()
+{
+	previousX=x;
+}

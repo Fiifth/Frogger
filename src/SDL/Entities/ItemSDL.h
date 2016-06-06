@@ -24,6 +24,7 @@ namespace frogger_sdl
 			ItemSDL(SDLdata* sdldata);
 			virtual ~ItemSDL();
 			void draw();
+			void queryW(int height);
 		private:
 
 			SDLdata* sdldata;

@@ -17,8 +17,8 @@ ProjectileSDL::ProjectileSDL(SDLdata* sdldata, char direction, int Xstart,int Ys
 	speedR = speed;
 	dividerR = 0;
 	this->h = size;
-
-	setProperties(nullptr, sdldata->getScrW(), sdldata->getScrH(), Xstart,sdldata->getDW(projTex->at(ani->getIndex()), size), true);
+	queryW(h);
+	setProperties(nullptr, sdldata->getScrW(), sdldata->getScrH(), Xstart,w, true);
 
 	if (Ypoint != nullptr)
 		y = Ypoint;
@@ -33,6 +33,7 @@ ProjectileSDL::~ProjectileSDL()
 
 frogger_sdl::ProjectileSDL::ProjectileSDL(SDLdata* sdldata):sdldata(sdldata)
 {
+	projTex=sdldata->getTextureVector('B');
 }
 
 void ProjectileSDL::draw()
@@ -51,3 +52,7 @@ void ProjectileSDL::draw()
 		turned = false;
 }
 
+void frogger_sdl::ProjectileSDL::queryW(int height)
+{
+	w=sdldata->getDW(projTex->at(ani->getIndex()), height);
+}
