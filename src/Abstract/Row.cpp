@@ -6,7 +6,6 @@
  */
 
 #include "Row.h"
-#include <iostream>
 using namespace frogger;
 
 Row::Row(char direction, int locY, int height, int number,RowProp* rowProperties) :

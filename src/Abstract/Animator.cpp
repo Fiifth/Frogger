@@ -6,7 +6,7 @@
  */
 
 #include <Animator.h>
-#include <iostream>
+#include <stdlib.h>
 using namespace frogger;
 
 Animator::Animator(std::vector<int> index, std::vector<int> ratio) :

@@ -7,7 +7,6 @@
 
 #include <ObstacleSDL.h>
 #include <stdlib.h>
-#include <iostream>
 #include "SDL.h"
 #include "Window.h"
 #include <string>

@@ -6,7 +6,6 @@
  */
 
 #include <ItemSDL.h>
-#include <iostream>
 using namespace frogger_sdl;
 
 frogger_sdl::ItemSDL::ItemSDL(SDLdata* sdldata):sdldata(sdldata)

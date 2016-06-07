@@ -25,7 +25,7 @@ void frogger::Item::effectOnPlayer(Player* player)
 	{
 		if (row->getRowProperties()->getMode() == 'C')
 			player->addLife(1);
-		else
+		else //no extra lifes in endless mode
 		{
 			player->addScore(10);
 			player->addProjectiles(1);

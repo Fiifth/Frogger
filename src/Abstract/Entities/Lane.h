@@ -7,6 +7,7 @@
 
 #ifndef ABSTRACT_ENTITIES_LANE_H_
 #define ABSTRACT_ENTITIES_LANE_H_
+
 #include "Props.h"
 #include "Player.h"
 #include <list>

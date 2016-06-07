@@ -10,7 +10,6 @@
 using namespace frogger;
 Lane::Lane()
 {
-
 }
 
 Lane::~Lane()

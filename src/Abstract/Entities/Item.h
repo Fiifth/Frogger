@@ -23,10 +23,8 @@ namespace frogger
 			bool itemListEmpty();
 			void setEffect(int effect);
 			int getEffect();
-
 		protected:
 			int effect;
-
 	};
 }
 

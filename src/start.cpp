@@ -11,7 +11,6 @@
 #include "Factory.h"
 #include "PlayerSDL.h"
 #include "FactorySDL.h"
-#include <iostream>
 #include <unistd.h>
 #include <windows.h>
 using namespace frogger;

@@ -8,7 +8,6 @@
 #include <SDLdata.h>
 #include <string>
 #include <SDL_image.h>
-#include <iostream>
 #include <stdlib.h>
 #include "Animator.h"
 
@@ -108,6 +107,7 @@ void SDLdata::createTextures()
 	fillTextureVectors(&laneTex,"lane",9);
 	fillTextureVectors(&itemTex,"item",2);
 	fillTextureVectors(&projTex,"proj",0);
+	//fillTextureVectors(&menu2Textures,"m",13);
 }
 
 

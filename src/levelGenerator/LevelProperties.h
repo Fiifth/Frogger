@@ -10,7 +10,6 @@
 #include "RowProp.h"
 #include <vector>
 #include <stdlib.h>
-#include <iostream>
 #include <Animator.h>
 namespace frogger
 {

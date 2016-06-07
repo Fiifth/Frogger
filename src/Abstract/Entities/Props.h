@@ -10,7 +10,6 @@
 #include "Entity.h"
 #include "Row.h"
 #include <levelGenerator/RowProp.h>
-#include <iostream>
 namespace frogger
 {
 	class Props: public frogger::Entity
@@ -25,8 +24,7 @@ namespace frogger
 			bool isRoom();
 			bool isVisible() const;
 			void setVisible(bool visible);
-			void setProperties(Row* row, int* screenWidth, int* screenHeight,
-					int x, int w, bool vis);
+			void setProperties(Row* row, int* screenWidth, int* screenHeight, int x, int w, bool vis);
 			virtual void draw()=0;
 			bool isTurned() const;
 			void setTurned(bool turned);

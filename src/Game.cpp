@@ -11,15 +11,14 @@
 #include "Factory.h"
 #include "Window.h"
 #include "Events.h"
-#include <iostream>
 #include <string>
 #include "Row.h"
 #include <vector>
 #include <list>
 #include <iterator>
 #include <algorithm>
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
+#include <stdlib.h>
+#include <time.h>
 #include <ctime>
 #include <ratio>
 #include <chrono>
@@ -30,8 +29,6 @@
 #include "LevelProperties.h"
 #include "Menu.H"
 
-using namespace std;
-using namespace std::chrono;
 using namespace frogger;
 
 Game::Game(Factory* F)
@@ -41,8 +38,8 @@ Game::Game(Factory* F)
 	int amountOfPlayers = 1;
 	char gameMode = 'E';
 	char difficulty = 'E';
-	int WindowHeight = 660;
-	int WindowWidth = 800;
+	int WindowHeight = 530;
+	int WindowWidth = 700;
 	int rowHeight = 45;
 	int dataWindowHeightDesired = 30;
 	int dataWindowHeight =
@@ -257,5 +254,3 @@ void frogger::Game::addHighScore(list<Player*>* players, char gameMode)
 		}
 	}
 }
-//start_time=chrono::steady_clock::now();
-//			end_time=chrono::steady_clock::now();

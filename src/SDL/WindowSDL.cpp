@@ -6,7 +6,6 @@
  */
 
 #include "WindowSDL.h"
-#include <iostream>
 #include <math.h>
 
 #include <string>
@@ -90,10 +89,10 @@ void WindowSDL::dislayData(list<frogger::Player*>* players)
 	int i = 1;
 	for (frogger::Player* pl : *players)
 	{
-		newString = newString + " ||Player" + std::to_string(i) + "|| ";
+		newString = newString + " P" + std::to_string(i) + " ";
 		newString = newString + "Score: ";
 		newString = newString + std::to_string(pl->getScore());
-		newString = newString + " Proj: ";
+		newString = newString + " ammo: ";
 		newString = newString + std::to_string(pl->getProjectiles());
 		newString = newString + " life: ";
 		newString = newString + std::to_string(pl->getLife());
@@ -111,7 +110,7 @@ void WindowSDL::dislayData(list<frogger::Player*>* players)
 	}
 	if (playerDataTex == nullptr)
 	{
-		sans1 = TTF_OpenFont("c:\\sans.ttf", *dataWindowHeight - 5);
+		sans1 = TTF_OpenFont("c:\\sans.ttf", *dataWindowHeight-6);
 		SDL_Surface* playerData = TTF_RenderText_Shaded(sans1, newString.c_str(), blue,	black);
 		playerDataTex = SDL_CreateTextureFromSurface(ren, playerData);
 		SDL_FreeSurface(playerData);
@@ -119,7 +118,7 @@ void WindowSDL::dislayData(list<frogger::Player*>* players)
 		int iW=0, iH=0;
 		SDL_QueryTexture(playerDataTex, NULL, NULL, &iW, &iH);
 		PlayerMessageRect.x = 0;
-		PlayerMessageRect.y = *HEIGHT-*dataWindowHeight;
+		PlayerMessageRect.y = *HEIGHT-*dataWindowHeight+3;
 		PlayerMessageRect.w = (iW <= *WIDTH) ? iW : *WIDTH;
 		PlayerMessageRect.h = iH;
 	}

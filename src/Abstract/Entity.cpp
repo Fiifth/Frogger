@@ -178,6 +178,7 @@ void frogger::Entity::setSpeed(int speed)
 {
 	speedR=speed;
 	this->speed = &speedR;
+	this->divider = &dividerR;
 }
 
 frogger::Animator* frogger::Entity::getAni()

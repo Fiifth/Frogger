@@ -1,5 +1,5 @@
 /*
- * Enemy.cpp
+ * Obstacle.cpp
  *
  *  Created on: 12-mrt.-2016
  *      Author: msn-w
@@ -19,8 +19,7 @@ Obstacle::~Obstacle()
 void Obstacle::collision(Player* player)
 {
 	considerFire();
-	if (colli(player)
-			&& ((!isTurned()) || (row->getRowProperties()->getType()) == 'E'))
+	if (colli(player)	&& ((!isTurned()) || (row->getRowProperties()->getType()) == 'E'))
 		player->hit();
 	else
 	{
@@ -30,13 +29,14 @@ void Obstacle::collision(Player* player)
 		if (temp2 < temp)
 			player->hit();
 	}
+	//collision obstacle and player projectiles
 	player->getProjectileList()->remove_if(playerProjectiles(this));
+	//collision obstacle projectiles and player projectiles
 	projectileList.remove_if(ProjCol(player->getProjectileList()));
 }
 
 void Obstacle::fire()
 {
-	//Projectile* proj(F->createProjectile(this, y, 5, 0));
 	Projectile* proj=F->createProjectile1();
 	proj->setAni(projAni->at(0).clone());
 	proj->queryW(row->getHeight());
@@ -76,8 +76,7 @@ void Obstacle::editYForProjectiles()
 bool frogger::Obstacle::playerProjectiles::operator ()(
 		Projectile* projectile) const
 {
-	if (obstacle->isVisible()
-			&& obstacle->colli(projectile))
+	if (obstacle->isVisible() && obstacle->colli(projectile))
 	{
 		delete (projectile);
 		obstacle->setVisible(false);

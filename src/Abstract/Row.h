@@ -13,8 +13,7 @@ namespace frogger
 	class Row
 	{
 		public:
-			Row(char direction, int locY, int height, int number,
-					RowProp* rowProperties);
+			Row(char direction, int locY, int height, int number,	RowProp* rowProperties);
 			virtual ~Row();
 			bool isDirLeft() const;
 			int getNumber() const;

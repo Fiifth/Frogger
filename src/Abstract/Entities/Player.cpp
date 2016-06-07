@@ -10,9 +10,7 @@
 using namespace std;
 using namespace frogger;
 
-Player::Player() :
-				vSpeed(0), hSpeed(0), startX(0), startY(0), totalTime(50), remainingTime(
-						totalTime)
+Player::Player()
 {
 }
 
@@ -67,7 +65,6 @@ void Player::followRow(Row* row)
 		else
 			move(-*row->getRowProperties()->getSpeed(), 0, false);
 	}
-
 }
 
 int Player::gethSpeed() const
@@ -149,13 +146,9 @@ void Player::hit()
 {
 	resetPosition();
 	if (life == 0)
-	{
 		setDead(true);
-	}
 	else
-	{
 		addLife(-1);
-	}
 }
 
 void Player::resetPosition()
@@ -181,9 +174,7 @@ bool Player::takeAction(std::string key)
 			int yTemp=yR;
 			moveDown();
 			if (yTemp!=yR)
-			{
 				addScore(-scorePerStep);
-			}
 		}
 		else if (key == keyUp)
 		{
@@ -232,9 +223,7 @@ void Player::decreaseTime()
 	if (counterEnabled)
 	{
 		currentTime = std::chrono::high_resolution_clock::now();
-		remainingTime = totalTime
-				- (std::chrono::duration_cast<std::chrono::seconds>(
-						currentTime - previousTime).count());
+		remainingTime = totalTime- (std::chrono::duration_cast<std::chrono::seconds>(currentTime - previousTime).count());
 	}
 }
 
@@ -314,11 +303,8 @@ void Player::disableCounter()
 void frogger::Player::followScreen(int offset)
 {
 	move(0, offset, false);
-
 	for (Projectile* proj : projectileList)
-	{
 		proj->move(0, offset, true);
-	}
 }
 
 void frogger::Player::setParameters(int life, int totalTime,

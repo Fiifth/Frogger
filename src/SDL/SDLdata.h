@@ -43,6 +43,7 @@ namespace frogger_sdl
 			SDL_Texture* line=nullptr;
 
 			std::vector<SDL_Texture*> menuTextures;
+			std::vector<SDL_Texture*> menu2Textures;
 			std::vector<SDL_Texture*> backTex;
 			std::vector<SDL_Texture*> playerTex;
 			std::vector<SDL_Texture*> ObstTex;

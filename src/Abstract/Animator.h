@@ -7,7 +7,6 @@
 
 #ifndef ANIMATOR_H_
 #define ANIMATOR_H_
-#include "SDL.h"
 #include <vector>
 namespace frogger
 {

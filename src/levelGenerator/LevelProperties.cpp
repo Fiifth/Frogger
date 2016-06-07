@@ -52,17 +52,17 @@ LevelProperties::~LevelProperties()
 
 void LevelProperties::easyLevel()
 {
-	seg1 = new RowProp(1, 0, 'B', mode, 40, 30, 0, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 30, 70 });
-	seg2 = new RowProp(1, 0, 'B', mode, 50, 10, 20, true, false, getVec(0, 8), {0, 1, 2, 3}, { 10, 20, 70 });
-	seg3 = new RowProp(1, 0, 'C', mode, 40, 30, 70, false, true, getVec(0, 8), {0, 1, 2, 3}, { 10, 20, 70 });
-	seg4 = new RowProp(1, 0, 'C', mode, 50, 10, 70, false, true, getVec(0, 8), {0, 1, 2, 3}, { 10, 20, 70 });
+	seg1 = new RowProp(1, 5, 'B', mode, 40, 30, 0, true, false, getVec(0, 4), {0, 1, 2}, { 10, 30, 70 });
+	seg2 = new RowProp(1, 5, 'B', mode, 50, 10, 20, true, false, getVec(0, 4), {0, 1, 2}, { 10, 20, 70 });
+	seg3 = new RowProp(1, 5, 'C', mode, 40, 30, 70, false, true, getVec(0, 4), {0, 1, 2}, { 10, 20, 70 });
+	seg4 = new RowProp(1, 5, 'C', mode, 50, 10, 70, false, true, getVec(0, 4), {0, 1, 2}, { 10, 20, 70 });
 }
 void frogger::LevelProperties::mediumLevel()
 {
-	seg1 = new RowProp(1, 0, 'B', mode, 40, 30, 0, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 30, 70 });
-	seg2 = new RowProp(1, 0, 'B', mode, 50, 10, 20, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
-	seg3 = new RowProp(1, 0, 'C', mode, 40, 30, 70, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
-	seg4 = new RowProp(1, 0, 'C', mode, 50, 10, 70, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
+	seg1 = new RowProp(1, 0, 'B', mode, 40, 30, 0, true, false, getVec(0, 6), {0, 1, 2, 3 }, { 10, 30, 70 });
+	seg2 = new RowProp(1, 0, 'B', mode, 50, 10, 20, true, false, getVec(0, 6), {0, 1, 2, 3 }, { 10, 20, 70 });
+	seg3 = new RowProp(1, 0, 'C', mode, 40, 30, 70, false, true, getVec(0, 6), {0, 1, 2, 3 }, { 10, 20, 70 });
+	seg4 = new RowProp(1, 0, 'C', mode, 50, 10, 70, false, true, getVec(0, 6), {0, 1, 2, 3 }, { 10, 20, 70 });
 }
 
 void frogger::LevelProperties::hardLevel()
@@ -283,5 +283,5 @@ frogger::Animator frogger::LevelProperties::getAnimator(
 		std::vector<int> indexes, std::vector<int> ratio)
 {
 	frogger::Animator temp(indexes, ratio);
-		return temp;
+	return temp;
 }

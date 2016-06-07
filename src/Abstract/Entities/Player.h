@@ -61,29 +61,32 @@ namespace frogger
 			void collision(Player* player);
 			void followScreen(int offset);
 			void initPlayer(int hSpeed,int vSpeed,int w, int h, int x,int y, int Xs, int Ys,int* screenW,int* screenH);
-			void setParameters(int life, int totalTime, bool counterEnabled,
-					int scorePerStep, int projectiles);
+			void setParameters(int life, int totalTime, bool counterEnabled, int scorePerStep, int projectiles);
 			void setProjAniList(std::vector<frogger::Animator>* projAni);
 
 		private:
-			int vSpeed;
-			int hSpeed;
+			int vSpeed=0;
+			int hSpeed=0;
 			int counter = 0;
-			int score = 0, life = 3, projectiles = 3;
-			int startX, startY;
-			int totalTime;
-			int remainingTime;
+			int score = 0;
+			int life = 0;
+			int projectiles = 0;
+			int startX=0;
+			int startY=0;
+			int totalTime=50;
+			int remainingTime=50;
 			bool counterEnabled = true;
 			bool dead = false;
 			int scorePerStep = 10;
-
-			std::chrono::high_resolution_clock::time_point previousTime =
-					std::chrono::high_resolution_clock::now();
-			std::chrono::high_resolution_clock::time_point currentTime =
-					std::chrono::high_resolution_clock::now();
 			float correctTime = float(totalTime);
-			std::string keyUp = "Up", keyDown = "Down", keyLeft = "Left",
-					keyRight = "Right", fire = "Right Ctrl";
+
+			std::chrono::high_resolution_clock::time_point previousTime =	std::chrono::high_resolution_clock::now();
+			std::chrono::high_resolution_clock::time_point currentTime =	std::chrono::high_resolution_clock::now();
+			std::string keyUp = "Up";
+			std::string keyDown = "Down";
+			std::string keyLeft = "Left";
+			std::string keyRight = "Right";
+			std::string fire = "Right Ctrl";
 
 		protected:
 			std::list<Projectile*> projectileList;

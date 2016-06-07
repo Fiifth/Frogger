@@ -16,8 +16,7 @@
 #include "Projectile.h"
 #include "Player.h"
 #include <chrono>
-#include <iostream>
-#include <algorithm>    // std::sort
+#include <algorithm>
 #include <LevelProperties.h>
 namespace frogger
 {

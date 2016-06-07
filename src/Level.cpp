@@ -116,8 +116,7 @@ void Level::rowGenerator(int rowHeight, int screenHight, Factory* F,
 			else if (n <= (numberOfRows))
 				rowProp = lvlprop->getSeg1();
 
-			rows->push_back(
-					F->createRow(dir, n * rowHeight, rowHeight, n, rowProp));
+			rows->push_back(F->createRow(dir, n * rowHeight, rowHeight, n, rowProp));
 			propsOnRow->push_back(enemies);
 			dir = dir == 'R' ? 'L' : 'R';
 		}
@@ -380,4 +379,20 @@ void Level::fillOneRow(Factory* F, Row* row,
 		}
 
 	}
+}
+
+bool frogger::Level::drawMoveRemove::operator ()(Props* prop) const
+{
+	bool temp = false;
+	if (!prop->inframe())
+	{
+		temp = true;
+		delete (prop);
+	}
+	else
+	{
+		prop->moveForward();
+		prop->draw();
+	}
+	return temp;
 }

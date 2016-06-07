@@ -7,7 +7,6 @@
 
 #include <Projectile.h>
 #include "Player.h"
-#include <iostream>
 using namespace frogger;
 
 Projectile::Projectile()
@@ -35,6 +34,5 @@ void frogger::Projectile::initProjectile(int speedR, int dividerR,char direction
 	this->directionR=directionR;
 	this->h=h;
 	this->x=x;
-
 }
 

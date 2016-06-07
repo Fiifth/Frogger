@@ -5,12 +5,11 @@
  *      Author: msn-w
  */
 
-#ifndef ENEMY_H_
-#define ENEMY_H_
+#ifndef OBSTACLE_H_
+#define OBSTACLE_H_
 #include "Props.h"
 #include "Entity.h"
 #include "Row.h"
-#include <iostream>
 #include "Player.h"
 #include "Projectile.h"
 #include <list>
