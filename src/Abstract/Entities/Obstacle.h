@@ -5,8 +5,8 @@
  *      Author: msn-w
  */
 
-#ifndef OBSTACLE_H_
-#define OBSTACLE_H_
+#ifndef ABSTRACT_ENTITIES_OBSTACLE_H_
+#define ABSTRACT_ENTITIES_OBSTACLE_H_
 #include "Props.h"
 #include "Entity.h"
 #include "Row.h"
@@ -22,7 +22,6 @@ namespace frogger
 			virtual ~Obstacle();
 			virtual void draw()=0;
 			void collision(Player* player);
-			void editYForProjectiles();
 			bool itemListEmpty();
 			void fire();
 			void considerFire();

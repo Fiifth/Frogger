@@ -1,5 +1,7 @@
 /*
  * LevelProperties.cpp
+ * Keeps a list of all the animators for every kind of entity.
+ * Keeps 7 kinds of rowprop objects. They will be given to the correct row objects by using this levelproperties object.
  *
  *  Created on: 23-apr.-2016
  *      Author: msn-w

@@ -17,11 +17,15 @@ EventsSDL::EventsSDL()
 EventsSDL::~EventsSDL()
 {
 }
-
 std::string EventsSDL::getEvent()
 {
 	SDL_Event e;
 	SDL_PollEvent(&e);
+	if (e.type == SDL_WINDOWEVENT && (e.window.event ==SDL_WINDOWEVENT_CLOSE))
+	{
+		return "Escape";
+	}
+
 	if (e.type == SDL_KEYDOWN)
 	{
 		const char* s = SDL_GetKeyName(e.key.keysym.sym);

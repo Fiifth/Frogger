@@ -1,13 +1,13 @@
 /*
  * window.cpp
+ * This object represents the area where the game takes place. It mainly keeps track of the dimensions.
  *
  *  Created on: Feb 29, 2016
  *      Author: fifth
  */
 
 #include "Window.h"
-#include <string>
-using namespace std;
+
 using namespace frogger;
 
 Window::Window()

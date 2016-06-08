@@ -1,6 +1,8 @@
 /*
  * Menu.cpp
- *
+ * Keeps a list of relative coordinates to the buttons of the menu screens.
+ * Determines which menu image is displayed when navigating the menu. It also
+ * takes hovering above a button into account.
  *  Created on: 24-apr.-2016
  *      Author: msn-w
  */
@@ -58,8 +60,7 @@ Menu::~Menu()
 	delete(DrawLineUnderDifficulty);
 }
 
-char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH,
-		int mXP, int mYP)
+char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH)
 {
 	switch (state)
 	{
@@ -113,9 +114,6 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH,
 			else
 			{
 				win->setBackground(6);
-				if (keyDown == "Escape")
-					return 'Q';
-				else
 					return state;
 			}
 			break;
@@ -242,7 +240,6 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH,
 				return state;
 			}
 			break;
-
 	}
 	return state;
 }

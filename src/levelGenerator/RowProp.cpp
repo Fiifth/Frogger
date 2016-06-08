@@ -1,5 +1,6 @@
 /*
  * LevelProperties.cpp
+ * Keeps the properties for prop objects.
  *
  *  Created on: 23-apr.-2016
  *      Author: msn-w

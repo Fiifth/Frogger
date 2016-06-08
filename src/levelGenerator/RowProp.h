@@ -8,7 +8,7 @@
 #ifndef LVLPROP_H_
 #define LVLPROP_H_
 #include <vector>
-#include <stdlib.h>     /* srand, rand */
+#include <stdlib.h>
 namespace frogger
 {
 	class RowProp
@@ -34,7 +34,7 @@ namespace frogger
 					int deltaItemRate, int deltaShootRate);
 			int getItemType();
 			char getMode() const;
-
+		private:
 			int speed;
 			int divider;
 			char type;

@@ -13,7 +13,7 @@ namespace frogger
 	class MenuButton
 	{
 		public:
-			MenuButton(float x, float y, float w, float h, Window* win);
+			MenuButton(double x, double y, double w, double h, Window* win);
 			virtual ~MenuButton();
 			bool col(int xCo, int yCo);
 			int getH() const;

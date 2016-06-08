@@ -1,6 +1,10 @@
 /*
  * Animator.cpp
  *
+ * The Animator gives the right indexes to entities. These indexes refer to the position of the textures in a texture vector.
+ * The animator mainly consist of a vector of indexes and a vector of ratios. The ratios determin how long a specific index
+ * should remain before moving on to the next index.
+ *
  *  Created on: 25-mrt.-2016
  *      Author: msn-w
  */

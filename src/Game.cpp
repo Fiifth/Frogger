@@ -97,7 +97,7 @@ Game::Game(Factory* F)
 				newHighscore=PrevState!='H';
 
 				PrevState = state;
-				state = men->menuExecution(keyStroke, state, x, y, x, y);
+				state = men->menuExecution(keyStroke, state, x, y);
 				if (state == 'H')
 				{
 					if (gameMode == 'E')
@@ -115,7 +115,7 @@ Game::Game(Factory* F)
 				{
 					level->levelExecution(keyStroke);
 
-					state = playersAlive(players, state) ? state : 'G';
+					state = playersAlive(players) ? state : 'G';
 					state = level->isObjectiveDone() ? 'V' : state;
 					if (gameMode == 'E'	&& ((players->back()->getScore()-prevScore) >= 100)	&& (players->back()->getScore() > prevScore))
 					{
@@ -130,7 +130,7 @@ Game::Game(Factory* F)
 				{
 					lvlprop = new LevelProperties(gameMode, difficulty);
 					addPlayers(F, players, amountOfPlayers, plStartX, plStartY,
-							plStartW, plStartH, plStartSpeed, rowHeight,
+							plStartW, plStartH, plStartSpeed,
 							gameMode, difficulty,lvlprop,win);
 
 					level = new Level(F, win, players, rowHeight, lvlprop);
@@ -169,7 +169,7 @@ Game::~Game()
 
 }
 
-bool Game::playersAlive(list<Player*>* players, char mode)
+bool Game::playersAlive(list<Player*>* players)
 {
 	bool temp = false;
 	for (Player* player : *players)
@@ -180,7 +180,7 @@ bool Game::playersAlive(list<Player*>* players, char mode)
 }
 
 void frogger::Game::addPlayers(Factory* F, list<Player*>* players, int amount,
-		int X, int Y, int W, int H, int speed, int rowHeight, char gameMode,
+		int X, int Y, int W, int H, int speed, char gameMode,
 		char difficulty,LevelProperties* lvlProp,Window* win)
 {
 	for(Player* player:*players)

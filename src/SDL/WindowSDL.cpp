@@ -1,28 +1,14 @@
 /*
  * windowSDL.cpp
+ * Keeps track of the SDL part of the game area. Drawing background/highscores/player data, managing renderer.
+ * Also locks the framerate on 60 fps by sleeping when an update is not yet needed.
  *
  *  Created on: Feb 29, 2016
- *      Author: fifth
+ *      Author: Kwinten
  */
 
 #include "WindowSDL.h"
-#include <math.h>
 
-#include <string>
-#include "SDLdata.h"
-#include <vector>
-
-#include <algorithm>
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
-#include <ctime>
-#include <ratio>
-#include <chrono>
-#include <Windows.h>
-#include <iostream>
-
-using namespace std;
-using namespace std::chrono;
 using namespace frogger_sdl;
 
 WindowSDL::WindowSDL(SDLdata* sdldata) :
@@ -31,7 +17,7 @@ WindowSDL::WindowSDL(SDLdata* sdldata) :
 	MenuTextures = sdldata->getMenuTextures();
 	white ={255, 255, 255,255};
 	black ={0, 0, 0,0};
-	blue={173,216,230};
+	blue={173,216,230,0};
 }
 
 WindowSDL::~WindowSDL()
@@ -62,7 +48,7 @@ void WindowSDL::makeWindow(int ScreenWidth, int ScreenHeight,int dataWindowHeigh
 	sdldata->createTextures();
 	updateScreen();
 }
-void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
+void WindowSDL::generateBackground(std::vector<frogger::Row*>* rows)
 {
 	std::vector<SDL_Texture*>* backTextures = sdldata->getBackTextures();
 	for (frogger::Row* row : *rows)
@@ -80,15 +66,14 @@ void WindowSDL::generateBackground(vector<frogger::Row*>* rows)
 			x = x + width;
 		}
 	}
-	endT = chrono::high_resolution_clock::now();
 }
-void WindowSDL::dislayData(list<frogger::Player*>* players)
+void WindowSDL::dislayData(std::list<frogger::Player*>* players)
 {
 	if (sans1==nullptr)
 	{
 		sans1 = TTF_OpenFont("c:\\sans.ttf", *dataWindowHeight-6);
 	}
-	string newString;
+	std::string newString;
 	int i = 1;
 	for (frogger::Player* pl : *players)
 	{
@@ -136,12 +121,12 @@ void WindowSDL::setBackground(int index)
 }
 void WindowSDL::updateScreen()
 {
-	endP = chrono::high_resolution_clock::now();
-	int difference = std::chrono::duration_cast<std::chrono::milliseconds>(	endP - startP).count();
+	endP = std::chrono::high_resolution_clock::now();
+	int difference = (int) round(std::chrono::duration_cast<std::chrono::milliseconds>(	endP - startP).count());
 	int delay = ((13 - difference)) >= 0 ? ((13 - difference)) : 0;
 	SDL_Delay(delay);
 	SDL_RenderPresent(ren);
-	startP = chrono::high_resolution_clock::now();
+	startP = std::chrono::high_resolution_clock::now();
 	SDL_RenderClear(ren);
 }
 

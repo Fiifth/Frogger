@@ -1,6 +1,8 @@
 /*
  * Row.cpp
  *
+ * Used by prop objects. This object is a collection of properties that will be used by props.
+ *
  *  Created on: 12-mrt.-2016
  *      Author: msn-w
  */

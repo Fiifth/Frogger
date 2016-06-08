@@ -1,8 +1,17 @@
 /*
  * Lane.cpp
+ * These are the type of objects where a player can stand on (when it isn't turned). They are the opposite of the obstacle object.
+ * When the lane object is visible and not turned a player that stands on the lane will automatically follow the object.
+ *
+ * The lane can be turned by the animator. When the object is turned it will behave like an obstacle.
+ *
+ * In classic game mode the player will need to hit all the lane objects on the last row to complete the level. When a player hits the lane
+ * on this row it will be turned as well.
+ *
+ * The lane itself can create item objects when creating the object.
  *
  *  Created on: 18-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #include <Lane.h>

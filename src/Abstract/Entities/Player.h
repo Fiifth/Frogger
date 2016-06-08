@@ -1,12 +1,12 @@
 /*
- * Frog.h
+ * Player.h
  *
  *  Created on: 22 Feb 2016
  *      Author: msn-w
  */
 
-#ifndef FROG_H_
-#define FROG_H_
+#ifndef ABSTRACT_ENTITIES_PLAYER_H_
+#define ABSTRACT_ENTITIES_PLAYER_H_
 #include "Window.h"
 #include "Entity.h"
 #include "Row.h"
@@ -51,6 +51,10 @@ namespace frogger
 			void initPlayer(int hSpeed,int vSpeed,int w, int h, int x,int y, int Xs, int Ys,int* screenW,int* screenH);
 			void setParameters(int life, int totalTime, bool counterEnabled, int scorePerStep, int projectiles);
 			void setProjAniList(std::vector<frogger::Animator>* projAni);
+			struct drawMoveRemove
+			{
+					bool operator()(Props* prop);
+			};
 
 		private:
 			int vSpeed=0;

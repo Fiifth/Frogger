@@ -1,6 +1,8 @@
 /*
  * Factory.cpp
  *
+ * Used to create objects
+ *
  *  Created on: 22 Feb 2016
  *      Author: msn-w
  */
@@ -8,8 +10,6 @@
 #include "Factory.h"
 
 using namespace frogger;
-
-using namespace std;
 
 Factory::Factory()
 {

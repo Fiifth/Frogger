@@ -1,5 +1,7 @@
 /*
- * Frog.cpp
+ * Player.cpp
+ * This is the object in the game where every prop interacts with.
+ * It can create projectile objects.
  *
  *  Created on: 22 Feb 2016
  *      Author: msn-w
@@ -7,7 +9,6 @@
 
 #include "Player.h"
 #include "Factory.h"
-using namespace std;
 using namespace frogger;
 
 Player::Player()
@@ -61,7 +62,7 @@ void Player::followRow(Row* row)
 		dividerCounter = 0;
 	}
 
-	if (timeToMove())
+	if (timeToMove()) //takes the divider into account when following the lane object
 	{
 		if (!row->isDirLeft())
 			move(*row->getRowProperties()->getSpeed(), 0, false);
@@ -170,7 +171,7 @@ void Player::decreaseTime()
 	if (counterEnabled)
 	{
 		currentTime = std::chrono::high_resolution_clock::now();
-		remainingTime = totalTime- (std::chrono::duration_cast<std::chrono::seconds>(currentTime - previousTime).count());
+		remainingTime = totalTime- ((int)std::chrono::duration_cast<std::chrono::seconds>(currentTime - previousTime).count());
 	}
 }
 
@@ -231,13 +232,13 @@ std::list<Projectile*>* Player::getProjectileList()
 
 void Player::collision(Player* player)
 {
-	if (player != this)
+	if (player != this) //player cannot be hit by its own projectiles
 	{
 		projectileList.remove_if(ProjCol(player->getProjectileList()));
 		int oldSize = projectileList.size();
 		projectileList.remove_if(ProjCol2(player));
 		int newSize = projectileList.size();
-		if (newSize < oldSize)
+		if (newSize < oldSize) //if size of projectile list decreases there will have been a collision
 			player->hit();
 	}
 }
@@ -278,4 +279,22 @@ void frogger::Player::initPlayer(int hSpeed, int vSpeed, int w, int h, int x,
 void frogger::Player::setProjAniList(std::vector<frogger::Animator>* projAni)
 {
 	this->projAni=projAni;
+}
+
+bool Player::drawMoveRemove::operator ()(Props* prop)
+{
+	bool temp = false;
+	if (!prop->inframe())
+	{
+		temp = true;
+		delete (prop);
+	}
+	else
+	{
+		prop->moveForward();
+		if (prop->isVisible())
+			prop->draw();
+
+	}
+	return temp;
 }

@@ -1,19 +1,20 @@
 /*
  * MenuButton.cpp
- *
+ * Keeps the actual coordinates of the button by multiplying the relative and the dimensions.
  *  Created on: 24-apr.-2016
  *      Author: msn-w
  */
 
 #include <MenuButton.h>
+#include <math.h>
 using namespace frogger;
 
-MenuButton::MenuButton(float x, float y, float w, float h, frogger::Window* win)
+MenuButton::MenuButton(double x, double y, double w, double h, frogger::Window* win)
 {
-	this->x = x * (*win->getWidth());
-	this->y = y * (*win->getHeight());
-	this->w = w * (*win->getWidth());
-	this->h = h * (*win->getHeight());
+	this->x =(int) round(x * (*win->getWidth()));
+	this->y =(int) round(y * (*win->getHeight()));
+	this->w =(int) round(w * (*win->getWidth()));
+	this->h =(int) round(h * (*win->getHeight()));
 }
 
 MenuButton::~MenuButton()

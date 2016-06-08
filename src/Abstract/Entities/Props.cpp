@@ -1,6 +1,10 @@
 /*
  * Pops.cpp
  *
+ * These are the objects a player can interact with (lane/obstacle/item/projectile)
+ * They usually have a row object where they take their properties from.
+ * (Exception when projectile is created by a player since the player doesn't have a row to give)
+ *
  *  Created on: 17-mrt.-2016
  *      Author: msn-w
  */
@@ -88,7 +92,7 @@ void frogger::Props::setProperties(Row* row, int* screenWidth,
 	this->x = x;
 	this->w = w;
 	this->visible = vis;
-	if (row != nullptr) //projectiles do not have rows when shot from player
+	if (row != nullptr) //projectiles do not have rows when shot by a player
 	{
 		direction = row->getDirection();
 		y = row->getLocY();
@@ -98,4 +102,22 @@ void frogger::Props::setProperties(Row* row, int* screenWidth,
 		itemRate = row->getRowProperties()->getItemRate();
 		shootRate = row->getRowProperties()->getShootRate();
 	}
+}
+
+bool Props::drawMoveRemove::operator ()(Props* prop)
+{
+	bool temp = false;
+	if (!prop->inframe())
+	{
+		temp = true;
+		delete (prop);
+	}
+	else
+	{
+		prop->moveForward();
+		if (prop->isVisible())
+			prop->draw();
+
+	}
+	return temp;
 }

@@ -5,8 +5,8 @@
  *      Author: fifth
  */
 
-#ifndef WINDOW_H_
-#define WINDOW_H_
+#ifndef ABSTRACT_WINDOW_H_
+#define ABSTRACT_WINDOW_H_
 #include <string>
 #include <vector>
 #include <list>
@@ -46,4 +46,4 @@ namespace frogger
 	};
 }
 
-#endif /* WINDOW_H_ */
+#endif /* ABSTRACT_WINDOW_H_ */

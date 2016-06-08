@@ -5,8 +5,8 @@
  *      Author: msn-w
  */
 
-#ifndef EVENTS_H_
-#define EVENTS_H_
+#ifndef ABSTRACT_EVENTS_H_
+#define ABSTRACT_EVENTS_H_
 #include <string>
 namespace frogger
 {

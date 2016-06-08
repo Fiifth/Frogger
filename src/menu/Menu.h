@@ -16,8 +16,7 @@ namespace frogger
 		public:
 			Menu(Window* win, char* gameMode, int* amountOfPlayers,char* difficulty);
 			virtual ~Menu();
-			char menuExecution(std::string keyDown, char state, int mXH,
-					int mYH, int mXP, int mYP);
+			char menuExecution(std::string keyDown, char state, int mXH,int mYH);
 
 		private:
 			Window* win;

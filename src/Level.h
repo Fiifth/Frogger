@@ -33,6 +33,7 @@
 #include "Projectile.h"
 #include <Obstacle.h>
 #include <Player.h>
+using namespace std;
 namespace frogger
 {
 	class Level
@@ -51,8 +52,7 @@ namespace frogger
 			void fillEnemyList(Factory* F, std::vector<Row*>* rows,
 					std::vector<std::list<Props*>>* propsOnRow,
 					int screenWidth);
-			void drawGameElements(std::vector<std::list<Props*>>* propsOnRow,list<Player*>* players,
-					vector<Row*>* rows);
+			void drawGameElements(std::vector<std::list<Props*>>* propsOnRow,list<Player*>* players);
 			Props* obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack, int x);
 			Props* obsOrLane(list<Props*>* PreProp, Row* row);
 			bool followFrog(vector<Row*>* rows, list<Player*>* players, int factor);
@@ -60,7 +60,7 @@ namespace frogger
 			bool isObjectiveDone() const;
 			void resetLevel();
 			void initLevel();
-			void extraRowNeeded(int rowHeight, int screenHeight,
+			void extraRowNeeded(int screenHeight,
 					int screenWidth, Factory* F, vector<Row*>* rows,
 					vector<list<Props*>>* propsOnRow, LevelProperties* lvlprop);
 			void fillOneRow(Factory* F, Row* rows, std::vector<std::list<Props*>>* propsOnRow, int screenWidth);

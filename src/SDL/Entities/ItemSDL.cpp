@@ -17,8 +17,6 @@ ItemSDL::~ItemSDL()
 {
 }
 
-
-
 void ItemSDL::draw()
 {
 	sdldata->renderTexture(itemTex->at(ani->getIndex()), sdldata->getRen(), x, *y, &w, h,row->isDirLeft(), true);

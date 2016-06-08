@@ -15,8 +15,8 @@
 #include "SDL.h"
 #include <vector>
 #include <algorithm>
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
+#include <stdlib.h>
+#include <time.h>
 #include <ctime>
 #include <ratio>
 #include <chrono>
@@ -24,6 +24,8 @@
 #include <string>
 #include "Player.h"
 #include "menu/MenuButton.h"
+#include <math.h>
+
 namespace frogger_sdl
 {
 	class WindowSDL: public frogger::Window

@@ -1,6 +1,9 @@
 /*
  * Level.cpp
  *
+ * This object will execute the playing part of the game.
+ * It creates and manages the entities by moving them and checking for collision.
+ *
  *  Created on: 8-apr.-2016
  *      Author: msn-w
  */
@@ -60,14 +63,14 @@ void Level::levelExecution(string keyStroke)
 		followFrog(rows, players, factor);
 
 	if (lvlprop->getMode() == 'E')
-		extraRowNeeded(rowHeight, *win->getGameWindowHeight(), *win->getWidth(),
+		extraRowNeeded(*win->getGameWindowHeight(), *win->getWidth(),
 				F, rows, propsOnRow, lvlprop);
 
 	win->generateBackground(rows);
 
 	propsGenerator(F, rows, propsOnRow);
 
-	drawGameElements(propsOnRow, players, rows);
+	drawGameElements(propsOnRow, players);
 	collisionDetection(propsOnRow, players);
 	objectiveDone =	lvlprop->getMode() == 'E' ?	false : objectiveCompleteCheck(propsOnRow);
 }
@@ -170,8 +173,7 @@ void Level::fillEnemyList(Factory* F, vector<Row*>* rows,
 	}
 }
 
-void Level::drawGameElements(std::vector<std::list<Props*>>* propsOnRow, list<Player*>* players,
-		vector<Row*>* rows)
+void Level::drawGameElements(std::vector<std::list<Props*>>* propsOnRow, list<Player*>* players)
 {
 	int i = 0;
 
@@ -293,7 +295,7 @@ void Level::initLevel()
 
 }
 
-void Level::extraRowNeeded(int rowHeight, int screenHeight, int screenWidth,
+void Level::extraRowNeeded(int screenHeight, int screenWidth,
 		Factory* F, vector<Row*>* rows, vector<list<Props*>>* propsOnRow,
 		LevelProperties* lvlprop)
 {

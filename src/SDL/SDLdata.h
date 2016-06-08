@@ -1,12 +1,12 @@
 /*
- * SDLstuff.h
+ * SDLdata.h
  *
  *  Created on: 7-mrt.-2016
  *      Author: msn-w
  */
 
-#ifndef SDLSTUFF_H_
-#define SDLSTUFF_H_
+#ifndef SDLDATA_H_
+#define SDLDATA_H_
 #include "SDL.h"
 #include <vector>
 #include <string>
@@ -53,4 +53,4 @@ namespace frogger_sdl
 	};
 }
 
-#endif /* SDLSTUFF_H_ */
+#endif /* SDLDATA_H_ */

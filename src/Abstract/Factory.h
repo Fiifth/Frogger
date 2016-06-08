@@ -5,8 +5,8 @@
  *      Author: msn-w
  */
 
-#ifndef FACTORY_H_
-#define FACTORY_H_
+#ifndef ABSTRACT_FACTORY_H_
+#define ABSTRACT_FACTORY_H_
 
 #include "Obstacle.h"
 #include "Player.h"
@@ -20,7 +20,6 @@
 #include "Item.h"
 #include <levelGenerator/RowProp.h>
 
-using namespace std;
 namespace frogger
 {
 	class Factory
@@ -38,4 +37,4 @@ namespace frogger
 			virtual Projectile* createProjectile1()=0;
 	};
 }
-#endif /* FACTORY_H_ */
+#endif /* ABSTRACT_FACTORY_H_ */

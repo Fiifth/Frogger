@@ -35,8 +35,6 @@ frogger::Player* frogger_sdl::FactorySDL::createPlayer1()
 	return new PlayerSDL(sdldata);
 }
 
-
-
 frogger::Projectile* frogger_sdl::FactorySDL::createProjectile1()
 {
 	return new ProjectileSDL(sdldata);

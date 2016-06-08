@@ -1,6 +1,6 @@
 /*
  * SDLstuff.cpp
- *
+ * Creates and keeps track of important SDL data. Renderer/textures
  *  Created on: 7-mrt.-2016
  *      Author: msn-w
  */
@@ -10,7 +10,7 @@
 #include <SDL_image.h>
 #include <stdlib.h>
 #include "Animator.h"
-#include <iostream>
+#include <math.h>
 
 using namespace frogger_sdl;
 
@@ -53,7 +53,7 @@ int SDLdata::getDW(SDL_Texture* tex, int h)
 	int aQ, wQ, hQ;
 	Uint32 fQ;
 	SDL_QueryTexture(tex, &fQ, &aQ, &wQ, &hQ);
-	return (float) (((float) h) / (float) hQ) * wQ;;
+	return (int) round((float)((h) / (float) hQ) * wQ);
 }
 SDL_Renderer* SDLdata::getRen()
 {
@@ -80,8 +80,8 @@ void SDLdata::createTextures()
 	fillTextureVectors(&backTex,"back",2);
 
 	fillTextureVectors(&playerTex,"frog",5);
-	//fillTextureVectors(&ObstTex,"o",12);
-	//fillTextureVectors(&laneTex,"lane",9);
+	//fillTextureVectors(&ObstTex,"o",12); //will be created when needed to save on startup time
+	//fillTextureVectors(&laneTex,"lane",9); //will be created when needed to save on startup time
 	fillTextureVectors(&itemTex,"item",2);
 	fillTextureVectors(&projTex,"proj",0);
 	fillTextureVectors(&menu2Textures,"menu/m",13);

@@ -5,8 +5,8 @@
  *      Author: msn-w
  */
 
-#ifndef ENTITY_H_
-#define ENTITY_H_
+#ifndef ABSTRACT_ENTITY_H_
+#define ABSTRACT_ENTITY_H_
 #include <list>
 #include "Animator.h"
 
@@ -15,7 +15,6 @@ namespace frogger
 {
 	class Projectile;
 	class Factory;
-	class Props;
 	class Player;
 	class Entity
 	{
@@ -39,10 +38,7 @@ namespace frogger
 			bool colli(Entity* entity);
 			bool colli2(Entity* entity1, Entity* entity2);
 			void setAni(frogger::Animator* ani);
-			struct drawMoveRemove
-			{
-					bool operator()(Props* prop);
-			};
+
 			struct ProjCol
 			{
 					std::list<Projectile*>* projectList;

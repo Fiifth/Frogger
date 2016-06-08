@@ -5,8 +5,8 @@
  *      Author: msn-w
  */
 
-#ifndef ABSTRACT_PROPS_H_
-#define ABSTRACT_PROPS_H_
+#ifndef ABSTRACT_ENTITIES_PROPS_H_
+#define ABSTRACT_ENTITIES_PROPS_H_
 #include "Entity.h"
 #include "Row.h"
 #include <levelGenerator/RowProp.h>
@@ -30,6 +30,10 @@ namespace frogger
 			void setTurned(bool turned);
 			bool timeToMove();
 			virtual bool itemListEmpty()=0;
+			struct drawMoveRemove
+			{
+					bool operator()(Props* prop);
+			};
 
 		protected:
 			Row* row;
@@ -40,4 +44,4 @@ namespace frogger
 			int* shootRate;
 	};
 }
-#endif /* ABSTRACT_PROPS_H_ */
+#endif /* ABSTRACT_ENTITIES_PROPS_H_ */

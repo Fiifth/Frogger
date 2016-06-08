@@ -5,8 +5,8 @@
  *      Author: msn-w
  */
 
-#ifndef ANIMATOR_H_
-#define ANIMATOR_H_
+#ifndef ABSTRACT_ANIMATOR_H_
+#define ABSTRACT_ANIMATOR_H_
 #include <vector>
 namespace frogger
 {
@@ -35,4 +35,4 @@ namespace frogger
 	};
 }
 
-#endif /* ANIMATOR_H_ */
+#endif /* ABSTRACT_ANIMATOR_H_ */

@@ -5,8 +5,8 @@
  *      Author: msn-w
  */
 
-#ifndef ROW_H_
-#define ROW_H_
+#ifndef ABSTRACT_ROW_H_
+#define ABSTRACT_ROW_H_
 #include "levelGenerator/RowProp.h"
 namespace frogger
 {
@@ -37,4 +37,4 @@ namespace frogger
 			RowProp* rowProperties;
 	};
 }
-#endif /* ROW_H_ */
+#endif /* ABSTRACT_ROW_H_ */

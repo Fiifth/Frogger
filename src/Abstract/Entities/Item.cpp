@@ -1,6 +1,9 @@
 /*
  * Item.cpp
  *
+ * These are the bonus item you can collect in game.
+ * They can the increase the score/life/ammo of the player that collects them
+ *
  *  Created on: 18-mrt.-2016
  *      Author: Kwinten
  */

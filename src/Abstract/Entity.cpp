@@ -1,12 +1,12 @@
 /*
  * Entity.cpp
  *
+ * This object represents the underlying object of all game entities that have a location.
  *  Created on: 12-mrt.-2016
  *      Author: msn-w
  */
 
 #include "Entity.h"
-#include "Props.h"
 #include "Projectile.h"
 using namespace frogger;
 Entity::Entity()
@@ -37,7 +37,7 @@ Entity::~Entity()
 }
 
 void Entity::move(int deltaX, int deltaY, bool leaveScreen)
-{
+{ //leaveScreen determines if the object is allowed to go offscreen (the player will not be allowed/obstacles have to leave screen)
 	int leftLimit, rightLimit, upperLimit, lowerlimit;
 	leftLimit = leaveScreen ? -*screenWidth * 4 : 0;
 	rightLimit = leaveScreen ? *screenWidth + getWidth() * 4 : *screenWidth;
@@ -111,23 +111,6 @@ void Entity::setF(Factory* f)
 	F = f;
 }
 
-bool Entity::drawMoveRemove::operator ()(Props* prop)
-{
-	bool temp = false;
-	if (!prop->inframe())
-	{
-		temp = true;
-		delete (prop);
-	}
-	else
-	{
-		prop->moveForward();
-		if (prop->isVisible())
-			prop->draw();
-
-	}
-	return temp;
-}
 
 bool Entity::colli(Entity* entity)
 {
