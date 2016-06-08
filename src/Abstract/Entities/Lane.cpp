@@ -14,6 +14,9 @@ Lane::Lane()
 
 Lane::~Lane()
 {
+	for(Item* item:itemList)
+	delete(item);
+	itemList.clear();
 }
 
 void Lane::collision(Player* player)

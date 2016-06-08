@@ -20,18 +20,23 @@ Level::Level(Factory* F, Window* win, list<Player*>* players, int rowHeight,
 Level::~Level()
 {
 	for(list<Props*> props:*propsOnRow)
+	{
 		for(Props* prop:props)
 			delete(prop);
+		props.clear();
+	}
+	propsOnRow->clear();
+
 	for(Row* row:*rows)
 		delete(row);
+	rows->clear();
 }
-char Level::levelExecution(string keyStroke)
+void Level::levelExecution(string keyStroke)
 {
 	int factor = 3;
 	int freeRows = 4;
 	freeRows = (lvlprop->getDifficulty() == 'M') ? 3 : freeRows;
 	freeRows = (lvlprop->getDifficulty() == 'H') ? 2 : freeRows;
-	// tempFactor = 0;
 	for (Player* player : *players)
 	{
 		int tempFactor = 0;
@@ -41,9 +46,7 @@ char Level::levelExecution(string keyStroke)
 		{
 			player->takeAction(keyStroke);
 		}
-		if (lvlprop->getMode() == 'E'
-				&& player->getY()
-						< *win->getGameWindowHeight() - rowHeight * freeRows)
+		if (lvlprop->getMode() == 'E'	&& player->getY()	< *win->getGameWindowHeight() - rowHeight * freeRows)
 		{
 			tempFactor = 1;
 			tempFactor =player->getY()< *win->getGameWindowHeight()- rowHeight * (freeRows + 1) ?	2 : tempFactor;
@@ -64,10 +67,9 @@ char Level::levelExecution(string keyStroke)
 
 	propsGenerator(F, rows, propsOnRow);
 
-	drawGameElements(propsOnRow, NULL, players, rows);
-	collisionDetection(propsOnRow, NULL, players);
+	drawGameElements(propsOnRow, players, rows);
+	collisionDetection(propsOnRow, players);
 	objectiveDone =	lvlprop->getMode() == 'E' ?	false : objectiveCompleteCheck(propsOnRow);
-	return 'H';
 }
 
 void Level::rowGenerator(int rowHeight, int screenHight, Factory* F,
@@ -76,11 +78,11 @@ void Level::rowGenerator(int rowHeight, int screenHight, Factory* F,
 {
 	int numberOfRows = (screenHight) / rowHeight;
 	list<Props*> enemies;
-	char dir = 'L'; //(rand() %2)>0)
+	char dir = 'L';
 	RowProp* rowProp;
 	if (lvlprop->getMode() == 'E')
 	{
-		for (int n = 0; n < numberOfRows + 1; n++)
+		for (int n = 0; n < numberOfRows + 2; n++)
 		{
 			int yloc;
 			yloc = (screenHight - rowHeight) - (n * rowHeight);
@@ -141,8 +143,7 @@ void Level::propsGenerator(Factory* F, vector<Row*>* rows,
 	}
 }
 
-int Level::collisionDetection(vector<list<Props*>>* propsOnRow,
-		list<Projectile*>*projectiles, list<Player*>* players)
+int Level::collisionDetection(vector<list<Props*>>* propsOnRow, list<Player*>* players)
 {
 	for (list<Props*> temp : *propsOnRow)
 	{
@@ -169,8 +170,7 @@ void Level::fillEnemyList(Factory* F, vector<Row*>* rows,
 	}
 }
 
-void Level::drawGameElements(std::vector<std::list<Props*>>* propsOnRow,
-		list<Projectile*>* projectiles, list<Player*>* players,
+void Level::drawGameElements(std::vector<std::list<Props*>>* propsOnRow, list<Player*>* players,
 		vector<Row*>* rows)
 {
 	int i = 0;
@@ -187,8 +187,7 @@ void Level::drawGameElements(std::vector<std::list<Props*>>* propsOnRow,
 	}
 }
 
-Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack,
-		int x)
+Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack, int x)
 {
 	Props* prop;
 	int number = rand() % 100;
@@ -311,7 +310,7 @@ void Level::extraRowNeeded(int rowHeight, int screenHeight, int screenWidth,
 			highestRow = row;
 		}
 	}
-	if (*highestRow->getLocY() > screenHeight)
+	if (*highestRow->getLocY() > screenHeight+highestRow->getHeight())
 	{
 		highestRow->setLocY(*lowestRow->getLocY() - lowestRow->getHeight());
 		highestRow->setRowProperties(lvlprop->getRandomRow());
@@ -378,7 +377,6 @@ void Level::fillOneRow(Factory* F, Row* row,
 		{
 			x = screenWidth;
 		}
-
 	}
 }
 

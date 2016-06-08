@@ -19,12 +19,11 @@ namespace frogger_sdl
 	class ItemSDL: public frogger::Item
 	{
 		public:
-			ItemSDL(SDLdata* sdldata);
+			explicit ItemSDL(SDLdata* sdldata);
 			virtual ~ItemSDL();
 			void draw();
 			void queryW(int height);
 		private:
-
 			SDLdata* sdldata;
 			std::vector<SDL_Texture*>* itemTex;
 	};

@@ -19,7 +19,7 @@ namespace frogger_sdl
 	class LaneSDL: public frogger::Lane
 	{
 		public:
-			LaneSDL(SDLdata* sdldata);
+			explicit LaneSDL(SDLdata* sdldata);
 			virtual ~LaneSDL();
 			void draw();
 			void queryW(int height);

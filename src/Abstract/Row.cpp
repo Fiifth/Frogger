@@ -83,13 +83,3 @@ char* frogger::Row::getDirection()
 {
 	return &direction;
 }
-
-void frogger::Row::setDirection(char direction)
-{
-	this->direction = direction;
-}
-
-int* frogger::Row::getYP()
-{
-	return &locY;
-}

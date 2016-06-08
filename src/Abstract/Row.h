@@ -17,11 +17,9 @@ namespace frogger
 			virtual ~Row();
 			bool isDirLeft() const;
 			int getNumber() const;
-			int* getSpeed() const;
 			int getHeight() const;
 			int* getLocY();
 			void setLocY(int NewlocY);
-			char getType();
 			Row* clone();
 			bool isLaneVis() const;
 			bool isObstacleVis() const;
@@ -30,8 +28,6 @@ namespace frogger
 			int getRandomObsInd();
 			int getRandomLaneInd();
 			char* getDirection();
-			void setDirection(char direction);
-			int* getYP();
 
 		private:
 			char direction;

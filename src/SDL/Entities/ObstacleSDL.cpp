@@ -19,7 +19,6 @@ frogger_sdl::ObstacleSDL::ObstacleSDL(SDLdata* sdldata):sdldata(sdldata)
 
 ObstacleSDL::~ObstacleSDL()
 {
-	delete (ani);
 }
 
 void ObstacleSDL::draw()

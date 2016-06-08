@@ -15,7 +15,6 @@ frogger_sdl::PlayerSDL::PlayerSDL(SDLdata* sdldata):sdldata(sdldata)
 
 PlayerSDL::~PlayerSDL()
 {
-	delete(ani);
 }
 
 void PlayerSDL::draw()

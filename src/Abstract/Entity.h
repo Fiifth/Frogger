@@ -23,9 +23,7 @@ namespace frogger
 			Entity();
 			virtual ~Entity();
 			void move(int deltaX, int deltaY, bool leaveScreen);
-			void setSize(int wNew, int hNew);
 			void setLocation(int xNew, int yNew);
-			void setScreenSize(int* width, int* height);
 			bool inframe();
 			int getH() const;
 			int getW() const;
@@ -36,14 +34,11 @@ namespace frogger
 			int getSpeed() const;
 			void setSpeed(int speed);
 			char getDirection() const;
-			void setDirection(char direction);
 			void setF(Factory* f);
-			void setYPointer(int* y);
 			virtual void collision(Player* player)=0;
 			bool colli(Entity* entity);
 			bool colli2(Entity* entity1, Entity* entity2);
 			void setAni(frogger::Animator* ani);
-			frogger::Animator* getAni();
 			struct drawMoveRemove
 			{
 					bool operator()(Props* prop);
@@ -51,7 +46,7 @@ namespace frogger
 			struct ProjCol
 			{
 					std::list<Projectile*>* projectList;
-					ProjCol(std::list<Projectile*>* projectList) :
+					explicit ProjCol(std::list<Projectile*>* projectList) :
 							projectList(projectList)
 					{
 					}
@@ -60,7 +55,7 @@ namespace frogger
 			struct ProjCol2
 			{
 					Entity* project;
-					ProjCol2(Entity* project):project(project)
+					explicit ProjCol2(Entity* project):project(project)
 					{
 					}
 					bool operator()(Entity* projectile) const;

@@ -94,10 +94,10 @@ void WindowSDL::dislayData(list<frogger::Player*>* players)
 		newString = newString + std::to_string(pl->getScore());
 		newString = newString + " ammo: ";
 		newString = newString + std::to_string(pl->getProjectiles());
+		if(pl->getRemainingTime()!=-1) //when remaining time =-1 game is in endless mode where you only have 1 life
+		{
 		newString = newString + " life: ";
 		newString = newString + std::to_string(pl->getLife());
-		if(pl->getRemainingTime()!=-1)
-		{
 		newString = newString + " time: ";
 		newString = newString + std::to_string(pl->getRemainingTime());
 		}

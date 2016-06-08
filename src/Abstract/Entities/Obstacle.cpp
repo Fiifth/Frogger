@@ -14,6 +14,9 @@ Obstacle::Obstacle()
 
 Obstacle::~Obstacle()
 {
+	for(Projectile* proj:projectileList)
+		delete(proj);
+	projectileList.clear();
 }
 
 void Obstacle::collision(Player* player)

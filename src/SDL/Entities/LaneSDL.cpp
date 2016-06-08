@@ -15,7 +15,6 @@ frogger_sdl::LaneSDL::LaneSDL(SDLdata* sdldata):sdldata(sdldata)
 
 LaneSDL::~LaneSDL()
 {
-	delete (ani);
 }
 
 void LaneSDL::draw()

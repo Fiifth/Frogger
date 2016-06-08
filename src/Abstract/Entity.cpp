@@ -33,6 +33,7 @@ Entity::Entity()
 
 Entity::~Entity()
 {
+	delete(ani);
 }
 
 void Entity::move(int deltaX, int deltaY, bool leaveScreen)
@@ -54,20 +55,10 @@ void Entity::move(int deltaX, int deltaY, bool leaveScreen)
 	}
 }
 
-void Entity::setSize(int wNew, int hNew)
-{
-	w = wNew;
-	h = hNew;
-}
 void Entity::setLocation(int xNew, int yNew)
 {
 	x = xNew;
 	*y = yNew;
-}
-void Entity::setScreenSize(int* width, int* height)
-{
-	screenWidth = width;
-	screenHeight = height;
 }
 bool Entity::inframe()
 {
@@ -143,10 +134,6 @@ bool Entity::colli(Entity* entity)
 	return (colli2(this, entity) || colli2(entity, this));
 }
 
-void frogger::Entity::setYPointer(int* y)
-{
-	this->y = y;
-}
 
 bool Entity::colli2(Entity* entity1, Entity* entity2)
 {
@@ -179,11 +166,6 @@ void frogger::Entity::setSpeed(int speed)
 	speedR=speed;
 	this->speed = &speedR;
 	this->divider = &dividerR;
-}
-
-frogger::Animator* frogger::Entity::getAni()
-{
-	return ani;
 }
 
 void frogger::Entity::setAni(frogger::Animator* ani)

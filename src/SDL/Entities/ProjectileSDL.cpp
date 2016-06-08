@@ -15,7 +15,6 @@ frogger_sdl::ProjectileSDL::ProjectileSDL(SDLdata* sdldata):sdldata(sdldata)
 
 ProjectileSDL::~ProjectileSDL()
 {
-	delete (ani);
 }
 
 void ProjectileSDL::draw()

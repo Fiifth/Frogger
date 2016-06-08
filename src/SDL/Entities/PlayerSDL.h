@@ -22,7 +22,7 @@ namespace frogger_sdl
 	class PlayerSDL: public frogger::Player
 	{
 		public:
-			PlayerSDL(SDLdata* sdldata);
+			explicit PlayerSDL(SDLdata* sdldata);
 			virtual ~PlayerSDL();
 			void draw();
 		private:

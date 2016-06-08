@@ -16,6 +16,9 @@ Player::Player()
 
 Player::~Player()
 {
+	for(Projectile* proj:projectileList)
+		delete(proj);
+	projectileList.clear();
 }
 
 void Player::moveUp()
@@ -67,44 +70,9 @@ void Player::followRow(Row* row)
 	}
 }
 
-int Player::gethSpeed() const
-{
-	return hSpeed;
-}
-
-void Player::sethSpeed(int speed)
-{
-	hSpeed = speed;
-}
-
-int Player::getvSpeed() const
-{
-	return vSpeed;
-}
-
-void Player::setvSpeed(int speed)
-{
-	vSpeed = speed;
-}
-
-int Player::getCounter() const
-{
-	return counter;
-}
-
-void Player::setCounter(int counter)
-{
-	this->counter = counter;
-}
-
 int Player::getLife() const
 {
 	return life;
-}
-
-void Player::setLife(int life)
-{
-	this->life = life;
 }
 
 int Player::getProjectiles() const
@@ -112,19 +80,9 @@ int Player::getProjectiles() const
 	return projectiles;
 }
 
-void Player::setProjectiles(int projectiles)
-{
-	this->projectiles = projectiles;
-}
-
 int Player::getScore() const
 {
 	return score;
-}
-
-void Player::setScore(int score)
-{
-	this->score = score;
 }
 
 void Player::addLife(int life)
@@ -157,12 +115,6 @@ void Player::resetPosition()
 	*y = startY;
 	*direction = 'U';
 	resetRemainingTime();
-}
-
-void Player::setStartPosition(int startX, int startY)
-{
-	this->startX = startX;
-	this->startY = startY;
 }
 
 bool Player::takeAction(std::string key)
@@ -205,11 +157,6 @@ int Player::getRemainingTime()
 	if (!dead)
 		decreaseTime();
 	return remainingTime;
-}
-
-void Player::setRemainingTime(int remainingTime)
-{
-	this->remainingTime = remainingTime;
 }
 
 void Player::resetRemainingTime()
@@ -293,11 +240,6 @@ void Player::collision(Player* player)
 		if (newSize < oldSize)
 			player->hit();
 	}
-}
-
-void Player::disableCounter()
-{
-	counterEnabled = false;
 }
 
 void frogger::Player::followScreen(int offset)

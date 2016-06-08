@@ -29,7 +29,7 @@ namespace frogger_sdl
 	class WindowSDL: public frogger::Window
 	{
 		public:
-			WindowSDL(SDLdata* sdldata);
+			explicit WindowSDL(SDLdata* sdldata);
 			virtual ~WindowSDL();
 			void makeWindow(int ScreenWidth, int ScreenHeight,int dataWindowHeight, char const* title);
 			void dislayData(std::list<frogger::Player*>* players);

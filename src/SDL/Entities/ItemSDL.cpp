@@ -15,7 +15,6 @@ frogger_sdl::ItemSDL::ItemSDL(SDLdata* sdldata):sdldata(sdldata)
 
 ItemSDL::~ItemSDL()
 {
-	delete (ani);
 }
 
 
