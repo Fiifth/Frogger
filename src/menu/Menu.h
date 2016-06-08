@@ -29,20 +29,14 @@ namespace frogger
 			MenuButton* BQ;
 			MenuButton* BHE;
 			MenuButton* BS;
-			MenuButton* HB;
 			MenuButton* S1;
 			MenuButton* S2;
 			MenuButton* S3;
-			MenuButton* SB;
 			MenuButton* SEN;
 			MenuButton* SC;
 			MenuButton* SE;
 			MenuButton* SM;
 			MenuButton* SH;
-			MenuButton* GR;
-			MenuButton* GM;
-			MenuButton* VN;
-			MenuButton* VM;
 
 			MenuButton* DrawLineUnderMode;
 			MenuButton* DrawLineUnderNumPlayers;

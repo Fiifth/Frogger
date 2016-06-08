@@ -44,20 +44,14 @@ Menu::~Menu()
 	delete(BQ);
 	delete(BHE);
 	delete(BS);
-	delete(HB);
 	delete(S1);
 	delete(S2);
 	delete(S3);
-	delete(SB);
 	delete(SEN);
 	delete(SC);
 	delete(SE);
 	delete(SM);
 	delete(SH);
-	delete(GR);
-	delete(GM);
-	delete(VN);
-	delete(VM);
 
 	delete(DrawLineUnderMode);
 	delete(DrawLineUnderNumPlayers);

@@ -63,7 +63,7 @@ Game::Game(Factory* F)
 
 	Menu* men = new Menu(win, &gameMode, &amountOfPlayers, &difficulty);
 
-	int temp = 0;
+	int prevScore = 0;
 	while (true)
 	{
 		int x, y;
@@ -91,6 +91,7 @@ Game::Game(Factory* F)
 					level=nullptr;
 					delete(lvlprop);
 					lvlprop=nullptr;
+					prevScore = 0;
 				}
 
 				newHighscore=PrevState!='H';
@@ -112,17 +113,14 @@ Game::Game(Factory* F)
 				//level execution modes
 				if (PrevState == state)
 				{
-
 					level->levelExecution(keyStroke);
 
 					state = playersAlive(players, state) ? state : 'G';
 					state = level->isObjectiveDone() ? 'V' : state;
-					if (gameMode == 'E'
-							&& ((players->back()->getScore() % 100) == 0)
-							&& (players->back()->getScore() > temp))
+					if (gameMode == 'E'	&& ((players->back()->getScore()-prevScore) >= 100)	&& (players->back()->getScore() > prevScore))
 					{
 						lvlprop->levelUp();
-						temp = players->back()->getScore();
+						prevScore = players->back()->getScore()-(players->back()->getScore()%100);
 					}
 					win->dislayData(players);
 					win->updateScreen();
@@ -189,7 +187,7 @@ void frogger::Game::addPlayers(Factory* F, list<Player*>* players, int amount,
 							delete(player);
 	players->clear();
 	int life = 4, totalTime = 50, scorePerStep = 10, projectiles = 3; //classic easy mode
-	bool counterEnabled = true;
+	bool counterEnabled;
 
 	counterEnabled = (gameMode == 'E') ? false : true;
 

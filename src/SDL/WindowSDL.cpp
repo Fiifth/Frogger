@@ -169,11 +169,13 @@ void WindowSDL::makeHighScoreTexture(std::vector<int> highScore)
 		sans2 = TTF_OpenFont("c:\\sans.ttf", 40);
 	int i = 0;
 	SDL_Rect Message_rect;
-	SDL_Surface* highScoreSurf;
-	SDL_Texture* 	highScoreTex;
+
 
 	for (int score : highScore)
 	{
+		SDL_Surface* highScoreSurf;
+		SDL_Texture* 	highScoreTex;
+
 		std::string highScore1 = (std::to_string(i + 1) + ". "+ std::to_string(score));
 
 		highScoreSurf= TTF_RenderText_Blended(sans2,	highScore1.c_str(), black);

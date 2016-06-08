@@ -74,7 +74,6 @@ void SDLdata::updateScreen()
 void SDLdata::createTextures()
 {
 	std::string recourcePath=SDL_GetBasePath();
-	std::string path = "test/line.png";
 
 	line = IMG_LoadTexture(re, (recourcePath+"test/line.png").c_str());
 

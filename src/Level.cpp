@@ -31,10 +31,10 @@ char Level::levelExecution(string keyStroke)
 	int freeRows = 4;
 	freeRows = (lvlprop->getDifficulty() == 'M') ? 3 : freeRows;
 	freeRows = (lvlprop->getDifficulty() == 'H') ? 2 : freeRows;
-	int tempFactor = 0;
+	// tempFactor = 0;
 	for (Player* player : *players)
 	{
-		tempFactor = 0;
+		int tempFactor = 0;
 		if (player->getRemainingTime() == 0)
 			player->hit();
 		else
