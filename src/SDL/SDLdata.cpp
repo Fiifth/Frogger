@@ -89,9 +89,9 @@ void SDLdata::createTextures()
 
 
 
-std::vector<SDL_Texture*> SDLdata::getBackTextures()
+std::vector<SDL_Texture*>* SDLdata::getBackTextures()
 {
-	return backTex;
+	return &backTex;
 }
 
 void SDLdata::setScreenDimension(int* gameWidth, int* gameHeight)

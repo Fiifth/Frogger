@@ -24,7 +24,7 @@ namespace frogger_sdl
 			void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int* w, int h, int angle, bool ratio);
 			int getDW(SDL_Texture* tex, int h);
 			void createTextures();
-			std::vector<SDL_Texture*> getBackTextures();
+			std::vector<SDL_Texture*>* getBackTextures();
 			void setScreenDimension(int* gameWidth, int* gameHeight);
 			int* getScrH() const;
 			void setScreenHeight(int* screenHeight);
