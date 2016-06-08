@@ -7,6 +7,7 @@
 
 #include <Menu.h>
 #include "MenuButton.h"
+#include <iostream>
 using namespace frogger;
 
 Menu::Menu(Window* win, char* gameMode, int* amountOfPlayers, char* difficulty) :
@@ -14,25 +15,21 @@ Menu::Menu(Window* win, char* gameMode, int* amountOfPlayers, char* difficulty) 
 				difficulty)
 {
 
-	BST = new MenuButton(0.29054, 0.41458, 0.43074, 0.07289, win);
-	BH = new MenuButton(0.30574, 0.57631, 0.39358, 0.06378, win);
-	BQ = new MenuButton(0.41216, 0.72665, 0.17399, 0.082, win);
-	BHE = new MenuButton(0.0152, 0.89294, 0.16892, 0.082, win);
-	BS = new MenuButton(0.65034, 0.89522, 0.33784, 0.08656, win);
-	HB = new MenuButton(0.38514, 0.83144, 0.20608, 0.09112, win);
-	S1 = new MenuButton(0.45101, 0.55809, 0.0777, 0.05011, win);
-	S2 = new MenuButton(0.58615, 0.55809, 0.06419, 0.05011, win);
-	S3 = new MenuButton(0.72973, 0.55125, 0.06926, 0.05011, win);
-	SB = new MenuButton(0.38514, 0.8656, 0.19932, 0.08428, win);
-	SEN = new MenuButton(0.72635, 0.40091, 0.18919, 0.05011, win);
-	SC = new MenuButton(0.47804, 0.40091, 0.16892, 0.05011, win);
-	SE = new MenuButton(0.47635, 0.70843, 0.1098, 0.05011, win);
-	SM = new MenuButton(0.62331, 0.70843, 0.17736, 0.05011, win);
-	SH = new MenuButton(0.85642, 0.70843, 0.125, 0.05011, win);
-	GR = new MenuButton(0.35304, 0.49886, 0.31757, 0.09112, win);
-	GM = new MenuButton(0.41554, 0.78132, 0.21453, 0.09112, win);
-	VN = new MenuButton(0.29899, 0.46014, 0.40878, 0.09112, win);
-	VM = new MenuButton(0.39865, 0.68337, 0.21115, 0.08428, win);
+	BST = new MenuButton(0.24719,0.4052,0.50843,0.09294, win);
+	BH = new MenuButton(0.2809,0.56506,0.46348,0.0855, win);
+	BQ = new MenuButton(0.39888,0.72119,0.19944,0.09665, win);
+	BHE = new MenuButton(0.02247,0.84387,0.10674,0.13383, win);
+	BS = new MenuButton(0.83989,0.829,0.13764,0.15985, win);
+	S1 = new MenuButton(0.43258,0.50558,0.05618,0.05576, win);
+	S2 = new MenuButton(0.43258,0.5948,0.05618,0.05576, win);
+	S3 = new MenuButton(0.43258,0.69517,0.05618,0.05576, win);
+	SEN = new MenuButton(0.03933,0.50558,0.19663,0.05576, win);
+	SC = new MenuButton(0.03652,0.5948,0.18539,0.05204, win);
+	SE = new MenuButton(0.73315,0.49442,0.1264,0.05576, win);
+	SM = new MenuButton(0.73315,0.5948,0.19663,0.05576, win);
+	SH = new MenuButton(0.73315,0.69517,0.1264,0.05576, win);
+
+	back=new MenuButton(0.38483,0.86617,0.22753,0.08178,win);
 
 	DrawLineUnderMode = SEN;
 	DrawLineUnderNumPlayers = S1;
@@ -70,19 +67,18 @@ Menu::~Menu()
 char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH,
 		int mXP, int mYP)
 {
-	//menuTextures={B,BH,BHE,BQ,BS,BST,G,GM,GR,H,HB,S,SB,V,VM,VN};
 	switch (state)
 	{
 		case 'B':
 			if (BST->col(mXH, mYH))
 			{
-				win->setBackground(5);
+				win->setBackground(1);
 				if (keyDown == "MOUSEBUTTONDOWN")
 					return 'E';
 			}
 			else if (BH->col(mXH, mYH))
 			{
-				win->setBackground(1);
+				win->setBackground(2);
 				if (keyDown == "MOUSEBUTTONDOWN")
 					return 'H';
 			}
@@ -94,7 +90,7 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH,
 			}
 			else if (BHE->col(mXH, mYH))
 			{
-				win->setBackground(2);
+				win->setBackground(5);
 				if (keyDown == "MOUSEBUTTONDOWN")
 					return 'B';
 			}
@@ -114,15 +110,15 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH,
 			}
 			break;
 		case 'H':
-			if (HB->col(mXH, mYH))
+			if (back->col(mXH, mYH))
 			{
-				win->setBackground(10);
+				win->setBackground(7);
 				if (keyDown == "MOUSEBUTTONDOWN")
 					state = 'B';
 			}
 			else
 			{
-				win->setBackground(9);
+				win->setBackground(6);
 				if (keyDown == "Escape")
 					return 'Q';
 				else
@@ -134,7 +130,7 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH,
 			{
 				*amountOfPlayers = 1;
 				DrawLineUnderNumPlayers = S1;
-				win->setBackground(11);
+				win->setBackground(8);
 				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
 						DrawLineUnderDifficulty);
 				return state;
@@ -143,7 +139,7 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH,
 			{
 				*amountOfPlayers = 2;
 				DrawLineUnderNumPlayers = S2;
-				win->setBackground(11);
+				win->setBackground(8);
 				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
 						DrawLineUnderDifficulty);
 				return state;
@@ -152,14 +148,14 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH,
 			{
 				*amountOfPlayers = 3;
 				DrawLineUnderNumPlayers = S3;
-				win->setBackground(11);
+				win->setBackground(8);
 				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
 						DrawLineUnderDifficulty);
 				return state;
 			}
-			else if (SB->col(mXH, mYH))
+			else if (back->col(mXH, mYH))
 			{
-				win->setBackground(12);
+				win->setBackground(9);
 				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
 						DrawLineUnderDifficulty);
 				if (keyDown == "MOUSEBUTTONDOWN")
@@ -169,7 +165,7 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH,
 			{
 				*gameMode = 'E';
 				DrawLineUnderMode = SEN;
-				win->setBackground(11);
+				win->setBackground(8);
 				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
 						DrawLineUnderDifficulty);
 				return state;
@@ -178,7 +174,7 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH,
 			{
 				*gameMode = 'C';
 				DrawLineUnderMode = SC;
-				win->setBackground(11);
+				win->setBackground(8);
 				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
 						DrawLineUnderDifficulty);
 				return state;
@@ -187,7 +183,7 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH,
 			{
 				*difficulty = 'E';
 				DrawLineUnderDifficulty = SE;
-				win->setBackground(11);
+				win->setBackground(8);
 				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
 						DrawLineUnderDifficulty);
 				return state;
@@ -196,7 +192,7 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH,
 			{
 				*difficulty = 'M';
 				DrawLineUnderDifficulty = SM;
-				win->setBackground(11);
+				win->setBackground(8);
 				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
 						DrawLineUnderDifficulty);
 				return state;
@@ -205,54 +201,50 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH,
 			{
 				*difficulty = 'H';
 				DrawLineUnderDifficulty = SH;
-				win->setBackground(11);
+				win->setBackground(8);
 				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
 						DrawLineUnderDifficulty);
 				return state;
 			}
 			else
 			{
-				win->setBackground(11);
+				win->setBackground(8);
 				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
 						DrawLineUnderDifficulty);
 				return state;
 			}
 			break;
 		case 'G':
-			if (GM->col(mXH, mYH))
+			if (back->col(mXH, mYH))
 			{
-				win->setBackground(7);
+				win->setBackground(13);
 				if (keyDown == "MOUSEBUTTONDOWN")
 					return 'B';
 			}
-			else if (GR->col(mXH, mYH))
+			else if (keyDown!="")
 			{
-				win->setBackground(8);
-				if (keyDown == "MOUSEBUTTONDOWN")
 					return 'E';
 			}
 			else
 			{
-				win->setBackground(6);
+				win->setBackground(12);
 				return state;
 			}
 			break;
 		case 'V':
-			if (VN->col(mXH, mYH))
+			if (keyDown!="")
 			{
-				win->setBackground(15);
-				if (keyDown == "MOUSEBUTTONDOWN")
 					return 'C';
 			}
-			else if (VM->col(mXH, mYH))
+			else if (back->col(mXH, mYH))
 			{
-				win->setBackground(14);
+				win->setBackground(11);
 				if (keyDown == "MOUSEBUTTONDOWN")
 					return 'B';
 			}
 			else
 			{
-				win->setBackground(13);
+				win->setBackground(10);
 				return state;
 			}
 			break;

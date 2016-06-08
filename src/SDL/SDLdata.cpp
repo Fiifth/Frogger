@@ -10,6 +10,7 @@
 #include <SDL_image.h>
 #include <stdlib.h>
 #include "Animator.h"
+#include <iostream>
 
 using namespace frogger_sdl;
 
@@ -18,7 +19,7 @@ SDLdata::SDLdata()
 }
 SDLdata::~SDLdata()
 {
-	deleteTextures(menuTextures);
+	deleteTextures(menu2Textures);
 	deleteTextures(backTex);
 	deleteTextures(playerTex);
 	deleteTextures(ObstTex);
@@ -72,42 +73,19 @@ void SDLdata::updateScreen()
 }
 void SDLdata::createTextures()
 {
-	std::string path = "C:/frogger/menu/";
+	std::string recourcePath=SDL_GetBasePath();
+	std::string path = "test/line.png";
 
-	SDL_Texture* B = IMG_LoadTexture(re, (path + "B.png").c_str());
-	SDL_Texture* BH = IMG_LoadTexture(re, (path + "BH.png").c_str());
-	SDL_Texture* BHE = IMG_LoadTexture(re, (path + "BHE.png").c_str());
-	SDL_Texture* BQ = IMG_LoadTexture(re, (path + "BQ.png").c_str());
-	SDL_Texture* BS = IMG_LoadTexture(re, (path + "BS.png").c_str());
-	SDL_Texture* BST = IMG_LoadTexture(re, (path + "BST.png").c_str());
-	SDL_Texture* G = IMG_LoadTexture(re, (path + "G.png").c_str());
-	SDL_Texture* GM = IMG_LoadTexture(re, (path + "GM.png").c_str());
-	SDL_Texture* GR = IMG_LoadTexture(re, (path + "GR.png").c_str());
-	SDL_Texture* H = IMG_LoadTexture(re, (path + "H.png").c_str());
-	SDL_Texture* HB = IMG_LoadTexture(re, (path + "HB.png").c_str());
-	SDL_Texture* S = IMG_LoadTexture(re, (path + "S.png").c_str());
-	SDL_Texture* SB = IMG_LoadTexture(re, (path + "SB.png").c_str());
-	SDL_Texture* V = IMG_LoadTexture(re, (path + "V.png").c_str());
-	SDL_Texture* VM = IMG_LoadTexture(re, (path + "VM.png").c_str());
-	SDL_Texture* VN = IMG_LoadTexture(re, (path + "VN.png").c_str());
-	menuTextures=
-	{	B,BH,BHE,BQ,BS,BST,G,GM,GR,H,HB,S,SB,V,VM,VN};
-	line = IMG_LoadTexture(re, (path + "line.png").c_str());
+	line = IMG_LoadTexture(re, (recourcePath+"test/line.png").c_str());
 
-	std::string imagePathBackground1 = "C:/frogger/back1.png";
-	std::string imagePathBackground2 = "C:/frogger/back2.png";
-	std::string imagePathBackground3 = "C:/frogger/back3.png";
+	fillTextureVectors(&backTex,"back",2);
 
-	backTex.push_back(IMG_LoadTexture(re, imagePathBackground1.c_str()));
-	backTex.push_back(IMG_LoadTexture(re, imagePathBackground2.c_str()));
-	backTex.push_back(IMG_LoadTexture(re, imagePathBackground3.c_str()));
-
-	fillTextureVectors(&playerTex,"frog",3);
-	fillTextureVectors(&ObstTex,"o",12);
-	fillTextureVectors(&laneTex,"lane",9);
+	fillTextureVectors(&playerTex,"frog",5);
+	//fillTextureVectors(&ObstTex,"o",12);
+	//fillTextureVectors(&laneTex,"lane",9);
 	fillTextureVectors(&itemTex,"item",2);
 	fillTextureVectors(&projTex,"proj",0);
-	//fillTextureVectors(&menu2Textures,"m",13);
+	fillTextureVectors(&menu2Textures,"menu/m",13);
 }
 
 
@@ -145,7 +123,7 @@ void SDLdata::setScreenWidth(int* screenWidth)
 
 std::vector<SDL_Texture*>* frogger_sdl::SDLdata::getMenuTextures()
 {
-	return &menuTextures;
+	return &menu2Textures;
 }
 
 SDL_Texture* frogger_sdl::SDLdata::getLine()
@@ -161,7 +139,8 @@ void frogger_sdl::SDLdata::deleteTextures(std::vector<SDL_Texture*> textureVecto
 
 void frogger_sdl::SDLdata::fillTextureVectors(std::vector<SDL_Texture*>* textureVector, std::string prefix,	int endNumber)
 {
-	std::string dir = "C:/frogger/"+prefix;
+	std::string recourcePath=SDL_GetBasePath();
+	std::string dir = recourcePath+"frogger/"+prefix;
 		for (int i=0;i<=endNumber;i++)
 		{
 			std::string completeDir=dir + std::to_string(i)+".png";
@@ -173,9 +152,17 @@ void frogger_sdl::SDLdata::fillTextureVectors(std::vector<SDL_Texture*>* texture
 std::vector<SDL_Texture*>* frogger_sdl::SDLdata::getTextureVector(char type)
 {
 	if(type=='O')
+	{
+		if (ObstTex.empty())
+			fillTextureVectors(&ObstTex,"o",12);
 		return &ObstTex;
+	}
 	else if(type=='L')
+	{
+		if(laneTex.empty())
+			fillTextureVectors(&laneTex,"lane",9);
 		return &laneTex;
+	}
 	else if(type=='I')
 		return &itemTex;
 	else if(type=='B')

@@ -96,8 +96,11 @@ void WindowSDL::dislayData(list<frogger::Player*>* players)
 		newString = newString + std::to_string(pl->getProjectiles());
 		newString = newString + " life: ";
 		newString = newString + std::to_string(pl->getLife());
+		if(pl->getRemainingTime()!=-1)
+		{
 		newString = newString + " time: ";
 		newString = newString + std::to_string(pl->getRemainingTime());
+		}
 		newString = newString + "  ";
 		i++;
 	}

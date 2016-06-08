@@ -19,7 +19,7 @@ LevelProperties::LevelProperties(char mode, char difficulty) :
 		laneAni={getAnimator({0,1,2},{40,5,10}),getAnimator({3},{0}),getAnimator({4,5},{20,20}),
 				getAnimator({4,5,4,5,6,7,8,9,7,6},{40,40,40,40,30,20,20,-70,10,20})};
 
-		playerAni={getAnimator({0,1},{1,0}),getAnimator({2,3},{1,0})};
+		playerAni={getAnimator({0,1},{1,0}),getAnimator({2,3},{1,0}),getAnimator({4,5},{1,0})};
 
 		itemAni={getAnimator({0},{0}),getAnimator({1},{0}),getAnimator({2},{0})};
 
@@ -52,25 +52,25 @@ LevelProperties::~LevelProperties()
 
 void LevelProperties::easyLevel()
 {
-	seg1 = new RowProp(1, 5, 'B', mode, 40, 30, 0, true, false, getVec(0, 4), {0, 1, 2}, { 10, 30, 70 });
-	seg2 = new RowProp(1, 5, 'B', mode, 50, 10, 20, true, false, getVec(0, 4), {0, 1, 2}, { 10, 20, 70 });
-	seg3 = new RowProp(1, 5, 'C', mode, 40, 30, 70, false, true, getVec(0, 4), {0, 1, 2}, { 10, 20, 70 });
-	seg4 = new RowProp(1, 5, 'C', mode, 50, 10, 70, false, true, getVec(0, 4), {0, 1, 2}, { 10, 20, 70 });
+	seg1 = new RowProp(1, 0, 'B', mode, 40, 30, 0, true, false, getVec(0, 4), {0, 1, 2}, { 10, 30, 70 });
+	seg2 = new RowProp(1, 1, 'B', mode, 50, 10, 20, true, false, getVec(0, 4), {0, 1, 2}, { 10, 20, 70 });
+	seg3 = new RowProp(1, 0, 'C', mode, 40, 30, 70, false, true, getVec(0, 4), {0, 1, 2}, { 10, 20, 70 });
+	seg4 = new RowProp(1, 1, 'C', mode, 50, 10, 70, false, true, getVec(0, 4), {0, 1, 2}, { 10, 20, 70 });
 }
 void frogger::LevelProperties::mediumLevel()
 {
 	seg1 = new RowProp(1, 0, 'B', mode, 40, 30, 0, true, false, getVec(0, 6), {0, 1, 2, 3 }, { 10, 30, 70 });
-	seg2 = new RowProp(1, 0, 'B', mode, 50, 10, 20, true, false, getVec(0, 6), {0, 1, 2, 3 }, { 10, 20, 70 });
+	seg2 = new RowProp(1, 1, 'B', mode, 50, 10, 20, true, false, getVec(0, 6), {0, 1, 2, 3 }, { 10, 20, 70 });
 	seg3 = new RowProp(1, 0, 'C', mode, 40, 30, 70, false, true, getVec(0, 6), {0, 1, 2, 3 }, { 10, 20, 70 });
-	seg4 = new RowProp(1, 0, 'C', mode, 50, 10, 70, false, true, getVec(0, 6), {0, 1, 2, 3 }, { 10, 20, 70 });
+	seg4 = new RowProp(1, 1, 'C', mode, 50, 10, 70, false, true, getVec(0, 6), {0, 1, 2, 3 }, { 10, 20, 70 });
 }
 
 void frogger::LevelProperties::hardLevel()
 {
 	seg1 = new RowProp(1, 0, 'B', mode, 40, 30, 0, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 30, 70 });
-	seg2 = new RowProp(1, 0, 'B', mode, 50, 10, 20, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
+	seg2 = new RowProp(1, 1, 'B', mode, 50, 10, 20, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
 	seg3 = new RowProp(1, 0, 'C', mode, 40, 30, 70, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
-	seg4 = new RowProp(1, 0, 'C', mode, 50, 10, 70, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
+	seg4 = new RowProp(1, 1, 'C', mode, 50, 10, 70, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
 }
 
 RowProp* LevelProperties::getFirstRow()
@@ -151,24 +151,24 @@ void frogger::LevelProperties::levelUp()
 
 	if (level == 2)
 	{
-		seg1->increaseProp(0, 0, 10, -1, 5);
-		seg2->increaseProp(0, 0, 10, -1, 5);
-		seg3->increaseProp(0, 0, 10, -1, 5);
-		seg4->increaseProp(0, 0, 10, -1, 5);
+		seg1->increaseProp(2, 1, 10, -1, 5);
+		seg2->increaseProp(0, -1, 10, -1, 5);
+		seg3->increaseProp(2, 1, 10, -1, 5);
+		seg4->increaseProp(0, -1, 10, -1, 5);
 	}
 	else if (level == 3)
 	{
-		seg1->increaseProp(1, 0, 0, -1, 0);
-		seg2->increaseProp(1, 0, 0, -1, 0);
-		seg3->increaseProp(1, 0, 0, -1, 0);
-		seg4->increaseProp(1, 0, 0, -1, 0);
+		seg1->increaseProp(0, 0, 0, -1, 0);
+		seg2->increaseProp(0, 0, 0, -1, 0);
+		seg3->increaseProp(0, 0, 0, -1, 0);
+		seg4->increaseProp(0, 0, 0, -1, 0);
 	}
 	else if (level == 4)
 	{
 		seg1->increaseProp(0, 0, 0, 0, 0);
-		seg2->increaseProp(0, 0, 0, 0, 0);
+		seg2->increaseProp(0, -1, 0, 0, 0);
 		seg3->increaseProp(0, 0, 0, 0, 0);
-		seg4->increaseProp(0, 0, 0, 0, 0);
+		seg4->increaseProp(0, -1, 0, 0, 0);
 	}
 	else if (level == 5)
 	{

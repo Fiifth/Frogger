@@ -47,6 +47,8 @@ namespace frogger
 			MenuButton* DrawLineUnderMode;
 			MenuButton* DrawLineUnderNumPlayers;
 			MenuButton* DrawLineUnderDifficulty;
+
+			MenuButton* back;
 	};
 }
 #endif /* MENU_H_ */

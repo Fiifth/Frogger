@@ -273,6 +273,7 @@ bool Level::objectiveCompleteCheck(std::vector<std::list<Props*> >* propsOnRow)
 	bool ready = true;
 	for (Props* prop : propsOnRow->at(0))
 	{
+		if(prop->getX()<=(*win->getWidth()-prop->getW()))
 		ready = prop->itemListEmpty() && ready ? true : false;
 	}
 	return ready;

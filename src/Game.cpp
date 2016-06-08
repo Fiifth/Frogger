@@ -70,6 +70,8 @@ Game::Game(Factory* F)
 
 		keyStroke = event->getEvent();
 		event->getMousePos(&x, &y);
+		if (keyStroke =="Escape")
+			state='B';
 
 		switch (state)
 		{
@@ -84,6 +86,11 @@ Game::Game(Factory* F)
 					addHighScore(players, gameMode);
 					for(Player* player:*players)
 						delete(player);
+					players->clear();
+					delete(level);
+					level=nullptr;
+					delete(lvlprop);
+					lvlprop=nullptr;
 				}
 
 				newHighscore=PrevState!='H';
@@ -135,11 +142,9 @@ Game::Game(Factory* F)
 				}
 				else if (PrevState == 'V')
 				{
+					if(level!=nullptr)
+										delete(level);
 					lvlprop->levelUp();
-					addPlayers(F, players, amountOfPlayers, plStartX, plStartY,
-							plStartW, plStartH, plStartSpeed, rowHeight,
-							gameMode, difficulty,lvlprop,win);
-
 					level = new Level(F, win, players, rowHeight, lvlprop);
 					state = 'C';
 					PrevState = state;
@@ -153,6 +158,8 @@ Game::Game(Factory* F)
 					delete(lvlprop);
 				if(level!=nullptr)
 					delete(level);
+				for(Player* player:*players)
+					delete(player);
 				return;
 				break;
 		}
@@ -178,6 +185,8 @@ void frogger::Game::addPlayers(Factory* F, list<Player*>* players, int amount,
 		int X, int Y, int W, int H, int speed, int rowHeight, char gameMode,
 		char difficulty,LevelProperties* lvlProp,Window* win)
 {
+	for(Player* player:*players)
+							delete(player);
 	players->clear();
 	int life = 4, totalTime = 50, scorePerStep = 10, projectiles = 3; //classic easy mode
 	bool counterEnabled = true;
@@ -190,6 +199,7 @@ void frogger::Game::addPlayers(Factory* F, list<Player*>* players, int amount,
 
 	totalTime = (difficulty == 'M') ? 40 : totalTime;
 	totalTime = (difficulty == 'H') ? 30 : totalTime;
+	totalTime = (gameMode == 'E') ? -1 : totalTime;
 
 	scorePerStep = (difficulty == 'M') ? 20 : scorePerStep;
 	scorePerStep = (difficulty == 'H') ? 30 : scorePerStep;
@@ -223,7 +233,7 @@ void frogger::Game::addPlayers(Factory* F, list<Player*>* players, int amount,
 	if (amount >= 3)
 	{
 		Player* player3 = F->createPlayer1();
-		player3->setAni(lvlProp->getPlayerAni(1).clone());
+		player3->setAni(lvlProp->getPlayerAni(2).clone());
 		player3->setF(F);
 		player3->setProjAniList(lvlProp->getProjAni());
 		player3->initPlayer(speed,speed,W,H,X+W,Y,X+W,Y,win->getWidth(),win->getGameWindowHeight());
