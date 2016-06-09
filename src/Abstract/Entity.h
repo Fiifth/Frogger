@@ -28,8 +28,8 @@ namespace frogger
 			int getW() const;
 			int getX() const;
 			int getY() const;
-			int getHeight() const;
-			int getWidth() const;
+			int getScrHeight() const;
+			int getScrWidth() const;
 			int getSpeed() const;
 			void setSpeed(int speed);
 			char getDirection() const;

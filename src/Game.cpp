@@ -1,34 +1,35 @@
 /*
  * Game.cpp
- *
+ * Manages the game.
+ * Consist mainly of a state machine that updates its state by executing a level or executing the menu. Also keeps track of the highscore.
  *  Created on: 22 Feb 2016
  *      
  */
 
+/*
+ * States:
+ * B: start menu
+ * H: highscore display menu
+ * S: settings menu
+ * V: victory screen
+ * G: game over screen
+ *
+ * E: Endless game mode
+ * C: classic game mode
+ * Q: quit state
+ *
+ */
+
+/* Row types:
+* A: First row (players starts here)
+* B: Obstacle row (row where obstacles are visible and lanes invisible)
+* C: Lane row (row where obstacles are invisible and lanes visible)
+* D: middle row (no movement, can contain some bushes)
+* E: last row (row where player wants to go)
+ */
+
+
 #include "Game.h"
-
-#include "SDLdata.h"
-#include "Factory.h"
-#include "Window.h"
-#include "Events.h"
-#include <string>
-#include "Row.h"
-#include <vector>
-#include <list>
-#include <iterator>
-#include <algorithm>
-#include <stdlib.h>
-#include <time.h>
-#include <ctime>
-#include <ratio>
-#include <chrono>
-#include "Projectile.h"
-#include <Obstacle.h>
-#include <Player.h>
-#include "Level.h"
-#include "LevelProperties.h"
-#include "Menu.H"
-
 using namespace frogger;
 
 Game::Game(Factory* F)
@@ -49,10 +50,10 @@ Game::Game(Factory* F)
 	int gameWindowWidth = WindowWidth;
 	int plStartW = rowHeight, plStartH = rowHeight, plStartSpeed = rowHeight;
 	int plStartX = (gameWindowWidth / 2), plStartY = (gameWindowHeight- plStartW);
-	string keyStroke;
+	std::string keyStroke;
 
-	list<Player*> playersR;
-	list<Player*>* players = &playersR;
+	std::list<Player*> playersR;
+	std::list<Player*>* players = &playersR;
 	Events* event = F->createEvents();
 	Window* win = F->createWindow();
 	LevelProperties* lvlprop=nullptr;
@@ -169,7 +170,7 @@ Game::~Game()
 
 }
 
-bool Game::playersAlive(list<Player*>* players)
+bool Game::playersAlive(std::list<Player*>* players)
 {
 	bool temp = false;
 	for (Player* player : *players)
@@ -179,7 +180,7 @@ bool Game::playersAlive(list<Player*>* players)
 	return temp;
 }
 
-void frogger::Game::addPlayers(Factory* F, list<Player*>* players, int amount,
+void frogger::Game::addPlayers(Factory* F, std::list<Player*>* players, int amount,
 		int X, int Y, int W, int H, int speed, char gameMode,
 		char difficulty,LevelProperties* lvlProp,Window* win)
 {
@@ -241,7 +242,7 @@ void frogger::Game::addPlayers(Factory* F, list<Player*>* players, int amount,
 	}
 }
 
-void frogger::Game::addHighScore(list<Player*>* players, char gameMode)
+void frogger::Game::addHighScore(std::list<Player*>* players, char gameMode)
 {
 	for (Player* play : *players)
 	{

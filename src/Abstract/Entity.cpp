@@ -40,7 +40,7 @@ void Entity::move(int deltaX, int deltaY, bool leaveScreen)
 { //leaveScreen determines if the object is allowed to go offscreen (the player will not be allowed/obstacles have to leave screen)
 	int leftLimit, rightLimit, upperLimit, lowerlimit;
 	leftLimit = leaveScreen ? -*screenWidth * 4 : 0;
-	rightLimit = leaveScreen ? *screenWidth + getWidth() * 4 : *screenWidth;
+	rightLimit = leaveScreen ? *screenWidth + getScrWidth() * 4 : *screenWidth;
 	upperLimit = leaveScreen ? -*screenWidth * 4 : 0;
 	lowerlimit =
 			leaveScreen ?
@@ -86,12 +86,12 @@ int Entity::getY() const
 	return *y;
 }
 
-int Entity::getHeight() const
+int Entity::getScrHeight() const
 {
 	return *screenHeight;
 }
 
-int Entity::getWidth() const
+int Entity::getScrWidth() const
 {
 	return *screenWidth;
 }

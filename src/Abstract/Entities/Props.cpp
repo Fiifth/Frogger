@@ -46,7 +46,7 @@ void Props::moveForward()
 }
 bool Props::isRoom()
 {
-	return ((x > 0) && (x < getWidth() - getW()));
+	return ((x > 0) && (x < getScrWidth() - getW()));
 }
 
 bool Props::isVisible() const

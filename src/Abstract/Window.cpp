@@ -12,10 +12,10 @@ using namespace frogger;
 
 Window::Window()
 {
-	WIDTHR=640;
-	HEIGHTR=480;
-	WIDTH = &WIDTHR;
-	HEIGHT = &HEIGHTR;
+	screenWidthR=640;
+	screenHeightR=480;
+	screenWidth = &screenWidthR;
+	screenHeight = &screenHeightR;
 	dataWindowHeightR=20;
 	gameWindowHeightR=460;
 	dataWindowHeight = &dataWindowHeightR;
@@ -29,8 +29,8 @@ Window::~Window()
 void Window::setProp(int width, int height, int dataWindowHeight,
 		char const* title)
 {
-	WIDTHR = width;
-	HEIGHTR = height;
+	screenWidthR = width;
+	screenHeightR = height;
 	dataWindowHeightR = dataWindowHeight;
 	gameWindowHeightR = height - dataWindowHeight;
 	TITLE = title;
@@ -38,12 +38,12 @@ void Window::setProp(int width, int height, int dataWindowHeight,
 
 int* Window::getHeight() const
 {
-	return HEIGHT;
+	return screenHeight;
 }
 
 int* Window::getWidth() const
 {
-	return WIDTH;
+	return screenWidth;
 }
 
 int* Window::getGameWindowHeight() const

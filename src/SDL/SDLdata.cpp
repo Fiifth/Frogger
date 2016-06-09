@@ -11,7 +11,6 @@
 #include <stdlib.h>
 #include "Animator.h"
 #include <math.h>
-
 using namespace frogger_sdl;
 
 SDLdata::SDLdata()
@@ -80,7 +79,7 @@ void SDLdata::createTextures()
 	fillTextureVectors(&backTex,"back",2);
 
 	fillTextureVectors(&playerTex,"frog",5);
-	//fillTextureVectors(&ObstTex,"o",12); //will be created when needed to save on startup time
+	//fillTextureVectors(&ObstTex,"o",15); //will be created when needed to save on startup time
 	//fillTextureVectors(&laneTex,"lane",9); //will be created when needed to save on startup time
 	fillTextureVectors(&itemTex,"item",2);
 	fillTextureVectors(&projTex,"proj",0);
@@ -139,7 +138,7 @@ void frogger_sdl::SDLdata::deleteTextures(std::vector<SDL_Texture*> textureVecto
 void frogger_sdl::SDLdata::fillTextureVectors(std::vector<SDL_Texture*>* textureVector, std::string prefix,	int endNumber)
 {
 	std::string recourcePath=SDL_GetBasePath();
-	std::string dir = recourcePath+"frogger/"+prefix;
+	std::string dir = recourcePath+"frogger\\"+prefix;
 		for (int i=0;i<=endNumber;i++)
 		{
 			std::string completeDir=dir + std::to_string(i)+".png";
@@ -153,7 +152,7 @@ std::vector<SDL_Texture*>* frogger_sdl::SDLdata::getTextureVector(char type)
 	if(type=='O')
 	{
 		if (ObstTex.empty())
-			fillTextureVectors(&ObstTex,"o",12);
+			fillTextureVectors(&ObstTex,"o",15);
 		return &ObstTex;
 	}
 	else if(type=='L')

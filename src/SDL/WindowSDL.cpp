@@ -37,11 +37,11 @@ WindowSDL::~WindowSDL()
 void WindowSDL::makeWindow(int ScreenWidth, int ScreenHeight,int dataWindowHeight, char const* title)
 {
 	setProp(ScreenWidth, ScreenHeight, dataWindowHeight, title);
-	sdldata->setScreenDimension(WIDTH, gameWindowHeight);
+	sdldata->setScreenDimension(screenWidth, gameWindowHeight);
 
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init();
-	win = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED,	SDL_WINDOWPOS_CENTERED, *WIDTH, *HEIGHT, SDL_WINDOW_SHOWN);
+	win = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED,	SDL_WINDOWPOS_CENTERED, *screenWidth, *screenHeight, SDL_WINDOW_SHOWN);
 	ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
 	sdldata->setRen(ren);
@@ -107,8 +107,8 @@ void WindowSDL::dislayData(std::list<frogger::Player*>* players)
 		int iW=0, iH=0;
 		SDL_QueryTexture(playerDataTex, NULL, NULL, &iW, &iH);
 		PlayerMessageRect.x = 0;
-		PlayerMessageRect.y = *HEIGHT-*dataWindowHeight+3;
-		PlayerMessageRect.w = (iW <= *WIDTH) ? iW : *WIDTH;
+		PlayerMessageRect.y = *screenHeight-*dataWindowHeight+3;
+		PlayerMessageRect.w = (iW <= *screenWidth) ? iW : *screenWidth;
 		PlayerMessageRect.h = iH;
 	}
 
@@ -117,7 +117,7 @@ void WindowSDL::dislayData(std::list<frogger::Player*>* players)
 }
 void WindowSDL::setBackground(int index)
 {
-	sdldata->renderTexture((*MenuTextures).at(index), sdldata->getRen(), 0, 0,WIDTH, *HEIGHT, 0, false);
+	sdldata->renderTexture((*MenuTextures).at(index), sdldata->getRen(), 0, 0,screenWidth, *screenHeight, 0, false);
 }
 void WindowSDL::updateScreen()
 {
@@ -167,8 +167,8 @@ void WindowSDL::makeHighScoreTexture(std::vector<int> highScore)
 		SDL_FreeSurface(highScoreSurf);
 		int iW, iH;
 		SDL_QueryTexture(highScoreTex, NULL, NULL, &iW, &iH);
-		Message_rect.x = (*WIDTH / 2) - iW / 2;
-		Message_rect.y = ((*HEIGHT) / 3) + (iH * i);
+		Message_rect.x = (*screenWidth / 2) - iW / 2;
+		Message_rect.y = ((*screenHeight) / 3) + (iH * i);
 		Message_rect.w = iW;
 		Message_rect.h = iH;
 

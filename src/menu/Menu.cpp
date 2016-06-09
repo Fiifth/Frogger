@@ -17,19 +17,19 @@ Menu::Menu(Window* win, char* gameMode, int* amountOfPlayers, char* difficulty) 
 				difficulty)
 {
 
-	BST = new MenuButton(0.24719,0.4052,0.50843,0.09294, win);
-	BH = new MenuButton(0.2809,0.56506,0.46348,0.0855, win);
-	BQ = new MenuButton(0.39888,0.72119,0.19944,0.09665, win);
-	BHE = new MenuButton(0.02247,0.84387,0.10674,0.13383, win);
-	BS = new MenuButton(0.83989,0.829,0.13764,0.15985, win);
-	S1 = new MenuButton(0.43258,0.50558,0.05618,0.05576, win);
-	S2 = new MenuButton(0.43258,0.5948,0.05618,0.05576, win);
-	S3 = new MenuButton(0.43258,0.69517,0.05618,0.05576, win);
-	SEN = new MenuButton(0.03933,0.50558,0.19663,0.05576, win);
-	SC = new MenuButton(0.03652,0.5948,0.18539,0.05204, win);
-	SE = new MenuButton(0.73315,0.49442,0.1264,0.05576, win);
-	SM = new MenuButton(0.73315,0.5948,0.19663,0.05576, win);
-	SH = new MenuButton(0.73315,0.69517,0.1264,0.05576, win);
+	BST = new MenuButton(0.24719,0.4052,0.50843,0.09294, win); //start game button
+	BH = new MenuButton(0.2809,0.56506,0.46348,0.0855, win); //high score button
+	BQ = new MenuButton(0.39888,0.72119,0.19944,0.09665, win); //quit button
+	BHE = new MenuButton(0.02247,0.84387,0.10674,0.13383, win); //help button
+	BS = new MenuButton(0.83989,0.829,0.13764,0.15985, win); //setting button
+	S1 = new MenuButton(0.43258,0.50558,0.05618,0.05576, win); //1 player setting
+	S2 = new MenuButton(0.43258,0.5948,0.05618,0.05576, win); //2 players setting
+	S3 = new MenuButton(0.43258,0.69517,0.05618,0.05576, win); //3 players setting
+	SEN = new MenuButton(0.03933,0.50558,0.19663,0.05576, win); //endless mode button
+	SC = new MenuButton(0.03652,0.5948,0.18539,0.05204, win); //classic mode button
+	SE = new MenuButton(0.73315,0.49442,0.1264,0.05576, win); //easy mode button
+	SM = new MenuButton(0.73315,0.5948,0.19663,0.05576, win); //medium mode button
+	SH = new MenuButton(0.73315,0.69517,0.1264,0.05576, win); //hard mode button
 
 	back=new MenuButton(0.38483,0.86617,0.22753,0.08178,win);
 
@@ -224,15 +224,15 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH)
 			}
 			break;
 		case 'V':
-			if (keyDown!="")
-			{
-					return 'C';
-			}
-			else if (back->col(mXH, mYH))
+			if (back->col(mXH, mYH))
 			{
 				win->setBackground(11);
 				if (keyDown == "MOUSEBUTTONDOWN")
 					return 'B';
+			}
+			else if (keyDown!="")
+			{
+				return 'C';
 			}
 			else
 			{

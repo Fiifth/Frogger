@@ -33,36 +33,36 @@
 #include "Projectile.h"
 #include <Obstacle.h>
 #include <Player.h>
-using namespace std;
+//using namespace std;
 namespace frogger
 {
 	class Level
 	{
 		public:
-			Level(Factory* F, Window* win, list<Player*>* players,
+			Level(Factory* F, Window* win, std::list<Player*>* players,
 					int rowHeight, LevelProperties* lvlprop);
 			virtual ~Level();
-			void levelExecution(string keyStroke);
+			void levelExecution(std::string keyStroke);
 			void rowGenerator(int rowHeight, int screenHight, Factory* F,
-					vector<Row*>* rows, vector<list<Props*>>* propsOnRow,
+					std::vector<Row*>* rows, std::vector<std::list<Props*>>* propsOnRow,
 					LevelProperties* lvlprop);
-			void propsGenerator(Factory* F, vector<Row*>* rows,
-					vector<list<Props*>>* propsOnRow);
-			int collisionDetection(vector<list<Props*>>* propsOnRow,list<Player*>* players);
+			void propsGenerator(Factory* F, std::vector<Row*>* rows,
+					std::vector<std::list<Props*>>* propsOnRow);
+			int collisionDetection(std::vector<std::list<Props*>>* propsOnRow,std::list<Player*>* players);
 			void fillEnemyList(Factory* F, std::vector<Row*>* rows,
 					std::vector<std::list<Props*>>* propsOnRow,
 					int screenWidth);
-			void drawGameElements(std::vector<std::list<Props*>>* propsOnRow,list<Player*>* players);
-			Props* obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack, int x);
-			Props* obsOrLane(list<Props*>* PreProp, Row* row);
-			bool followFrog(vector<Row*>* rows, list<Player*>* players, int factor);
+			void drawGameElements(std::vector<std::list<Props*>>* propsOnRow,std::list<Player*>* players);
+			Props* obsOrLane(std::list<Props*>* PreProp, Row* row, bool frontOrBack, int x);
+			Props* obsOrLane(std::list<Props*>* PreProp, Row* row);
+			bool followFrog(std::vector<Row*>* rows, std::list<Player*>* players, int factor);
 			bool objectiveCompleteCheck(std::vector<std::list<Props*>>* propsOnRow);
 			bool isObjectiveDone() const;
 			void resetLevel();
 			void initLevel();
 			void extraRowNeeded(int screenHeight,
-					int screenWidth, Factory* F, vector<Row*>* rows,
-					vector<list<Props*>>* propsOnRow, LevelProperties* lvlprop);
+					int screenWidth, Factory* F, std::vector<Row*>* rows,
+					std::vector<std::list<Props*>>* propsOnRow, LevelProperties* lvlprop);
 			void fillOneRow(Factory* F, Row* rows, std::vector<std::list<Props*>>* propsOnRow, int screenWidth);
 
 			struct drawMoveRemove
@@ -73,13 +73,13 @@ namespace frogger
 		private:
 			Factory* F;
 			Window* win;
-			list<Player*>* players;
+			std::list<Player*>* players;
 			int rowHeight;
 			std::string keyStroke;
-			vector<Row*> rowsR;
-			vector<list<Props*>> propsOnRowR;
-			vector<Row*>* rows = &rowsR;
-			vector<list<Props*>>* propsOnRow = &propsOnRowR;
+			std::vector<Row*> rowsR;
+			std::vector<std::list<Props*>> propsOnRowR;
+			std::vector<Row*>* rows = &rowsR;
+			std::vector<std::list<Props*>>* propsOnRow = &propsOnRowR;
 			bool objectiveDone = false;
 			LevelProperties* lvlprop;
 	};

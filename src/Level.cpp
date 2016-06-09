@@ -13,7 +13,7 @@
 #include "levelGenerator/RowProp.h"
 using namespace frogger;
 
-Level::Level(Factory* F, Window* win, list<Player*>* players, int rowHeight,
+Level::Level(Factory* F, Window* win, std::list<Player*>* players, int rowHeight,
 		LevelProperties* lvlprop) :
 		F(F), win(win), players(players), rowHeight(rowHeight), lvlprop(lvlprop)
 {
@@ -22,7 +22,7 @@ Level::Level(Factory* F, Window* win, list<Player*>* players, int rowHeight,
 
 Level::~Level()
 {
-	for(list<Props*> props:*propsOnRow)
+	for(std::list<Props*> props:*propsOnRow)
 	{
 		for(Props* prop:props)
 			delete(prop);
@@ -34,7 +34,7 @@ Level::~Level()
 		delete(row);
 	rows->clear();
 }
-void Level::levelExecution(string keyStroke)
+void Level::levelExecution(std::string keyStroke)
 {
 	int factor = 3;
 	int freeRows = 4;
@@ -76,11 +76,11 @@ void Level::levelExecution(string keyStroke)
 }
 
 void Level::rowGenerator(int rowHeight, int screenHight, Factory* F,
-		vector<Row*>* rows, vector<list<Props*>>* propsOnRow,
+		std::vector<Row*>* rows, std::vector<std::list<Props*>>* propsOnRow,
 		LevelProperties* lvlprop)
 {
 	int numberOfRows = (screenHight) / rowHeight;
-	list<Props*> enemies;
+	std::list<Props*> enemies;
 	char dir = 'L';
 	RowProp* rowProp;
 	if (lvlprop->getMode() == 'E')
@@ -128,15 +128,15 @@ void Level::rowGenerator(int rowHeight, int screenHight, Factory* F,
 	}
 }
 
-void Level::propsGenerator(Factory* F, vector<Row*>* rows,
-		vector<list<Props*>>* propsOnRow)
+void Level::propsGenerator(Factory* F, std::vector<Row*>* rows,
+		std::vector<std::list<Props*>>* propsOnRow)
 {
 	for (Row* row : *rows)
 	{
 		if ((row->getRowProperties()->getType() == 'B')
 				|| (row->getRowProperties()->getType() == 'C'))
 		{
-			list<Props*>* PreProp = &propsOnRow->at(row->getNumber());
+			std::list<Props*>* PreProp = &propsOnRow->at(row->getNumber());
 			if ((PreProp->empty()) || ((PreProp->front())->isRoom()))
 			{
 				Props* prop = obsOrLane(PreProp, row);
@@ -146,9 +146,9 @@ void Level::propsGenerator(Factory* F, vector<Row*>* rows,
 	}
 }
 
-int Level::collisionDetection(vector<list<Props*>>* propsOnRow, list<Player*>* players)
+int Level::collisionDetection(std::vector<std::list<Props*>>* propsOnRow, std::list<Player*>* players)
 {
-	for (list<Props*> temp : *propsOnRow)
+	for (std::list<Props*> temp : *propsOnRow)
 	{
 		for (Props* temp2 : temp)
 		{
@@ -164,8 +164,8 @@ int Level::collisionDetection(vector<list<Props*>>* propsOnRow, list<Player*>* p
 	return false;
 }
 
-void Level::fillEnemyList(Factory* F, vector<Row*>* rows,
-		vector<list<Props*>>* propsOnRow, int screenWidth)
+void Level::fillEnemyList(Factory* F, std::vector<Row*>* rows,
+		std::vector<std::list<Props*>>* propsOnRow, int screenWidth)
 {
 	for (Row* row : *rows)
 	{
@@ -173,11 +173,11 @@ void Level::fillEnemyList(Factory* F, vector<Row*>* rows,
 	}
 }
 
-void Level::drawGameElements(std::vector<std::list<Props*>>* propsOnRow, list<Player*>* players)
+void Level::drawGameElements(std::vector<std::list<Props*>>* propsOnRow, std::list<Player*>* players)
 {
 	int i = 0;
 
-	for (list<Props*> temp : *propsOnRow)
+	for (std::list<Props*> temp : *propsOnRow)
 	{
 		propsOnRow->at(i).remove_if(drawMoveRemove());
 		i++;
@@ -189,7 +189,7 @@ void Level::drawGameElements(std::vector<std::list<Props*>>* propsOnRow, list<Pl
 	}
 }
 
-Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack, int x)
+Props* Level::obsOrLane(std::list<Props*>* PreProp, Row* row, bool frontOrBack, int x)
 {
 	Props* prop;
 	int number = rand() % 100;
@@ -251,7 +251,7 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row, bool frontOrBack, int x
 	return prop;
 }
 
-bool Level::followFrog(vector<Row*>* rows, list<Player*>* players, int factor)
+bool Level::followFrog(std::vector<Row*>* rows, std::list<Player*>* players, int factor)
 {
 	for (Row* row : *rows)
 	{
@@ -289,14 +289,12 @@ void Level::resetLevel()
 
 void Level::initLevel()
 {
-	rowGenerator(rowHeight, *win->getGameWindowHeight(), F, rows, propsOnRow,
-			lvlprop);
+	rowGenerator(rowHeight, *win->getGameWindowHeight(), F, rows, propsOnRow,	lvlprop);
 	fillEnemyList(F, rows, propsOnRow, *win->getWidth());
-
 }
 
 void Level::extraRowNeeded(int screenHeight, int screenWidth,
-		Factory* F, vector<Row*>* rows, vector<list<Props*>>* propsOnRow,
+		Factory* F, std::vector<Row*>* rows, std::vector<std::list<Props*>>* propsOnRow,
 		LevelProperties* lvlprop)
 {
 	Row* lowestRow = rows->back();
@@ -321,7 +319,7 @@ void Level::extraRowNeeded(int screenHeight, int screenWidth,
 	}
 }
 
-Props* Level::obsOrLane(list<Props*>* PreProp, Row* row)
+Props* Level::obsOrLane(std::list<Props*>* PreProp, Row* row)
 {
 	Props* prop;
 	int number = rand() % 100;
@@ -356,7 +354,7 @@ Props* Level::obsOrLane(list<Props*>* PreProp, Row* row)
 void Level::fillOneRow(Factory* F, Row* row,
 		std::vector<std::list<Props*> >* propsOnRow, int screenWidth)
 {
-	list<Props*> listOfProps;
+	std::list<Props*> listOfProps;
 	int x = 0;
 	while (x < screenWidth)
 	{
@@ -365,7 +363,7 @@ void Level::fillOneRow(Factory* F, Row* row,
 				|| row->getRowProperties()->getType() == 'D'
 				|| row->getRowProperties()->getType() == 'E')
 		{
-			list<Props*>* PreProp = &propsOnRow->at(row->getNumber());
+			std::list<Props*>* PreProp = &propsOnRow->at(row->getNumber());
 
 			Props* prop = obsOrLane(PreProp, row, row->isDirLeft(), x);
 			if (row->isDirLeft())

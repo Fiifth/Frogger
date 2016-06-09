@@ -34,10 +34,10 @@ namespace frogger
 			int* getHeight() const;
 			int* getWidth() const;
 		protected:
-			int WIDTHR;
-			int HEIGHTR;
-			int* WIDTH = &WIDTHR;
-			int* HEIGHT = &HEIGHTR;
+			int screenWidthR;
+			int screenHeightR;
+			int* screenWidth = &screenWidthR;
+			int* screenHeight = &screenHeightR;
 			int dataWindowHeightR;
 			int gameWindowHeightR;
 			int* dataWindowHeight = &dataWindowHeightR;
