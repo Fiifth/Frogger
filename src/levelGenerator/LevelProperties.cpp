@@ -138,6 +138,18 @@ void LevelProperties::setMode(char mode)
 
 RowProp* LevelProperties::getRandomRow()
 {
+	if(difficulty=='E')
+	{
+		int temp = rand() % 60;
+		if (temp < 25)
+			return seg1;
+		else if (temp < 50)
+			return seg2;
+		else
+			return middleRow;
+	}
+	else
+	{
 	int temp = rand() % 110;
 	if (temp < 25)
 		return seg1;
@@ -149,6 +161,7 @@ RowProp* LevelProperties::getRandomRow()
 		return seg4;
 	else
 		return middleRow;
+	}
 }
 
 void frogger::LevelProperties::levelUp()
