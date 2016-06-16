@@ -8,7 +8,7 @@
  *      Author: Kwinten
  */
 
-#include <Abstract/Entities/Item.h>
+#include <abstract/entities/Item.h>
 using namespace frogger;
 Item::Item():	effect(0)
 {

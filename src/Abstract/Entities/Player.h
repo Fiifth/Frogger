@@ -7,14 +7,15 @@
 
 #ifndef ABSTRACT_ENTITIES_PLAYER_H_
 #define ABSTRACT_ENTITIES_PLAYER_H_
-#include "Abstract/Window.h"
-#include "Abstract/Entity.h"
-#include "Abstract/Row.h"
+#include <abstract/entities/Player.h>
+#include <abstract/entities/Projectile.h>
+#include <abstract/Entity.h>
+#include <abstract/Row.h>
+#include <abstract/Window.h>
+#include <abstract/entities/Props.h>
 #include <chrono>
 #include <string>
-#include "Abstract/Entities/Projectile.h"
 #include <list>
-#include "Abstract/Entities/Player.h"
 #include <vector>
 
 namespace frogger

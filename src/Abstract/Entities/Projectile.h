@@ -7,9 +7,9 @@
 
 #ifndef ABSTRACT_ENTITIES_PROJECTILE_H_
 #define ABSTRACT_ENTITIES_PROJECTILE_H_
-#include "Abstract/Entities/Props.h"
-#include "Abstract/Entity.h"
-#include "Abstract/Entities/Player.h"
+#include <abstract/entities/Player.h>
+#include <abstract/entities/Props.h>
+#include <abstract/Entity.h>
 namespace frogger
 {
 	class Projectile: public frogger::Props

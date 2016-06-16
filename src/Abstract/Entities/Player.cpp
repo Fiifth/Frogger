@@ -7,8 +7,8 @@
  *      Author: Kwinten
  */
 
-#include "Abstract/Entities/Player.h"
-#include "Abstract/Factory.h"
+#include <abstract/entities/Player.h>
+#include <abstract/Factory.h>
 using namespace frogger;
 
 Player::Player()

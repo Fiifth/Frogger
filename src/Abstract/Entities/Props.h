@@ -7,8 +7,8 @@
 
 #ifndef ABSTRACT_ENTITIES_PROPS_H_
 #define ABSTRACT_ENTITIES_PROPS_H_
-#include "Abstract/Entity.h"
-#include "Abstract/Row.h"
+#include <abstract/Entity.h>
+#include <abstract/Row.h>
 #include <levelGenerator/RowProp.h>
 namespace frogger
 {

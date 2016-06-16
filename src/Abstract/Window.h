@@ -7,11 +7,11 @@
 
 #ifndef ABSTRACT_WINDOW_H_
 #define ABSTRACT_WINDOW_H_
+#include <abstract/entities/Player.h>
+#include <abstract/Row.h>
 #include <string>
 #include <vector>
 #include <list>
-#include "Abstract/Row.h"
-#include "Abstract/Entities/Player.h"
 namespace frogger
 {
 	class Player;

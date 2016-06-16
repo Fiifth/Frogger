@@ -7,8 +7,8 @@
 
 #ifndef ABSTRACT_ENTITY_H_
 #define ABSTRACT_ENTITY_H_
+#include <abstract/Animator.h>
 #include <list>
-#include "Abstract/Animator.h"
 
 
 namespace frogger

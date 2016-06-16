@@ -9,8 +9,8 @@
  *      Author: Kwinten
  */
 
-#include <Abstract/Entities/Props.h>
-#include "Abstract/Factory.h"
+#include <abstract/entities/Props.h>
+#include <abstract/Factory.h>
 using namespace frogger;
 
 Props::Props():	row(nullptr), visible(true),turned(false),isTurenedByAni(false),itemRate(nullptr),shootRate(nullptr)

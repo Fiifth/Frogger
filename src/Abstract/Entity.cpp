@@ -6,8 +6,8 @@
  *      Author: Kwinten
  */
 
-#include "Abstract/Entity.h"
-#include "Abstract/Entities/Projectile.h"
+#include <abstract/entities/Projectile.h>
+#include <abstract/Entity.h>
 using namespace frogger;
 Entity::Entity()
 {

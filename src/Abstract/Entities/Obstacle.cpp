@@ -11,8 +11,8 @@
  *      Author: Kwinten
  */
 
-#include <Abstract/Entities/Obstacle.h>
-#include "Abstract/Factory.h"
+#include <abstract/entities/Obstacle.h>
+#include <abstract/Factory.h>
 using namespace frogger;
 Obstacle::Obstacle()
 {

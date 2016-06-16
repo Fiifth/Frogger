@@ -9,7 +9,7 @@
  *      Author: Kwinten
  */
 
-#include <Abstract/Animator.h>
+#include <abstract/Animator.h>
 #include <stdlib.h>
 using namespace frogger;
 

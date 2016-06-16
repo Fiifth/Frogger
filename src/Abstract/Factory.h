@@ -8,14 +8,14 @@
 #ifndef ABSTRACT_FACTORY_H_
 #define ABSTRACT_FACTORY_H_
 
-#include "Abstract/Entities/Obstacle.h"
-#include "Abstract/Entities/Player.h"
-#include "Abstract/Window.h"
-#include "Abstract/Events.h"
-#include "Abstract/Row.h"
-#include "Abstract/Entities/Lane.h"
-#include "Abstract/Entities/Projectile.h"
-#include "Abstract/Entities/Item.h"
+#include <abstract/entities/Item.h>
+#include <abstract/entities/Lane.h>
+#include <abstract/entities/Obstacle.h>
+#include <abstract/entities/Player.h>
+#include <abstract/entities/Projectile.h>
+#include <abstract/Events.h>
+#include <abstract/Row.h>
+#include <abstract/Window.h>
 #include <levelGenerator/RowProp.h>
 
 namespace frogger

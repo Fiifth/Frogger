@@ -8,10 +8,10 @@
 #ifndef ABSTRACT_ENTITIES_LANE_H_
 #define ABSTRACT_ENTITIES_LANE_H_
 
-#include "Abstract/Entities/Props.h"
-#include "Abstract/Entities/Player.h"
+#include <abstract/entities/Item.h>
+#include <abstract/entities/Player.h>
+#include <abstract/entities/Props.h>
 #include <list>
-#include "Abstract/Entities/Item.h"
 namespace frogger
 {
 	class Lane: public frogger::Props

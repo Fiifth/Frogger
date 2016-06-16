@@ -8,8 +8,8 @@
  *      Author: Kwinten
  */
 
-#include <Abstract/Entities/Projectile.h>
-#include "Abstract/Entities/Player.h"
+#include <abstract/entities/Player.h>
+#include <abstract/entities/Projectile.h>
 using namespace frogger;
 
 Projectile::Projectile()

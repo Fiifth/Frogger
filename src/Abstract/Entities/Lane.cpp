@@ -14,8 +14,8 @@
  *      Author: Kwinten
  */
 
-#include <Abstract/Entities/Lane.h>
-#include "Abstract/Factory.h"
+#include <abstract/entities/Lane.h>
+#include <abstract/Factory.h>
 using namespace frogger;
 Lane::Lane()
 {
