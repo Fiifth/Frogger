@@ -9,7 +9,6 @@
 
 #include <menu/Menu.h>
 #include "menu/MenuButton.h"
-#include <iostream>
 using namespace frogger;
 
 Menu::Menu(Window* win, char* gameMode, int* amountOfPlayers, char* difficulty) :

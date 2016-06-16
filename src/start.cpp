@@ -1,3 +1,4 @@
+
 /*
  * start.cpp
  *
@@ -7,8 +8,8 @@
 #define SDL_MAIN_HANDLED
 
 #include "Game.h"
-#include "Abstract/Factory.h"
-#include "SDL/FactorySDL.h"
+#include <abstract/Factory.h>
+#include <concrete/FactorySDL.h>
 #include <unistd.h>
 #include <windows.h>
 using namespace frogger;

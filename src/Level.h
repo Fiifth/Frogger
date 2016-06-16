@@ -7,18 +7,21 @@
 
 #ifndef LEVEL_H_
 #define LEVEL_H_
+#include <abstract/entities/Obstacle.h>
+#include <abstract/entities/Player.h>
+#include <abstract/entities/Projectile.h>
+#include <abstract/entities/Projectile.h>
+#include <abstract/entities/Props.h>
+#include <abstract/Events.h>
+#include <abstract/Factory.h>
+#include <abstract/Row.h>
+#include <abstract/Row.h>
+#include <abstract/Window.h>
 #include <vector>
-#include <Abstract/Row.h>
 #include <list>
 #include "levelGenerator/LevelProperties.h"
-#include "Abstract/Entities/Projectile.h"
-#include "Abstract/Entities/Props.h"
-
 #include "Abstract/Factory.h"
-#include "Abstract/Window.h"
-#include "Abstract/Events.h"
 #include <string>
-#include "Abstract/Row.h"
 #include <vector>
 #include <list>
 #include <iterator>
@@ -29,9 +32,6 @@
 #include <ratio>
 #include <chrono>
 #include <string>
-#include "Abstract/Entities/Projectile.h"
-#include <Abstract/Entities/Obstacle.h>
-#include "Abstract/Entities/Player.h"
 
 namespace frogger
 {

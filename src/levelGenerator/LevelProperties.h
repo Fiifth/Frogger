@@ -7,10 +7,10 @@
 
 #ifndef LEVELGENERATOR_LEVELPROPERTIES_H_
 #define LEVELGENERATOR_LEVELPROPERTIES_H_
+#include <abstract/Animator.h>
 #include "levelGenerator/RowProp.h"
 #include <vector>
 #include <stdlib.h>
-#include <Abstract/Animator.h>
 namespace frogger
 {
 	class LevelProperties

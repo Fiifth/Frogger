@@ -6,26 +6,26 @@
 
 #ifndef GAME_H_
 #define GAME_H_
-#include "Abstract/Factory.h"
-#include "Abstract/Window.h"
-#include "Abstract/Events.h"
+#include <abstract/entities/Obstacle.h>
+#include <abstract/entities/Obstacle.h>
+#include <abstract/entities/Player.h>
+#include <abstract/entities/Player.h>
+#include <abstract/entities/Projectile.h>
+#include <abstract/entities/Props.h>
+#include <abstract/Events.h>
+#include <abstract/Factory.h>
+#include <abstract/Row.h>
+#include <abstract/Row.h>
+#include <abstract/Window.h>
 #include <string>
-#include "Abstract/Row.h"
 #include <vector>
 #include <list>
 #include <algorithm>
 #include <stdlib.h>
 #include <ratio>
-#include <Abstract/Entities/Obstacle.h>
-#include "Abstract/Entities/Player.h"
 #include "Level.h"
 #include "levelGenerator/LevelProperties.h"
 #include "menu/Menu.H"
-#include <Abstract/Entities/Obstacle.h>
-#include "Abstract/Row.h"
-#include "Abstract/Entities/Props.h"
-#include "Abstract/Entities/Projectile.h"
-#include "Abstract/Entities/Player.h"
 namespace frogger
 {
 	class Game
