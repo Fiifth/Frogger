@@ -1,11 +1,11 @@
 /*
- * FrogSDL.cpp
+ * PlayerSDL.cpp
  *
  *  Created on: 22 Feb 2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include "PlayerSDL.h"
+#include "SDL/Entities/PlayerSDL.h"
 using namespace frogger_sdl;
 
 frogger_sdl::PlayerSDL::PlayerSDL(SDLdata* sdldata):sdldata(sdldata)

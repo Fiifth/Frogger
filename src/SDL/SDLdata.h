@@ -2,11 +2,11 @@
  * SDLdata.h
  *
  *  Created on: 7-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#ifndef SDLDATA_H_
-#define SDLDATA_H_
+#ifndef SDL_SDLDATA_H_
+#define SDL_SDLDATA_H_
 #include "SDL.h"
 #include <vector>
 #include <string>

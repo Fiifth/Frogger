@@ -2,13 +2,13 @@
  * Pops.h
  *
  *  Created on: 17-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef ABSTRACT_ENTITIES_PROPS_H_
 #define ABSTRACT_ENTITIES_PROPS_H_
-#include "Entity.h"
-#include "Row.h"
+#include "Abstract/Entity.h"
+#include "Abstract/Row.h"
 #include <levelGenerator/RowProp.h>
 namespace frogger
 {

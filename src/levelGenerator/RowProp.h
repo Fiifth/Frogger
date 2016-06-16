@@ -2,11 +2,11 @@
  * LevelProperties.h
  *
  *  Created on: 23-apr.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#ifndef LVLPROP_H_
-#define LVLPROP_H_
+#ifndef LEVELGENERATOR_LVLPROP_H_
+#define LEVELGENERATOR_LVLPROP_H_
 #include <vector>
 #include <stdlib.h>
 namespace frogger
@@ -50,4 +50,4 @@ namespace frogger
 	};
 }
 
-#endif /* LVLPROP_H_ */
+#endif /* LEVELGENERATOR_LVLPROP_H_ */

@@ -2,10 +2,10 @@
  * LaneSDL.cpp
  *
  *  Created on: 18-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include <LaneSDL.h>
+#include <SDL/Entities/LaneSDL.h>
 using namespace frogger_sdl;
 
 frogger_sdl::LaneSDL::LaneSDL(SDLdata* sdldata):sdldata(sdldata)

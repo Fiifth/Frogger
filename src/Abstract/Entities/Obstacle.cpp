@@ -8,11 +8,11 @@
  * The obstacle itself can create projectile objects during its lifetime.
  *
  *  Created on: 12-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include <Obstacle.h>
-#include "Factory.h"
+#include <Abstract/Entities/Obstacle.h>
+#include "Abstract/Factory.h"
 using namespace frogger;
 Obstacle::Obstacle()
 {

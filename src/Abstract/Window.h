@@ -10,9 +10,8 @@
 #include <string>
 #include <vector>
 #include <list>
-#include "Row.h"
-#include "Player.h"
-
+#include "Abstract/Row.h"
+#include "Abstract/Entities/Player.h"
 namespace frogger
 {
 	class Player;

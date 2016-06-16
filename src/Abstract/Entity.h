@@ -2,13 +2,13 @@
  * Entity.h
  *
  *  Created on: 12-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef ABSTRACT_ENTITY_H_
 #define ABSTRACT_ENTITY_H_
 #include <list>
-#include "Animator.h"
+#include "Abstract/Animator.h"
 
 
 namespace frogger

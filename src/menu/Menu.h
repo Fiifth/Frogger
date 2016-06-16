@@ -2,13 +2,13 @@
  * Menu.h
  *
  *  Created on: 24-apr.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#ifndef MENU_H_
-#define MENU_H_
-#include "Window.h"
-#include "MenuButton.h"
+#ifndef MENU_MENU_H_
+#define MENU_MENU_H_
+#include "Abstract/Window.h"
+#include "menu/MenuButton.h"
 namespace frogger
 {
 	class Menu

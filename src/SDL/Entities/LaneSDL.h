@@ -2,18 +2,18 @@
  * LaneSDL.h
  *
  *  Created on: 18-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef SDL_ENTITIES_LANESDL_H_
 #define SDL_ENTITIES_LANESDL_H_
-#include "Lane.h"
-#include "SDLdata.h"
-#include "Row.h"
+#include "Abstract/Entities/Lane.h"
+#include "SDL/SDLdata.h"
+#include "Abstract/Row.h"
 #include "SDL.h"
 #include <vector>
-#include "Animator.h"
-#include "Factory.h"
+#include "Abstract/Animator.h"
+#include "Abstract/Factory.h"
 namespace frogger_sdl
 {
 	class LaneSDL: public frogger::Lane

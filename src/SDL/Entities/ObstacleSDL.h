@@ -1,20 +1,20 @@
 /*
- * EnemySDL.h
+ * ObstacleSDL.h
  *
  *  Created on: 12-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#ifndef ENEMYSDL_H_
-#define ENEMYSDL_H_
-#include "Obstacle.h"
-#include "Entity.h"
-#include "Window.h"
-#include "SDLdata.h"
-#include "Row.h"
-#include <list>
-#include "Animator.h"
-#include "Factory.h"
+#ifndef SDL_ENTITIES_OBSTACLESDL_H_
+#define SDL_ENTITIES_OBSTACLESDL_H_
+#include "Abstract/Entities/Obstacle.h"
+#include "Abstract/Entity.h"
+#include "Abstract/Window.h"
+#include "SDL/SDLdata.h"
+#include "Abstract/Row.h"
+#include <vector>
+#include "Abstract/Animator.h"
+#include "Abstract/Factory.h"
 
 namespace frogger_sdl
 {

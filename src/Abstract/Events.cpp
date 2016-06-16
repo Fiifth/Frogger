@@ -2,10 +2,10 @@
  * Events.cpp
  * Used to get the players input in string form
  *  Created on: 6-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include "Events.h"
+#include "Abstract/Events.h"
 using namespace frogger;
 
 Events::Events()

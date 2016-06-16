@@ -2,14 +2,14 @@
  * SDLstuff.cpp
  * Creates and keeps track of important SDL data. Renderer/textures
  *  Created on: 7-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include <SDLdata.h>
+#include <SDL/SDLdata.h>
 #include <string>
 #include <SDL_image.h>
 #include <stdlib.h>
-#include "Animator.h"
+#include "Abstract/Animator.h"
 #include <math.h>
 using namespace frogger_sdl;
 

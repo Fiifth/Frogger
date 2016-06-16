@@ -6,10 +6,10 @@
  * should remain before moving on to the next index.
  *
  *  Created on: 25-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include <Animator.h>
+#include <Abstract/Animator.h>
 #include <stdlib.h>
 using namespace frogger;
 

@@ -2,15 +2,15 @@
  * LevelProperties.h
  *
  *  Created on: 23-apr.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef LEVELGENERATOR_LEVELPROPERTIES_H_
 #define LEVELGENERATOR_LEVELPROPERTIES_H_
-#include "RowProp.h"
+#include "levelGenerator/RowProp.h"
 #include <vector>
 #include <stdlib.h>
-#include <Animator.h>
+#include <Abstract/Animator.h>
 namespace frogger
 {
 	class LevelProperties

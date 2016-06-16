@@ -2,7 +2,7 @@
  * Row.h
  *
  *  Created on: 12-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef ABSTRACT_ROW_H_

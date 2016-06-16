@@ -6,11 +6,11 @@
  * (Exception when projectile is created by a player since the player doesn't have a row to give)
  *
  *  Created on: 17-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include <Props.h>
-#include "Factory.h"
+#include <Abstract/Entities/Props.h>
+#include "Abstract/Factory.h"
 using namespace frogger;
 
 Props::Props():	row(nullptr), visible(true),turned(false),isTurenedByAni(false),itemRate(nullptr),shootRate(nullptr)

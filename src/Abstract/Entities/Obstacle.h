@@ -2,17 +2,19 @@
  * Enemy.h
  *
  *  Created on: 12-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef ABSTRACT_ENTITIES_OBSTACLE_H_
 #define ABSTRACT_ENTITIES_OBSTACLE_H_
-#include "Props.h"
-#include "Entity.h"
-#include "Row.h"
-#include "Player.h"
-#include "Projectile.h"
+#include "Abstract/Entities/Props.h"
+#include "Abstract/Entity.h"
+#include "Abstract/Row.h"
+#include "Abstract/Entities/Player.h"
+#include "Abstract/Entities/Projectile.h"
 #include <list>
+#include <vector>
+#include <Abstract/Animator.h>
 namespace frogger
 {
 	class Obstacle: public frogger::Props

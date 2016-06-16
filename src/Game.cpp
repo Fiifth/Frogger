@@ -13,7 +13,6 @@
  * S: settings menu
  * V: victory screen
  * G: game over screen
- *
  * E: Endless game mode
  * C: classic game mode
  * Q: quit state
@@ -71,8 +70,6 @@ Game::Game(Factory* F)
 
 		keyStroke = event->getEvent();
 		event->getMousePos(&x, &y);
-		if (keyStroke =="Escape")
-			state='B';
 
 		switch (state)
 		{
@@ -162,12 +159,16 @@ Game::Game(Factory* F)
 				return;
 				break;
 		}
+		if (keyStroke =="Escape")
+			if(state=='B')
+				state='Q';
+			else
+				state='B';
 	}
 }
 
 Game::~Game()
 {
-
 }
 
 bool Game::playersAlive(std::list<Player*>* players)

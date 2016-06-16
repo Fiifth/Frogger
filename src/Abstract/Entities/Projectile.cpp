@@ -5,11 +5,11 @@
  * When it is created by an obstacle it will hit players in the game.
  *
  *  Created on: 4-apr.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include <Projectile.h>
-#include "Player.h"
+#include <Abstract/Entities/Projectile.h>
+#include "Abstract/Entities/Player.h"
 using namespace frogger;
 
 Projectile::Projectile()

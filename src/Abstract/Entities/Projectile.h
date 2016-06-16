@@ -2,14 +2,14 @@
  * Projectile.h
  *
  *  Created on: 4-apr.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef ABSTRACT_ENTITIES_PROJECTILE_H_
 #define ABSTRACT_ENTITIES_PROJECTILE_H_
-#include "Props.h"
-#include "Entity.h"
-#include "Player.h"
+#include "Abstract/Entities/Props.h"
+#include "Abstract/Entity.h"
+#include "Abstract/Entities/Player.h"
 namespace frogger
 {
 	class Projectile: public frogger::Props

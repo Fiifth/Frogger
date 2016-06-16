@@ -2,10 +2,10 @@
  * EventsSDL.cpp
  *
  *  Created on: 6-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include "EventsSDL.h"
+#include "SDL/EventsSDL.h"
 #include "SDL.h"
 using namespace frogger_sdl;
 

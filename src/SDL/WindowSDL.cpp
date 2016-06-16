@@ -7,7 +7,7 @@
  *      Author: Kwinten
  */
 
-#include "WindowSDL.h"
+#include "SDL/WindowSDL.h"
 
 using namespace frogger_sdl;
 

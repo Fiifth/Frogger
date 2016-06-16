@@ -2,10 +2,10 @@
  * MenuButton.cpp
  * Keeps the actual coordinates of the button by multiplying the relative and the dimensions.
  *  Created on: 24-apr.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include <MenuButton.h>
+#include <menu/MenuButton.h>
 #include <math.h>
 using namespace frogger;
 

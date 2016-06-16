@@ -4,11 +4,11 @@
  * Determines which menu image is displayed when navigating the menu. It also
  * takes hovering above a button into account.
  *  Created on: 24-apr.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include <Menu.h>
-#include "MenuButton.h"
+#include <menu/Menu.h>
+#include "menu/MenuButton.h"
 #include <iostream>
 using namespace frogger;
 
@@ -98,9 +98,6 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH)
 			else
 			{
 				win->setBackground(0);
-				if (keyDown == "Escape")
-					return 'Q';
-				else
 					return state;
 			}
 			break;

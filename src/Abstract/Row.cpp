@@ -4,10 +4,10 @@
  * Used by prop objects. This object is a collection of properties that will be used by props.
  *
  *  Created on: 12-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include "Row.h"
+#include "Abstract/Row.h"
 using namespace frogger;
 
 Row::Row(char direction, int locY, int height, int number,RowProp* rowProperties) :

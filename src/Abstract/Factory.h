@@ -2,22 +2,20 @@
  * Factory.h
  *
  *  Created on: 22 Feb 2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef ABSTRACT_FACTORY_H_
 #define ABSTRACT_FACTORY_H_
 
-#include "Obstacle.h"
-#include "Player.h"
-#include "Window.h"
-#include "WindowSDL.h"
-#include "Events.h"
-#include "SDLdata.h"
-#include "Row.h"
-#include "Lane.h"
-#include "Projectile.h"
-#include "Item.h"
+#include "Abstract/Entities/Obstacle.h"
+#include "Abstract/Entities/Player.h"
+#include "Abstract/Window.h"
+#include "Abstract/Events.h"
+#include "Abstract/Row.h"
+#include "Abstract/Entities/Lane.h"
+#include "Abstract/Entities/Projectile.h"
+#include "Abstract/Entities/Item.h"
 #include <levelGenerator/RowProp.h>
 
 namespace frogger

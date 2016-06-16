@@ -4,10 +4,10 @@
  * Used to create objects
  *
  *  Created on: 22 Feb 2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include "Factory.h"
+#include "Abstract/Factory.h"
 
 using namespace frogger;
 

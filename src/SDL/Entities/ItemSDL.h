@@ -2,18 +2,18 @@
  * ItemSDL.h
  *
  *  Created on: 18-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef SDL_ENTITIES_ITEMSDL_H_
 #define SDL_ENTITIES_ITEMSDL_H_
 
-#include "Item.h"
-#include "SDLdata.h"
+#include "Abstract/Entities/Item.h"
+#include "SDL/SDLdata.h"
 #include "SDL.h"
-#include "Row.h"
+#include "Abstract/Row.h"
 #include <vector>
-#include "Animator.h"
+#include "Abstract/Animator.h"
 namespace frogger_sdl
 {
 	class ItemSDL: public frogger::Item

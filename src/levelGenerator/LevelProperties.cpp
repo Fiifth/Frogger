@@ -4,11 +4,10 @@
  * Keeps 7 kinds of rowprop objects. They will be given to the correct row objects by using this levelproperties object.
  *
  *  Created on: 23-apr.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #include <levelGenerator/LevelProperties.h>
-#include <iostream>
 using namespace frogger;
 
 LevelProperties::LevelProperties(char mode, char difficulty) :
@@ -53,31 +52,31 @@ LevelProperties::~LevelProperties()
 
 void LevelProperties::easyLevel()
 {
-	seg1 = new RowProp(1, 1, 'B', mode, 40, 20, 0, true, false, getVec(0, 4), {0, 1, 2}, { 10, 30, 70 });
-	seg2 = new RowProp(1, 0, 'B', mode, 50, 5, 0, true, false, getVec(0, 4), {0, 1, 2}, { 10, 20, 70 });
-	seg3 = new RowProp(1, 1, 'C', mode, 40, 20, 0, false, true, getVec(0, 4), {0, 1, 2}, { 10, 20, 70 });
-	seg4 = new RowProp(1, 0, 'C', mode, 50, 5, 0, false, true, getVec(0, 4), {0, 1, 2}, { 10, 20, 70 });
-	lastRow = new RowProp(0, 0, 'E', mode, 100, 100, 0, true, false, {9,10,11}, { 2 }, { 10, 20, 70 });
-	middleRow = new RowProp(0, 0, 'D', mode, 30, 70, 0, true, false,{9,10,11}, { 0 }, { 10, 20, 70 });
+	seg1 = new RowProp(1, 1, 'B', mode, 10, 20, 0, true, false, getVec(0, 6), {0, 1, 2}, { 10, 70, 20 });
+	seg2 = new RowProp(1, 0, 'B', mode, 20, 5, 0, true, false, getVec(0, 6), {0, 1, 2}, { 10, 70, 20 });
+	seg3 = new RowProp(1, 1, 'C', mode, 10, 20, 0, false, true, getVec(0, 8), {0, 1, 2}, { 10, 70, 20 });
+	seg4 = new RowProp(1, 0, 'C', mode, 20, 5, 0, false, true, getVec(0, 8), {0, 1, 2}, { 10, 70, 20 });
+	lastRow = new RowProp(0, 0, 'E', mode, 100, 100, 0, true, false, {9,10,11}, { 2 }, { 10, 70, 20 });
+	middleRow = new RowProp(0, 0, 'D', mode, 30, 70, 0, true, false,{9,10,11}, { 0 }, { 10, 70, 20 });
 }
 void frogger::LevelProperties::mediumLevel()
 {
-	seg1 = new RowProp(1, 1, 'B', mode, 40, 30, 10, true, false, getVec(0, 6), {0, 1, 2, 3 }, { 10, 30, 70 });
-	seg2 = new RowProp(1, 0, 'B', mode, 50, 10, 20, true, false, getVec(0, 6), {0, 1, 2, 3 }, { 10, 20, 70 });
-	seg3 = new RowProp(1, 1, 'C', mode, 40, 30, 0, false, true, getVec(0, 6), {0, 1, 2, 3 }, { 10, 20, 70 });
-	seg4 = new RowProp(1, 0, 'C', mode, 50, 10, 0, false, true, getVec(0, 6), {0, 1, 2, 3 }, { 10, 20, 70 });
-	lastRow = new RowProp(0, 0, 'E', mode, 100, 100, 0, true, false, {9,10,11}, { 1 }, { 10, 20, 70 });
-	middleRow = new RowProp(0, 0, 'D', mode, 50, 50, 0, true, false,{9,10,11}, { 0 }, { 10, 20, 70 });
+	seg1 = new RowProp(1, 1, 'B', mode, 20, 30, 10, true, false, getVec(0, 6), {0, 1, 2, 3 }, { 10, 70, 20 });
+	seg2 = new RowProp(1, 0, 'B', mode, 40, 10, 20, true, false, getVec(0, 6), {0, 1, 2, 3 }, { 10, 70, 20 });
+	seg3 = new RowProp(1, 1, 'C', mode, 20, 30, 0, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 70, 20 });
+	seg4 = new RowProp(1, 0, 'C', mode, 40, 10, 0, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 70, 20 });
+	lastRow = new RowProp(0, 0, 'E', mode, 100, 100, 0, true, false, {9,10,11}, { 1 }, { 10, 70, 20 });
+	middleRow = new RowProp(0, 0, 'D', mode, 50, 50, 0, true, false,{9,10,11}, { 0 }, { 10, 70, 20 });
 }
 
 void frogger::LevelProperties::hardLevel()
 {
-	seg1 = new RowProp(1, 1, 'B', mode, 40, 40, 40, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 30, 70 });
-	seg2 = new RowProp(1, 0, 'B', mode, 50, 15, 20, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
-	seg3 = new RowProp(1, 1, 'C', mode, 40, 40, 0, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
-	seg4 = new RowProp(1, 0, 'C', mode, 50, 15, 0, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 20, 70 });
-	lastRow = new RowProp(0, 0, 'E', mode, 100, 100, 0, true, false, {9,10,11}, { 1 }, { 10, 20, 70 });
-	middleRow = new RowProp(0, 0, 'D', mode, 70, 30, 0, true, false,{9,10,11}, { 0 }, { 10, 20, 70 });
+	seg1 = new RowProp(1, 1, 'B', mode, 40, 40, 40, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 70, 20 });
+	seg2 = new RowProp(1, 0, 'B', mode, 50, 15, 20, true, false, getVec(0, 8), {0, 1, 2, 3 }, { 10, 70, 20 });
+	seg3 = new RowProp(1, 1, 'C', mode, 40, 40, 0, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 70, 20 });
+	seg4 = new RowProp(1, 0, 'C', mode, 50, 15, 0, false, true, getVec(0, 8), {0, 1, 2, 3 }, { 10, 70, 20 });
+	lastRow = new RowProp(0, 0, 'E', mode, 100, 100, 0, true, false, {9,10,11}, { 1 }, { 10, 70, 20 });
+	middleRow = new RowProp(0, 0, 'D', mode, 70, 30, 0, true, false,{9,10,11}, { 0 }, { 10, 70, 20 });
 }
 
 RowProp* LevelProperties::getFirstRow()

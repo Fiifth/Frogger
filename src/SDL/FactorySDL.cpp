@@ -2,10 +2,10 @@
  * FactorySDL.cpp
  *
  *  Created on: 22 Feb 2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include "FactorySDL.h"
+#include "SDL/FactorySDL.h"
 
 using namespace frogger_sdl;
 

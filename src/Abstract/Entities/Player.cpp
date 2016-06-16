@@ -4,11 +4,11 @@
  * It can create projectile objects.
  *
  *  Created on: 22 Feb 2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include "Player.h"
-#include "Factory.h"
+#include "Abstract/Entities/Player.h"
+#include "Abstract/Factory.h"
 using namespace frogger;
 
 Player::Player()
@@ -131,8 +131,10 @@ bool Player::takeAction(std::string key)
 		}
 		else if (key == keyUp)
 		{
+			int yTemp=yR;
 			moveUp();
-			addScore(scorePerStep);
+			if (yTemp!=yR)
+				addScore(scorePerStep);
 			return true;
 		}
 		else if (key == keyLeft)

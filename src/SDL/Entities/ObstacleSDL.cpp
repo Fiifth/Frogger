@@ -2,13 +2,13 @@
  * EnemySDL.cpp
  *
  *  Created on: 12-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include <ObstacleSDL.h>
+#include <SDL/Entities/ObstacleSDL.h>
 #include <stdlib.h>
 #include "SDL.h"
-#include "Window.h"
+#include "Abstract/Window.h"
 #include <string>
 using namespace frogger_sdl;
 

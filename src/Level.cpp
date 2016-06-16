@@ -5,7 +5,7 @@
  * It creates and manages the entities by moving them and checking for collision.
  *
  *  Created on: 8-apr.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #include <Level.h>
@@ -55,6 +55,7 @@ void Level::levelExecution(std::string keyStroke)
 			tempFactor =player->getY()< *win->getGameWindowHeight()- rowHeight * (freeRows + 1) ?	2 : tempFactor;
 			tempFactor =player->getY()< *win->getGameWindowHeight()- rowHeight * (freeRows + 2) ? 3 : tempFactor;
 			tempFactor =player->getY()< *win->getGameWindowHeight()- rowHeight * (freeRows + 3) ?	4 : tempFactor;
+			tempFactor =player->getY()< *win->getGameWindowHeight()- rowHeight * (freeRows + 4) ?	5 : tempFactor;
 		}
 		if (!player->isDead())
 			factor = (factor > tempFactor) ? tempFactor : factor;

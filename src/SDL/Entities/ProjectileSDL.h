@@ -2,15 +2,16 @@
  * ProjectileSDL.h
  *
  *  Created on: 4-apr.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef SDL_ENTITIES_PROJECTILESDL_H_
 #define SDL_ENTITIES_PROJECTILESDL_H_
 
-#include "Projectile.h"
-#include "SDLdata.h"
-#include "Animator.h"
+#include "Abstract/Entities/Projectile.h"
+#include "SDL/SDLdata.h"
+#include "Abstract/Animator.h"
+#include <vector>
 namespace frogger_sdl
 {
 	class ProjectileSDL: public frogger::Projectile

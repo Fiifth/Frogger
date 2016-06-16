@@ -2,16 +2,16 @@
  * Lane.h
  *
  *  Created on: 18-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef ABSTRACT_ENTITIES_LANE_H_
 #define ABSTRACT_ENTITIES_LANE_H_
 
-#include "Props.h"
-#include "Player.h"
+#include "Abstract/Entities/Props.h"
+#include "Abstract/Entities/Player.h"
 #include <list>
-#include "Item.h"
+#include "Abstract/Entities/Item.h"
 namespace frogger
 {
 	class Lane: public frogger::Props

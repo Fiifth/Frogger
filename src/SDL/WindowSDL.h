@@ -5,14 +5,13 @@
  *      Author: fifth
  */
 
-#ifndef WINDOWSDL_H_
-#define WINDOWSDL_H_
-#include "Window.h"
+#ifndef SDL_WINDOWSDL_H_
+#define SDL_WINDOWSDL_H_
+#include "Abstract/Window.h"
 #include "SDL.h"
-#include "SDLdata.h"
-#include "Row.h"
+#include "SDL/SDLdata.h"
+#include "Abstract/Row.h"
 #include "SDL_ttf.h"
-#include "SDL.h"
 #include <vector>
 #include <algorithm>
 #include <stdlib.h>
@@ -22,7 +21,7 @@
 #include <chrono>
 #include <list>
 #include <string>
-#include "Player.h"
+#include "Abstract/Entities/Player.h"
 #include "menu/MenuButton.h"
 #include <math.h>
 

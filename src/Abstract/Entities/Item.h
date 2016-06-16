@@ -7,9 +7,9 @@
 
 #ifndef ABSTRACT_ENTITIES_ITEM_H_
 #define ABSTRACT_ENTITIES_ITEM_H_
-#include "Props.h"
-#include "Entity.h"
-#include "Player.h"
+#include "Abstract/Entities/Props.h"
+#include "Abstract/Entity.h"
+#include "Abstract/Entities/Player.h"
 namespace frogger
 {
 	class Item: public frogger::Props

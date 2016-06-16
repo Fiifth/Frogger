@@ -2,10 +2,10 @@
  * ProjectileSDL.cpp
  *
  *  Created on: 4-apr.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include <ProjectileSDL.h>
+#include <SDL/Entities/ProjectileSDL.h>
 using namespace frogger_sdl;
 
 frogger_sdl::ProjectileSDL::ProjectileSDL(SDLdata* sdldata):sdldata(sdldata)

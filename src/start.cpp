@@ -2,14 +2,13 @@
  * start.cpp
  *
  *  Created on: 22 Feb 2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 #define SDL_MAIN_HANDLED
 
 #include "Game.h"
-#include "Factory.h"
-#include "PlayerSDL.h"
-#include "FactorySDL.h"
+#include "Abstract/Factory.h"
+#include "SDL/FactorySDL.h"
 #include <unistd.h>
 #include <windows.h>
 using namespace frogger;

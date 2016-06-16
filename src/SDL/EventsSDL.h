@@ -2,13 +2,13 @@
  * EventsSDL.h
  *
  *  Created on: 6-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#ifndef EVENTSSDL_H_
-#define EVENTSSDL_H_
+#ifndef SDL_EVENTSSDL_H_
+#define SDL_EVENTSSDL_H_
 
-#include "Events.h"
+#include "Abstract/Events.h"
 #include <string>
 namespace frogger_sdl
 {

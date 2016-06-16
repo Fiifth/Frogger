@@ -2,38 +2,37 @@
  * Level.h
  *
  *  Created on: 8-apr.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef LEVEL_H_
 #define LEVEL_H_
 #include <vector>
-#include <Row.h>
+#include <Abstract/Row.h>
 #include <list>
-#include "LevelProperties.h"
-#include "Projectile.h"
-#include "Props.h"
+#include "levelGenerator/LevelProperties.h"
+#include "Abstract/Entities/Projectile.h"
+#include "Abstract/Entities/Props.h"
 
-#include "SDLdata.h"
-#include "Factory.h"
-#include "Window.h"
-#include "Events.h"
+#include "Abstract/Factory.h"
+#include "Abstract/Window.h"
+#include "Abstract/Events.h"
 #include <string>
-#include "Row.h"
+#include "Abstract/Row.h"
 #include <vector>
 #include <list>
 #include <iterator>
 #include <algorithm>
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
+#include <stdlib.h>
+#include <time.h>
 #include <ctime>
 #include <ratio>
 #include <chrono>
 #include <string>
-#include "Projectile.h"
-#include <Obstacle.h>
-#include <Player.h>
-//using namespace std;
+#include "Abstract/Entities/Projectile.h"
+#include <Abstract/Entities/Obstacle.h>
+#include "Abstract/Entities/Player.h"
+
 namespace frogger
 {
 	class Level

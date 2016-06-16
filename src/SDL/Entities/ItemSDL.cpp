@@ -2,10 +2,10 @@
  * ItemSDL.cpp
  *
  *  Created on: 18-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include <ItemSDL.h>
+#include <SDL/Entities/ItemSDL.h>
 using namespace frogger_sdl;
 
 frogger_sdl::ItemSDL::ItemSDL(SDLdata* sdldata):sdldata(sdldata)

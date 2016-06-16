@@ -1,31 +1,31 @@
 /*
  * Game.h
  *  Created on: 22 Feb 2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef GAME_H_
 #define GAME_H_
-#include "Factory.h"
-#include "Window.h"
-#include "Events.h"
+#include "Abstract/Factory.h"
+#include "Abstract/Window.h"
+#include "Abstract/Events.h"
 #include <string>
-#include "Row.h"
+#include "Abstract/Row.h"
 #include <vector>
 #include <list>
 #include <algorithm>
 #include <stdlib.h>
 #include <ratio>
-#include <Obstacle.h>
-#include <Player.h>
+#include <Abstract/Entities/Obstacle.h>
+#include "Abstract/Entities/Player.h"
 #include "Level.h"
-#include "LevelProperties.h"
-#include "Menu.H"
-#include <Obstacle.h>
-#include "Row.h"
-#include "Props.h"
-#include "Projectile.h"
-#include "Player.h"
+#include "levelGenerator/LevelProperties.h"
+#include "menu/Menu.H"
+#include <Abstract/Entities/Obstacle.h>
+#include "Abstract/Row.h"
+#include "Abstract/Entities/Props.h"
+#include "Abstract/Entities/Projectile.h"
+#include "Abstract/Entities/Player.h"
 namespace frogger
 {
 	class Game

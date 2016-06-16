@@ -2,7 +2,7 @@
  * Animator.h
  *
  *  Created on: 25-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef ABSTRACT_ANIMATOR_H_

@@ -2,18 +2,20 @@
  * Player.h
  *
  *  Created on: 22 Feb 2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
 #ifndef ABSTRACT_ENTITIES_PLAYER_H_
 #define ABSTRACT_ENTITIES_PLAYER_H_
-#include "Window.h"
-#include "Entity.h"
-#include "Row.h"
+#include "Abstract/Window.h"
+#include "Abstract/Entity.h"
+#include "Abstract/Row.h"
 #include <chrono>
 #include <string>
-#include "Projectile.h"
+#include "Abstract/Entities/Projectile.h"
 #include <list>
+#include "Abstract/Entities/Player.h"
+#include <vector>
 
 namespace frogger
 {

@@ -1,22 +1,22 @@
 /*
- * FrogSDL.h
+ * PlayerSDL.h
  *
  *  Created on: 22 Feb 2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#ifndef FROGSDL_H_
-#define FROGSDL_H_
-#include "Entity.h"
-#include "Player.h"
-#include "Window.h"
-#include "SDLdata.h"
+#ifndef SDL_ENTITIES_PLAYERSDL_H_
+#define SDL_ENTITIES_PLAYERSDL_H_
+#include "Abstract/Entity.h"
+#include "Abstract/Entities/Player.h"
+#include "Abstract/Window.h"
+#include "SDL/SDLdata.h"
 #include <vector>
-#include "Animator.h"
-#include "Factory.h"
-#include "Props.h"
+#include "Abstract/Animator.h"
+#include "Abstract/Factory.h"
+#include "Abstract/Entities/Props.h"
 #include "SDL.h"
-#include "Projectile.h"
+#include "Abstract/Entities/Projectile.h"
 namespace frogger_sdl
 {
 	class PlayerSDL: public frogger::Player

@@ -2,29 +2,29 @@
  * FactorySDL.h
  *
  *  Created on: 22 Feb 2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#ifndef FACTORYSDL_H_
-#define FACTORYSDL_H_
+#ifndef SDL_FACTORYSDL_H_
+#define SDL_FACTORYSDL_H_
 
-#include "Obstacle.h"
-#include "ObstacleSDL.h"
-#include "Player.h"
-#include "PlayerSDL.h"
-#include "Window.h"
-#include "WindowSDL.h"
-#include "Lane.h"
-#include "LaneSDL.h"
-#include "Factory.h"
-#include "Row.h"
-#include "Events.h"
-#include "EventsSDL.h"
-#include "SDLdata.h"
-#include "Item.h"
-#include "ItemSDL.h"
-#include "Projectile.h"
-#include "ProjectileSDL.h"
+#include "Abstract/Entities/Obstacle.h"
+#include "SDL/Entities/ObstacleSDL.h"
+#include "Abstract/Entities/Player.h"
+#include "SDL/Entities/PlayerSDL.h"
+#include "Abstract/Window.h"
+#include "SDL/WindowSDL.h"
+#include "Abstract/Entities/Lane.h"
+#include "SDL/Entities/LaneSDL.h"
+#include "Abstract/Factory.h"
+#include "Abstract/Row.h"
+#include "Abstract/Events.h"
+#include "SDL/EventsSDL.h"
+#include "SDL/SDLdata.h"
+#include "Abstract/Entities/Item.h"
+#include "SDL/Entities/ItemSDL.h"
+#include "Abstract/Entities/Projectile.h"
+#include "SDL/Entities/ProjectileSDL.h"
 
 namespace frogger_sdl
 {

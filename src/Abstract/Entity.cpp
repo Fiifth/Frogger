@@ -3,11 +3,11 @@
  *
  * This object represents the underlying object of all game entities that have a location.
  *  Created on: 12-mrt.-2016
- *      Author: msn-w
+ *      Author: Kwinten
  */
 
-#include "Entity.h"
-#include "Projectile.h"
+#include "Abstract/Entity.h"
+#include "Abstract/Entities/Projectile.h"
 using namespace frogger;
 Entity::Entity()
 {
