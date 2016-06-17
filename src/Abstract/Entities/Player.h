@@ -13,6 +13,7 @@
 #include <abstract/Row.h>
 #include <abstract/Window.h>
 #include <abstract/entities/Props.h>
+#include <abstract/Animator.h>
 #include <chrono>
 #include <string>
 #include <list>

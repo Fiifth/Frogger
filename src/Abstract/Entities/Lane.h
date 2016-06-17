@@ -11,7 +11,9 @@
 #include <abstract/entities/Item.h>
 #include <abstract/entities/Player.h>
 #include <abstract/entities/Props.h>
+#include <abstract/Animator.h>
 #include <list>
+#include <vector>
 namespace frogger
 {
 	class Lane: public frogger::Props

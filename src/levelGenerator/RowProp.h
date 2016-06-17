@@ -1,12 +1,12 @@
 /*
- * LevelProperties.h
+ * RowProperties.h
  *
  *  Created on: 23-apr.-2016
  *      Author: Kwinten
  */
 
-#ifndef LEVELGENERATOR_LVLPROP_H_
-#define LEVELGENERATOR_LVLPROP_H_
+#ifndef LEVELGENERATOR_ROWPROP_H_
+#define LEVELGENERATOR_ROWPROP_H_
 #include <vector>
 #include <stdlib.h>
 namespace frogger
@@ -50,4 +50,4 @@ namespace frogger
 	};
 }
 
-#endif /* LEVELGENERATOR_LVLPROP_H_ */
+#endif /* LEVELGENERATOR_ROWPROP_H_ */

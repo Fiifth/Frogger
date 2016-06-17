@@ -7,14 +7,11 @@
 #ifndef GAME_H_
 #define GAME_H_
 #include <abstract/entities/Obstacle.h>
-#include <abstract/entities/Obstacle.h>
-#include <abstract/entities/Player.h>
 #include <abstract/entities/Player.h>
 #include <abstract/entities/Projectile.h>
 #include <abstract/entities/Props.h>
 #include <abstract/Events.h>
 #include <abstract/Factory.h>
-#include <abstract/Row.h>
 #include <abstract/Row.h>
 #include <abstract/Window.h>
 #include <string>
