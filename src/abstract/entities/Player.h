@@ -81,7 +81,7 @@ namespace frogger
 			std::string keyDown = "Down";
 			std::string keyLeft = "Left";
 			std::string keyRight = "Right";
-			std::string fire = "Right Ctrl";
+			std::string fire = "Right Shift";
 
 		protected:
 			std::list<Projectile*> projectileList;

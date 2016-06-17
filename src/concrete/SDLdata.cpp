@@ -83,7 +83,7 @@ void SDLdata::createTextures()
 	fillTextureVectors(&laneTex,"lane",9);
 	fillTextureVectors(&itemTex,"item",2);
 	fillTextureVectors(&projTex,"proj",0);
-	fillTextureVectors(&menu2Textures,"menu/m",13);
+	fillTextureVectors(&menu2Textures,"menu/m",15);
 }
 
 

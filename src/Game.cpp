@@ -13,6 +13,7 @@
  * S: settings menu
  * V: victory screen
  * G: game over screen
+ * A: help screen
  * E: Endless game mode
  * C: classic game mode
  * Q: quit state
@@ -27,6 +28,11 @@
 * E: last row (row where player wants to go)
  */
 
+/*
+ * int life = 4, totalTime = 50, scorePerStep = 5, projectiles = 4; //easy diff
+ * int life = 3, totalTime = 40, scorePerStep = 10, projectiles = 3; //medium diff
+ * int life = 2, totalTime = 30, scorePerStep = 15, projectiles = 2; //hard diff
+ */
 
 #include "Game.h"
 using namespace frogger;
@@ -78,6 +84,7 @@ Game::Game(Factory* F)
 			case 'G':
 			case 'S':
 			case 'V':
+			case 'A':
 				//menu case modes
 				if (state == 'G' && PrevState != state)
 				{
@@ -188,7 +195,7 @@ void frogger::Game::addPlayers(Factory* F, std::list<Player*>* players, int amou
 	for(Player* player:*players)
 							delete(player);
 	players->clear();
-	int life = 4, totalTime = 50, scorePerStep = 10, projectiles = 3; //classic easy mode
+	int life = 4, totalTime = 50, scorePerStep = 5, projectiles = 4; //classic easy mode
 	bool counterEnabled;
 
 	counterEnabled = (gameMode == 'E') ? false : true;
@@ -201,11 +208,11 @@ void frogger::Game::addPlayers(Factory* F, std::list<Player*>* players, int amou
 	totalTime = (difficulty == 'H') ? 30 : totalTime;
 	totalTime = (gameMode == 'E') ? -1 : totalTime;
 
-	scorePerStep = (difficulty == 'M') ? 20 : scorePerStep;
-	scorePerStep = (difficulty == 'H') ? 30 : scorePerStep;
+	scorePerStep = (difficulty == 'M') ? 10 : scorePerStep;
+	scorePerStep = (difficulty == 'H') ? 15 : scorePerStep;
 
-	projectiles = (difficulty == 'M') ? 2 : projectiles;
-	projectiles = (difficulty == 'H') ? 1 : projectiles;
+	projectiles = (difficulty == 'M') ? 3 : projectiles;
+	projectiles = (difficulty == 'H') ? 2 : projectiles;
 
 	players->clear();
 	if (amount >= 1)

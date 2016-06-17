@@ -43,6 +43,11 @@ void WindowSDL::makeWindow(int ScreenWidth, int ScreenHeight,int dataWindowHeigh
 	TTF_Init();
 	win = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED,	SDL_WINDOWPOS_CENTERED, *screenWidth, *screenHeight, SDL_WINDOW_SHOWN);
 	ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
+	std::string recourcePath=SDL_GetBasePath();
+	std::string path=recourcePath+"frogger\\icon.bmp";
+	SDL_Surface* loadedSurface = SDL_LoadBMP( path.c_str() );
+	SDL_SetWindowIcon(win, loadedSurface);
+	SDL_FreeSurface(loadedSurface);
 
 	sdldata->setRen(ren);
 	sdldata->createTextures();

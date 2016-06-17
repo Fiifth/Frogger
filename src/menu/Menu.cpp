@@ -86,7 +86,7 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH)
 			{
 				win->setBackground(5);
 				if (keyDown == "MOUSEBUTTONDOWN")
-					return 'B';
+					return 'A';
 			}
 			else if (BS->col(mXH, mYH))
 			{
@@ -233,6 +233,19 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH)
 			else
 			{
 				win->setBackground(10);
+				return state;
+			}
+			break;
+		case 'A':
+			if (back->col(mXH, mYH))
+			{
+				win->setBackground(15);
+				if (keyDown == "MOUSEBUTTONDOWN")
+					state = 'B';
+			}
+			else
+			{
+				win->setBackground(14);
 				return state;
 			}
 			break;

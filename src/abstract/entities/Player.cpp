@@ -224,6 +224,7 @@ void Player::setDifferentControls(char set)
 		keyDown = "Down";
 		keyLeft = "Left";
 		keyRight = "Right";
+		fire = "Left Shift";
 	}
 }
 
