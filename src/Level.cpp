@@ -355,7 +355,6 @@ Props* Level::obsOrLane(std::list<Props*>* PreProp, Row* row)
 void Level::fillOneRow(Factory* F, Row* row,
 		std::vector<std::list<Props*> >* propsOnRow, int screenWidth)
 {
-	std::list<Props*> listOfProps;
 	int x = 0;
 	while (x < screenWidth)
 	{

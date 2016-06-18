@@ -76,7 +76,9 @@ void WindowSDL::dislayData(std::list<frogger::Player*>* players)
 {
 	if (sans1==nullptr)
 	{
-		sans1 = TTF_OpenFont("c:\\sans.ttf", *dataWindowHeight-6);
+		std::string recourcePath=SDL_GetBasePath();
+		std::string sansPath=recourcePath+"\\frogger\\sans.ttf";
+		sans1 = TTF_OpenFont(sansPath.c_str(), *dataWindowHeight-6);
 	}
 	std::string newString;
 	int i = 1;
@@ -156,7 +158,11 @@ void WindowSDL::makeHighScoreTexture(std::vector<int> highScore)
 	highScoreRectV.clear();
 
 	if (sans2 == nullptr)
-		sans2 = TTF_OpenFont("c:\\sans.ttf", 50);
+	{
+		std::string recourcePath=SDL_GetBasePath();
+		std::string sansPath=recourcePath+"\\frogger\\sans.ttf";
+		sans2 = TTF_OpenFont(sansPath.c_str(), 50);
+	}
 	int i = 0;
 	SDL_Rect Message_rect;
 

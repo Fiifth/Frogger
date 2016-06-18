@@ -1,3 +1,4 @@
+checkAllIssues=true
 checkInconclusive=true
 checkUnusedFunctions=true
 com.googlecode.cppcheclipse.ui.SettingsPreferencePage_useParentScope=false
