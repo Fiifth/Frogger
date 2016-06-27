@@ -36,7 +36,6 @@ namespace frogger
 			std::vector<frogger::Animator>* getItemAni();
 			std::vector<frogger::Animator>* getProjAni();
 
-
 			std::vector<int> getVec(int a, int b);
 			char getMode() const;
 			void setMode(char mode);

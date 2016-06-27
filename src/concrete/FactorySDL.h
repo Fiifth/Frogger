@@ -36,7 +36,6 @@ namespace frogger_sdl
 
 			virtual frogger::Window* createWindow();
 			virtual frogger::Events* createEvents();
-
 			virtual frogger::Player* createPlayer1();
 			virtual frogger::Obstacle* createObstacle1();
 			virtual frogger::Lane* createLane1();

@@ -45,7 +45,7 @@ void SDLdata::renderTexture(SDL_Texture* tex, SDL_Renderer* ren, int x, int y,
 		temp = SDL_FLIP_HORIZONTAL;
 		angle = 0;
 	}
-	SDL_RenderCopyEx(ren, tex, NULL, &dst, angle, NULL, temp);
+	SDL_RenderCopyEx(ren, tex, nullptr, &dst, angle, nullptr, temp);
 }
 int SDLdata::getDW(SDL_Texture* tex, int h)
 {
@@ -64,7 +64,7 @@ void SDLdata::setRen(SDL_Renderer* rende)
 }
 void SDLdata::setBackground(SDL_Texture* texB)
 {
-	SDL_RenderCopy(re, texB, NULL, NULL);
+	SDL_RenderCopy(re, texB, nullptr, nullptr);
 }
 void SDLdata::updateScreen()
 {

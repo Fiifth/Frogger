@@ -27,7 +27,7 @@ namespace frogger
 			virtual ~Factory();
 			virtual Window* createWindow()=0;
 			virtual Events* createEvents()=0;
-			virtual Row* createRow(char direction, int locY, int width,	int number, RowProp* rowprop);
+			Row* createRow(char direction, int locY, int width,	int number, RowProp* rowprop);
 			virtual Player* createPlayer1()=0;
 			virtual Obstacle* createObstacle1()=0;
 			virtual Lane* createLane1()=0;

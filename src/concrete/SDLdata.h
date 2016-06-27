@@ -49,7 +49,6 @@ namespace frogger_sdl
 			std::vector<SDL_Texture*> laneTex;
 			std::vector<SDL_Texture*> itemTex;
 			std::vector<SDL_Texture*> projTex;
-
 	};
 }
 

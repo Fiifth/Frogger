@@ -29,7 +29,7 @@ namespace frogger
 			int getRandomLaneInd();
 			char* getDirection();
 
-		private:
+		protected:
 			char direction;
 			int locY;
 			int height;

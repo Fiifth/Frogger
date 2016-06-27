@@ -164,7 +164,6 @@ int Player::getRemainingTime()
 
 void Player::resetRemainingTime()
 {
-
 	previousTime = std::chrono::high_resolution_clock::now();
 }
 
@@ -173,7 +172,7 @@ void Player::decreaseTime()
 	if (counterEnabled)
 	{
 		currentTime = std::chrono::high_resolution_clock::now();
-		remainingTime = totalTime- ((int)std::chrono::duration_cast<std::chrono::seconds>(currentTime - previousTime).count());
+		remainingTime = totalTime - ((int)std::chrono::duration_cast<std::chrono::seconds>(currentTime - previousTime).count());
 	}
 }
 

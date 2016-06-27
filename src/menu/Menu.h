@@ -37,9 +37,9 @@ namespace frogger
 			MenuButton* SM;
 			MenuButton* SH;
 
-			MenuButton* DrawLineUnderMode;
-			MenuButton* DrawLineUnderNumPlayers;
-			MenuButton* DrawLineUnderDifficulty;
+			MenuButton* selectedMode;
+			MenuButton* selectedNumberOfPlayers;
+			MenuButton* selectedDifficulty;
 
 			MenuButton* back;
 	};

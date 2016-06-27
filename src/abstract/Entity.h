@@ -10,10 +10,9 @@
 #include <abstract/Animator.h>
 #include <list>
 
-
 namespace frogger
 {
-	class Projectile;
+	class Projectile; //forward declaration
 	class Factory;
 	class Player;
 	class Entity

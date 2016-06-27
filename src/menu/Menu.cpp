@@ -15,7 +15,6 @@ Menu::Menu(Window* win, char* gameMode, int* amountOfPlayers, char* difficulty) 
 		win(win), gameMode(gameMode), amountOfPlayers(amountOfPlayers), difficulty(
 				difficulty)
 {
-
 	BST = new MenuButton(0.24719,0.4052,0.50843,0.09294, win); //start game button
 	BH = new MenuButton(0.2809,0.56506,0.46348,0.0855, win); //high score button
 	BQ = new MenuButton(0.39888,0.72119,0.19944,0.09665, win); //quit button
@@ -32,10 +31,9 @@ Menu::Menu(Window* win, char* gameMode, int* amountOfPlayers, char* difficulty) 
 
 	back=new MenuButton(0.38483,0.86617,0.22753,0.08178,win);
 
-	DrawLineUnderMode = SEN;
-	DrawLineUnderNumPlayers = S1;
-	DrawLineUnderDifficulty = SE;
-
+	selectedMode = SEN;
+	selectedNumberOfPlayers = S1;
+	selectedDifficulty = SE;
 }
 
 Menu::~Menu()
@@ -54,9 +52,9 @@ Menu::~Menu()
 	delete(SM);
 	delete(SH);
 
-	delete(DrawLineUnderMode);
-	delete(DrawLineUnderNumPlayers);
-	delete(DrawLineUnderDifficulty);
+	delete(selectedMode);
+	delete(selectedNumberOfPlayers);
+	delete(selectedDifficulty);
 }
 
 char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH)
@@ -117,88 +115,88 @@ char Menu::menuExecution(std::string keyDown, char state, int mXH, int mYH)
 			if (S1->col(mXH, mYH) && keyDown == "MOUSEBUTTONDOWN")
 			{
 				*amountOfPlayers = 1;
-				DrawLineUnderNumPlayers = S1;
+				selectedNumberOfPlayers = S1;
 				win->setBackground(8);
-				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
-						DrawLineUnderDifficulty);
+				win->drawLineUnder(selectedMode, selectedNumberOfPlayers,
+						selectedDifficulty);
 				return state;
 			}
 			else if (S2->col(mXH, mYH) && keyDown == "MOUSEBUTTONDOWN")
 			{
 				*amountOfPlayers = 2;
-				DrawLineUnderNumPlayers = S2;
+				selectedNumberOfPlayers = S2;
 				win->setBackground(8);
-				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
-						DrawLineUnderDifficulty);
+				win->drawLineUnder(selectedMode, selectedNumberOfPlayers,
+						selectedDifficulty);
 				return state;
 			}
 			else if (S3->col(mXH, mYH) && keyDown == "MOUSEBUTTONDOWN")
 			{
 				*amountOfPlayers = 3;
-				DrawLineUnderNumPlayers = S3;
+				selectedNumberOfPlayers = S3;
 				win->setBackground(8);
-				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
-						DrawLineUnderDifficulty);
+				win->drawLineUnder(selectedMode, selectedNumberOfPlayers,
+						selectedDifficulty);
 				return state;
 			}
 			else if (back->col(mXH, mYH))
 			{
 				win->setBackground(9);
-				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
-						DrawLineUnderDifficulty);
+				win->drawLineUnder(selectedMode, selectedNumberOfPlayers,
+						selectedDifficulty);
 				if (keyDown == "MOUSEBUTTONDOWN")
 					return 'B';
 			}
 			else if (SEN->col(mXH, mYH) && keyDown == "MOUSEBUTTONDOWN")
 			{
 				*gameMode = 'E';
-				DrawLineUnderMode = SEN;
+				selectedMode = SEN;
 				win->setBackground(8);
-				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
-						DrawLineUnderDifficulty);
+				win->drawLineUnder(selectedMode, selectedNumberOfPlayers,
+						selectedDifficulty);
 				return state;
 			}
 			else if (SC->col(mXH, mYH) && keyDown == "MOUSEBUTTONDOWN")
 			{
 				*gameMode = 'C';
-				DrawLineUnderMode = SC;
+				selectedMode = SC;
 				win->setBackground(8);
-				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
-						DrawLineUnderDifficulty);
+				win->drawLineUnder(selectedMode, selectedNumberOfPlayers,
+						selectedDifficulty);
 				return state;
 			}
 			else if (SE->col(mXH, mYH) && keyDown == "MOUSEBUTTONDOWN")
 			{
 				*difficulty = 'E';
-				DrawLineUnderDifficulty = SE;
+				selectedDifficulty = SE;
 				win->setBackground(8);
-				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
-						DrawLineUnderDifficulty);
+				win->drawLineUnder(selectedMode, selectedNumberOfPlayers,
+						selectedDifficulty);
 				return state;
 			}
 			else if (SM->col(mXH, mYH) && keyDown == "MOUSEBUTTONDOWN")
 			{
 				*difficulty = 'M';
-				DrawLineUnderDifficulty = SM;
+				selectedDifficulty = SM;
 				win->setBackground(8);
-				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
-						DrawLineUnderDifficulty);
+				win->drawLineUnder(selectedMode, selectedNumberOfPlayers,
+						selectedDifficulty);
 				return state;
 			}
 			else if (SH->col(mXH, mYH) && keyDown == "MOUSEBUTTONDOWN")
 			{
 				*difficulty = 'H';
-				DrawLineUnderDifficulty = SH;
+				selectedDifficulty = SH;
 				win->setBackground(8);
-				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
-						DrawLineUnderDifficulty);
+				win->drawLineUnder(selectedMode, selectedNumberOfPlayers,
+						selectedDifficulty);
 				return state;
 			}
 			else
 			{
 				win->setBackground(8);
-				win->drawLineUnder(DrawLineUnderMode, DrawLineUnderNumPlayers,
-						DrawLineUnderDifficulty);
+				win->drawLineUnder(selectedMode, selectedNumberOfPlayers,
+						selectedDifficulty);
 				return state;
 			}
 			break;

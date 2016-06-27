@@ -24,7 +24,7 @@ Lane::Lane()
 Lane::~Lane()
 {
 	for(Item* item:itemList)
-	delete(item);
+		delete(item);
 	itemList.clear();
 }
 
@@ -47,7 +47,6 @@ void Lane::collision(Player* player)
 			visible = true;
 		}
 	}
-
 	itemList.remove_if(collisionS(player));
 }
 

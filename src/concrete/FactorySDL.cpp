@@ -29,7 +29,6 @@ frogger::Events* FactorySDL::createEvents()
 	return new EventsSDL();
 }
 
-
 frogger::Player* frogger_sdl::FactorySDL::createPlayer1()
 {
 	return new PlayerSDL(sdldata);

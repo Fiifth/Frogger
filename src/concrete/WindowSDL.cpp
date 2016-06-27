@@ -12,7 +12,7 @@
 using namespace frogger_sdl;
 
 WindowSDL::WindowSDL(SDLdata* sdldata) :
-		sdldata(sdldata), ren(NULL), win(NULL)
+		sdldata(sdldata), ren(nullptr), win(nullptr)
 {
 	MenuTextures = sdldata->getMenuTextures();
 	white ={255, 255, 255,255};
@@ -43,6 +43,7 @@ void WindowSDL::makeWindow(int ScreenWidth, int ScreenHeight,int dataWindowHeigh
 	TTF_Init();
 	win = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED,	SDL_WINDOWPOS_CENTERED, *screenWidth, *screenHeight, SDL_WINDOW_SHOWN);
 	ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
+	//SDL_CreateWindowAndRenderer(*screenWidth,*screenHeight,SDL_WINDOW_SHOWN, &win,  &ren);
 	std::string recourcePath=SDL_GetBasePath();
 	std::string path=recourcePath+"frogger\\icon.bmp";
 	SDL_Surface* loadedSurface = SDL_LoadBMP( path.c_str() );
@@ -112,14 +113,14 @@ void WindowSDL::dislayData(std::list<frogger::Player*>* players)
 		SDL_FreeSurface(playerData);
 
 		int iW=0, iH=0;
-		SDL_QueryTexture(playerDataTex, NULL, NULL, &iW, &iH);
+		SDL_QueryTexture(playerDataTex, nullptr, nullptr, &iW, &iH);
 		PlayerMessageRect.x = 0;
 		PlayerMessageRect.y = *screenHeight-*dataWindowHeight+3;
 		PlayerMessageRect.w = (iW <= *screenWidth) ? iW : *screenWidth;
 		PlayerMessageRect.h = iH;
 	}
 
-	SDL_RenderCopyEx(ren, playerDataTex, NULL, &PlayerMessageRect, 0, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(ren, playerDataTex, nullptr, &PlayerMessageRect, 0, nullptr, SDL_FLIP_NONE);
 	oldString = newString;
 }
 void WindowSDL::setBackground(int index)
@@ -144,7 +145,7 @@ void WindowSDL::displayHighScore(std::vector<int> highScore,bool newHighscore)
 	int i=0;
 	for(SDL_Texture* highScoreTex:highScoreTexV)
 	{
-		SDL_RenderCopyEx(ren, highScoreTex, NULL, &highScoreRectV.at(i), 0, NULL, SDL_FLIP_NONE);
+		SDL_RenderCopyEx(ren, highScoreTex, nullptr, &highScoreRectV.at(i), 0, nullptr, SDL_FLIP_NONE);
 		i++;
 	}
 }
@@ -177,14 +178,12 @@ void WindowSDL::makeHighScoreTexture(std::vector<int> highScore)
 		highScoreTex = SDL_CreateTextureFromSurface(ren,	highScoreSurf);
 		SDL_FreeSurface(highScoreSurf);
 		int iW, iH;
-		SDL_QueryTexture(highScoreTex, NULL, NULL, &iW, &iH);
+		SDL_QueryTexture(highScoreTex, nullptr, nullptr, &iW, &iH);
 		Message_rect.x = (*screenWidth / 2) - iW / 2;
 		Message_rect.y = ((*screenHeight) / 3) + (iH * i);
 		Message_rect.w = iW;
 		Message_rect.h = iH;
-
 		i++;
-
 		highScoreTexV.push_back(highScoreTex);
 		highScoreRectV.push_back(Message_rect);
 	}

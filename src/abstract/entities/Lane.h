@@ -14,6 +14,7 @@
 #include <abstract/Animator.h>
 #include <list>
 #include <vector>
+#include <stdlib.h>
 namespace frogger
 {
 	class Lane: public frogger::Props

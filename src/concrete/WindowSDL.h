@@ -53,7 +53,6 @@ namespace frogger_sdl
 			SDL_Rect PlayerMessageRect;
 			std::vector<SDL_Texture*> highScoreTexV;
 			std::vector<SDL_Rect> highScoreRectV;
-
 			SDL_Window* win;
 
 			std::chrono::high_resolution_clock::time_point startP =

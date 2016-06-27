@@ -13,6 +13,7 @@
 #include <abstract/entities/Props.h>
 #include <abstract/Entity.h>
 #include <abstract/Row.h>
+#include <stdlib.h>
 #include <list>
 #include <vector>
 namespace frogger

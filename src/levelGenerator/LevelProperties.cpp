@@ -170,7 +170,7 @@ void frogger::LevelProperties::levelUp()
 
 	if (level == 2)
 	{
-		seg1->increaseProp(0, 0, 10, -1, 2);
+		seg1->increaseProp(0, 0, 10, -1, 2); //speed,divider,itemRate,shootRate
 		seg2->increaseProp(0, 0, 10, -1, 2);
 		seg3->increaseProp(0, 0, 10, -1, 2);
 		seg4->increaseProp(0, 0, 10, -1, 2);

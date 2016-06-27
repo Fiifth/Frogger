@@ -8,6 +8,7 @@
 
 #include <abstract/entities/Projectile.h>
 #include <abstract/Entity.h>
+#include <abstract/Factory.h>
 using namespace frogger;
 Entity::Entity()
 {

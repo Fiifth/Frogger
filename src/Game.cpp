@@ -17,7 +17,6 @@
  * E: Endless game mode
  * C: classic game mode
  * Q: quit state
- *
  */
 
 /* Row types:
