@@ -7,4 +7,4 @@ Features:
       * Classic game mode (Enjoy the original frogger game mode)
 3. Three different difficulty settings 
 
-![alt text](https://github.com/Fiifth/Frogger/blob/master/m0.png)
+<img src="https://github.com/Fiifth/Frogger/blob/master/demo.jpg" width="700">
